@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda's Chamber of Vibes</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+    <script src="/radio.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+	<div class="main-container">
+		<div class="main-window" id="radio-window">
+			<div class="subwindow" id="main-image">
+				<div class="page-image" id="radio-img">
+					<audio id="audioPlayer" preload="none">
+					</audio>
+					<div class="overlay-container" id="song-details">
+						<div id="status-current-song" class="status-content" style="display: block;">{{current-song}}</div>
+					</div>
+					<div class="overlay-container" id="primary-controls">
+						<button class="controls" id="audioPlay">
+						<button class="controls" id="audioStop">
+						<button class="controls" id="volUp">
+						<button class="controls" id="volDown">
+					</div>
+					<div class="overlay-container" id="extra-outout"></div>
+					<div class="overlay-container" id="meta-buttons"></div>
+				</div>
+			</div>
+			<div class="subwindow" id="left-sidebar">
+				<a href="/radio.html">
+					<img src="img/icons/radio.png" style="width:100%"></img>
+				</a>
+			</div>
+			<div class="subwindow" id="text-box">
+				<div class="text-container">
+					<p class="speaker-text">Ｐａｎｄａ</p>
+					<p class="dialog-text">
+						Welcome to my corner of cyberspace! How can I help you？
+					</p>
+				</div>
+			</div>
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+  </body>
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+</html>

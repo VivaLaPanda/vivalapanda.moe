@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda's Digiverse</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <script src="/index.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+	<div id="audio-player-container">
+		<audio id="music" loop preload controls>
+			<source src="audio/dance_in_the_memories.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+			Your browser does not support the audio element.
+		</audio>
+		
+		
+		<audio id="bootSound" preload controls>
+			<source src="audio/boot.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+			Your browser does not support the audio element.
+		</audio>
+	</div>
+	<div class="main-container">
+		<div id="boot-screen">
+			<div id="boot-container">
+				<p id="boot-text"  style="white-space: pre-line"></p>
+			</div>
+		</div>
+		<div class="main-window">
+			<div class="subwindow" id="main-image">
+				<div class="page-image" id="home-img">
+					<input type="image" id="mute" alt="mute" src="/img/icons/playing_big.png">
+				</div>
+			</div>
+			<div class="subwindow" id="left-sidebar">
+				<a href="/radio.html">
+					<img src="img/icons/radio.png" style="width:100%"></img>
+				</a>
+			</div>
+			<div class="subwindow" id="text-box">
+				<div class="text-container">
+					<p class="speaker-text">Ｐａｎｄａ</p>
+					<p class="dialog-text">
+						Welcome to my corner of cyberspace! How can I help you？
+					</p>
+				</div>
+			</div>
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+	<!-- <div class="container-fluid"> -->
+		<!-- <div class="row"></div> -->
+		<!-- <div class="row align-items-center justify-content-center"> -->
+			<!-- <div class="col"></div> -->
+			
+			<!-- <div class="col"></div> -->
+		<!-- </div> -->
+		<!-- <div class="row"></div> -->
+	<!-- </div> -->
+  </body>
+</html>
