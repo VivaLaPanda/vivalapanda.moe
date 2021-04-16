@@ -58,9 +58,8 @@ function getPlaylistInfo(){
 
 function setup(){
     var audio = $('#audioPlayer')[0];
-	// TODO PLACEHOLDER AUDIO
-    // var src = 'https://VivaLaPanda.moe/stream.mp3';
-    var src = '/audio/mercurius_pretty-the_birth_of_homunculus.mp3';
+    var src = 'https://VivaLaPanda.moe/stream.mp3';
+    // var src = '/audio/mercurius_pretty-the_birth_of_homunculus.mp3';
     audio.volume = 1;
 
     function preload(imgurl) {
