@@ -36,18 +36,19 @@ function getPlaylistInfo(){
         $('#status-current-song').html(response.currentSong.title)
       }
 
-      // // Set playlist
-      // if (response.upcoming.length != 0) {
-        // $('#queueState').html("")
-        // playlistRows = response.upcoming.map(function(song) {
-          // return "<li>" + "<a target=\"_blank\" rel=\"noreferrer\" href=\"" + song.url + "\"> " + song.title + "</a>" + "</li>\n"
-        // })
-        // playlistRows = playlistRows.join("")
-        // $('#upcoming').html(playlistRows)
-      // } else {
-        // $('#upcoming').html("")
-        // $('#queueState').html("Nothing queued")
-      // }
+      // Set playlist
+      if (response.upcoming.length != 0) {
+        $('#queueState').css("display", "none");
+        playlistRows = response.upcoming.map(function(song) {
+          return "<li>" + "<a target=\"_blank\" rel=\"noreferrer\" href=\"" + song.url + "\"> " + song.title + "</a>" + "</li>\n"
+        })
+        playlistRows = playlistRows.join("")
+        $('#upcoming').html(playlistRows)
+      } else {
+        $('#upcoming').html("")
+        $('#queueState').html("Nothing queued")
+        $('#queueState').css("display", "block");
+      }
     }
     else{
       createErrorMessage(httpRequest.responseText);
@@ -56,10 +57,15 @@ function getPlaylistInfo(){
   httpRequest.send();
 }
 
+var queueHidden = true;
+var aboutShowing = false;
+var typeWriterRunning = false;
+var moreTextClicked = false;
+var typewriterInterrupt = false;
 function setup(){
     var audio = $('#audioPlayer')[0];
-    var src = 'https://VivaLaPanda.moe/stream.mp3';
-    // var src = '/audio/mercurius_pretty-the_birth_of_homunculus.mp3';
+    // var src = 'https://VivaLaPanda.moe/stream.mp3';
+    var src = '/audio/mercurius_pretty-the_birth_of_homunculus.mp3';
     audio.volume = 1;
 
     function preload(imgurl) {
@@ -129,6 +135,86 @@ function setup(){
         // });
     }
     $.bindAudioControls();
+	
+	$('#show-queue').click(function () {
+		if (queueHidden) {
+			queueHidden = false;
+			$('#queue-window').css("display", "block");
+			$('#visualizer').css("display", "none");
+		} else {
+			queueHidden = true;
+			$('#queue-window').css("display", "none");
+			$('#visualizer').css("display", "block");
+		}
+	})
+	
+	
+	var aboutText = `
+		This radio app runs on the UtaStream backend that I wrote. It's a lightweight Go app that allows for creating an online radio. Anyone who has an API key can queue music here, so the stuff you hear is from me and my frens.
+	`;
+	$('#about').click(function () {
+		
+		if (aboutShowing) {
+		} else {
+			aboutShowing = true;
+			typeWriterRunning = true;
+			
+			$('#radio-dialog').html("");
+			
+			var aboutTextIdx = 0;
+
+			function typeWriter() {
+			  if (aboutTextIdx < aboutText.length && !typewriterInterrupt) {
+				document.getElementById("radio-dialog").innerHTML += aboutText.charAt(aboutTextIdx);
+				aboutTextIdx++;
+				setTimeout(typeWriter, 30);
+			  } else {
+				$('#radio-dialog').html(aboutText);
+				$('#text-arrow').css("display", "block");
+				typeWriterRunning = false;
+				typewriterInterrupt = false;
+			  }
+			}
+			typeWriter();
+		}
+	});
+	
+	$('#radio-dialog').click(function () {
+		if (aboutShowing && !moreTextClicked) {
+			if (typeWriterRunning) {
+				typewriterInterrupt = true;
+				
+				$('#text-arrow').css("display", "block");
+				typeWriterRunning = false;
+				
+				return;
+			}
+			
+			moreTextClicked = true;
+			$('#radio-dialog').html("");
+			$('#text-arrow').css("display", "none");
+			
+			
+			var aboutTextIdx = 0;
+			var aboutText = `
+				You can check out the source code below. Enjoy the tunes!
+				
+				
+			`;
+			
+			
+			function typeWriter() {
+			  if (aboutTextIdx < aboutText.length) {
+				document.getElementById("radio-dialog").innerHTML += aboutText.charAt(aboutTextIdx);
+				aboutTextIdx++;
+				setTimeout(typeWriter, 30);
+			  } else {
+				  document.getElementById("radio-dialog").innerHTML += "<br><a target='_blank' href='https://github.com/VivaLaPanda/uta-stream'>GitHub</a>";
+			  }
+			}
+			typeWriter();
+		}
+	});
 };
 
 var visualizerStopped = true;

@@ -27,9 +27,19 @@
 						<button class="controls" id="volDown">
 					</div>
 					<div class="overlay-container" id="extra-output">
+						<div id="queue-window" style="display: none;">
+							<h5>Queue</h5>
+							<p id="queueState">Nothing queued</p>
+							<ul id="upcoming">
+							</ul>
+						</div>
 						<canvas id="visualizer" height="1140px" width="880px"></canvas>
 					</div>
-					<div class="overlay-container" id="meta-buttons"></div>
+					<div class="overlay-container" id="meta-buttons">
+						<button class="controls" id="show-queue">
+						<button class="controls" id="manage-radio">
+						<button class="controls" id="about">
+					</div>
 				</div>
 			</div>
 			<div class="subwindow" id="left-sidebar">
@@ -40,10 +50,11 @@
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
-					<p class="dialog-text">
+					<p class="dialog-text" id="radio-dialog">
 						Welcome to the vibe zone
 					</p>
 				</div>
+				<img class="bounce" id="text-arrow" style="display:none;" src="img/icons/text-arrow.png"></img>
 			</div>
 			<div class="subwindow" id="right-sidebar"></div>
 		</div>

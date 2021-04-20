@@ -24,6 +24,11 @@ p {
 	color: white;
 }
 
+#radio-window a {
+	text-decoration: none;
+	color: #00eebb;
+}
+
 .main-container {
 	width: 1280px;
 	margin: auto;
@@ -246,6 +251,20 @@ body {
     height: 30px;
 }
 
+#show-queue {
+	width: 240px;
+    height: 28px;
+    top: 6px;
+    left: 8px;
+}
+
+#about {
+	width: 240px;
+    height: 28px;
+    top: 78px;
+    left: 8px;
+}
+
 #visualizer {
 	width: 285px;
     height: 110px;
@@ -306,5 +325,125 @@ body {
    -moz-transform: translateX(-60%); /* Firefox bug fix */
    -webkit-transform: translateX(-60%); /* Firefox bug fix */
    transform: translateX(-100%); 
+   }
+  }
+  
+  
+#queue-window {
+	color: #00eebb;
+    font-family: 'f14seg-bolditalic';
+	position: relative;
+	width: 90%;
+    height: 90%;
+	white-space: nowrap;
+	padding: 5px;
+	padding-left: 10px;
+	
+	overflow-y: scroll;
+}
+
+/* width */
+#queue-window::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+#queue-window::-webkit-scrollbar-track {
+  background: #00eebb;
+}
+
+/* Handle */
+#queue-window::-webkit-scrollbar-thumb {
+  background: #ef0060;
+}
+
+#queue-window h5 {
+    /* position: absolute; */
+    /* height: 100%; */
+    /* margin: 0; */
+    /* line-height: 50px; */
+	/* text-decoration: none; */
+	
+	color: #00eebb;
+	margin-block-start: 0px;
+	margin-block-end: .5em;
+	padding-left: 5px;
+}
+
+#queue-window p {
+	color: #00eebb;
+    font-family: 'f14seg-italic';
+	font-size: 10px;
+	
+	margin-left: 5px;
+}
+
+#queue-window a {
+    /* position: absolute; */
+    /* height: 100%; */
+    /* margin: 0; */
+    /* line-height: 50px; */
+	text-decoration: none;
+	font-size: 8px;
+	
+	color: #00eebb;
+}
+
+#queue-window ul {
+	list-style-type: none;
+	margin-block-start: 0px;
+    margin-block-end: 1em;
+    padding-inline-start: 10px;
+}
+
+#queue-window li {
+}
+
+#text-arrow {    
+	width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 15px;
+    bottom: 5px;
+}
+
+.bounce {
+    /* Starting position */
+       -moz-transform:translateY(0%);
+       -webkit-transform:translateY(0%);
+       transform:translateY(0%);
+
+	/* Apply animation to this element */	
+       -moz-animation: bounce 1.5s steps(15) infinite;
+       -webkit-animation: bounce 1.5s steps(15) infinite;
+       animation: bounce 1.5s steps(15) infinite;
+}
+
+/* Move it (define the animation) */
+  @-moz-keyframes bounce {
+   0%   { -moz-transform: translateY(0%); }
+   50% { -moz-transform: translateY(-30%); }
+   100% { -moz-transform: translateY(0%); }
+  }
+  @-webkit-keyframes bounce {
+   0%   { -webkit-transform: translateY(0%); }
+   50%   { -webkit-transform: translateY(-30%); }
+   100% { -webkit-transform: translateY(0%); }
+  }
+  @keyframes bounce {
+   0%   { 
+   -moz-transform: translateY(0%); /* Firefox bug fix */
+   -webkit-transform: translateY(0%); /* Firefox bug fix */
+   transform: translateY(0%); 		
+   }
+   50% { 
+   -moz-transform: translateY(-30%); /* Firefox bug fix */
+   -webkit-transform: translateY(-30%); /* Firefox bug fix */
+   transform: translateY(-30%); 
+   }
+   100% { 
+   -moz-transform: translateY(0%); /* Firefox bug fix */
+   -webkit-transform: translateY(0%); /* Firefox bug fix */
+   transform: translateY(0%); 
    }
   }
