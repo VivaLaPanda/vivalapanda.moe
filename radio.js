@@ -1,11 +1,42 @@
+var apiKey = "";
+
 window.onload = function(){
     setup();
-    getPlaylistInfo();
-
-    setInterval(function() {
-        getPlaylistInfo();
-    }, 60 * 1000); // 60 * 1000 milsec
 	
+	var aboutTextIdx = 0;
+	var aboutText = `
+		Welcome to the vibe zone
+	`;
+	
+	
+	function typeWriter() {
+	  if (aboutTextIdx < aboutText.length) {
+		document.getElementById("radio-dialog").innerHTML += aboutText.charAt(aboutTextIdx);
+		aboutTextIdx++;
+		setTimeout(typeWriter, 60);
+	  }
+	}
+	typeWriter();
+}
+
+function validateKey() {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('GET', 'http://localhost:8085/api/auth?route=/enqueue');
+    httpRequest.withCredentials = true;
+    httpRequest.setRequestHeader("Authorization", "Bearer " + apiKey);
+    httpRequest.onload = function(){
+        if(httpRequest.status == 200 ){
+			$('#authorized-status').html("AUTHORIZED");
+			$('#authorized-status').addClass("glow-teal");
+			$('#authorized-status').removeClass("glow-red");
+        }
+        else{
+			$('#authorized-status').html("UNAUTHORIZED");
+			$('#authorized-status').removeClass("glow-teal");
+			$('#authorized-status').addClass("glow-red");
+        }
+    }
+    httpRequest.send();
 }
 
 /**
@@ -31,7 +62,12 @@ function getPlaylistInfo(){
 	  
       // Set current playing
       if(response.currentSong.url){
-        $('#status-current-song').html("<a target=\"_blank\" rel=\"noreferrer\" href=\"" + response.currentSong.url + "\"> " + response.currentSong.title + "</a>")
+		var classText = "";
+		if (response.currentSong.title.length > 24) {
+			classText = "scroller";
+		}
+		
+        $('#status-current-song').html("<a class=\"" + classText + "\" target=\"_blank\" rel=\"noreferrer\" href=\"" + response.currentSong.url + "\"> " + response.currentSong.title + "</a>")
       } else {
         $('#status-current-song').html(response.currentSong.title)
       }
@@ -58,6 +94,7 @@ function getPlaylistInfo(){
 }
 
 var queueHidden = true;
+var manageHidden = true;
 var aboutShowing = false;
 var typeWriterRunning = false;
 var moreTextClicked = false;
@@ -73,7 +110,8 @@ function setup(){
     }
 
     apiKey = localStorage.apiKey;
-    // $('#apiKey').val(apiKey);
+    $('#apiKey').val(apiKey);
+	validateKey();
     // ga('set', 'userId', apiKey);
 
     $('#audioPlay').hover(function () {
@@ -94,28 +132,89 @@ function setup(){
         $('#statusRefresh').click(function() {
           getPlaylistInfo();
         })
-        $('#audioPlay').click(function () {
-            if (!audio.canPlayType('audio/mpeg')) {
-                alert("Your browser very probably can't play mp3 streams! Stop using Opera.");
-                return;
-            }
-            //This might seem kind of weird, but this is the surest way to beat the
-            //goddamn automatic caching that Firefox kept doing - which itself is
-            //a hard problem to actually run up against; the user has to close the
-            //tab and then open the closed tab (i.e, Ctrl+Shift+T) and resume play,
-            //at which point the play would be resumed from the start of the audio
-            //which had been buffered up until that point, instead of starting fresh.
-            //if (navigator.userAgent.match(/Firefox/)) {
-            var data = $(audio).data('src');
-            audio.src = data ? data : (src + '?nocache=' + Date.now());
+		
+		var powerOn = false;
+		$('#radio-img').click(function () {
+			if (powerOn == true) {
+				return;
+			}
+			powerOn = true;
 			
-            audio.load();
-            audio.play();
+			var tapeSound = document.querySelector("#tapeSound");
+			tapeSound.play();
+			
+			var bootTextIdx = 0;
+			var bootText = `Welcome. . . .`;
+			
+			
+			function typeWriter() {
+				if (bootTextIdx < bootText.length) {
+					document.getElementById("welcome-text").innerHTML += bootText.charAt(bootTextIdx);
+					bootTextIdx++;
+					setTimeout(typeWriter, 250);
+				} else {
+					window.setTimeout(()=>{
+						// Runs after the typer
+						$('#radio-img').css("background-image", "url('img/radio-zoomed.png')");
+						getPlaylistInfo();
+
+						setInterval(function() {
+							getPlaylistInfo();
+						}, 60 * 1000); // 60 * 1000 milsec
+					
+					
+						if (!audio.canPlayType('audio/mpeg')) {
+							alert("Your browser very probably can't play mp3 streams! Stop using Opera.");
+							return;
+						}
+						//This might seem kind of weird, but this is the surest way to beat the
+						//goddamn automatic caching that Firefox kept doing - which itself is
+						//a hard problem to actually run up against; the user has to close the
+						//tab and then open the closed tab (i.e, Ctrl+Shift+T) and resume play,
+						//at which point the play would be resumed from the start of the audio
+						//which had been buffered up until that point, instead of starting fresh.
+						//if (navigator.userAgent.match(/Firefox/)) {
+						var data = $(audio).data('src');
+						audio.src = data ? data : (src + '?nocache=' + Date.now());
+						
+						audio.load();
+						audio.play();
+						
+						window.setTimeout(()=>{
+							startVisualizer();
+						}, 1000);
+						// ga('send', 'event', 'Stream', 'play', 'Stream play tracking');
+					}, 1000);
+				}
+			}
+			typeWriter();
+		});
+		
+        $('#audioPlay').click(function () {
+			var tapeSound = document.querySelector("#tapeSound");
+			tapeSound.pause();
+			
+			if (!audio.canPlayType('audio/mpeg')) {
+				alert("Your browser very probably can't play mp3 streams! Stop using Opera.");
+				return;
+			}
+			//This might seem kind of weird, but this is the surest way to beat the
+			//goddamn automatic caching that Firefox kept doing - which itself is
+			//a hard problem to actually run up against; the user has to close the
+			//tab and then open the closed tab (i.e, Ctrl+Shift+T) and resume play,
+			//at which point the play would be resumed from the start of the audio
+			//which had been buffered up until that point, instead of starting fresh.
+			//if (navigator.userAgent.match(/Firefox/)) {
+			var data = $(audio).data('src');
+			audio.src = data ? data : (src + '?nocache=' + Date.now());
+			
+			audio.load();
+			audio.play();
 			
 			window.setTimeout(()=>{
 				startVisualizer();
 			}, 1000);
-            // ga('send', 'event', 'Stream', 'play', 'Stream play tracking');
+			// ga('send', 'event', 'Stream', 'play', 'Stream play tracking');
         });
         $('#audioStop').click(function () {
             audio.pause();
@@ -135,19 +234,6 @@ function setup(){
         // });
     }
     $.bindAudioControls();
-	
-	$('#show-queue').click(function () {
-		if (queueHidden) {
-			queueHidden = false;
-			$('#queue-window').css("display", "block");
-			$('#visualizer').css("display", "none");
-		} else {
-			queueHidden = true;
-			$('#queue-window').css("display", "none");
-			$('#visualizer').css("display", "block");
-		}
-	})
-	
 	
 	var aboutText = `
 		This radio app runs on the UtaStream backend that I wrote. It's a lightweight Go app that allows for creating an online radio. Anyone who has an API key can queue music here, so the stuff you hear is from me and my frens.
@@ -216,6 +302,133 @@ function setup(){
 		}
 	});
 };
+
+function showQueue(event) {
+	if (queueHidden) {
+		queueHidden = false;
+		$('#queue-window').css("display", "block");
+		$('#visualizer').css("display", "none");
+	} else {
+		queueHidden = true;
+		$('#queue-window').css("display", "none");
+		$('#visualizer').css("display", "block");
+	}
+}
+
+function showManage(event) {
+	if (manageHidden) {
+		manageHidden = false;
+		$('#manage-container').css("display", "block");
+	} else {
+		manageHidden = true;
+		$('#manage-container').css("display", "none");
+	}
+}
+
+function setApiKey(event){
+	apiKey = $('#apiKey').val();
+	localStorage.apiKey = apiKey;
+	validateKey();
+}
+
+/**
+ * Add song to the playlist queue.
+ * @param event the click event of the "Queue" button
+ */
+function submitToQueue(event){
+    // ga('send', 'event', 'Manage', 'queue', 'Stream play tracking');
+    var httpRequest = new XMLHttpRequest();
+    var inputElement = document.getElementById('song');
+    var songUrl = inputElement.value;
+	var songTitle = document.getElementById('title').value;
+	
+    if(songUrl){
+        httpRequest.open('POST', 'https://VivaLaPanda.moe/api/enqueue?song='+ songUrl + "&title=" + songTitle);
+        httpRequest.withCredentials = true;
+        httpRequest.setRequestHeader("Authorization", "Bearer " + apiKey);
+        httpRequest.onload = submitToQueueResult;
+        httpRequest.onerror = netError;
+        httpRequest.send();
+    }
+}
+
+/**
+ * display that song was successfully queued.
+ */
+function submitToQueueResult(error){
+    var inputElement = document.getElementById('song');
+    if(this.status == 200 ){
+		showQueue();
+		getPlaylistInfo();
+		
+		$("#error-container").removeClass("critical-error");
+		
+		$("#status-text").html("NEW TRACK REGISTERED");
+    } else {
+		$("#error-container").addClass("critical-error");
+		
+		$("#status-text").html("INVALID PHONIC IDENTIFIERS");
+    }
+}
+function netError(){
+	$("#error-container").addClass("critical-error");
+	
+	$("#status-text").html("CRITICAL NETWORK FAILURE");
+}
+
+
+/**
+ * skips the current song
+ */
+function skipSong(event){
+    // ga('send', 'event', 'Manage', 'skip', 'Stream play tracking');
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', 'https://VivaLaPanda.moe/api/skip');
+    httpRequest.withCredentials = true;
+    httpRequest.setRequestHeader("Authorization", "Bearer " + apiKey);
+	httpRequest.onerror = netError;
+    httpRequest.onload = function(){
+        if(httpRequest.status == 200 ){
+			showQueue();
+			getPlaylistInfo();
+			
+			$("#error-container").removeClass("critical-error");
+			
+			$("#status-text").html("TRACK SKIPPED");
+        } else {
+			$("#error-container").addClass("critical-error");
+			
+			$("#status-text").html("ERROR: PHONIC STASIS");
+        }
+    }
+    httpRequest.send();
+}
+
+/**
+ * Skips the current song and randomizes the autoq
+ */
+function shuffle(event){
+    // ga('send', 'event', 'Manage', 'shuffle', 'Stream play tracking');
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', 'https://VivaLaPanda.moe/api/shuffle');
+    httpRequest.withCredentials = true;
+    httpRequest.setRequestHeader("Authorization", "Bearer " + apiKey);
+	httpRequest.onerror = netError;
+    httpRequest.onload = function(){
+        if(httpRequest.status == 200 ){
+			getPlaylistInfo();
+			
+			$("#error-container").removeClass("critical-error");
+			
+			$("#status-text").html("REINITIALIZED PHONIC DRIVERS");
+        } else {
+			$("#error-container").addClass("critical-error");
+			
+			$("#status-text").html("ERROR: PHONIC STASIS");
+        }
+    }
+    httpRequest.send();
+}
 
 var visualizerStopped = true;
 var firstClick = true;

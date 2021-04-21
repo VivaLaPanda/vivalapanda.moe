@@ -17,8 +17,12 @@
 				<div class="page-image" id="radio-img">
 					<audio id="audioPlayer" preload="none">
 					</audio>
+					<audio id="tapeSound" style="display: none;" preload controls>
+						<source src="audio/tape2.mp3" crossOrigin="anonymous" type="audio/ogg">
+						Your browser does not support the audio element.
+					</audio>
 					<div class="overlay-container" id="song-details">
-						<div id="status-current-song" class="status-content" style="display: block;">{{current-song}}</div>
+						<div id="status-current-song" class="status-content" style="display: block;"><p id="welcome-text"></p></div>
 					</div>
 					<div class="overlay-container" id="primary-controls">
 						<button class="controls" id="audioPlay">
@@ -36,8 +40,8 @@
 						<canvas id="visualizer" height="1140px" width="880px"></canvas>
 					</div>
 					<div class="overlay-container" id="meta-buttons">
-						<button class="controls" id="show-queue">
-						<button class="controls" id="manage-radio">
+						<button class="controls" id="show-queue" onclick="showQueue(event)">
+						<button class="controls" id="manage-radio" onclick="showManage(event)">
 						<button class="controls" id="about">
 					</div>
 				</div>
@@ -48,10 +52,59 @@
 				</a>
 			</div>
 			<div class="subwindow" id="text-box">
-				<div class="text-container">
+				<div class="text-container-overlay" id="manage-container" style="display: none;">
+					<div id="manage-header">
+						<p class="glow-teal" id="manage-header-left">PHONIC CONTROL SYSTEM</p>
+						<div id="manage-header-right">
+							<p class="glow-teal">PHONIC CONTROLLER: <span class="glow-teal" id="connection-status">CONNECTED</span></p>
+							<p class="glow-teal">STATUS: <span class="glow-red" id="authorized-status">UNAUTHORIZED</span></p>
+						</div>
+					</div>
+					<hr>
+					<div id="manage-content">
+						<div id="authorize-container">
+							<p class="glow-teal">ENTER ACCESS KEY</p>
+							<input class="manage-input" type="text" name="apiKey" id="apiKey">
+							<button
+								class="manage-button"
+								id="set-key"
+								onclick="setApiKey(event)">
+								AUTHORIZE
+							</button>
+						</div>
+						<div id="error-container">
+							<p>TRANSACTION STATUS:</p>
+							<p id="status-text" class="glow-teal">NOMINAL</p>
+						</div>
+						<div id="enqueue-container">
+							<input type="text" name="song" class="manage-input" id="song" placeholder="URL" required>
+							<input type="text" name="title" class="manage-input" id="title" placeholder="TITLE">
+							<button
+								class="manage-button"
+								id="enqueue-button"
+								onclick="submitToQueue(event)">
+								SUBMIT
+							</button>
+						</div>
+						<div id="queue-control-container">
+							<button
+								class="manage-button"
+								id="skip-button"
+								onclick="skipSong(event)">
+								SKIP
+							</button>
+							<button
+								class="manage-button"
+								id="shuffle-button"
+								onclick="shuffle(event)">
+								SHUFFLE
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="text-container" id="dialog-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
 					<p class="dialog-text" id="radio-dialog">
-						Welcome to the vibe zone
 					</p>
 				</div>
 				<img class="bounce" id="text-arrow" style="display:none;" src="img/icons/text-arrow.png"></img>
