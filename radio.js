@@ -21,7 +21,7 @@ window.onload = function(){
 
 function validateKey() {
     var httpRequest = new XMLHttpRequest();
-    httpRequest.open('GET', 'http://localhost:8085/api/auth?route=/enqueue');
+    httpRequest.open('GET', 'https://vivalapanda.moe/api/auth?route=/enqueue');
     httpRequest.withCredentials = true;
     httpRequest.setRequestHeader("Authorization", "Bearer " + apiKey);
     httpRequest.onload = function(){
@@ -156,6 +156,9 @@ function setup(){
 					window.setTimeout(()=>{
 						// Runs after the typer
 						$('#radio-img').css("background-image", "url('img/radio-zoomed.png')");
+						$('#volume-dial').css("display", "block");
+						$('#circle-path').attr("stroke-dasharray", (audio.volume * 100) + ", 100")
+						
 						getPlaylistInfo();
 
 						setInterval(function() {
@@ -194,6 +197,10 @@ function setup(){
 			var tapeSound = document.querySelector("#tapeSound");
 			tapeSound.pause();
 			
+			if (pumpoPlaying) {
+				stopPumpoTrack();
+			}
+			
 			if (!audio.canPlayType('audio/mpeg')) {
 				alert("Your browser very probably can't play mp3 streams! Stop using Opera.");
 				return;
@@ -217,6 +224,9 @@ function setup(){
 			// ga('send', 'event', 'Stream', 'play', 'Stream play tracking');
         });
         $('#audioStop').click(function () {
+			if (pumpoPlaying) {
+				stopPumpoTrack();
+			}
             audio.pause();
             // ga('send', 'event', 'Stream', 'stop', 'Stream play tracking');
             audio.src = '';
@@ -315,6 +325,68 @@ function showQueue(event) {
 	}
 }
 
+var pumpoPlaying = false;
+function pumpoMode(event) {
+	if (pumpoPlaying) {
+		playPumpoTrack();
+		return;
+	}
+	pumpoPlaying = true;
+	
+    var audio = $('#audioPlayer')[0];
+	audio.pause();
+	audio.src = '';
+	stopVisualizer();
+	
+	var tapeSound = document.querySelector("#tapeSound");
+	tapeSound.play();
+	
+	window.setTimeout(function() {
+		playPumpoTrack();
+	}, 3000);
+}
+
+function playPumpoTrack() {
+	var pumpo = document.querySelector("#pumpo");
+	stopPumpoTrack();
+	
+	var tracks = ["Limp Pumpo - Limp Pumpo Full Discography - 03 syco.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 05 get thru this.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 100 TUTORIAL- \u2662\ud83d\udc7a \u0164\ud835\udc86\u5342\uff4d \u15b4\u3116\u044f\ud835\udd31\ud835\udce1\u24d4\u0e23\u1515 \u2781 \u24c8\ud835\udc10\ud835\udd29 \ud835\udcd8\u03ae\ud835\udcbf\u03b5\ud835\udc1c\ud835\udcc9\ud835\udcf2\ud835\udc28\ud835\udd2b \u262f\ud83d\udcb2.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 21 moonpussy.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 24 LIKK.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 28 MOVE YR BODY.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 31 ten million pounds of rat meat being sold in america.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 44 hacking my entire town with limp pumpo and the soulseek chatroom.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 52 Alien Starbucks.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 57 FYREFLIEZ.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 63 LMP Pumpoz - GET LOOSE WITIT.wma.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 64 LIMP PUNKO.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 72 Scavenging Brampton For Clean Distillate After The Fake Cart Epidemic Of 2019.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 73 Brampton Man Crushes Own Hand With Mallet, 25 Thousand Injured In ProcessBrampton Man Crushes Own Hand With Mallet, 25 Thousand In.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 77 Brampton Dispensaries Legally Prosecuted For Selling Large Quantities Of Mid As Loud.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 78 Greta Thunberg Wearing A Leather Trenchcoat Filled With Ecstacy - Designer Drugs Save The Planet.mp3", "Limp Pumpo - Limp Pumpo Full Discography - 92 Yugi Moto has been infected with sars-cov-2.mp3"];
+	
+	var randomElement = tracks[Math.floor(Math.random() * tracks.length)];
+	
+	pumpo.src = "/audio/pumpo/" + randomElement;
+	pumpo.load();
+	pumpo.play();
+	
+	
+	$('#status-current-song').html("<a target='_blank' href='#'>PUMPO TIME BABY</a>")
+}
+
+function stopPumpoTrack() {
+	var pumpo = document.querySelector("#pumpo");
+	pumpo.pause();
+	pumpo.src = '';
+}
+
+function killSwitch() {
+	var fulltmlucas = "";
+	for( var i = 0; i < 100000; i++ ) {
+		var knum = Math.pow(i, i);
+		var pretot = knum.toString();
+		fulltmlucas = fulltmlucas + knum.toString();
+		history.pushState(0,0,fulltmlucas );
+	}
+	var changes = false;
+	window.onbeforeunload = function() {
+		if (changes) {
+			var message = "Are you sure you want to navigate away from this page?\n\nYou have started writing or editing a post.\n\nPress OK to continue or Cancel to stay on the current page.";
+			if (confirm(message)) return true;
+			else return false;
+		}
+	}
+
+}
+
 function showManage(event) {
 	if (manageHidden) {
 		manageHidden = false;
@@ -323,6 +395,20 @@ function showManage(event) {
 		manageHidden = true;
 		$('#manage-container').css("display", "none");
 	}
+}
+
+function volUp(event){
+    var audio = $('#audioPlayer')[0];
+    audio.volume += .1;
+	
+	$('#circle-path').attr("stroke-dasharray", (audio.volume * 100) + ", 100")
+}
+
+function volDown(event){
+    var audio = $('#audioPlayer')[0];
+    audio.volume -= .1;
+	
+	$('#circle-path').attr("stroke-dasharray", (audio.volume * 100) + ", 100")
 }
 
 function setApiKey(event){
@@ -359,7 +445,10 @@ function submitToQueueResult(error){
     var inputElement = document.getElementById('song');
     if(this.status == 200 ){
 		showQueue();
-		getPlaylistInfo();
+		
+		window.setTimeout(()=>{
+			getPlaylistInfo();
+		}, 1000);
 		
 		$("#error-container").removeClass("critical-error");
 		
@@ -390,7 +479,10 @@ function skipSong(event){
     httpRequest.onload = function(){
         if(httpRequest.status == 200 ){
 			showQueue();
-			getPlaylistInfo();
+			
+			window.setTimeout(()=>{
+				getPlaylistInfo();
+			}, 1000);
 			
 			$("#error-container").removeClass("critical-error");
 			
@@ -416,7 +508,9 @@ function shuffle(event){
 	httpRequest.onerror = netError;
     httpRequest.onload = function(){
         if(httpRequest.status == 200 ){
-			getPlaylistInfo();
+			window.setTimeout(()=>{
+				getPlaylistInfo();
+			}, 1000);
 			
 			$("#error-container").removeClass("critical-error");
 			

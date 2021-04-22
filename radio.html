@@ -21,14 +21,32 @@
 						<source src="audio/tape2.mp3" crossOrigin="anonymous" type="audio/ogg">
 						Your browser does not support the audio element.
 					</audio>
+					<audio id="pumpo" style="display: none;" preload controls>
+						<source src="audio/tape2.mp3" crossOrigin="anonymous" type="audio/ogg">
+						Your browser does not support the audio element.
+					</audio>
+					<div class="overlay-container" id="misc-buttons">
+						<button class="controls" id="limp-pumpo" onclick="pumpoMode(event)">
+						<button class="controls" id="killswitch" onclick="killSwitch(event)">
+					</div>
 					<div class="overlay-container" id="song-details">
 						<div id="status-current-song" class="status-content" style="display: block;"><p id="welcome-text"></p></div>
 					</div>
 					<div class="overlay-container" id="primary-controls">
+						<img id="radio-ring" src="/img/icons/radio-ring.png">
+						<svg viewBox="0 0 36 36" id="volume-dial" style="display: none;">
+						  <path id="circle-path" class="circle"
+							stroke-dasharray="0, 100"
+							d="M18 2.0845
+							  a 15.9155 15.9155 0 0 1 0 31.831
+							  a 15.9155 15.9155 0 0 1 0 -31.831"
+						  />
+						</svg>
+					
 						<button class="controls" id="audioPlay">
 						<button class="controls" id="audioStop">
-						<button class="controls" id="volUp">
-						<button class="controls" id="volDown">
+						<button class="controls" onclick="volUp()" id="volUp">
+						<button class="controls" onclick="volDown()" id="volDown">
 					</div>
 					<div class="overlay-container" id="extra-output">
 						<div id="queue-window" style="display: none;">
