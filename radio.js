@@ -134,8 +134,18 @@ function setup(){
         })
 		
 		var powerOn = false;
-		$('#radio-img').click(function () {
-			if (powerOn == true) {
+		$('#radio-img').click(function (event) {
+			if (powerOn == true || event.target.id == "audioPlay") {
+				powerOn = true;
+				
+				// If we skipped the intro, make sure to set the
+				// watcher on song info anyway
+				if (event.target.id == "audioPlay") {
+					setInterval(function() {
+						getPlaylistInfo();
+					}, 60 * 1000); // 60 * 1000 milsec
+				}
+				
 				return;
 			}
 			powerOn = true;
@@ -218,6 +228,16 @@ function setup(){
 			audio.load();
 			audio.play();
 			
+			$('#radio-img').css("background-image", "url('img/radio-zoomed.png')");
+			$('#volume-dial').css("display", "block");
+			$('#circle-path').attr("stroke-dasharray", (audio.volume * 100) + ", 100")
+			
+			
+			$('#right-sidebar')
+				.css("background-image","url(img/holo/HoloHappyBGTransparent.png)");
+			
+			getPlaylistInfo();
+			
 			window.setTimeout(()=>{
 				startVisualizer();
 			}, 1000);
@@ -227,6 +247,10 @@ function setup(){
 			if (pumpoPlaying) {
 				stopPumpoTrack();
 			}
+			
+			$('#right-sidebar')
+				.css("background-image","url(img/holo/HolosadBGTransparent.png)");
+			
             audio.pause();
             // ga('send', 'event', 'Stream', 'stop', 'Stream play tracking');
             audio.src = '';
@@ -316,6 +340,7 @@ function setup(){
 function showQueue(event) {
 	if (queueHidden) {
 		queueHidden = false;
+		getPlaylistInfo();
 		$('#queue-window').css("display", "block");
 		$('#visualizer').css("display", "none");
 	} else {
@@ -338,6 +363,10 @@ function pumpoMode(event) {
 	audio.src = '';
 	stopVisualizer();
 	
+	
+	$('#right-sidebar')
+		.css("background-image","url(img/holo/HolosurpriseBGTransparent.png)");
+	
 	var tapeSound = document.querySelector("#tapeSound");
 	tapeSound.play();
 	
@@ -359,7 +388,7 @@ function playPumpoTrack() {
 	pumpo.play();
 	
 	
-	$('#status-current-song').html("<a target='_blank' href='#'>PUMPO TIME BABY</a>")
+	$('#status-current-song').html("<a target='_blank' href='#'>IT'S PUMPO TIME BABY!</a>")
 }
 
 function stopPumpoTrack() {
@@ -369,22 +398,23 @@ function stopPumpoTrack() {
 }
 
 function killSwitch() {
-	var fulltmlucas = "";
-	for( var i = 0; i < 100000; i++ ) {
-		var knum = Math.pow(i, i);
-		var pretot = knum.toString();
-		fulltmlucas = fulltmlucas + knum.toString();
-		history.pushState(0,0,fulltmlucas );
-	}
-	var changes = false;
-	window.onbeforeunload = function() {
-		if (changes) {
-			var message = "Are you sure you want to navigate away from this page?\n\nYou have started writing or editing a post.\n\nPress OK to continue or Cancel to stay on the current page.";
-			if (confirm(message)) return true;
-			else return false;
-		}
-	}
-
+	// var fulltmlucas = "";
+	// for( var i = 0; i < 100000; i++ ) {
+		// var knum = Math.pow(i, i);
+		// var pretot = knum.toString();
+		// fulltmlucas = fulltmlucas + knum.toString();
+		// history.pushState(0,0,fulltmlucas );
+	// }
+	// var changes = false;
+	// window.onbeforeunload = function() {
+		// if (changes) {
+			// var message = "Are you sure you want to navigate away from this 
+// page?\n\nYou have started writing or editing a post.\n\nPress OK to 
+// continue or Cancel to stay on the current page.";
+			// if (confirm(message)) return true;
+			// else return false;
+		// }
+	// }
 }
 
 function showManage(event) {
@@ -444,6 +474,7 @@ function submitToQueue(event){
 function submitToQueueResult(error){
     var inputElement = document.getElementById('song');
     if(this.status == 200 ){
+		queueHidden = true;
 		showQueue();
 		
 		window.setTimeout(()=>{
