@@ -24,6 +24,40 @@ p {
 	color: white;
 }
 
+/* .row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+} */
+
+.nav-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: auto;
+    height: min-content;
+  }
+  
+  .nav-row>a {
+    display: flex;
+    padding: 25px;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-row img {
+    width: 100%
+}
+
 .main-container {
 	width: 1280px;
 	margin: auto;
@@ -35,8 +69,6 @@ p {
 	background-size: cover;
 	width: 1280px;
 	height: 800px;
-	
-	display: none;
 }
 
 #boot-screen {
@@ -116,11 +148,26 @@ body {
 	background-size: cover;
 }
 
+#contact-img {
+	background-image: url("img/mail.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+    background-position: center;
+}
+
+#fourohfour-img {
+	background-image: url("img/godmercy.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
 #left-sidebar {    
 	width: 244px;
     height: 348px;
     top: -82px;
     left: 6px;
+
+    flex-direction: column;
 }
 
 #text-box {        

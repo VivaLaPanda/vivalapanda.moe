@@ -57,9 +57,6 @@ function getPlaylistInfo(){
   httpRequest.onload = function(){
     response = JSON.parse(httpRequest.response)
     if(httpRequest.status == 200 ){
-      console.log(response);
-	  
-	  
       // Set current playing
       if(response.currentSong.url){
 		var classText = "";
@@ -631,7 +628,7 @@ function startVisualizer() {
             for(let i = 0; i < bufferLength; i++) {
         
                 let v = dataArray[i] / 128.0;
-                let y = (v - .7) * HEIGHT;
+                let y = (v - .9) * HEIGHT * 2;
         
 				// 284 h, half empty so 142. 32 bars
 				// // visCanvasCtx.lineTo(x, y);
