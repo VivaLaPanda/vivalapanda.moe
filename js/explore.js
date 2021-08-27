@@ -19,3 +19,7 @@ function toggleMute() {
 		musicBtn.style.filter = "grayscale(100%)";
 	}
 }
+
+function goTo(location) {
+	window.location.href = location + ".html";
+}

@@ -3,39 +3,34 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panda's Digiverse</title>
+    <title>Casino</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/index.css" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/index.js" crossorigin="anonymous"></script>
+    <link href="/css/explore.css" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/explore.js" crossorigin="anonymous"></script>
+
+	<style>
+		#explore-img {
+			background-image: url("/img/explore/places/casino.png");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+		}
+	</style>
   </head>
-  <!--
-	Main source image for this page comes from "Nooch - Abakareta Inbou" I think
-	The sidebar things come from Doki Doki Pretty League, though I've edited them quite a bit
-  -->
   <body>
 	<div id="audio-player-container">
 		<audio id="music" loop preload controls>
 			<source src="audio/dance_in_the_memories.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
 			Your browser does not support the audio element.
 		</audio>
-		
-		
-		<audio id="bootSound" preload controls>
-			<source src="audio/boot.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
-			Your browser does not support the audio element.
-		</audio>
 	</div>
 	<div class="main-container">
-		<div id="boot-screen">
-			<div id="boot-container">
-				<p id="boot-text"  style="white-space: pre-line"></p>
-			</div>
-		</div>
-		<div class="main-window" style="display: none;">
+		<div class="main-window">
 			<div class="subwindow" id="main-image">
-				<div class="page-image" id="home-img">
-					<input type="image" id="mute" alt="mute" src="/img/icons/playing_big.png">
+				<div class="page-image" id="explore-img">
+					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
+				<button class="explore-nav" onclick="goTo('casino')"></button>
 			</div>
 			<div class="subwindow" id="left-sidebar">
 
@@ -60,7 +55,7 @@
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
 					<p class="dialog-text">
-						Welcome to my corner of cyberspace! How can I help you？
+						Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure.
 					</p>
 				</div>
 			</div>
