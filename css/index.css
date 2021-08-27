@@ -1,0 +1,12 @@
+#boot-screen {
+	background: url("/img/boot-screen-bg.jpg");
+	background-size: cover;
+	width: 1280px;
+	height: 800px;
+}
+
+#home-img {
+	background-image: url("/img/computer_crop.gif");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
