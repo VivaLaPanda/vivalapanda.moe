@@ -24,18 +24,6 @@ p {
 	color: white;
 }
 
-/* .row {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.col {
-    display: flex;
-    flex-direction: column;
-    width: inherit;
-} */
-
 .nav-row {
     display: flex;
     width: 100%;
@@ -131,7 +119,7 @@ body {
 }
 
 #main-image {
-    width: 740px;
+    width: 7px;
     height: 528px;
     left: 270px;
     top: 10px;
@@ -378,9 +366,13 @@ body {
 	overflow: hidden;
 	position: relative;
 	width: 90%;
-    height: 90%;
+    height: 50%;
 	white-space: nowrap;
 	padding: 5px;
+}
+
+#status-listeners {
+	font-size: 10px;
 }
 
 .status-content p {

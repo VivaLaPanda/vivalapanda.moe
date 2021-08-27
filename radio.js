@@ -65,6 +65,7 @@ function getPlaylistInfo(){
 		}
 		
         $('#status-current-song').html("<a class=\"" + classText + "\" target=\"_blank\" rel=\"noreferrer\" href=\"" + response.currentSong.url + "\"> " + response.currentSong.title + "</a>")
+        $('#status-listeners').html("current listeners: " + response.listenerCount)
       } else {
         $('#status-current-song').html(response.currentSong.title)
       }
