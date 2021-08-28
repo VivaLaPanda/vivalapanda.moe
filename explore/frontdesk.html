@@ -3,17 +3,33 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino</title>
+    <title>Front Desk</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="/css/explore.css" rel="stylesheet" type="text/css" media="all">
     <script src="/js/explore.js" crossorigin="anonymous"></script>
 
 	<style>
 		#explore-img {
-			background-image: url("/img/explore/places/casino.png");
+			background-image: url("/img/explore/places/front_desk.gif");
 			background-repeat: no-repeat;
 			background-size: cover;
-			background-position: center;
+			background-position: left;
+		}
+
+		#penthouse-nav {
+			left: 146px;
+    		top: 7px;
+		}
+		#penthouse-nav img {
+			width: 113px;
+		}
+
+		#bar-nav {
+			top: 98px;
+			left: 170px;
+		}
+		#bar-nav img {
+			width: 70px;
 		}
 	</style>
   </head>
@@ -30,7 +46,12 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button class="explore-nav" onclick="goTo('casino')"></button>
+				<button id="penthouse-nav" class="explore-nav" onclick="goTo('penthouse')">
+					<img src="/img/explore/overlays/penthouse-button.png"/>
+				</button>
+				<button id="bar-nav" class="explore-nav" onclick="goTo('towerbar')">
+					<img src="/img/explore/overlays/bar-button.png"/>
+				</button>
 			</div>
 			<div class="subwindow" id="left-sidebar">
 
@@ -53,9 +74,9 @@
 </div>
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
-					<p class="speaker-text">Ｐａｎｄａ</p>
+					<p class="speaker-text">3 7</p>
 					<p class="dialog-text">
-						Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure.
+						"Welcome to the Tokugawa tower sir, how may I assist?"
 					</p>
 				</div>
 			</div>

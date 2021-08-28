@@ -3,17 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino</title>
+    <title>Skybar</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="/css/explore.css" rel="stylesheet" type="text/css" media="all">
     <script src="/js/explore.js" crossorigin="anonymous"></script>
 
 	<style>
 		#explore-img {
-			background-image: url("/img/explore/places/casino.png");
+			background-image: url("/img/explore/places/bar_crowded.png");
 			background-repeat: no-repeat;
 			background-size: cover;
-			background-position: center;
+			background-position: left;
+		}
+
+		#talk-to-her {
+			width: 141px;
+			height: 357px;
+			right: 114px;
+			bottom: 112px;
 		}
 	</style>
   </head>
@@ -30,14 +37,14 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button class="explore-nav" onclick="goTo('casino')"></button>
+				<button id="talk-to-her" class="explore-nav" onclick="talkToBarshoujo()"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
-					<p class="speaker-text">Ｐａｎｄａ</p>
-					<p class="dialog-text">
-						Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure.
+					<p id="towerbar-speaker" class="speaker-text">T o n y</p>
+					<p id="towerbar-text" class="dialog-text">
+						"Come over here friend, grab yourself a seat!"
 					</p>
 				</div>
 			</div>

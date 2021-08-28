@@ -100,6 +100,8 @@ body {
     height: 528px;
     left: 270px;
     top: 10px;
+
+    overflow: hidden;
 }
 
 .page-image {    

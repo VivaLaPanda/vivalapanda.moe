@@ -10,7 +10,7 @@
 
 	<style>
 		#explore-img {
-			background-image: url("/img/explore/pathways/mainstreet.png");
+			background-image: url("/img/explore/pathways/mainstreet_night.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
@@ -19,7 +19,6 @@
 		#casino {
 			width: 141px;
 			height: 127px;
-			background-color: blue;
 			right: 94px;
 			bottom: 22px;
 		}
@@ -28,7 +27,7 @@
   <body>
 	<div id="audio-player-container">
 		<audio id="music" loop preload controls>
-			<source src="audio/dance_in_the_memories.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+			<source src="/audio/dance_in_the_memories.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
 			Your browser does not support the audio element.
 		</audio>
 	</div>
@@ -38,7 +37,7 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="casino" class="explore-nav" onclick="goTo('casino')"></button>
+				<button id="casino" class="explore-nav" onclick="goTo('frontdesk')"></button>
 			</div>
 			<div class="subwindow" id="left-sidebar">
 
