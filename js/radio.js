@@ -629,12 +629,14 @@ function startVisualizer() {
             for(let i = 0; i < bufferLength; i++) {
         
                 let v = dataArray[i] / 128.0;
-                let y = (v - .9) * HEIGHT * 2;
+                const variance = 1.5; // How much the graph moves
+                const baseline = .9; // Where the bottom is
+                let y = (v - baseline) * HEIGHT * variance;
         
 				// 284 h, half empty so 142. 32 bars
 				// // visCanvasCtx.lineTo(x, y);
 				visCanvasCtx.beginPath();
-				for (let barIdx = 0; ((barIdx * 2) * barHeight) < HEIGHT; barIdx++) {
+				for (let barIdx = 0; ((barIdx * 2) * barHeight) < HEIGHT + 5; barIdx++) {
 					let barY = (barIdx * 2) * barHeight;
 					visCanvasCtx.rect(x + .5, HEIGHT - barY, sliceWidth - 1, barHeight);
 				}
