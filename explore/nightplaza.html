@@ -3,43 +3,43 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pandopolis</title>
+    <title>Penthouse</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="/css/explore.css" rel="stylesheet" type="text/css" media="all">
     <script src="/js/explore.js" crossorigin="anonymous"></script>
 
 	<style>
 		#explore-img {
-			background-image: url("/img/explore/pathways/mainstreet_night.png");
+			background-image: url("/img/explore/pathways/night_city_plaza.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
 		}
 
-		#tower {
-			width: 141px;
-			height: 127px;
-			right: 94px;
-			bottom: 22px;
-		}
+        #frontwalkway {
+            width: 101px;
+            height: 97px;
+            right: 94px;
+            bottom: 212px;
+        }
 
-		#tree-alley {
-			width: 85px;
-			height: 77px;
-			right: 246px;
-			bottom: 52px;
-		}
+        #rightwalkway {
+            width: 85px;
+            height: 127px;
+            right: -4px;
+            bottom: 82px;
+        }
 
-		#other-street {
-			width: 106px;
-			height: 87px;
-			right: 370px;
-			bottom: 63px;
-		}
+        #forest {
+            width: 415px;
+            height: 87px;
+            left: 0px;
+            bottom: 232px;
+        }
 
-		.main-window {
-			background-image: url("/img/background-frame-dark.png");
-		}
+        .main-window {
+            background-image: url("/img/background-frame-dark.png");
+        }
 	</style>
   </head>
   <body>
@@ -55,9 +55,9 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="tower" class="explore-nav" onclick="goTo('frontdesk')"></button>
-				<button id="tree-alley" class="explore-nav" onclick="goTo('nightplaza')"></button>
-				<button id="other-street" class="explore-nav" onclick="goTo('partystreet')"></button>
+				<button id="frontwalkway" class="explore-nav" onclick="goTo('nightpark')"></button>
+				<button id="rightwalkway" class="explore-nav" onclick="goTo('nightresidential')"></button>
+				<button id="forest" class="explore-nav" onclick="goTo('forestedge')"></button>
 			</div>
 			<div class="subwindow" id="left-sidebar">
 
@@ -82,11 +82,11 @@
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
 					<p class="dialog-text">
-						Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure.
+						Looking out over the skyline always puts me in a contemplative mood...
 					</p>
 				</div>
 			</div>
-			<div class="subwindow" id="right-sidebar"></div>
+			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
 		</div>
 	</div>
   </body>

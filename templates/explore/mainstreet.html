@@ -16,11 +16,29 @@
 			background-position: center;
 		}
 
-		#casino {
+		#tower {
 			width: 141px;
 			height: 127px;
 			right: 94px;
 			bottom: 22px;
+		}
+
+		#tree-alley {
+			width: 85px;
+			height: 77px;
+			right: 246px;
+			bottom: 52px;
+		}
+
+		#other-street {
+			width: 106px;
+			height: 87px;
+			right: 370px;
+			bottom: 63px;
+		}
+
+		.main-window {
+			background-image: url("/img/background-frame-dark.png");
 		}
 	</style>
   </head>
@@ -37,7 +55,9 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="casino" class="explore-nav" onclick="goTo('frontdesk')"></button>
+				<button id="tower" class="explore-nav" onclick="goTo('frontdesk')"></button>
+				<button id="tree-alley" class="explore-nav" onclick="goTo('nightplaza')"></button>
+				<button id="other-street" class="explore-nav" onclick="goTo('partystreet')"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">

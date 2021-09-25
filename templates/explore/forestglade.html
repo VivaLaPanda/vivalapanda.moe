@@ -11,18 +11,10 @@
 	<style>
 		#explore-img {
             z-index: 10;
-			background-image: url("/img/explore/places/city_overlook_transparent.png");
+			background-image: url("/img/explore/places/forestglade.png");
 			background-repeat: no-repeat;
 			background-size: cover;
-			background-position: center;
-		}
-		#explore-img-underlay {
-            z-index: 0;
-            position: absolute;
-
-            bottom: 80px;
-            left: -1px;
-            width: 780px;
+			background-position: left;
 		}
 	</style>
   </head>
@@ -39,8 +31,6 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-                <img src="/img/explore/settings/skyling-normal-flicker.gif" id="explore-img-underlay"/>
-				<button class="explore-nav" onclick="goTo('casino')"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
@@ -51,7 +41,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HolosurpriseBGTransparent.png);"></div>
+			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
 		</div>
 	</div>
   </body>

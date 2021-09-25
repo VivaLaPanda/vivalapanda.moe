@@ -204,7 +204,12 @@ function setup(){
         $('#audioPlay').click(function () {
 			var tapeSound = document.querySelector("#tapeSound");
 			tapeSound.pause();
+		
 			
+			if (audio.currentTime > 0) {
+				return;
+			}	
+	
 			if (pumpoPlaying) {
 				stopPumpoTrack();
 			}
@@ -222,7 +227,7 @@ function setup(){
 			//if (navigator.userAgent.match(/Firefox/)) {
 			var data = $(audio).data('src');
 			audio.src = data ? data : (src + '?nocache=' + Date.now());
-			
+	
 			audio.load();
 			audio.play();
 			

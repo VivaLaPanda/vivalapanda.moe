@@ -10,20 +10,22 @@
 
 	<style>
 		#explore-img {
-            z-index: 10;
-			background-image: url("/img/explore/places/city_overlook_transparent.png");
+			background-image: url("/img/explore/pathways/forest.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
 		}
-		#explore-img-underlay {
-            z-index: 0;
-            position: absolute;
 
-            bottom: 80px;
-            left: -1px;
-            width: 780px;
-		}
+        #forest {
+            width: 416px;
+            height: 297px;
+            left: 150px;
+            bottom: 42px;
+        }
+
+        .main-window {
+            background-image: url("/img/background-frame-dark.png");
+        }
 	</style>
   </head>
   <body>
@@ -39,10 +41,27 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-                <img src="/img/explore/settings/skyling-normal-flicker.gif" id="explore-img-underlay"/>
-				<button class="explore-nav" onclick="goTo('casino')"></button>
+				<button id="forest" class="explore-nav" onclick="goTo('forestglade')"></button>
 			</div>
-			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="left-sidebar">
+
+    <div class="nav-row">
+        <a class="navbutton" href="/index.html">
+            <img src="/img/icons/computer_recolor.png"></img>
+        </a>
+        <a class="navbutton" href="/radio.html">
+            <img src="/img/icons/cd_audio_recolor.png"></img>
+        </a>
+    </div>
+    <div class="nav-row">
+        <a class="navbutton" href="/contact.html">
+            <img src="/img/icons/envelope_closed_recolor.png"></img>
+        </a>
+        <a class="navbutton" href="/explore/mainstreet.html">
+            <img src="/img/icons/globe_map_recolor.png"></img>
+        </a>
+    </div>
+</div>
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
@@ -51,7 +70,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HolosurpriseBGTransparent.png);"></div>
+			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
 		</div>
 	</div>
   </body>

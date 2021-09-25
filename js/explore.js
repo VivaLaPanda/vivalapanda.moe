@@ -3,21 +3,33 @@ window.onload = function(){
 	var musicBtn = document.querySelector("#mute");
 	var music = document.querySelector("#music");
 
+	music.muted = window.localStorage.getItem('muted') == 'true';
+
     music.play();
-    musicBtn.style.filter = "grayscale(0%)";
+    updateMute();
 }
 
 function toggleMute() {
+	if (window.localStorage.getItem('muted') == 'true') {
+		music.play();
+		window.localStorage.setItem('muted', false);
+	} else {
+		window.localStorage.setItem('muted', true);
+	}
+	
+	updateMute();
+}
+
+function updateMute() {
 	var musicBtn = document.querySelector("#mute");
 	
-	if (music.muted) {
-		music.play();
-		music.muted = false;
-		musicBtn.style.filter = "grayscale(0%)";
-	} else {
-		music.muted = true;
+	if (window.localStorage.getItem('muted') == 'true') {
 		musicBtn.style.filter = "grayscale(100%)";
+	} else {
+		musicBtn.style.filter = "grayscale(0%)";
 	}
+	
+	music.muted = window.localStorage.getItem('muted') == 'true';
 }
 
 function goTo(location) {

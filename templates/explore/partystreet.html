@@ -10,20 +10,36 @@
 
 	<style>
 		#explore-img {
-            z-index: 10;
-			background-image: url("/img/explore/places/city_overlook_transparent.png");
+			background-image: url("/img/explore/pathways/partydistrict.webp");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
 		}
-		#explore-img-underlay {
-            z-index: 0;
-            position: absolute;
 
-            bottom: 80px;
-            left: -1px;
-            width: 780px;
-		}
+        .main-window {
+            background-image: url("/img/background-frame-dark.png");
+        }
+
+        #club {
+            width: 235px;
+            height: 277px;
+            right: 0px;
+            bottom: 27px;
+        }
+
+        #agency {
+            width: 155px;
+            height: 177px;
+            right: 210px;
+            bottom: 297px;
+        }
+
+        #weaponshop {
+            width: 85px;
+            height: 87px;
+            right: 400px;
+            bottom: 227px;
+        }
 	</style>
   </head>
   <body>
@@ -39,8 +55,9 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-                <img src="/img/explore/settings/skyling-normal-flicker.gif" id="explore-img-underlay"/>
-				<button class="explore-nav" onclick="goTo('casino')"></button>
+				<button id="club" class="explore-nav" onclick="goTo('club')"></button>
+				<button id="agency" class="explore-nav" onclick="goTo('agency')"></button>
+				<button id="weaponshop" class="explore-nav" onclick="goTo('weaponshop')"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
@@ -51,7 +68,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HolosurpriseBGTransparent.png);"></div>
+			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
 		</div>
 	</div>
   </body>

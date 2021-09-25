@@ -10,20 +10,36 @@
 
 	<style>
 		#explore-img {
-            z-index: 10;
-			background-image: url("/img/explore/places/city_overlook_transparent.png");
+			background-image: url("/img/explore/pathways/night_city_plaza.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
 		}
-		#explore-img-underlay {
-            z-index: 0;
-            position: absolute;
 
-            bottom: 80px;
-            left: -1px;
-            width: 780px;
-		}
+        #frontwalkway {
+            width: 101px;
+            height: 97px;
+            right: 94px;
+            bottom: 212px;
+        }
+
+        #rightwalkway {
+            width: 85px;
+            height: 127px;
+            right: -4px;
+            bottom: 82px;
+        }
+
+        #forest {
+            width: 415px;
+            height: 87px;
+            left: 0px;
+            bottom: 232px;
+        }
+
+        .main-window {
+            background-image: url("/img/background-frame-dark.png");
+        }
 	</style>
   </head>
   <body>
@@ -39,8 +55,9 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-                <img src="/img/explore/settings/skyling-normal-flicker.gif" id="explore-img-underlay"/>
-				<button class="explore-nav" onclick="goTo('casino')"></button>
+				<button id="frontwalkway" class="explore-nav" onclick="goTo('nightpark')"></button>
+				<button id="rightwalkway" class="explore-nav" onclick="goTo('nightresidential')"></button>
+				<button id="forest" class="explore-nav" onclick="goTo('forestedge')"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
@@ -51,7 +68,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HolosurpriseBGTransparent.png);"></div>
+			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
 		</div>
 	</div>
   </body>
