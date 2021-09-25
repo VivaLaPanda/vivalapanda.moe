@@ -3,7 +3,10 @@ window.onload = function(){
 	var musicBtn = document.querySelector("#mute");
 	var music = document.querySelector("#music");
 
-	music.muted = window.localStorage.getItem('muted') == 'true';
+	
+	window.localStorage.setItem('muted', true);
+
+	music.muted = window.localStorage.getItem('muted') == 'true'; // Localstorage always gives strings, not bools
 
     music.play();
     updateMute();
