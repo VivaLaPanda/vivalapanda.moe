@@ -10,7 +10,6 @@
 
 	<style>
 		#explore-img {
-            z-index: 10;
 			background-image: url("/img/explore/pathways/night_residential.png");
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -20,6 +19,13 @@
         .main-window {
             background-image: url("/img/background-frame-dark.png");
         }
+
+		#continue {
+			width: 246px;
+			height: 47px;
+			right: 230px;
+			bottom: 83px;
+		}
 	</style>
   </head>
   <body>
@@ -35,8 +41,7 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button class="explore-nav" onclick="goTo('nightpark')"></button>
-				<button class="explore-nav" onclick="goTo('nightresidential')"></button>
+				<button id="continue" class="explore-nav" onclick="goTo('nightresidential2')"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">

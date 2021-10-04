@@ -10,8 +10,7 @@
 
 	<style>
 		#explore-img {
-            z-index: 10;
-			background-image: url("/img/explore/places/club.png");
+			background-image: url("/img/explore/pathways/night_apartments.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
@@ -20,6 +19,15 @@
         .main-window {
             background-image: url("/img/background-frame-dark.png");
         }
+
+		#caross-street {
+			width: 80px;
+            height: 47px;
+            right: 343px;
+            bottom: 273px;
+
+            background-color: red;
+		}
 	</style>
   </head>
   <body>
@@ -35,14 +43,32 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="club" class="explore-nav" onclick="goTo('club')"></button>
+				<button id="cross-street" class="explore-nav" onclick="goTo('nightapartments')"></button>
 			</div>
-			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="left-sidebar">
+
+    <div class="nav-row">
+        <a class="navbutton" href="/index.html">
+            <img src="/img/icons/computer_recolor.png"></img>
+        </a>
+        <a class="navbutton" href="/radio.html">
+            <img src="/img/icons/cd_audio_recolor.png"></img>
+        </a>
+    </div>
+    <div class="nav-row">
+        <a class="navbutton" href="/contact.html">
+            <img src="/img/icons/envelope_closed_recolor.png"></img>
+        </a>
+        <a class="navbutton" href="/explore/mainstreet.html">
+            <img src="/img/icons/globe_map_recolor.png"></img>
+        </a>
+    </div>
+</div>
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
 					<p class="dialog-text">
-						:cattodance:
+						Hey you don't think these people will mind us wandering into their houses right?
 					</p>
 				</div>
 			</div>

@@ -10,8 +10,7 @@
 
 	<style>
 		#explore-img {
-            z-index: 10;
-			background-image: url("/img/explore/places/club.png");
+			background-image: url("/img/explore/pathways/night_residential_2.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
@@ -19,6 +18,20 @@
 
         .main-window {
             background-image: url("/img/background-frame-dark.png");
+        }
+
+        #cross-street {
+            width: 80px;
+            height: 47px;
+            right: 343px;
+            bottom: 273px;
+        }
+
+        #left-house {
+            width: 130px;
+            height: 287px;
+            right: 563px;
+            bottom: 163px;
         }
 	</style>
   </head>
@@ -35,14 +48,15 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="club" class="explore-nav" onclick="goTo('club')"></button>
+				<button id="cross-street" class="explore-nav" onclick="goTo('nightresidential_girl')"></button>
+				<button id="left-house" class="explore-nav" onclick="goTo('musicianbedroom')"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
 					<p class="dialog-text">
-						:cattodance:
+						Hey you don't think these people will mind us wandering into their houses right?
 					</p>
 				</div>
 			</div>

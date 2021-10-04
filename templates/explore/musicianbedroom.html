@@ -10,15 +10,22 @@
 
 	<style>
 		#explore-img {
-            z-index: 10;
-			background-image: url("/img/explore/places/club.png");
+			background-image: url("/img/explore/places/night_musician_bedroom.png");
 			background-repeat: no-repeat;
 			background-size: cover;
-			background-position: center;
+			background-position: left;
 		}
 
         .main-window {
             background-image: url("/img/background-frame-dark.png");
+        }
+
+        #stereo {
+            position: absolute;
+            width: 230px;
+            height: 207px;
+            right: 513px;
+            bottom: 133px;
         }
 	</style>
   </head>
@@ -35,14 +42,16 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="club" class="explore-nav" onclick="goTo('club')"></button>
+				<a id="stereo" href="https://www.beepbox.co">
+                    <button class="explore-nav"></button>
+                </a>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
 					<p class="dialog-text">
-						:cattodance:
+						Hey you don't think these people will mind us wandering into their houses right?
 					</p>
 				</div>
 			</div>

@@ -8,10 +8,15 @@
     <link href="/css/explore.css" rel="stylesheet" type="text/css" media="all">
     <script src="/js/explore.js" crossorigin="anonymous"></script>
 
+    <script>
+        function talkToSpookyGirl(event) {
+            document.getElementById("spookygirl-text").innerHTML = "\"Uhh, that person is definitely a ghost. Let's <i>not</i> talk to them.\""
+        }
+    </script>
+
 	<style>
 		#explore-img {
-            z-index: 10;
-			background-image: url("/img/explore/places/club.png");
+			background-image: url("/img/explore/pathways/night_residential_girl.png");
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
@@ -19,6 +24,20 @@
 
         .main-window {
             background-image: url("/img/background-frame-dark.png");
+        }
+
+		#cross-street {
+			width: 80px;
+            height: 157px;
+            right: 643px;
+            bottom: 93px;
+		}
+
+        #girl {
+            width: 80px;
+            height: 187px;
+            right: 283px;
+            bottom: 13px;
         }
 	</style>
   </head>
@@ -35,14 +54,15 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="club" class="explore-nav" onclick="goTo('club')"></button>
+				<button id="cross-street" class="explore-nav" onclick="goTo('nightapartments')"></button>
+				<button id="girl" class="explore-nav" onclick="talkToSpookyGirl()"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
-					<p class="dialog-text">
-						:cattodance:
+					<p id="spookygirl-text" class="dialog-text">
+						Hey you don't think these people will mind us wandering into their houses right?
 					</p>
 				</div>
 			</div>
