@@ -7,6 +7,7 @@ var locations = {
         "frameMode": "dark",
         "music": "../audio/possessioner-possessioner.mp3",
     
+        
         "speakerText": "P a n d a",
         "dialogText": ["Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."],
         "links": [
