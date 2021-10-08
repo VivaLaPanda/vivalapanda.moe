@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penthouse</title>
+    <title>Definitely Not a Ghost Girl</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="/css/explore.css" rel="stylesheet" type="text/css" media="all">
     <script src="/js/explore.js" crossorigin="anonymous"></script>
@@ -54,7 +54,9 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="cross-street" class="explore-nav" onclick="goTo('nightapartments')"></button>
+
+				<a id="cross-street" class="explore-nav" href="explore.html?loc=nightapartments">
+				</a>
 				<button id="girl" class="explore-nav" onclick="talkToSpookyGirl()"></button>
 			</div>
 			{{ template "t_lsidebar.html" . }}

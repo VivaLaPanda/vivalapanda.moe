@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front Desk</title>
+    <title>Tokugawa Tower Lobby</title>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="/css/explore.css" rel="stylesheet" type="text/css" media="all">
     <script src="/js/explore.js" crossorigin="anonymous"></script>
@@ -46,12 +46,13 @@
 				<div class="page-image" id="explore-img">
 					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
 				</div>
-				<button id="penthouse-nav" class="explore-nav" onclick="goTo('penthouse')">
+
+				<a id="penthouse-nav" class="explore-nav" href="penthouse.html">
 					<img src="/img/explore/overlays/penthouse-button.png"/>
-				</button>
-				<button id="bar-nav" class="explore-nav" onclick="goTo('towerbar')">
+				</a>
+				<a id="bar-nav" class="explore-nav" href="towerbar.html">
 					<img src="/img/explore/overlays/bar-button.png"/>
-				</button>
+				</a>
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
