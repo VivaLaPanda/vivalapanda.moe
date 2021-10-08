@@ -5,7 +5,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/possessioner-possessioner.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": ["Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."],
@@ -42,7 +42,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/kavinsky-nightcall.mp3",
     
         "speakerText": "J o h n n y  U p p e r c u t",
         "dialogText": [
@@ -57,19 +57,19 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "light",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/sonic-casino-night-zone.mp4",
     
         "speakerText": "P a n d a",
         "dialogText": ["Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."],
         "links": []
     },
-    "casino": {
+    "club": {
         "title": "Club Polka",
         "mainImage": "../img/explore/places/club.png",
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/control-your-music.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": [":cattodance:"],
@@ -81,7 +81,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/death-bringer-forest.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": ["It's almost sunrise, perfect time to wander into the mysterious forest!"],
@@ -102,7 +102,7 @@ var locations = {
         "mainImagePos": "left",
         "holoImage": "../img/holo/HolosurpriseBGTransparent.png",
         "frameMode": "light",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": ["There's definitely a mythical sword somewhere around here..."],
@@ -143,7 +143,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
     
         "speakerText": "Ｐａｎｄａ",
         "dialogText": ["Hey you don't think these people will mind us wandering into their houses right?"],
@@ -164,7 +164,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/viper-moon.mp3",
     
         "speakerText": "Ｐａｎｄａ",
         "dialogText": [
@@ -179,7 +179,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/viper-moon.mp3",
     
         "speakerText": "Ｐａｎｄａ",
         "dialogText": ["It's so quiet here at night..."],
@@ -216,7 +216,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/doki-doki-vac01.mp3",
     
         "speakerText": "Ｐａｎｄａ",
         "dialogText": [
@@ -238,7 +238,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/doki-doki-vac01.mp3",
     
         "speakerText": "Ｐａｎｄａ",
         "dialogText": [
@@ -269,7 +269,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/animahjong-x-10.mp3",
     
         "speakerText": "Ｐａｎｄａ",
         "dialogText": [
@@ -308,7 +308,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/dance_in_the_memories.mp3",
+        "music": "../audio/possessioner-in-the-boutique.mp3",
     
         "speakerText": "Ｐａｎｄａ",
         "dialogText": [
