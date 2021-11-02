@@ -77,10 +77,14 @@ function getPlaylistInfo(){
           return "<li>" + "<a target=\"_blank\" rel=\"noreferrer\" href=\"" + song.url + "\"> " + song.title + "</a>" + "</li>\n"
         })
         playlistRows = playlistRows.join("")
-        $('#upcoming').html(playlistRows)
+        $('#upcoming').html(playlistRows);
+
+	var playlistLength = response.upcoming.reduce((x,y) => x + y.duration, 0)
+	document.getElementById("queue-length").textContent = ": Approx " + Math.round(playlistLength / 60000000000) + "m";
       } else {
-        $('#upcoming').html("")
-        $('#queueState').html("Nothing queued")
+        $('#upcoming').html("");
+	document.getElementById("queue-length").textContent = "";
+        $('#queueState').html("Nothing queued");
         $('#queueState').css("display", "block");
       }
     }
