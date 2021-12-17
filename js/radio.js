@@ -489,8 +489,15 @@ function submitToQueueResult(error){
 		}, 1000);
 		
 		$("#error-container").removeClass("critical-error");
-		
 		$("#status-text").html("NEW TRACK REGISTERED");
+
+		
+		document.getElementById('song').value = ""; // Clear the song url input
+		var songTitle = document.getElementById('title');
+		// Clear the title, only the part after the dash (if there is a dash)
+		if (songTitle.value != "") {
+			songTitle.value = songTitle.value.substring(0, songTitle.value.indexOf('-') + 1);
+		}
     } else {
 		$("#error-container").addClass("critical-error");
 		
