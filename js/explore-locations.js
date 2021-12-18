@@ -265,8 +265,8 @@ var locations = {
         ]
     },
     "partystreet": {
-        "title": "The Party Street",
-        "mainImage": "../img/explore/pathways/partydistrict.webp",
+        "title": "Isogashii Boulevard",
+        "mainImage": "../img/explore/pathways/night_street_busy.png",
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
@@ -280,28 +280,50 @@ var locations = {
             {
                 to: "?loc=club",
     
-                width: "235px",
-                height: "277px",
-                right: "0px",
-                bottom: "27px"
+                width: "91px",
+                height: "174px",
+                right: "28px",
+                bottom: "78px"
             },
             {
                 to: "?loc=agency",
     
-                width: "155px",
-                height: "177px",
-                right: "210px",
-                bottom: "297px"
+                width: "115px",
+                height: "167px",
+                right: "16px",
+                bottom: "357px"
             },
             {
-                to: "?loc=weaponshop",
+                to: "?loc=nightalley",
     
                 width: "85px",
-                height: "87px",
-                right: "400px",
-                bottom: "227px"
+                height: "103px",
+                right: "232px",
+                bottom: "135px"
+            },
+            {
+                to: "?loc=electronicstore",
+    
+                width: "85px",
+                height: "179px",
+                right: "616px",
+                bottom: "64px"
             },
         ]
+    },
+    "electronicstore": {
+        "title": "Denchi's Delights",
+        "mainImage": "../img/explore/places/electronics_store.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "S a k u r a",
+        "dialogText": [
+            "\"Go ahead, go for a spin!\"",
+        ],
+        "links": []
     },
     "weaponshop": {
         "title": "Ghandi's Surplus Suprises",
@@ -311,11 +333,168 @@ var locations = {
         "frameMode": "dark",
         "music": "../audio/possessioner-in-the-boutique.mp3",
     
-        "speakerText": "Ｐａｎｄａ",
+        "speakerText": "P a n d a",
         "dialogText": [
             "I uhh, promise this place is definitely legal...",
             "probably."
         ],
         "links": []
+    },
+    "nightalley": {
+        "title": "The Alley",
+        "mainImage": "../img/explore/pathways/night_busy_alley.png",
+        "mainImagePos": "center right",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "Ｐａｎｄａ",
+        "dialogText": [
+            "Ah, now we're exploring properly"
+        ],
+        "links": [
+            {
+                to: "?loc=shizukastreet",
+    
+                width: "67px",
+                height: "87px",
+                right: "190px",
+                bottom: "227px"
+            },
+            {
+                to: "?loc=weaponshop",
+    
+                width: "45px",
+                height: "119px",
+                right: "270px",
+                bottom: "202px"
+            },
+            {
+                to: "?loc=cutiebar",
+    
+                width: "77px",
+                height: "357px",
+                right: "425px",
+                bottom: "58px"
+            },
+        ]
+    },
+    "cutiebar": {
+        "title": "Rabu Rabu",
+        "mainImage": "../img/explore/places/bar_with_cutie.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "S a b r i n a",
+        "dialogText": [
+            "\"Wow anon, you finally made it\""
+        ],
+        "links": []
+    },
+    "shizukastreet": {
+        "title": "Shizuka Street",
+        "mainImage": "../img/explore/pathways/night_city_street.png",
+        "mainImagePos": "center left",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "P a n d a",
+        "dialogText": [
+            "Ah, now we're exploring properly"
+        ],
+        "links": [
+            {
+                to: "?loc=weirdstore",
+    
+                width: "114px",
+                height: "197px",
+                right: "69px",
+                bottom: "138px"
+            },
+            {
+                to: "?loc=livehouse",
+    
+                width: "48px",
+                height: "85px",
+                right: "386px",
+                bottom: "166px"
+            },
+            {
+                to: "?loc=bathhouseentry",
+    
+                width: "48px",
+                height: "85px",
+                right: "486px",
+                bottom: "166px"
+            },
+        ]
+    },
+    "weirdstore": {
+        "title": "Erratic Errata",
+        "mainImage": "../img/explore/places/shop_misc_interior.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "P a n d a",
+        "dialogText": [
+            "This place is definitely a front for *something*"
+        ],
+        "links": []
+    },
+    "livehouse": {
+        "title": "Namba Bears",
+        "mainImage": "../img/explore/places/night_weird_bar.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "P a n d a",
+        "dialogText": [
+            "Namba is the place to be for fun obscure music shows"
+        ],
+        "links": []
+    },
+    "smallbathhouse": {
+        "title": "Brownie's Bathhouse",
+        "mainImage": "../img/explore/places/bathhouse_small.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "P a n d a",
+        "dialogText": [
+            "Let's take a break and relax a while"
+        ],
+        "links": []
+    },
+    "bathhouseentry": {
+        "title": "Brownie's Bathhouse",
+        "mainImage": "../img/explore/portraits/bath.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/TODO",
+    
+        "speakerText": "Brownie",
+        "dialogText": [
+            "\"Welcome to my fine establishment, hope you enjoy yourself\""
+        ],
+        "links": [
+            {
+                to: "?loc=smallbathhouse",
+    
+                width: "100%",
+                height: "100%",
+                right: "0px",
+                bottom: "0px"
+            },
+        ]
     },
 }
