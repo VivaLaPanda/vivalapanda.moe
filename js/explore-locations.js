@@ -348,7 +348,7 @@ var locations = {
         "frameMode": "dark",
         "music": "../audio/TODO",
     
-        "speakerText": "Ｐａｎｄａ",
+        "speakerText": "P a n d a",
         "dialogText": [
             "Ah, now we're exploring properly"
         ],

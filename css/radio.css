@@ -551,6 +551,13 @@
     left: 94px;
 }
 
+#rawstream {
+    width: 58px;
+    height: 17px;
+    top: 230px;
+    left: 34px;
+}
+
 #killswitch {
     width: 55px;
     height: 26px;

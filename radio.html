@@ -27,12 +27,12 @@
 						Your browser does not support the audio element.
 					</audio>
 					<div class="overlay-container" id="misc-buttons">
-						<button class="controls" id="limp-pumpo" onclick="pumpoMode(event)">
-						<button class="controls" id="killswitch" onclick="killSwitch(event)">
+						<button class="controls" id="limp-pumpo" onclick="pumpoMode(event)"></button>
+						<button class="controls" id="killswitch" onclick="killSwitch(event)"></button>
+						<a href="/stream.mp3" target="_blank" class="controls" id="rawstream"></a>
 					</div>
 					<div class="overlay-container" id="song-details">
 						<div id="status-current-song" class="status-content" style="display: block;"><p id="welcome-text"></p></div>
-						<div id="status-listeners" class="status-content" style="display: block;"></div>
 					</div>
 					<div class="overlay-container" id="primary-controls">
 						<img id="radio-ring" src="/img/icons/radio-ring.png">
@@ -52,7 +52,7 @@
 					</div>
 					<div class="overlay-container" id="extra-output">
 						<div id="queue-window" style="display: none;">
-							<h5>Queue <span id="queue-length"></span></h5>
+							<h5>Queue</h5>
 							<p id="queueState">Nothing queued</p>
 							<ul id="upcoming">
 							</ul>
