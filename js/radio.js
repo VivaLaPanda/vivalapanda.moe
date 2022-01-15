@@ -1,14 +1,66 @@
 var apiKey = "";
 
+function convertTZ(date, tzString) {
+    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));   
+}
+
+function advent() {
+	const yourDate = new Date();
+	const d = convertTZ(yourDate, "America/Los_Angeles")
+	if (d.getDate() == 25 && d.getMonth() == 11) {	
+		keys = [
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"https://discord.gift/p7pMeJYbmbqa5tHd",
+			"https://discord.gift/Kv6y9wgyPhePJwH3",
+			"https://discord.gift/9WbJZeydBgDzHVdq",
+			"https://discord.gift/PpknjAZdFSjHDBAs",
+			"https://discord.gift/kAhkBNtEQx3eBr9y",
+			"https://discord.gift/9RveGXmNYmPKGeUa",
+			"https://discord.gift/FqzwRQe46TjYybYb",
+			"https://discord.gift/WzPqFwgsxcBtzAmj",
+			"https://discord.gift/WcqknbzqehzWus35",
+			"https://discord.gift/NJSWeUPTtukCvZgJ",
+			"https://discord.gift/DCg6PtqjGuqtcVWw",
+			"https://discord.gift/NvEZAwRXWPMXPwZ2",
+			"https://discord.gift/Z8pHcttaUVWnGdGS",
+			"https://discord.gift/SwGaM7CPfGhyu6eA",
+			"https://discord.gift/ew2Nwet6s2YZMXcy",
+		]
+		let hour = d.getHours();
+
+		return keys[hour]
+	}
+
+}
+
+
 window.onload = function(){
     setup();
+	const adventCode = advent()	
 	
 	var aboutTextIdx = 0;
 	var aboutText = `
-		Welcome to the vibe zone
+		Welcome to the vibe zone.
 	`;
-	
-	
+	if (adventCode) {
+		aboutText+= `
+			Merry Christmas! Nitro code for this hour:
+			${advent()}
+		`
+	}
+
 	function typeWriter() {
 	  if (aboutTextIdx < aboutText.length) {
 		document.getElementById("radio-dialog").innerHTML += aboutText.charAt(aboutTextIdx);

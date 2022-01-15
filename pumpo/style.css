@@ -1,0 +1,24 @@
+.body {
+  color: black;
+  font-family: Rave;
+  cursor: url(1.gif), auto;
+}
+@font-face {
+font-family: 'Rave';
+src: url('rave-webfont.woff') format('woff');
+src: url('rave-webfont.woff2') format('woff2');
+font-weight: normal;
+font-style: normal;
+}
+.center {
+  text-align: center;
+  cursor:url(1.gif), auto;
+}
+.link{
+cursor:url(ddr5.gif),auto;
+text-decoration: none;
+}
+.link1{
+ cursor:url(1.gif),auto;
+text-decoration: none;
+}
