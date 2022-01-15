@@ -57,6 +57,7 @@ p {
 	background-size: cover;
 	width: 1280px;
 	height: 800px;
+    position: relative;
 }
 
 body {
@@ -84,8 +85,7 @@ body {
 
 
 .subwindow {
-	position: relative;
-	display: flex;
+	position: absolute;
     /* background-color: rgba(200,50,50,.8); */
 }
 
@@ -93,6 +93,15 @@ body {
 	width: 80%;
     margin-left: auto;
     margin-right: auto;
+}
+
+#main-image {
+    width: 740px;
+    height: 528px;
+    left: 270px;
+    top: 10px;
+
+    overflow: hidden;
 }
 
 #main-image {
@@ -112,7 +121,7 @@ body {
 #left-sidebar {    
 	width: 244px;
     height: 348px;
-    top: -82px;
+    top: 439px;
     left: 6px;
 
     flex-direction: column;
@@ -121,7 +130,7 @@ body {
 #text-box {        
 	width: 762px;
     height: 252px;
-	top: -328px;
+    top: 552px;
     left: 259px;
     border-radius: 5px;
 }
@@ -143,7 +152,7 @@ body {
 #right-sidebar {
 	width: 244px;
     height: 348px;
-    top: -681px;
+    top: 446px;
     left: 1030px;
 	
     background-image: url("/img/holo/HoloHappyBGTransparent.png");
