@@ -104,9 +104,9 @@ body {
     overflow: hidden;
 }
 
-#main-image {
+#main-image-tall {
     width: 740px;
-    height: 528px;
+    height: 790px;
     left: 270px;
     top: 10px;
 
