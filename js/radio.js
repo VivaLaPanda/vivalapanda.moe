@@ -575,8 +575,6 @@ function skipSong(event){
 	httpRequest.onerror = netError;
     httpRequest.onload = function(){
         if(httpRequest.status == 200 ){
-			showQueue();
-			
 			window.setTimeout(()=>{
 				getPlaylistInfo();
 			}, 1000);
