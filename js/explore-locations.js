@@ -107,7 +107,16 @@ var locations = {
     
         "speakerText": "P a n d a",
         "dialogText": ["There's definitely a mythical sword somewhere around here..."],
-        "links": []
+        "links": [
+            {
+                to: "train.html",
+    
+                width: "416px",
+                height: "297px",
+                right: "150px",
+                bottom: "42px"
+            },
+        ]
     },
     "musicianbedroom": {
         "title": "Andy's House",
@@ -302,6 +311,14 @@ var locations = {
                 bottom: "135px"
             },
             {
+                to: "?loc=stationcrossing",
+    
+                width: "85px",
+                height: "103px",
+                right: "432px",
+                bottom: "135px"
+            },
+            {
                 to: "?loc=electronicstore",
     
                 width: "85px",
@@ -311,13 +328,105 @@ var locations = {
             },
         ]
     },
+    "stationcrossing": {
+        "title": "Isogashii Crossing",
+        "mainImage": "../img/explore/pathways/day_trainstation_crossing.png",
+        "mainImagePos": "center right",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "light",
+        "music": "../audio/cosmic-psycho-settle.mp3",
+    
+        "speakerText": "Ｐａｎｄａ",
+        "dialogText": [
+            "Yeah, its normal for it to suddenly become day when you come here, don't worry about it",
+        ],
+        "links": [
+            {
+                to: "?loc=trainplatform",
+    
+                width: "216px",
+                height: "174px",
+                right: "0px",
+                bottom: "78px"
+            },
+        ]
+    },
+    // "trainstation": {
+    //     "title": "Isogashii Station",
+    //     "mainImage": "../img/explore/pathways/day_train_station.png",
+    //     "mainImagePos": "center",
+    //     "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+    //     "frameMode": "light",
+    //     "music": "../audio/caught-a-star-in-your-eye.mp3",
+    
+    //     "speakerText": "Ｐａｎｄａ",
+    //     "dialogText": [
+    //         "Time to go on an adventure!",
+    //     ],
+    //     "links": [
+    //         {
+    //             to: "?loc=trainplatform",
+    
+    //             width: "324px",
+    //             height: "181px",
+    //             right: "187px",
+    //             bottom: "179px"
+    //         },
+    //     ]
+    // },
+    "trainplatform": {
+        "title": "Platform 1",
+        "mainImage": "../img/explore/places/train_platform.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "dark",
+        "music": "../audio/cosmic-psycho-begin.mp3",
+    
+        "speakerText": "S t a t i o n   A t t e n d a n t",
+        "dialogText": [
+            "\"Please stay behind the yellow line\"",
+        ],
+        "links": [
+            {
+                to: "?loc=trainwetlands",
+    
+                width: "151px",
+                height: "354px",
+                right: "108px",
+                bottom: "78px"
+            },
+        ]
+    },
+    "trainwetlands": {
+        "title": "On the train",
+        "mainImage": "../img/explore/places/day_wetlands_bridge.png",
+        "mainImagePos": "center",
+        "holoImage": "../img/holo/HoloHappyBGTransparent.png",
+        "frameMode": "light",
+        "music": "../audio/doradora-emotion-dor02.mp3",
+    
+        "speakerText": "P a n d a",
+        "dialogText": [
+            "I just love looking out at the world through a train window ^_^",
+        ],
+        "links": [
+            {
+                to: "../train.html",
+    
+                width: "441px",
+                height: "54px",
+                right: "0px",
+                bottom: "158px"
+            },
+        ]
+    },
     "electronicstore": {
         "title": "Denchi's Delights",
         "mainImage": "../img/explore/places/electronics_store.png",
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/ippatsu-jang-see-you-later.mp3",
     
         "speakerText": "S a k u r a",
         "dialogText": [
@@ -331,7 +440,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/possessioner-in-the-boutique.mp3",
+        "music": "../audio/eve-burst-error-hacking.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": [
@@ -346,7 +455,7 @@ var locations = {
         "mainImagePos": "center right",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/cosmic-psycho-settle.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": [
@@ -385,7 +494,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/cosmic-psycho-sweetheart.mp3",
     
         "speakerText": "S a b r i n a",
         "dialogText": [
@@ -399,7 +508,7 @@ var locations = {
         "mainImagePos": "center left",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/cosmic-psycho-settle.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": [
@@ -438,7 +547,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/crystal-rinal-school-days.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": [
@@ -452,7 +561,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/mesuneko-hishoshitsu-staff-roll.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": [
@@ -466,7 +575,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/eve-burst-error-room-marina.mp3",
     
         "speakerText": "P a n d a",
         "dialogText": [
@@ -480,7 +589,7 @@ var locations = {
         "mainImagePos": "center",
         "holoImage": "../img/holo/HoloHappyBGTransparent.png",
         "frameMode": "dark",
-        "music": "../audio/TODO",
+        "music": "../audio/eve-burst-error-room-marina.mp3",
     
         "speakerText": "Brownie",
         "dialogText": [
@@ -490,9 +599,9 @@ var locations = {
             {
                 to: "?loc=smallbathhouse",
     
-                width: "100%",
+                width: "597px",
                 height: "100%",
-                right: "0px",
+                right: "85px",
                 bottom: "0px"
             },
         ]
