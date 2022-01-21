@@ -9,12 +9,17 @@
     <script src="/js/train.js" crossorigin="anonymous"></script>
   </head>
   <body>
+  <div id="audio-player-container">
+    <audio id="music" loop preload controls>
+      <source src="" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 	<div class="main-container">
 		<div class="main-window">
 			<div class="subwindow" id="main-image-tall">
-				<div class="page-image" id="contact-img">
-				</div>
-			</div>
+        <div id="tallvideo"></div>
+      </div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="right-sidebar"></div>
 		</div>

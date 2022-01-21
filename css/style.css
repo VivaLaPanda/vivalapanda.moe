@@ -105,10 +105,10 @@ body {
 }
 
 #main-image-tall {
-    width: 740px;
+    width: 766px;
     height: 790px;
-    left: 270px;
-    top: 10px;
+    left: 258px;
+    top: 0px;
 
     overflow: hidden;
 }
