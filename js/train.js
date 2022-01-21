@@ -20,7 +20,7 @@ window.onload = function(){
 // mostly all copied from http://vimutv.com/
 
 var getRandom = function(min, max) {
-	return Math.floor(Math.random() * (max - min) + min);
+	return Math.floor(Math.random() * max);
 };
 
 var tag = document.createElement('script');
@@ -29,7 +29,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var playlistID = "PLVBUsmE3WihINwYoXTDDPGT0kE2rVelby";
 
-var randomSong = getRandom(0,15) - 1;
+var randomSong = getRandom(0,27) - 1;
 
 var video;
 function onYouTubeIframeAPIReady() {
