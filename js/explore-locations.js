@@ -432,7 +432,16 @@ var locations = {
         "dialogText": [
             "\"Go ahead, go for a spin!\"",
         ],
-        "links": []
+        "links": [
+            {
+                to: "../sympho-slots/index.html",
+    
+                width: "237px",
+                height: "287px",
+                right: "320px",
+                bottom: "37px"
+            },
+        ]
     },
     "weaponshop": {
         "title": "Ghandi's Surplus Suprises",
@@ -447,7 +456,8 @@ var locations = {
             "I uhh, promise this place is definitely legal...",
             "probably."
         ],
-        "links": []
+        "links": [
+        ]
     },
     "nightalley": {
         "title": "The Alley",
