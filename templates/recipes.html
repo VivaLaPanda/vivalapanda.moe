@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda's Recipe Book</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/recipe.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <div id="audio-player-container">
+    <audio id="music" loop preload controls>
+      <source src="" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+	<div class="main-container">
+		<div class="main-window">
+			<div class="subwindow" id="main-image-tall">
+        <div id="talltext">
+          <h1>Panda's Recipe Book</h1>
+
+          <hr>
+
+          <h3>Buttermilk Pancakes</h3>
+          <h4>Ingredients</h4>
+          <ul>
+            <li>1 cup flour</li>
+            <li>1/2 tsp baking soda</li>
+            <li>1/4 tsp salt</li>
+            <li>1 cup buttermilk</li>
+            <li>1 tbsp melted butter</li>
+            <li>1 egg</li>
+          </ul>
+
+          <p>In a small bowl, beat egg white until it forms moist peaks.</p>
+          <p>In a medium bowl mix egg yolk and buttermilk until blended.</p>
+          <p>Mix the flour and baking soda (optionally: sift them together). 
+            Then mix in the egg and milk. Stir until just blended.</p>
+          <p>Add butter, and then fold in the egg white gently.</p>
+
+          <p>Cook on a hot cast iron pan with a generous amount of oil. 
+            A drop of batter should sizzle immediately when dropped in. 
+            Flip approximately when the top of the batter starts and then s
+            tops bubbling.</p>
+          
+          <hr>
+          <h3>Katsudon</h3>
+          <h4>Ingredients</h4>
+          <ul>
+            <li>1 onion</li>
+            <li>1 green onion</li>
+            <li>2-3 eggs</li>
+            <li>1 pork or chicken cutlet, sliced into thin strips</li>
+            <li>1 cup of rice (cooked)</li>
+          </ul>
+          <ul>
+            <li>Dashi soup stock</li>
+            <li>Soy sauce</li>
+            <li>Mirin</li>
+            <li>Katsuobushi</li>
+            <li>Pickled ginger/onion</li>
+          </ul>
+
+          <p><b>Making the Stock:</b></p>
+          <p>
+            Mix the dashi, soy sauce, and mirin in about equal 
+            parts until you have about 1/2 a cup of broth. Adjust 
+            the proportions to taste. The aim should be to have
+            a strong flavor that’s just on the edge of being too 
+            salty/fishy. Also, make more than you need rather than 
+            less, it's not a big deal if you don't use it all.
+          </p>
+          
+          <p>
+            <b>Cooking the katsudon:</b>
+          </p>
+          <p>
+            First, lightly beat the egg. You want a broken yoke, but 
+            the yoke and white should still be mostly separate.
+          </p>
+          <p>
+            Start by sauteing the onions in the pan until translucent. 
+            Next, nestle the cutlet into the onions.
+          </p>
+          <p>
+            Pour the egg over the top of everything. If it feels like 
+            the egg isn’t properly covering what you have, quickly break 
+            the yolk of another egg and add it. Pour the broth over 
+            everything, until the bottom of the pan is covered in about 
+            a centimeter of liquid. Add a lid, and let everything steam 
+            together.
+          </p>
+          <p>
+            Take the pan off the flame once the egg is still slightly 
+            translucent (adjust based on how raw you are willing to eat 
+            your eggs, but lean towards the raw side). Serve everything 
+            over the rice, and garnish with the green onion, 
+            katsuobushi, and pickled ginger and/or onion.
+          </p>
+          <hr>
+        </div>
+      </div>
+			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+  </body>
+</html>

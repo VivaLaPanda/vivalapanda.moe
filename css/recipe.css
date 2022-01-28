@@ -1,0 +1,54 @@
+#talltext {
+    width: auto;
+    height: 100%;
+
+    font-family: 'pc-98';
+    background-color: #ffaaba;
+    color: black;
+    padding: 10px;
+    margin: 10px;
+	
+	overflow-y: scroll;
+    overflow-x: auto;
+}
+
+p {
+    font-size: 20px;
+    color: black;
+}
+
+b {
+    font-family: 'pc-98-bold';
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    font-family: 'pc-98-bold';
+}
+
+h3 {
+    font-family: 'pc-98-bold';
+}
+
+hr {
+    background-color: #8799ff;
+    height: 1px;
+    border: none;
+}
+
+
+/* width */
+#talltext::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  #talltext::-webkit-scrollbar-track {
+    background: #ffaaba;
+  }
+  
+  /* Handle */
+  #talltext::-webkit-scrollbar-thumb {
+    background: #8799ff;
+  }
