@@ -72,18 +72,21 @@ hr {
     width: 80%;
 }
 
-img {
+#talltext img {
     width: 100%;
     margin: auto;
     text-align: center;
     /* margin-left: auto; */
     /* margin-right: auto; */
     display: flex;
+    border: 0.5rem #8899ff;
+    border-style: ridge;
 }
 
 figcaption {
     text-align: center;
     font-style: italic;
+    font-family: 'pc-98';
 }
 
 time {
@@ -114,8 +117,6 @@ background: #664477;
 .recipe-imagebox {
     width: 48%;
     display: inline;
-    border: 0.5rem #8899ff;
-    border-style: ridge;
     height: fit-content;
     margin-top: 21px;
     /* margin-bottom: auto; */
@@ -123,7 +124,7 @@ background: #664477;
 
 .recipe-ingredientbox {
     width: 48%;
-    padding-left: 15px;
+    padding-left: 27px;
 }
 
 .recipe-header {
