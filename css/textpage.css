@@ -22,7 +22,7 @@ a:hover {
 }
 
 p {
-    font-size: 15px;
+    font-size: 22px;
     color: black;
     line-height: 1.2em;
 }
@@ -133,7 +133,7 @@ background: #664477;
 }
 
 .blogpost-body {
-    width: 75%;
+    width: 88%;
     margin: auto;
     padding-bottom: 30px;
     margin-bottom: 30px;
