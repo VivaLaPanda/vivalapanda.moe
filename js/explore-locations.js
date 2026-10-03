@@ -326,6 +326,13 @@ var locations = {
                 right: "616px",
                 bottom: "64px"
             },
+            {
+                to: "/recipes.html",
+                width: "85px",
+                height: "179px",
+                right: "500px",
+                bottom: "64px"
+            },
         ]
     },
     "stationcrossing": {

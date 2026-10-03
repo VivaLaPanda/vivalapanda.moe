@@ -1,27 +1,27 @@
 @font-face {
-     font-family: pc-98;
-     src: url('/fonts/pc-9800.ttf'); 
+    font-family: pc-98;
+    src: url('/fonts/pc-9800.ttf');
 }
 
 @font-face {
-     font-family: pc-98-bold;
-     src: url('/fonts/pc-9800-bold.ttf'); 
+    font-family: pc-98-bold;
+    src: url('/fonts/pc-9800-bold.ttf');
 }
 
 @font-face {
-     font-family: f14seg-italic;
-     src: url('/fonts/DSEG14Classic-Italic.woff2'); 
+    font-family: f14seg-italic;
+    src: url('/fonts/DSEG14Classic-Italic.woff2');
 }
 
 @font-face {
-     font-family: f14seg-bolditalic;
-     src: url('/fonts/DSEG14Classic-BoldItalic.woff2'); 
+    font-family: f14seg-bolditalic;
+    src: url('/fonts/DSEG14Classic-BoldItalic.woff2');
 }
 
 p {
-	font-family: 'pc-98';
-	font-size: 30px;
-	color: white;
+    font-family: 'pc-98';
+    font-size: 30px;
+    color: white;
 }
 
 .nav-row {
@@ -32,12 +32,12 @@ p {
     flex-wrap: nowrap;
     height: auto;
     height: min-content;
-  }
-  
-  .nav-row>a {
+}
+
+.nav-row>a {
     display: flex;
     padding: 25px;
-    flex:1;
+    flex: 1;
     justify-content: center;
     align-items: center;
 }
@@ -47,37 +47,37 @@ p {
 }
 
 .main-container {
-	width: 1280px;
-	margin: auto;
+    width: 1280px;
+    margin: auto;
 }
 
 .main-window {
-	background-image: url("/img/background-frame.png");
-	background-repeat: no-repeat;
-	background-size: cover;
-	width: 1280px;
-	height: 800px;
+    background-image: url("/img/background-frame.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1280px;
+    height: 800px;
     position: relative;
 }
 
 body {
-	background-color: black;
+    background-color: black;
     background-image: url("/img/stars.gif");
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	overflow: hidden;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    overflow: auto;
 }
 
 #audio-player-container {
-	display: none;
+    display: none;
 }
 
 #mute {
-	width: 100px;
+    width: 100px;
     height: 100px;
     filter: grayscale(100%);
-	
+
     position: absolute;
     bottom: 0px;
     right: 0px;
@@ -85,12 +85,12 @@ body {
 
 
 .subwindow {
-	position: absolute;
+    position: absolute;
     /* background-color: rgba(200,50,50,.8); */
 }
 
 .subwindow a {
-	width: 80%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -113,13 +113,13 @@ body {
     overflow: hidden;
 }
 
-.page-image {    
-	width: 100%;
+.page-image {
+    width: 100%;
     height: 100%;
 }
 
-#left-sidebar {    
-	width: 244px;
+#left-sidebar {
+    width: 244px;
     height: 348px;
     top: 439px;
     left: 6px;
@@ -127,8 +127,8 @@ body {
     flex-direction: column;
 }
 
-#text-box {        
-	width: 762px;
+#text-box {
+    width: 762px;
     height: 252px;
     top: 552px;
     left: 259px;
@@ -136,27 +136,85 @@ body {
 }
 
 .text-container {
-	position: absolute;
-	margin: 5px;
+    position: absolute;
+    margin: 5px;
 }
 
 .speaker-text {
-	color: #ef0060;
+    color: #ef0060;
     margin-top: 0px;
 }
 
 .dialog-text {
-	margin-left: 18px;
+    margin-left: 18px;
 }
 
 #right-sidebar {
-	width: 244px;
+    width: 244px;
     height: 348px;
     top: 446px;
     left: 1030px;
-	
+
     background-image: url("/img/holo/HoloHappyBGTransparent.png");
     background-size: cover;
     background-position-x: -183px;
 }
 
+/* Update the body styles for mobile */
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+    }
+
+    body {
+        background-attachment: fixed;
+    }
+
+    .main-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        overflow-x: clip;
+    }
+
+    .main-window {
+        width: 100%;
+        max-width: 100%;
+        background-image: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        overflow-x: clip;
+        height: auto;
+    }
+
+    /* Hide sidebars completely */
+    #left-sidebar,
+    #right-sidebar {
+        display: none;
+    }
+
+    /* Force all direct children to respect container width */
+    .main-window>* {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    /* Ensure images don't overflow */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
