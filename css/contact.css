@@ -15,3 +15,10 @@
     margin-top: 0px;
     margin-bottom: 12px;
 }
+
+/* a username rather than a link: its own colour, and one click selects it for copying */
+.handle {
+    color: #8799ff;
+    user-select: all;
+    cursor: text;
+}
