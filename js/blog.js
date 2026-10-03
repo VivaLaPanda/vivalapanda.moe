@@ -18,7 +18,7 @@
         return a;
     }
 
-    function cover(post) {
+    function cover(post, width) {
         var img = new Image();
         img.crossOrigin = "anonymous"; // substackcdn sends ACAO: *, so the canvas stays readable
         img.alt = "";
@@ -27,7 +27,7 @@
         if (window.PC98 && typeof window.PC98.render === "function") {
             img.addEventListener("load", function () {
                 try {
-                    var art = window.PC98.render(img, { width: 240 });
+                    var art = window.PC98.render(img, { width: width });
                     art.className = "blog-cover-art";
                     img.replaceWith(art);
                 } catch (err) {
@@ -39,10 +39,11 @@
         return img;
     }
 
-    function postCard(post) {
+    // big: the full-width featured card, whose cover is shown at 480px
+    function postCard(post, big) {
         var card = el("article", "blog-post");
         if (post.thumb) {
-            card.appendChild(link(post.link, cover(post))).className = "blog-cover";
+            card.appendChild(link(post.link, cover(post, big ? 480 : 240))).className = "blog-cover";
         }
         var meta = el("div", "blog-meta");
         var when = el("time", "blog-date", post.date.slice(0, 10).replace(/-/g, "."));
@@ -92,8 +93,9 @@
                 list.appendChild(el("h2", "blog-section", "All posts"));
             }
             rest.forEach(function (post, i) {
-                var card = postCard(post);
-                if (i === 0 && !pinned.length) card.classList.add("blog-post-latest");
+                var featured = i === 0 && !pinned.length;
+                var card = postCard(post, featured);
+                if (featured) card.classList.add("blog-post-latest");
                 list.appendChild(card);
             });
         })
