@@ -1,11 +1,12 @@
+/* woff2 is ~384KB vs 1.9MB for the ttf (same tables); the ttf stays as a fallback */
 @font-face {
     font-family: pc-98;
-    src: url('/fonts/pc-9800.ttf');
+    src: url('/fonts/pc-9800.woff2') format('woff2'), url('/fonts/pc-9800.ttf') format('truetype');
 }
 
 @font-face {
     font-family: pc-98-bold;
-    src: url('/fonts/pc-9800-bold.ttf');
+    src: url('/fonts/pc-9800-bold.woff2') format('woff2'), url('/fonts/pc-9800-bold.ttf') format('truetype');
 }
 
 @font-face {

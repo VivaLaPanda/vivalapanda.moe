@@ -12,7 +12,9 @@ function toggleMute() {
 }
 
 
-window.onload = function(){
+// DOMContentLoaded, not onload: onload also waits for the preloaded font, and clicks on the
+// boot screen before then would be ignored
+document.addEventListener("DOMContentLoaded", function () {
 	var body = document.querySelector("body");
 	var musicBtn = document.querySelector("#mute");
 	var bootSound = document.querySelector("#bootSound");
@@ -29,11 +31,16 @@ window.onload = function(){
 	} else {
 		document.querySelector("#boot-screen").addEventListener('click', event => {
 			window.localStorage.setItem('hasVisited', true);
-			bootSound.play();
-			animateBootscreen();
-		});
+			bootSound.play(); // must start inside the click for autoplay rules
+			// don't type until pc-98 is ready, or the text shows up in a fallback font and
+			// then jumps when it swaps; give up after 3s rather than hang on a slow network
+			var timeout = new Promise(resolve => setTimeout(resolve, 3000));
+			Promise.race([document.fonts.load("30px pc-98", "ｼ"), timeout])
+				.catch(() => {})
+				.then(animateBootscreen);
+		}, { once: true });
 	}
-}
+});
 
 function animateBootscreen() {
 	var container = document.getElementById("boot-container");
