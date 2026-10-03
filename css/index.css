@@ -5,6 +5,18 @@
 	height: 800px;
 }
 
+/* a fixed terminal window that stops above the function-key bar (y 766+ in the
+   background); js/index.js keeps it scrolled to the newest line */
+#boot-container {
+	height: 750px;
+	overflow: hidden;
+}
+
+#boot-text {
+	margin: 0;
+	padding-top: 30px;
+}
+
 #home-img {
 	background-image: url("/img/computer_crop.gif");
 	background-repeat: no-repeat;

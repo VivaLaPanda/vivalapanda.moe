@@ -36,11 +36,26 @@ window.onload = function(){
 }
 
 function animateBootscreen() {
-	function completeAnimation() {
-		
+	var container = document.getElementById("boot-container");
+	// one text node we append to: no re-parsing the whole block on every character
+	var output = document.createTextNode("");
+	document.getElementById("boot-text").appendChild(output);
+
+	// Types `text` a character at a time, keeping the newest line in view like a terminal
+	function type(text, delay, done) {
+		var chars = Array.from(text); // whole code points, never half a character
+		var i = 0;
+		(function next() {
+			if (i < chars.length) {
+				output.appendData(chars[i++]);
+				container.scrollTop = container.scrollHeight;
+				setTimeout(next, delay);
+			} else {
+				done();
+			}
+		})();
 	}
-	
-	var necTxtIdx = 0;
+
 	var necTxt = `
 		Booting...
 		
@@ -52,20 +67,6 @@ function animateBootscreen() {
 		ＥＭＳメモリが使用可能です ＫＫＣＦＵＮＣが組み込まれました
 	`;
 
-	function typeWriter1() {
-	  if (necTxtIdx < necTxt.length) {
-		document.getElementById("boot-text").innerHTML += necTxt.charAt(necTxtIdx);
-		necTxtIdx++;
-		setTimeout(typeWriter1, 15);
-	  } else {
-		typeWriter2();
-	  }
-	}
-	
-	typeWriter1();
-	
-	
-	var pandaTxtIdx = 0;
 	var pandaTxt = `
 		.
 		.
@@ -76,20 +77,13 @@ function animateBootscreen() {
 		Welcome to VivaLaPanda's digital home!
 	`;
 
-	function typeWriter2() {
-	  if (pandaTxtIdx < pandaTxt.length) {
-		document.getElementById("boot-text").innerHTML += pandaTxt.charAt(pandaTxtIdx);
-		pandaTxtIdx++;
-		setTimeout(typeWriter2, 120);
-	  } else {
-		document.querySelector("#boot-screen").style.display = "none";
-		document.querySelector(".main-window").style.display = "block";
-		
-		var music = document.querySelector("#music");
-		var bootSound = document.querySelector("#bootSound");
-		toggleMute()
-		bootSound.pause();
-	  }
-	}
-	
+	type(necTxt, 15, function () {
+		type(pandaTxt, 120, function () {
+			document.querySelector("#boot-screen").style.display = "none";
+			document.querySelector(".main-window").style.display = "block";
+
+			toggleMute();
+			document.querySelector("#bootSound").pause();
+		});
+	});
 }
