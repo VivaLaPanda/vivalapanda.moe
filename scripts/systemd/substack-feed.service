@@ -1,0 +1,15 @@
+# Install: cp scripts/systemd/substack-feed.* /etc/systemd/system/ && systemctl daemon-reload
+#          && systemctl enable --now substack-feed.timer
+[Unit]
+Description=Refresh /blog/posts.json from the Substack RSS feed
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /var/www/html/vivalapanda.moe/scripts/substack_feed.py /var/www/html/vivalapanda.moe/blog/posts.json
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/www/html/vivalapanda.moe/blog

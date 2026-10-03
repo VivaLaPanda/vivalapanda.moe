@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly refresh of the blog's Substack feed
+
+[Timer]
+OnBootSec=2min
+OnCalendar=hourly
+RandomizedDelaySec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

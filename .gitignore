@@ -1,3 +1,6 @@
 .DS_Store
 *.swp
 audio/temp/
+# generated hourly on the server by scripts/substack_feed.py
+blog/posts.json
+dev-assets/animation/

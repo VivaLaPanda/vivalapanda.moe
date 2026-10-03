@@ -1,0 +1,151 @@
+/* /blog/: native listing of the Substack feed (see js/blog.js) */
+
+.blog-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.blog-logo {
+    flex: 0 0 128px;
+    width: 128px; /* .subwindow a sets 80% */
+    line-height: 0;
+}
+
+#talltext #blog-logo {
+    width: 128px;
+    border: 4px ridge #8899ff;
+}
+
+.blog-heading {
+    min-width: 0;
+}
+
+.blog-heading h1 {
+    margin: 10px 0 4px 0;
+}
+
+.blog-intro,
+.blog-subscribe {
+    text-align: center;
+    margin: 6px 0;
+}
+
+.blog-intro {
+    font-size: 18px;
+}
+
+.blog-subscribe a {
+    display: inline-block;
+    width: auto; /* .subwindow a sets 80% */
+    padding: 4px 14px;
+    background-color: #664477;
+    color: #ffaaba;
+    border: 4px ridge #8899ff;
+}
+
+.blog-subscribe a:hover {
+    background-color: #8799ff;
+    color: white;
+}
+
+.blog-status {
+    text-align: center;
+}
+
+.blog-post {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 22px;
+    padding: 14px 0;
+    border-bottom: 2px dotted #8799ff;
+}
+
+.blog-post:last-child {
+    border-bottom: none;
+}
+
+.blog-cover {
+    flex: 0 0 240px;
+    line-height: 0;
+}
+
+/* overrides the generic #talltext img rule */
+#talltext .blog-cover-art {
+    display: block;
+    width: 240px;
+    height: auto;
+    border: 4px ridge #8899ff;
+    image-rendering: pixelated;
+}
+
+.blog-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+#talltext .blog-date {
+    display: block;
+    margin: 0 0 4px 0;
+    text-align: left;
+    font-family: 'pc-98';
+    font-size: 18px;
+    color: #5a4fa8;
+}
+
+.blog-title {
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    line-height: 1.15em;
+}
+
+.blog-title a {
+    color: #664477;
+}
+
+.blog-title a:hover {
+    color: #8799ff;
+}
+
+.blog-subtitle {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* the newest post gets a full-width cover on top */
+.blog-post-latest {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.blog-post-latest .blog-cover {
+    flex-basis: auto;
+    align-self: center;
+}
+
+#talltext .blog-post-latest .blog-cover-art {
+    width: 480px;
+    max-width: 100%;
+}
+
+.blog-post-latest .blog-title {
+    font-size: 30px;
+}
+
+@media (max-width: 768px) {
+    .blog-post {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .blog-cover {
+        flex-basis: auto;
+    }
+
+    #talltext .blog-cover-art {
+        width: 100%;
+    }
+}

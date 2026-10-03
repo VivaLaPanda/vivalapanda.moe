@@ -34,9 +34,10 @@ p {
     height: min-content;
 }
 
-.nav-row>a {
+/* 18px vertical padding fits three rows of icons in the 348px sidebar */
+.nav-row>.navbutton {
     display: flex;
-    padding: 25px;
+    padding: 18px 25px;
     flex: 1;
     justify-content: center;
     align-items: center;
