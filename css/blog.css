@@ -115,7 +115,21 @@
     font-size: 18px;
 }
 
-/* the newest post gets a full-width cover on top */
+#talltext .blog-section {
+    margin: 18px 0 2px 0;
+    padding: 2px 10px;
+    font-size: 20px;
+    color: #ffaaba;
+    background-color: #664477;
+    border: 3px ridge #8899ff;
+    display: inline-block;
+}
+
+.blog-post-pinned {
+    border-bottom: none;
+}
+
+/* the newest (or pinned) post gets a full-width cover on top */
 .blog-post-latest {
     flex-direction: column;
     gap: 10px;

@@ -22,6 +22,8 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 FEED_URL = "https://vlpanda.substack.com/feed"
+# unofficial JSON behind the Substack homepage; its pinnedPosts are the "Pin to homepage" posts
+HOMEPAGE_URL = "https://vlpanda.substack.com/api/v1/homepage_data"
 USER_AGENT = "vivalapanda.moe blog feed (+https://vivalapanda.moe/blog/)"
 # Substack's image CDN sends Access-Control-Allow-Origin: *, so pages can read covers into a canvas
 THUMB_URL = "https://substackcdn.com/image/fetch/w_600,c_limit,f_png/{}"
@@ -71,13 +73,35 @@ def parse(xml_bytes):
     }
 
 
+def fetch(url):
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return resp.read()
+
+
+def pinned_slugs():
+    """Slugs of the posts pinned on the Substack homepage, in pin order.
+
+    The endpoint isn't a documented API, so any failure just means no pins.
+    """
+    try:
+        home = json.loads(fetch(HOMEPAGE_URL))
+        return [p["slug"] for p in home.get("pinnedPosts") or [] if p.get("slug")]
+    except Exception as err:
+        print(f"couldn't read pinned posts, continuing without them: {err}", file=sys.stderr)
+        return []
+
+
 def main():
     out = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_OUTPUT
-    req = urllib.request.Request(FEED_URL, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        data = parse(resp.read())
+    data = parse(fetch(FEED_URL))
     if not data["posts"]:
         sys.exit("feed parsed but had no posts; keeping the existing file")
+
+    pins = pinned_slugs()
+    for post in data["posts"]:
+        slug = urllib.parse.urlparse(post["link"]).path.rstrip("/").rsplit("/", 1)[-1]
+        post["pinned"] = pins.index(slug) + 1 if slug in pins else None
 
     # write-then-rename so readers never see a half-written file
     fd, tmp = tempfile.mkstemp(dir=out.parent, prefix=".posts-", suffix=".json")

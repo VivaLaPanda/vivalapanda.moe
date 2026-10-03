@@ -77,9 +77,23 @@
                 logo.src = feed.logo;
             }
             list.replaceChildren();
-            feed.posts.forEach(function (post, i) {
+            // posts pinned on the Substack homepage go first, featured; the rest by date
+            var pinned = feed.posts
+                .filter(function (p) { return p.pinned; })
+                .sort(function (a, b) { return a.pinned - b.pinned; });
+            var rest = feed.posts.filter(function (p) { return !p.pinned; });
+            if (pinned.length) {
+                list.appendChild(el("h2", "blog-section", "★ Pinned"));
+                pinned.forEach(function (post) {
+                    var card = postCard(post);
+                    card.classList.add("blog-post-latest", "blog-post-pinned");
+                    list.appendChild(card);
+                });
+                list.appendChild(el("h2", "blog-section", "All posts"));
+            }
+            rest.forEach(function (post, i) {
                 var card = postCard(post);
-                if (i === 0) card.classList.add("blog-post-latest");
+                if (i === 0 && !pinned.length) card.classList.add("blog-post-latest");
                 list.appendChild(card);
             });
         })
