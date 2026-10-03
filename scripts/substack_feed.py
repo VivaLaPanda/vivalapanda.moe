@@ -22,7 +22,8 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 FEED_URL = "https://vlpanda.substack.com/feed"
-# unofficial JSON behind the Substack homepage; its pinnedPosts are the "Pin to homepage" posts
+# unofficial JSON behind the Substack homepage; homeHeroPins are the "Pin to homepage" posts
+# (its pinnedPosts field is just the lead post on the homepage, usually the newest)
 HOMEPAGE_URL = "https://vlpanda.substack.com/api/v1/homepage_data"
 USER_AGENT = "vivalapanda.moe blog feed (+https://vivalapanda.moe/blog/)"
 # Substack's image CDN sends Access-Control-Allow-Origin: *, so pages can read covers into a canvas
@@ -40,6 +41,22 @@ def plain_text(s):
     return re.sub(r"\s+", " ", html.unescape(s)).strip().translate(QUOTES)
 
 
+def make_post(title, subtitle, link, published, image):
+    return {
+        "title": plain_text(title),
+        "subtitle": plain_text(subtitle),
+        "link": link,
+        "date": published.astimezone(timezone.utc).isoformat(),
+        "image": image,
+        "thumb": THUMB_URL.format(urllib.parse.quote(image, safe="")) if image else None,
+        "pinned": None,
+    }
+
+
+def slug_of(link):
+    return urllib.parse.urlparse(link).path.rstrip("/").rsplit("/", 1)[-1]
+
+
 def parse(xml_bytes):
     channel = ET.fromstring(xml_bytes).find("channel")
     if channel is None:
@@ -55,14 +72,8 @@ def parse(xml_bytes):
         image = enclosure.get("url") if enclosure is not None else None
         if image == logo:
             image = None
-        posts.append({
-            "title": plain_text(item.findtext("title")),
-            "subtitle": plain_text(item.findtext("description")),
-            "link": item.findtext("link"),
-            "date": published.astimezone(timezone.utc).isoformat(),
-            "image": image,
-            "thumb": THUMB_URL.format(urllib.parse.quote(image, safe="")) if image else None,
-        })
+        posts.append(make_post(item.findtext("title"), item.findtext("description"),
+                               item.findtext("link"), published, image))
     posts.sort(key=lambda p: p["date"], reverse=True)
     return {
         "title": plain_text(channel.findtext("title")),
@@ -79,14 +90,16 @@ def fetch(url):
         return resp.read()
 
 
-def pinned_slugs():
-    """Slugs of the posts pinned on the Substack homepage, in pin order.
+def pinned_posts():
+    """Posts pinned on the Substack homepage ("Pin to homepage"), in pin order.
 
     The endpoint isn't a documented API, so any failure just means no pins.
     """
     try:
         home = json.loads(fetch(HOMEPAGE_URL))
-        return [p["slug"] for p in home.get("pinnedPosts") or [] if p.get("slug")]
+        by_id = home.get("postsForHomeHeroPins") or {}
+        pins = sorted(home.get("homeHeroPins") or [], key=lambda pin: pin.get("position", 0))
+        return [by_id[str(pin["post_id"])] for pin in pins if str(pin.get("post_id")) in by_id]
     except Exception as err:
         print(f"couldn't read pinned posts, continuing without them: {err}", file=sys.stderr)
         return []
@@ -98,10 +111,17 @@ def main():
     if not data["posts"]:
         sys.exit("feed parsed but had no posts; keeping the existing file")
 
-    pins = pinned_slugs()
-    for post in data["posts"]:
-        slug = urllib.parse.urlparse(post["link"]).path.rstrip("/").rsplit("/", 1)[-1]
-        post["pinned"] = pins.index(slug) + 1 if slug in pins else None
+    by_slug = {slug_of(p["link"]): p for p in data["posts"]}
+    for order, pin in enumerate(pinned_posts(), start=1):
+        post = by_slug.get(pin["slug"])
+        if post is None:
+            # the RSS feed only carries recent posts; build older pinned ones from the pin data
+            published = datetime.fromisoformat(pin["post_date"].replace("Z", "+00:00"))
+            post = make_post(pin["title"], pin.get("subtitle") or pin.get("description"),
+                             pin["canonical_url"], published, pin.get("cover_image"))
+            data["posts"].append(post)
+        post["pinned"] = order
+    data["posts"].sort(key=lambda p: p["date"], reverse=True)
 
     # write-then-rename so readers never see a half-written file
     fd, tmp = tempfile.mkstemp(dir=out.parent, prefix=".posts-", suffix=".json")
