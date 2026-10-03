@@ -7,6 +7,10 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
+# a failed fetch (network not up yet after a reboot, Substack hiccup) retries instead of
+# waiting for the next hourly run; the last good posts.json stays in place meanwhile
+Restart=on-failure
+RestartSec=5min
 ExecStart=/usr/bin/python3 /var/www/html/vivalapanda.moe/scripts/substack_feed.py /var/www/html/vivalapanda.moe/blog/posts.json
 NoNewPrivileges=yes
 PrivateTmp=yes
