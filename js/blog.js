@@ -86,7 +86,7 @@
                 list.appendChild(el("h2", "blog-section", "★ Pinned"));
                 pinned.forEach(function (post) {
                     var card = postCard(post);
-                    card.classList.add("blog-post-latest", "blog-post-pinned");
+                    card.classList.add("blog-post-pinned");
                     list.appendChild(card);
                 });
                 list.appendChild(el("h2", "blog-section", "All posts"));

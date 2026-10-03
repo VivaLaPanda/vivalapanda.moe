@@ -125,11 +125,7 @@
     display: inline-block;
 }
 
-.blog-post-pinned {
-    border-bottom: none;
-}
-
-/* the newest (or pinned) post gets a full-width cover on top */
+/* with nothing pinned, the newest post gets a full-width cover on top */
 .blog-post-latest {
     flex-direction: column;
     gap: 10px;
