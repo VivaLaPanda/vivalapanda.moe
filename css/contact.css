@@ -4,3 +4,14 @@
 	background-size: cover;
     background-position: center;
 }
+
+/* four contact lines need to fit the dialog box */
+#text-box .speaker-text {
+    margin-bottom: 12px;
+}
+
+#text-box .dialog-text {
+    font-size: 26px;
+    margin-top: 0px;
+    margin-bottom: 12px;
+}
