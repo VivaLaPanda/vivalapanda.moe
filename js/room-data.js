@@ -4,7 +4,8 @@
 // rank = prominence (how much Panda uses the account): 1 is most. It orders the LOOK list,
 // keyboard focus and which unvisited object glints first.
 // Dialogue: lines are borrowed from real visual novels (verbatim where possible, a word swapped
-// otherwise); every line's source is in pc98-assets/assets/panda-room/dialogue-sources.md.
+// otherwise; PC-98-era lines translated from the Japanese); every line's source is in
+// pc98-assets/assets/panda-room/dialogue-sources.md.
 // Keep each box <= 48 characters and use straight quotes (the pc-98 font draws curly ones full-width).
 window.ROOM = {
     scene: {
@@ -16,7 +17,7 @@ window.ROOM = {
 
     greeting: [
         "Welcome, traveler, to my room of mysteries.",
-        "Don't be shy now, come on in.",
+        "Sorryyy! The train was totally packed...",
         "If you get lost, press LOOK, okay?"
     ],
 
@@ -33,7 +34,7 @@ window.ROOM = {
                 "The town, the people... we're all family.",
                 "I talk about it on Twitter. A lot."
             ],
-            repeat: ["It's the most dangerous place in the city!"],
+            repeat: ["Pleeease... take me somewhere~"],
             choices: [
                 { label: "Visit Twitter", href: "https://twitter.com/vivalapanda" },
                 { label: "Look at something else" }
@@ -51,7 +52,7 @@ window.ROOM = {
                 "You can call me vivalapanda.",
                 "Don't worry, your secret's safe with me."
             ],
-            repeat: ["I guess I'll text you when I'm coming over."],
+            repeat: ["If friends gossip about us... how embarrassing."],
             choices: [
                 { label: "Copy my Discord handle", copy: "vivalapanda" },
                 { label: "Message on Signal", href: "https://signal.me/#eu/MIrm4ig1ASPFMk21aOIshA8-K9WukBzeRf-EyQ0YWOGqG6brSNlHlqtuk1IbLs5H" },
@@ -101,7 +102,7 @@ window.ROOM = {
             rank: 5,
             polygon: [[268, 76], [364, 74], [364, 222], [268, 222]],
             anchor: [300, 110],
-            hover: "Three books I'd been looking for, all there!",
+            hover: "If it's books you want, leave it to me.",
             click: [
                 "My reading list isn't ready yet. Soon!",
                 "I barely got to do any reading today, so..."
@@ -141,7 +142,7 @@ window.ROOM = {
                 "That's where I log all the movies I watch.",
                 "Let's go watch!"
             ],
-            repeat: ["Isn't this such a good movie?"],
+            repeat: ["It's pro wrestling! Woo! Woo!"],
             choices: [
                 { label: "Visit Letterboxd", href: "https://letterboxd.com/VivaLaPanda/" },
                 { label: "Look at something else" }
@@ -168,12 +169,12 @@ window.ROOM = {
         idle: [
             "It's nice and quiet in here, isn't it?",
             "Do... would you like some tea?",
-            "I feel sleepy-py."
+            "Luck comes to those who smile. So, smile!"
         ],
         empty: [
             "Hm? Are you talking to moi?",
-            "It's not that amazing.",
-            "Nope. I know nothing, pal!",
+            "If you need something, just say it!",
+            "Hey, don't make that face.",
             "Uguu..."
         ],
         lookPrompt: "What do you want to look at?",
