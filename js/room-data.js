@@ -17,7 +17,7 @@ window.ROOM = {
 
     greeting: [
         "Welcome, traveler, to my room of mysteries.",
-        "Sorryyy! The train was totally packed...",
+        "Don't be shy now, come on in.",
         "If you get lost, press LOOK, okay?"
     ],
 
