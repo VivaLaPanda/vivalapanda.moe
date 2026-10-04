@@ -115,11 +115,16 @@
         });
         svg.appendChild(og);
 
-        // hit areas, largest first, so small objects sit on top and win the pointer where they
-        // overlap (the monitor over the window, the butterfly's padded area over the sill)
+        // hit areas back to front, so the front object wins the pointer where they overlap (the
+        // blazer over the window, the console over the TV): the art's zOrder (front to back) when
+        // there is one, then largest first, so small objects sit on top
         function hitArea(o) { return o.hit || o.polygon; }
+        var z = R.zOrder || [];
+        function depth(o) { var i = z.indexOf(o.id); return i < 0 ? z.length : i; }
         var g = el("g", {}, true);
-        spots.slice().sort(function (a, b) { return area(hitArea(b)) - area(hitArea(a)); }).forEach(function (o) {
+        spots.slice().sort(function (a, b) {
+            return (depth(b) - depth(a)) || (area(hitArea(b)) - area(hitArea(a)));
+        }).forEach(function (o) {
             var poly = el("polygon", {
                 "class": "room-hotspot",
                 points: points(hitArea(o)),
