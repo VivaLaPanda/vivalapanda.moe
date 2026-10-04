@@ -1,0 +1,259 @@
+/* Panda's Room (room.html): scene with hotspots, a command bar, and Panda talking in the dialog box */
+
+#room-frame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+}
+
+#room-stage {
+    position: relative;
+    flex: none;
+    margin: 0 auto;
+}
+
+#room-art {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+#room-hotspots {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* night lighting: everything but the hotspots sits a little darker */
+.room-shade {
+    fill: #000;
+    opacity: 0.38;
+    pointer-events: none;
+}
+
+.room-hotspot {
+    fill: transparent;
+    stroke: transparent;
+    stroke-width: 2px;
+    vector-effect: non-scaling-stroke;
+    shape-rendering: crispEdges;
+    cursor: url("/img/cursors/magnifier.png") 12 12, pointer;
+    outline: none;
+}
+
+/* hover and keyboard focus look the same */
+.room-hotspot.active,
+.room-hotspot:focus-visible {
+    fill: rgba(255, 238, 200, 0.16);
+    stroke: #ffaaba;
+}
+
+.room-hotspot.seen.active,
+.room-hotspot.seen:focus-visible {
+    stroke: #8799ff;
+}
+
+/* LOOK: flash every hotspot's outline */
+#room-hotspots.reveal .room-hotspot {
+    stroke: #ffaaba;
+    animation: room-reveal 1.6s steps(1) forwards;
+}
+
+@keyframes room-reveal {
+    0%, 25%, 50%, 75% { stroke: #ffaaba; }
+    12%, 37%, 62% { stroke: #ef0060; }
+    100% { stroke: transparent; }
+}
+
+.room-seen-mark {
+    fill: #8799ff;
+    stroke: #000;
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
+}
+
+.room-glint {
+    fill: #fff;
+    pointer-events: none;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: room-glint 1.2s steps(6) forwards;
+}
+
+@keyframes room-glint {
+    0% { transform: scale(0); opacity: 1; }
+    40% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.2); opacity: 0; }
+}
+
+/* the corner label while the art is a placeholder */
+#room-standin {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    font-family: 'pc-98';
+    font-size: 16px;
+    color: #000;
+    background-color: #ffaaba;
+    padding: 2px 8px;
+    pointer-events: none;
+}
+
+/* LOOK sits in the dialog box's top-right corner, like a PC-98 command button */
+#room-look {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    z-index: 1;
+    font-family: 'pc-98';
+    font-size: 22px;
+    color: #fff;
+    background-color: #2a2a66;
+    border: 3px outset #8799ff;
+    padding: 2px 12px;
+    cursor: pointer;
+}
+
+#room-look:hover,
+#room-look:focus-visible {
+    background-color: #ffaaba;
+    color: #000;
+    outline: none;
+}
+
+/* dialog box */
+#room-text {
+    font-size: 26px;
+    min-height: 1.3em;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#room-choices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-left: 18px;
+}
+
+#room-choices.room-choices-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    column-gap: 30px;
+    row-gap: 2px;
+}
+
+/* #room-choices for specificity: style.css's `.subwindow a` would stretch link choices to 80% */
+#room-choices .room-choice {
+    font-family: 'pc-98';
+    font-size: 26px;
+    line-height: 1.25;
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 0 8px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    width: auto; /* .subwindow a sets 80% */
+    margin: 0;
+}
+
+#room-choices.room-choices-grid .room-choice {
+    font-size: 22px;
+}
+
+#room-choices .room-choice.dim {
+    color: #8799ff;
+}
+
+/* the selected choice is an inverted bar, PC-98 menu style */
+#room-choices .room-choice:hover,
+#room-choices .room-choice:focus-visible,
+#room-choices .room-choice:focus {
+    background-color: #ffaaba;
+    color: #000;
+    outline: none;
+}
+
+#text-arrow {
+    position: absolute;
+    right: 18px;
+    bottom: 10px;
+    width: 25px;
+    height: 25px;
+    image-rendering: pixelated;
+}
+
+#text-arrow.bounce {
+    animation: room-bounce 1.5s steps(15) infinite;
+}
+
+@keyframes room-bounce {
+    0%, 100% { transform: translateY(0%); }
+    50% { transform: translateY(-30%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #text-arrow.bounce,
+    #room-hotspots.reveal .room-hotspot {
+        animation: none;
+    }
+    #room-hotspots.reveal .room-hotspot {
+        stroke: #ffaaba;
+    }
+}
+
+/* phones: the scene and the dialog box stack, full width */
+@media (max-width: 768px) {
+    #main-image,
+    #text-box {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    #main-image {
+        height: auto;
+    }
+
+    #room-look {
+        font-size: 18px;
+        top: 6px;
+        right: 8px;
+    }
+
+    #text-box {
+        height: auto;
+        min-height: 230px;
+        background-color: #000;
+        border-top: 2px solid #8799ff;
+    }
+
+    #text-box .text-container {
+        position: relative;
+        padding: 8px 6px 40px 6px;
+    }
+
+    #room-text,
+    #room-choices .room-choice {
+        font-size: 19px;
+    }
+
+    #room-choices.room-choices-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 8px;
+    }
+
+    #room-choices.room-choices-grid .room-choice {
+        font-size: 17px;
+    }
+}

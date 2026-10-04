@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda's Room</title>
+    <link href="/css/style.css?version=2" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/room.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/room-data.js?version=1" defer></script>
+    <script src="/js/room.js?version=1" defer></script>
+  </head>
+  <body>
+	<div class="main-container">
+		<div class="main-window">
+			<div class="subwindow" id="main-image">
+				<div id="room-frame">
+					<div id="room-stage">
+						<img id="room-art" alt="Panda's room at night: a desk with a PC under a big window onto the city, a bookshelf, a bed with a panda plush, and a small TV">
+						<svg id="room-hotspots" role="group" aria-label="Things in Panda's room" xmlns="http://www.w3.org/2000/svg"></svg>
+						<span id="room-standin" hidden>STAND-IN ART</span>
+					</div>
+				</div>
+			</div>
+			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="text-box">
+				<button type="button" id="room-look" aria-label="Look: list everything in the room">見る LOOK</button>
+				<div class="text-container">
+					<p class="speaker-text">Ｐａｎｄａ</p>
+					<p class="dialog-text" id="room-text" aria-live="polite"></p>
+					<div id="room-choices" role="menu"></div>
+					<noscript>
+						<p class="dialog-text">
+							<a href="https://twitter.com/vivalapanda">Twitter</a> ·
+							<a href="https://signal.me/#eu/MIrm4ig1ASPFMk21aOIshA8-K9WukBzeRf-EyQ0YWOGqG6brSNlHlqtuk1IbLs5H">Signal</a> ·
+							Discord: vivalapanda ·
+							<a href="https://github.com/VivaLaPanda">GitHub</a> ·
+							<a href="https://vlpanda.substack.com">Substack</a> ·
+							<a href="https://bsky.app/profile/vivalapanda.moe">Bluesky</a> ·
+							<a href="https://letterboxd.com/VivaLaPanda/">Letterboxd</a>
+						</p>
+					</noscript>
+				</div>
+				<img class="bounce" id="text-arrow" src="/img/icons/text-arrow.png" alt="" hidden>
+			</div>
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+  </body>
+</html>
