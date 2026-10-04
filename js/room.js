@@ -31,6 +31,7 @@
     var state = "idle";    // idle | talking | choosing
     var typing = null;     // { timer, line, onDone }
     var advance = null;    // called by click/Enter when a ▼ is showing
+    var inGreeting = false; // the opening lines are up; once a box is typed, a hover replaces them
     var announcedAllSeen = allSeen();
     var emptyIdx = 0;
     var idleTimer = null;
@@ -196,7 +197,8 @@
     }
 
     // say lines one box at a time (▼ between them), then run `after`
-    function say(lines, after) {
+    function say(lines, after, greeting) {
+        inGreeting = !!greeting;
         state = "talking";
         clearChoices();
         arrow.hidden = true;
@@ -218,6 +220,7 @@
     }
 
     function toIdle() {
+        inGreeting = false;
         state = "idle";
         clearChoices();
         arrow.hidden = true;
@@ -301,6 +304,8 @@
 
     function hover(o) {
         shapes[o.id].classList.add("active");
+        // a greeting box that's finished typing gives way to the first thing you point at
+        if (inGreeting && !typing) toIdle();
         // the line stays up after the pointer leaves (WCAG 1.4.13), until something else replaces it
         if (state === "idle") show(o.hover, true);
     }
@@ -332,6 +337,7 @@
             return { label: o.name, object: o, dim: seen[o.id] };
         });
         list.push({ label: "Never mind" });
+        inGreeting = false;
         state = "talking";
         stopTyping();
         text.dataset.full = R.lines.lookPrompt;
@@ -414,7 +420,7 @@
     });
 
     buildScene();
-    say(R.greeting);
+    say(R.greeting, null, true);
     resetIdle();
     if (!reduceMotion) setInterval(glint, GLINT_MS);
 })();

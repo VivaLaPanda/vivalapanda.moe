@@ -3,8 +3,9 @@
 // Polygons and anchors are in the scene image's native pixels; js/room.js scales them with the art.
 // rank = prominence (how much Panda uses the account): 1 is most. It orders the LOOK list,
 // keyboard focus and which unvisited object glints first.
-// Dialogue rules (see pc98-assets research notes): <= 48 characters per box, one idea per box,
-// the setup and punchline split across boxes, at most one ellipsis per box.
+// Dialogue: lines are borrowed from real visual novels (verbatim where possible, a word swapped
+// otherwise); every line's source is in pc98-assets/assets/panda-room/dialogue-sources.md.
+// Keep each box <= 48 characters and use straight quotes (the pc-98 font draws curly ones full-width).
 window.ROOM = {
     scene: {
         src: "/img/room/room-standin.png", // layout B, rough PC-98 pass (pc98-assets/assets/panda-room)
@@ -14,9 +15,9 @@ window.ROOM = {
     },
 
     greeting: [
-        "Oh, you made it! Come in, mind the cables.",
-        "Poke at anything that glows. I'll narrate.",
-        "Lost? Hit LOOK and I'll point things out."
+        "Welcome, traveler, to my room of mysteries.",
+        "Don't be shy now, come on in.",
+        "If you get lost, press LOOK, okay?"
     ],
 
     objects: [
@@ -27,12 +28,12 @@ window.ROOM = {
             rank: 1,
             polygon: [[20, 46], [212, 52], [212, 184], [20, 184]],
             anchor: [150, 90],
-            hover: "The city at night. Someone's always awake.",
+            hover: "E-everything looks so p-pretty at night...",
             click: [
-                "Every lit window is somebody's whole world.",
-                "I yell about zoning at a few of them on Twitter."
+                "The town, the people... we're all family.",
+                "I talk about it on Twitter. A lot."
             ],
-            repeat: ["Yes, I'm on Twitter. Yes, right now."],
+            repeat: ["It's the most dangerous place in the city!"],
             choices: [
                 { label: "Visit Twitter", href: "https://twitter.com/vivalapanda" },
                 { label: "Look at something else" }
@@ -45,12 +46,12 @@ window.ROOM = {
             rank: 2,
             polygon: [[266, 240], [316, 236], [322, 268], [274, 276]],
             anchor: [294, 256],
-            hover: "My phone. It's buzzing. It's always buzzing.",
+            hover: "I'm so gonna text you weird memes.",
             click: [
-                "Want to talk? I'm vivalapanda on Discord.",
-                "Signal works too, if it's secret-ish."
+                "You can call me vivalapanda.",
+                "Don't worry, your secret's safe with me."
             ],
-            repeat: ["Still buzzing. You could make it buzz more."],
+            repeat: ["I guess I'll text you when I'm coming over."],
             choices: [
                 { label: "Copy my Discord handle", copy: "vivalapanda" },
                 { label: "Message on Signal", href: "https://signal.me/#eu/MIrm4ig1ASPFMk21aOIshA8-K9WukBzeRf-EyQ0YWOGqG6brSNlHlqtuk1IbLs5H" },
@@ -64,12 +65,12 @@ window.ROOM = {
             rank: 3,
             polygon: [[46, 164], [124, 164], [124, 228], [138, 230], [134, 250], [62, 250], [64, 230], [46, 228]],
             anchor: [85, 190],
-            hover: "My PC! Code goes here when it's done. So, never.",
+            hover: "Oh crap... fell asleep at the computer again.",
             click: [
-                "Radio servers, PC-98 filters, this very site...",
-                "Most of it works! Some of it on purpose."
+                "But my lover has always been my computer.",
+                "Everything I make ends up on GitHub."
             ],
-            repeat: ["Same PC. Still not done. Never will be."],
+            repeat: ["This is... An Infinitely Repeating Game."],
             choices: [
                 { label: "Visit GitHub", href: "https://github.com/VivaLaPanda" },
                 { label: "Look at something else" }
@@ -82,12 +83,12 @@ window.ROOM = {
             rank: 4,
             polygon: [[6, 248], [62, 240], [76, 258], [20, 268]],
             anchor: [40, 254],
-            hover: "Today's paper. I wrote it, so it's biased.",
+            hover: "Heh. Who knew newspapers could be interesting?",
             click: [
-                "The Portentous Portal! Long posts on cities.",
-                "Grab some tea first. They run long."
+                "I write about cities on my Substack.",
+                "Well, you can read it at your own pace."
             ],
-            repeat: ["Same paper. New issue soon. Probably."],
+            repeat: ["Are you ready to continue reading?"],
             choices: [
                 { label: "Read the Portal", href: "https://vlpanda.substack.com" },
                 { label: "Look at something else" }
@@ -100,12 +101,12 @@ window.ROOM = {
             rank: 5,
             polygon: [[268, 76], [364, 74], [364, 222], [268, 222]],
             anchor: [300, 110],
-            hover: "Bookshelf. Seeing Like a State is load-bearing.",
+            hover: "Three books I'd been looking for, all there!",
             click: [
-                "These are the books I'd actually hand you.",
-                "The list is still being shelved. Soon!"
+                "My reading list isn't ready yet. Soon!",
+                "I barely got to do any reading today, so..."
             ],
-            repeat: ["Yes, I've read them all. Mostly. Okay, some."],
+            repeat: ["Why would you waste that on the top shelf?"],
             choices: [
                 { label: "Look at something else" }
             ]
@@ -117,12 +118,12 @@ window.ROOM = {
             rank: 6,
             polygon: [[196, 158], [228, 158], [228, 192], [196, 192]],
             anchor: [212, 174],
-            hover: "A butterfly on the sill. It's very blue.",
+            hover: "I love butterflies. They are the best animal.",
             click: [
-                "That's my Bluesky. I'm there sometimes.",
-                "Mostly I just admire it from here."
+                "That one's my Bluesky. I'm there sometimes.",
+                "It wouldn't be so bad to be the sky."
             ],
-            repeat: ["Still blue. Still a butterfly. Still me."],
+            repeat: ["Chicken? Why would I be a bird?"],
             choices: [
                 { label: "Visit Bluesky", href: "https://bsky.app/profile/vivalapanda.moe" },
                 { label: "Look at something else" }
@@ -135,12 +136,12 @@ window.ROOM = {
             rank: 7,
             polygon: [[380, 172], [440, 172], [440, 236], [380, 236]],
             anchor: [410, 200],
-            hover: "A little TV. I'm logging what I watch now.",
+            hover: "You've found the television, then.",
             click: [
-                "My Letterboxd! I made it, like, today.",
-                "Zero films logged. Peak mystery."
+                "That's where I log all the movies I watch.",
+                "Let's go watch!"
             ],
-            repeat: ["Still empty? Give me a weekend."],
+            repeat: ["Isn't this such a good movie?"],
             choices: [
                 { label: "Visit Letterboxd", href: "https://letterboxd.com/VivaLaPanda/" },
                 { label: "Look at something else" }
@@ -155,31 +156,31 @@ window.ROOM = {
             name: "Panda plush",
             polygon: [[318, 200], [360, 200], [362, 254], [318, 254]],
             anchor: [340, 222],
-            hover: "Panda plush. The original Panda, actually.",
+            hover: "The panda says, 'Gao, gao!'",
             lines: [
-                "She's been here longer than the furniture.",
-                "Be nice. She hears everything."
+                "Of course the panda can't win. It's a panda.",
+                "Sorry, I was born cute."
             ]
         }
     ],
 
     lines: {
         idle: [
-            "No rush. The city's not going anywhere.",
-            "Want some tea? I'll put the kettle on.",
-            "Hear that? Last train heading home."
+            "It's nice and quiet in here, isn't it?",
+            "Do... would you like some tea?",
+            "I feel sleepy-py."
         ],
         empty: [
-            "Nothing special there. Just vibes.",
-            "That's just the room. A very good room.",
-            "Hm? Try the glowing stuff.",
-            "That's the floor. Mind the cables."
+            "Hm? Are you talking to moi?",
+            "It's not that amazing.",
+            "Nope. I know nothing, pal!",
+            "Uguu..."
         ],
-        lookPrompt: "What should I tell you about?",
-        leaving: "Have fun out there! I'll be right here.",
-        copied: "Copied! Add me: vivalapanda.",
-        copyFailed: "Couldn't copy... it's vivalapanda!",
-        backToRoom: "Sure! Look around.",
-        allSeen: "Okay, you've found everything. I'm impressed."
+        lookPrompt: "What do you want to look at?",
+        leaving: "It's not good bye, it's see you again.",
+        copied: "Copied! It's vivalapanda.",
+        copyFailed: "Huh? It didn't copy... it's vivalapanda!",
+        backToRoom: "Okkei!",
+        allSeen: "Congratulations! You found everything~!"
     }
 };
