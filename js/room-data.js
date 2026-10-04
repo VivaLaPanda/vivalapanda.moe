@@ -6,9 +6,10 @@
 // pixels stay crisp and even.
 // rank = prominence (how much Panda uses the account): 1 is most. It orders the LOOK list,
 // keyboard focus and which unvisited object glints first.
-// Dialogue: lines are borrowed from real visual novels (verbatim where possible, a word swapped
-// otherwise; PC-98-era lines translated from the Japanese); every line's source is in
-// pc98-assets/assets/panda-room/dialogue-sources.md.
+// Dialogue: real visual-novel lines where they fit this room (verbatim, adapted or interpolated;
+// PC-98-era lines translated from the Japanese) and plain lines in the same register where they
+// don't; every line has to make sense coming from Panda, about that object, in this night room.
+// Each line's kind and source is in pc98-assets/assets/panda-room/dialogue-sources.md.
 // Keep each box <= 48 characters and use straight quotes (the pc-98 font draws curly ones full-width).
 window.ROOM = {
     scene: {
@@ -22,7 +23,7 @@ window.ROOM = {
     greeting: [
         "Welcome, traveler, to my room of mysteries.",
         "Don't be shy now, come on in.",
-        "If you get lost, press LOOK, okay?"
+        "Poke around all you like! Lost? Press LOOK."
     ],
 
     objects: [
@@ -37,7 +38,7 @@ window.ROOM = {
             hover: "E-everything looks so p-pretty at night...",
             click: [
                 "The town, the people... we're all family.",
-                "I talk about it on Twitter. A lot."
+                "I tweet about it way too much. Mostly zoning."
             ],
             repeat: ["Pleeease... take me somewhere~"],
             choices: [
@@ -54,10 +55,10 @@ window.ROOM = {
             anchor: [106, 241],
             lit: { src: "/img/room/lit/phone@4x.png?v=3", x: 94, y: 235, w: 25, h: 12 },
             hit: [[90, 231], [123, 231], [123, 251], [90, 251]], // padded: the object itself is tiny
-            hover: "I'm so gonna text you weird memes.",
+            hover: "Eh? My phone's buzzing... is that you?",
             click: [
-                "You can call me vivalapanda.",
-                "Don't worry, your secret's safe with me."
+                "On Discord, you can call me vivalapanda.",
+                "Secrets go on Signal. They're safe with me."
             ],
             repeat: ["If friends gossip about us... how embarrassing."],
             choices: [
@@ -74,12 +75,12 @@ window.ROOM = {
             polygon: [[373, 135], [421, 136], [428, 138], [428, 180], [424, 184], [431, 187], [431, 192], [390, 192], [390, 189], [387, 186], [381, 184], [386, 180], [382, 176], [375, 175], [375, 138], [373, 136]],
             anchor: [402, 161],
             lit: { src: "/img/room/lit/pc@4x.png?v=3", x: 372, y: 134, w: 60, h: 59 },
-            hover: "Oh crap... fell asleep at the computer again.",
+            hover: "I keep falling asleep at that computer...",
             click: [
-                "But my lover has always been my computer.",
+                "My true love has always been my computer.",
                 "Everything I make ends up on GitHub."
             ],
-            repeat: ["This is... An Infinitely Repeating Game."],
+            repeat: ["Back again? It's an infinitely repeating game."],
             choices: [
                 { label: "Visit GitHub", href: "https://github.com/VivaLaPanda" },
                 { label: "Look at something else" }
@@ -93,7 +94,7 @@ window.ROOM = {
             polygon: [[359, 177], [380, 178], [385, 182], [384, 184], [390, 188], [390, 191], [370, 189], [359, 178]],
             anchor: [374, 183],
             lit: { src: "/img/room/lit/newspaper@4x.png?v=3", x: 358, y: 176, w: 32, h: 16 },
-            hover: "Heh. Who knew newspapers could be interesting?",
+            hover: "Heh. Who knew my essays could be interesting?",
             click: [
                 "I write about cities on my Substack.",
                 "Well, you can read it at your own pace."
@@ -117,7 +118,7 @@ window.ROOM = {
                 "My reading list isn't ready yet. Soon!",
                 "I barely got to do any reading today, so..."
             ],
-            repeat: ["Why would you waste that on the top shelf?"],
+            repeat: ["Still not ready! Reading takes time, okay?"],
             choices: [
                 { label: "Look at something else" }
             ]
@@ -136,7 +137,7 @@ window.ROOM = {
                 "That one's my Bluesky. I'm there sometimes.",
                 "It wouldn't be so bad to be the sky."
             ],
-            repeat: ["Chicken? Why would I be a bird?"],
+            repeat: ["Why would it be a bird? It's a butterfly!"],
             choices: [
                 { label: "Visit Bluesky", href: "https://bsky.app/profile/vivalapanda.moe" },
                 { label: "Look at something else" }
@@ -152,7 +153,7 @@ window.ROOM = {
             lit: { src: "/img/room/lit/tv@4x.png?v=3", x: 441, y: 34, w: 28, h: 38 },
             hover: "You've found the television, then.",
             click: [
-                "That's where I log all the movies I watch.",
+                "Every movie I watch goes on my Letterboxd.",
                 "Let's go watch!"
             ],
             repeat: ["It's pro wrestling! Woo! Woo!"],
@@ -173,7 +174,7 @@ window.ROOM = {
             lit: { src: "/img/room/lit/plush@4x.png?v=3", x: 33, y: 166, w: 33, h: 48 },
             hover: "The panda says, 'Gao, gao!'",
             lines: [
-                "Of course the panda can't win. It's a panda.",
+                "He's the original Panda. I'm the sequel.",
                 "Sorry, I was born cute."
             ]
         }
@@ -183,7 +184,8 @@ window.ROOM = {
         idle: [
             "It's nice and quiet in here, isn't it?",
             "Do... would you like some tea?",
-            "Luck comes to those who smile. So, smile!"
+            "Luck comes to those who smile. So, smile!",
+            "Hear that? The last train's heading home."
         ],
         empty: [
             "Hm? Are you talking to moi?",
