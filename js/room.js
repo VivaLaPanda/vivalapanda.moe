@@ -26,7 +26,9 @@
     var byRank = R.objects.slice().sort(function (a, b) { return a.rank - b.rank; });
     // every hotspot: the linked objects by rank, then knick-knacks that are drawn in the scene
     var spots = byRank.concat(R.knickKnacks.filter(function (k) { return k.polygon; }));
-    var shapes = {};       // id -> polygon element
+    var shapes = {};       // id -> hit polygon (the focusable element)
+    var outlines = {};     // id -> exact outline polygon (LOOK's flash)
+    var lits = {};         // id -> lit sprite <img>
     var seen = loadSeen(); // id -> true
     var state = "idle";    // idle | talking | choosing
     var typing = null;     // { timer, line, onDone }
@@ -59,11 +61,40 @@
         return Math.abs(a / 2);
     }
 
+    // place an element over the art by native-pixel rect, in % so it scales with the stage
+    function placeNative(node, x, y, w, h) {
+        var s = R.scene;
+        node.style.left = (100 * x / s.width) + "%";
+        node.style.top = (100 * y / s.height) + "%";
+        node.style.width = (100 * w / s.width) + "%";
+        node.style.height = (100 * h / s.height) + "%";
+    }
+
     function buildScene() {
         var s = R.scene;
         art.src = s.src;
-        document.getElementById("room-standin").hidden = !s.standIn;
         svg.setAttribute("viewBox", "0 0 " + s.width + " " + s.height);
+
+        // city lights: step through the twinkle strip's frames, like PC-98 palette cycling
+        if (s.twinkle && !reduceMotion) {
+            var t = s.twinkle;
+            var tw = el("div", { id: "room-twinkle", "aria-hidden": "true" });
+            placeNative(tw, t.x, t.y, t.w, t.h);
+            tw.style.backgroundImage = "url(" + t.src + ")";
+            tw.style.backgroundSize = (t.frames * 100) + "% 100%";
+            tw.style.animationDuration = (t.frames / t.fps) + "s";
+            tw.style.animationTimingFunction = "steps(" + t.frames + ", jump-none)";
+            stage.insertBefore(tw, svg);
+        }
+
+        // each object's lit state (brightened, with a warm rim), shown on hover and focus
+        spots.forEach(function (o) {
+            if (!o.lit) return;
+            var img = el("img", { "class": "room-lit", src: o.lit.src, alt: "", "aria-hidden": "true" });
+            placeNative(img, o.lit.x, o.lit.y, o.lit.w, o.lit.h);
+            stage.insertBefore(img, svg);
+            lits[o.id] = img;
+        });
 
         // dim everything except the hotspots, so the objects read as lit
         var defs = el("defs", {}, true);
@@ -76,12 +107,22 @@
         svg.appendChild(defs);
         svg.appendChild(el("rect", { "class": "room-shade", width: s.width, height: s.height, mask: "url(#room-lit)" }, true));
 
-        // largest first, so small objects sit on top and win the pointer where they overlap
+        // exact outlines, for LOOK's flash
+        var og = el("g", {}, true);
+        spots.forEach(function (o) {
+            outlines[o.id] = el("polygon", { "class": "room-outline", points: points(o.polygon) }, true);
+            og.appendChild(outlines[o.id]);
+        });
+        svg.appendChild(og);
+
+        // hit areas, largest first, so small objects sit on top and win the pointer where they
+        // overlap (the monitor over the window, the butterfly's padded area over the sill)
+        function hitArea(o) { return o.hit || o.polygon; }
         var g = el("g", {}, true);
-        spots.slice().sort(function (a, b) { return area(b.polygon) - area(a.polygon); }).forEach(function (o) {
+        spots.slice().sort(function (a, b) { return area(hitArea(b)) - area(hitArea(a)); }).forEach(function (o) {
             var poly = el("polygon", {
                 "class": "room-hotspot",
-                points: points(o.polygon),
+                points: points(hitArea(o)),
                 role: "button",
                 tabindex: o === spots[0] ? "0" : "-1",
                 "aria-label": o.service ? o.name + " (" + o.service + ")" : o.name,
@@ -97,9 +138,8 @@
             g.appendChild(poly);
         });
         svg.appendChild(g);
-        svg.appendChild(el("g", { id: "room-marks" }, true));
         svg.appendChild(el("g", { id: "room-glints" }, true));
-        drawMarks();
+        markSeen();
 
         // clicking the room itself (not an object)
         stage.addEventListener("click", function () {
@@ -122,18 +162,11 @@
         stage.style.height = Math.round(s.height * scale) + "px";
     }
 
-    function drawMarks() {
-        var marks = document.getElementById("room-marks");
-        marks.textContent = "";
+    // seen state never marks the scene itself: it only shows while LOOK is up (the dimmed names
+    // in its list, and a blue rather than pink flash), plus which objects still glint
+    function markSeen() {
         spots.forEach(function (o) {
-            shapes[o.id].classList.toggle("seen", !!seen[o.id]);
-            if (!seen[o.id]) return;
-            var x = o.anchor[0], y = o.anchor[1];
-            // a small diamond: "you've looked at this"
-            marks.appendChild(el("polygon", {
-                "class": "room-seen-mark",
-                points: points([[x, y - 4], [x + 4, y], [x, y + 4], [x - 4, y]])
-            }, true));
+            outlines[o.id].classList.toggle("seen", !!seen[o.id]);
         });
     }
 
@@ -304,6 +337,7 @@
 
     function hover(o) {
         shapes[o.id].classList.add("active");
+        if (lits[o.id]) lits[o.id].classList.add("on");
         // a greeting box that's finished typing gives way to the first thing you point at
         if (inGreeting && !typing) toIdle();
         // the line stays up after the pointer leaves (WCAG 1.4.13), until something else replaces it
@@ -312,12 +346,13 @@
 
     function unhover(o) {
         shapes[o.id].classList.remove("active");
+        if (lits[o.id]) lits[o.id].classList.remove("on");
     }
 
     function open(o) {
         seen[o.id] = true;
         saveSeen();
-        drawMarks();
+        markSeen();
         if (!o.choices) { // a knick-knack: just a line
             say(o.lines);
             return;

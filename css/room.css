@@ -15,11 +15,42 @@
     margin: 0 auto;
 }
 
+/* the art is a nearest-neighbour 4x copy scaled down smoothly ("sharp bilinear"): at the window's
+   non-integer 1.65x, plain nearest-neighbour gives uneven 1px/2px columns that break the dithers */
 #room-art {
     display: block;
     width: 100%;
     height: 100%;
-    image-rendering: pixelated;
+}
+
+/* lit sprites and the city twinkle sit over the art at native-pixel rects (set in % by room.js) */
+.room-lit,
+#room-twinkle {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+}
+
+.room-lit {
+    visibility: hidden;
+}
+
+/* hover and keyboard focus light the object up, instantly, PC-98 style */
+.room-lit.on {
+    visibility: visible;
+}
+
+#room-twinkle {
+    background-repeat: no-repeat;
+    background-position: 0% 0%;
+    animation-name: room-twinkle;
+    animation-iteration-count: infinite;
+}
+
+/* duration and steps() come from room-data.js (frames / fps) */
+@keyframes room-twinkle {
+    from { background-position: 0% 0%; }
+    to { background-position: 100% 0%; }
 }
 
 #room-hotspots {
@@ -46,22 +77,25 @@
     outline: none;
 }
 
-/* hover and keyboard focus look the same */
-.room-hotspot.active,
-.room-hotspot:focus-visible {
-    fill: rgba(255, 238, 200, 0.16);
-    stroke: #ffaaba;
+/* exact object outlines: invisible except while LOOK flashes them */
+.room-outline {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 2px;
+    vector-effect: non-scaling-stroke;
+    shape-rendering: crispEdges;
+    pointer-events: none;
 }
 
-.room-hotspot.seen.active,
-.room-hotspot.seen:focus-visible {
-    stroke: #8799ff;
-}
-
-/* LOOK: flash every hotspot's outline */
-#room-hotspots.reveal .room-hotspot {
+/* LOOK: flash every object's outline, pink if you haven't looked at it yet, blue if you have */
+#room-hotspots.reveal .room-outline {
     stroke: #ffaaba;
     animation: room-reveal 1.6s steps(1) forwards;
+}
+
+#room-hotspots.reveal .room-outline.seen {
+    stroke: #8799ff;
+    animation-name: room-reveal-seen;
 }
 
 @keyframes room-reveal {
@@ -70,12 +104,9 @@
     100% { stroke: transparent; }
 }
 
-.room-seen-mark {
-    fill: #8799ff;
-    stroke: #000;
-    stroke-width: 1px;
-    vector-effect: non-scaling-stroke;
-    pointer-events: none;
+@keyframes room-reveal-seen {
+    0%, 75% { stroke: #8799ff; }
+    100% { stroke: transparent; }
 }
 
 .room-glint {
@@ -90,19 +121,6 @@
     0% { transform: scale(0); opacity: 1; }
     40% { transform: scale(1); opacity: 1; }
     100% { transform: scale(0.2); opacity: 0; }
-}
-
-/* the corner label while the art is a placeholder */
-#room-standin {
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
-    font-family: 'pc-98';
-    font-size: 16px;
-    color: #000;
-    background-color: #ffaaba;
-    padding: 2px 8px;
-    pointer-events: none;
 }
 
 /* LOOK sits in the dialog box's top-right corner, like a PC-98 command button */
@@ -203,11 +221,17 @@
 
 @media (prefers-reduced-motion: reduce) {
     #text-arrow.bounce,
-    #room-hotspots.reveal .room-hotspot {
+    #room-hotspots.reveal .room-outline {
         animation: none;
     }
-    #room-hotspots.reveal .room-hotspot {
+    #room-hotspots.reveal .room-outline {
         stroke: #ffaaba;
+    }
+    #room-hotspots.reveal .room-outline.seen {
+        stroke: #8799ff;
+    }
+    #room-twinkle {
+        display: none;
     }
 }
 
