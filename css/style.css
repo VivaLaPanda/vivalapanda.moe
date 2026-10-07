@@ -115,6 +115,11 @@ body {
     overflow: hidden;
 }
 
+/* full-height pages: the standard frame only borders the picture area above the text box */
+.main-window:has(#main-image-tall) {
+    background-image: url("/img/background-frame-tall.png");
+}
+
 .page-image {
     width: 100%;
     height: 100%;

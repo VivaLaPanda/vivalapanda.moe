@@ -131,6 +131,11 @@ time {
     /* margin-bottom: auto; */
 }
 
+/* the photos are PC-98 renders (js/pc98.js at 320px), so scale them without smoothing */
+.recipe-imagebox img {
+    image-rendering: pixelated;
+}
+
 .recipe-ingredientbox {
     width: 48%;
     padding-left: 27px;
