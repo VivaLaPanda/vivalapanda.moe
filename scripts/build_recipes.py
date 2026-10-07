@@ -60,6 +60,9 @@ CROSS_LINKS = [
     ("tri-tip", "tri-tip"),
 ]
 
+# the "★ Starred" section at the top of the index; they're listed under their courses too
+STARRED = ["shepherds-pie", "beef-bourguignon", "chickpea-salad"]
+
 # hand-written pages from before the recipe doc: the course they're listed under, after the doc's own recipes
 OLDER = {
     "Mains": [("Katsudon", "katsudon"), ("Buttermilk Pancakes", "pancakes")],
@@ -239,6 +242,11 @@ def index_page(courses):
     def row(href, title):
         return ["  <li>", f'    <a href="{href}">', f'      <span class="recipe-title">{title}</span>', "    </a>", "  </li>"]
 
+    by_slug = {r["slug"]: r for c in courses for r in c["recipes"]}
+    body += ["", '<div class="recipe-section">★ Starred</div>', '<ul class="recipe-index">']
+    for slug in STARRED:
+        body += row(f"/recipes/{slug}.html", inline(by_slug[slug]["title"], []))
+    body.append("</ul>")
     for course in courses:
         body += ["", f'<div class="recipe-section">{html.escape(course["name"])}</div>', '<ul class="recipe-index">']
         for r in course["recipes"]:
@@ -264,6 +272,7 @@ def main():
     assert len(slugs) == len(set(slugs)), "two recipes share a slug"
     assert not set(slugs) & {s for rows in OLDER.values() for _, s in rows}, "a recipe would overwrite a hand-written page"
     assert set(OLDER) <= {c["name"] for c in courses}, "OLDER names a course the doc doesn't have"
+    assert set(STARRED) <= set(slugs), "STARRED names a recipe the doc doesn't have"
     for course in courses:
         for recipe in course["recipes"]:
             (out / f"{recipe['slug']}.html").write_text(recipe_page(recipe), encoding="utf-8")
