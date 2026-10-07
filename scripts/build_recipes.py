@@ -190,7 +190,7 @@ HEAD = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/textpage.css?version=4" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/textpage.css?version=5" rel="stylesheet" type="text/css" media="all">
     <link href="/css/recipes.css?version=5" rel="stylesheet" type="text/css" media="all">
   </head>
   <body>
