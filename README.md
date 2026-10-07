@@ -28,6 +28,10 @@ The blog reads `blog/posts.json`, generated from the Substack feed (and its pinn
 `python3 scripts/substack_feed.py`. It's gitignored. On the server, a systemd timer refreshes it hourly
 (`scripts/systemd/`).
 
+The reading list (`/reading/`) works the same way: `python3 scripts/goodreads_feed.py` turns Panda's public Goodreads
+shelves (their RSS feeds; the API is closed) into `reading/books.json`, gitignored, refreshed hourly on the server by
+`goodreads-feed.timer`. Read dates and reviews added on Goodreads show up on the page automatically.
+
 The recipe book is generated from `content/recipes.md` (an export of the recipe doc: `## Course`, `### Recipe`,
 `**Verdict:**`, a "Serves · Source" line, then `**Ingredients**` / `**Method**` / `**Notes**` sections). After
 editing it, run `python3 scripts/build_recipes.py`, which writes `templates/recipes.html` and

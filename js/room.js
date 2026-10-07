@@ -283,7 +283,10 @@
         choices.forEach(function (c) {
             var item;
             if (c.href) {
-                item = el("a", { href: c.href, target: "_blank", rel: "noopener noreferrer" });
+                // other sites open in a new tab; the site's own pages (the reading list) in this one
+                item = /^https?:/.test(c.href)
+                    ? el("a", { href: c.href, target: "_blank", rel: "noopener noreferrer" })
+                    : el("a", { href: c.href });
                 item.addEventListener("click", function () { say([R.lines.leaving]); });
             } else {
                 item = el("button", { type: "button" });

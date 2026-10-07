@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly refresh of the reading list's Goodreads shelves
+
+[Timer]
+OnBootSec=3min
+OnCalendar=hourly
+RandomizedDelaySec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

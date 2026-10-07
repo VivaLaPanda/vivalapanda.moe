@@ -1,0 +1,191 @@
+/* /reading/: Panda's Goodreads shelves (js/reading.js). Section labels and the Elsewhere row come from recipes.css. */
+
+#talltext.reading-page {
+    padding-bottom: 96px;
+}
+
+.reading-status {
+    font-size: 20px;
+}
+
+/* links here are plain purple like the rest of the site; #talltext beats style.css's `.subwindow a` 80% width */
+#talltext .reading-page a,
+#talltext.reading-page .reading-meta a,
+#talltext.reading-page .reading-shelf a,
+#talltext.reading-page .reading-now a {
+    width: auto;
+    margin: 0;
+}
+
+/* PC-98 covers: crisp pixels in the site's ridge frame */
+.reading-cover {
+    display: block;
+    width: 98px;
+    height: auto;
+    image-rendering: pixelated;
+    border: 3px ridge #8899ff;
+    background-color: #ffc4cf;
+}
+
+.reading-cover-missing {
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    color: #664477;
+}
+
+/* currently reading: cover beside the title */
+.reading-now {
+    margin: 6px 0 22px 0;
+}
+
+.reading-current {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 8px 0;
+}
+
+/* the favourites: a shelf of covers */
+#talltext .reading-shelf {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 26px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+    gap: 16px 10px;
+}
+
+#talltext .reading-shelf-item {
+    font-family: 'pc-98';
+}
+
+#talltext.reading-page .reading-shelf-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.reading-shelf-title {
+    margin-top: 6px;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #664477;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#talltext.reading-page .reading-shelf-link:hover .reading-shelf-title,
+#talltext.reading-page .reading-shelf-link:focus-visible .reading-shelf-title {
+    background-color: #664477;
+    color: #ffaaba;
+}
+
+/* the list: one row per book */
+#talltext .reading-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+}
+
+#talltext .reading-book {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 8px 10px;
+    border-bottom: 2px dotted #8799ff;
+    font-family: 'pc-98';
+}
+
+.reading-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+#talltext .reading-title {
+    font-family: 'pc-98-bold';
+    font-size: 21px;
+    color: #664477;
+}
+
+#talltext .reading-title:hover,
+#talltext .reading-title:focus-visible {
+    background-color: #664477;
+    color: #ffaaba;
+    outline: none;
+}
+
+.reading-series {
+    margin-left: 8px;
+    font-size: 16px;
+    color: #8799ff;
+}
+
+.reading-author {
+    margin-top: 2px;
+    font-size: 17px;
+    color: #553366;
+}
+
+#talltext .reading-review {
+    font-size: 18px;
+    margin: 8px 0 4px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#talltext .reading-review-link {
+    font-size: 17px;
+}
+
+.reading-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    white-space: nowrap;
+}
+
+.reading-stars {
+    font-size: 18px;
+    color: #664477;
+    letter-spacing: 1px;
+}
+
+.reading-date {
+    font-size: 16px;
+    color: #8799ff;
+}
+
+@media (max-width: 768px) {
+    #talltext.reading-page {
+        padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    }
+
+    #talltext .reading-shelf {
+        grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+        gap: 14px 6px;
+    }
+
+    #talltext .reading-book {
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px 4px;
+    }
+
+    .reading-side {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 12px;
+    }
+
+    #talltext .reading-title {
+        font-size: 19px;
+    }
+}

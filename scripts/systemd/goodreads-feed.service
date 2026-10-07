@@ -1,0 +1,18 @@
+# Install: cp scripts/systemd/goodreads-feed.* /etc/systemd/system/ && systemctl daemon-reload
+#          && systemctl enable --now goodreads-feed.timer
+[Unit]
+Description=Refresh /reading/books.json from Panda's Goodreads shelves
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# a failed fetch retries instead of waiting for the next hourly run; the last good books.json stays in place
+Restart=on-failure
+RestartSec=5min
+ExecStart=/usr/bin/python3 /var/www/html/vivalapanda.moe/scripts/goodreads_feed.py /var/www/html/vivalapanda.moe/reading/books.json
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/www/html/vivalapanda.moe/reading

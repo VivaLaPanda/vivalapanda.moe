@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda's Reading List</title>
+    <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/textpage.css?version=5" rel="stylesheet" type="text/css" media="all">
+    <!-- recipes.css for the shared section labels and the boxed ⇒ "Elsewhere" row -->
+    <link href="/css/recipes.css?version=6" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/reading.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/pc98.js?version=1" defer></script>
+    <script src="/js/reading.js?version=1" defer></script>
+  </head>
+  <body>
+  <div id="audio-player-container">
+    <audio id="music" loop preload controls>
+      <source src="" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+	<div class="main-container">
+		<div class="main-window">
+			<div class="subwindow" id="main-image-tall">
+        <div id="talltext" class="reading-page">
+          <h1>Panda's Reading List</h1>
+
+          <hr>
+
+          <!-- filled in by js/reading.js from /reading/books.json (scripts/goodreads_feed.py, hourly on the server) -->
+          <div id="reading" aria-live="polite">
+            <p class="reading-status">Dusting off the shelves...</p>
+          </div>
+          <noscript>
+            <p class="reading-status">
+              My shelves are on <a href="https://www.goodreads.com/user/show/29012397-vivalapanda">Goodreads</a>.
+            </p>
+          </noscript>
+
+          <!-- other places: ⇒ rows open in a new tab (the pc-98 font has no ↗) -->
+          <div class="recipe-section">Elsewhere</div>
+          <ul class="recipe-index recipe-elsewhere">
+            <li>
+              <a href="https://www.goodreads.com/user/show/29012397-vivalapanda" target="_blank" rel="noopener">
+                <span class="recipe-title">Follow along on Goodreads</span>
+                <span class="recipe-host">goodreads.com</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+  </body>
+</html>

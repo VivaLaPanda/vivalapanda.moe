@@ -5,6 +5,7 @@
 // 500x357 pixels; the images are nearest-neighbour 4x copies that the browser scales down smoothly, so
 // pixels stay crisp and even.
 // The room is only for places elsewhere on the web (accounts, email); the site's own pages are in the sidenav.
+// One exception, the user's call: the bookshelf also opens the on-site reading list (/reading/).
 // rank = prominence (how much Panda uses the account): 1 is most. It orders the LOOK list,
 // keyboard focus and which unvisited object glints first.
 // zOrder = the art's objects front to back (hotspots.json z_order_front_to_back): where hit areas
@@ -120,11 +121,14 @@ window.ROOM = {
             lit: { src: "/img/room/lit/bookshelf@4x.png?v=6", x: 430, y: 64, w: 43, h: 255 },
             hover: "If it's books you want, leave it to me.",
             click: [
-                "My reading list isn't ready yet. Soon!",
+                "You could say I really enjoy reading...",
                 "I barely got to do any reading today, so..."
             ],
-            repeat: ["Still not ready! Reading takes time, okay?"],
+            repeat: ["Coffee can be nice with books too, you know?"],
             choices: [
+                // the one on-site link in the room: the user chose the bookshelf over a sidebar icon (2026-10-07)
+                { label: "Browse my reading list", href: "/reading/" },
+                { label: "Visit Goodreads", href: "https://www.goodreads.com/user/show/29012397-vivalapanda" },
                 { label: "Look at something else" }
             ]
         },

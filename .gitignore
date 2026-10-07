@@ -5,3 +5,6 @@ audio/temp/
 blog/posts.json
 dev-assets/animation/
 __pycache__/
+
+# generated hourly on the server by scripts/goodreads_feed.py
+reading/books.json
