@@ -85,11 +85,16 @@
     font-size: 20px;
 }
 
-#talltext .recipe-page h1 {
+/* room after the last step, so it doesn't sit on the window's bottom edge */
+#talltext.recipe-page {
+    padding-bottom: 96px;
+}
+
+#talltext.recipe-page h1 {
     margin-top: 4px;
 }
 
-#talltext .recipe-page h2 {
+#talltext.recipe-page h2 {
     margin: 22px 0 8px 0;
 }
 
@@ -116,6 +121,11 @@
 
 #talltext .recipe-ingredientbox h2 {
     margin-top: 4px;
+}
+
+/* "Dashi soup stock", "Garnish": h5's default 0.83em is too small to read */
+#talltext .recipe-ingredientbox h5 {
+    font-size: 16px;
 }
 
 /* the steps read like the body text, not like the bold purple lists */
@@ -146,5 +156,21 @@
     #talltext .recipe-index a {
         font-size: 20px;
         padding: 8px 4px;
+    }
+
+    /* a phone has the width for the ingredients to match the steps more closely */
+    #talltext .recipe-ingredientbox li {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+
+    /* the page scrolls as a whole on phones; leave room above the home bar too */
+    #talltext.recipe-page {
+        padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* the only way back on a phone (the sidebar is hidden), so give it a full-size tap target */
+    #talltext .recipe-back {
+        padding: 10px 0;
     }
 }

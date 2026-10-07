@@ -1,6 +1,9 @@
 #talltext {
     width: auto;
-    height: 100%;
+    /* border-box, minus the 10px margins: the box (and its bottom padding) ends inside the window
+       instead of running past #main-image-tall's clipped edge */
+    box-sizing: border-box;
+    height: calc(100% - 20px);
     /* font-family: 'pc-98'; */
     background-color: #ffaaba;
     color: black;
