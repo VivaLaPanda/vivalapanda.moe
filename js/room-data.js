@@ -177,10 +177,10 @@ window.ROOM = {
             anchor: [358, 166],
             lit: { src: "/img/room/lit/letter@4x.png?v=4", x: 348, y: 160, w: 21, h: 14 },
             hit: [[346, 158], [371, 158], [371, 176], [346, 176]], // padded: the object itself is small
-            hover: "Letters are a lost art, you know.",
+            hover: "I wrote to my parents last week.",
             click: [
-                "You can always write to me.",
-                "I'm at me@panda.moe. I read everything!"
+                "You can write to me too! I'm at me@panda.moe.",
+                "Everything that you write is a treasure to me."
             ],
             repeat: ["Write to me, okay? I'll write back."],
             choices: [
@@ -197,12 +197,12 @@ window.ROOM = {
             anchor: [403, 318],
             lit: { src: "/img/room/lit/controller@4x.png?v=4", x: 339, y: 297, w: 98, h: 45 },
             hit: [[338, 335], [342, 331], [389, 298], [403, 296], [416, 296], [418, 298], [435, 318], [438, 322], [438, 332], [436, 334], [360, 343], [342, 343], [338, 339]], // console, cartridge and pad
-            hover: "My console! Don't look at my hours played.",
+            hover: "Eh? Just playing some Cities: Skylines.",
             click: [
                 "I play games rarely. ...Very rarely.",
-                "I'll go easy on you. Maybe."
+                "Hey, what's your favorite game?"
             ],
-            repeat: ["One more game. Then sleep. Probably."],
+            repeat: ["Fancy another game?"],
             choices: [
                 // verified 2026-10-04: profile "VivaLaPanda", summary "I play games rarely."
                 { label: "Visit Steam", href: "https://steamcommunity.com/id/vivalapanda" },
@@ -217,12 +217,12 @@ window.ROOM = {
             polygon: [[63, 233], [88, 235], [88, 243], [70, 255], [63, 256], [54, 254], [51, 257], [47, 253], [42, 253], [42, 245], [63, 234]],
             anchor: [64, 244],
             lit: { src: "/img/room/lit/lesswrong@4x.png?v=4", x: 41, y: 232, w: 48, h: 27 },
-            hover: "That tome? It changed how I think. Really.",
+            hover: "Ah, now I started thinking again. This is bad.",
             click: [
-                "Bedtime reading. Very light, as you can see.",
-                "My long-winded thoughts live on LessWrong."
+                "My nerdier essays go up on LessWrong.",
+                "I could go on, but I think you get the point..."
             ],
-            repeat: ["Change my mind! Really. Bring evidence."],
+            repeat: ["As rational as ever, I see."],
             choices: [
                 { label: "Visit LessWrong", href: "https://www.lesswrong.com/users/vivalapanda" },
                 { label: "Look at something else" }
@@ -236,12 +236,12 @@ window.ROOM = {
             polygon: [[317, 160], [320, 161], [319, 163], [321, 165], [329, 169], [330, 201], [329, 204], [324, 203], [316, 196], [307, 204], [304, 204], [303, 202], [304, 169], [317, 161]],
             anchor: [316, 183],
             lit: { src: "/img/room/lit/linkedin@4x.png?v=4", x: 302, y: 159, w: 29, h: 46 },
-            hover: "My interview blazer. It's seen things.",
+            hover: "Is it hard, being an adult?",
             click: [
-                "I put it on when I have to be an adult.",
-                "My job title? Mad scientist. ...Sort of."
+                "I wear it to interviews. And on LinkedIn.",
+                "Need me for work stuff? LinkedIn's the place."
             ],
-            repeat: ["Business casual is a lie, you know."],
+            repeat: ["Thank you for your hard work today."],
             choices: [
                 { label: "Visit LinkedIn", href: "https://www.linkedin.com/in/smithdevio/" },
                 { label: "Look at something else" }
@@ -269,10 +269,10 @@ window.ROOM = {
             polygon: [[64, 67], [131, 67], [131, 150], [64, 150], [64, 68]],
             anchor: [97, 108],
             lit: { src: "/img/room/lit/poster@4x.png?v=4", x: 63, y: 66, w: 69, h: 85 },
-            hover: "Don't judge my poster. She's a hero!",
+            hover: "Cuteness wins in the end. Cuteness is justice!",
             lines: [
                 "That's my favorite magical girl!",
-                "...I've rewatched it more than I'll admit."
+                "Abracadabra! Welcome to life as a magical girl!"
             ]
         }
     ],
