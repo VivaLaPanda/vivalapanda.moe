@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katsudon · Panda's Recipe Book</title>
+    <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/textpage.css?version=3" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/recipes.css?version=1" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <div id="audio-player-container">
+    <audio id="music" loop preload controls>
+      <source src="" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+	<div class="main-container">
+		<div class="main-window">
+			<div class="subwindow" id="main-image-tall">
+        <div id="talltext" class="recipe-page">
+          <a class="recipe-back" href="/recipes.html">← Recipe book</a>
+          <h1>Katsudon</h1>
+
+          <hr>
+
+          <div class="recipe-header">
+            <div class="recipe-imagebox">
+              <img src="/img/recipes/katsudon-pc98.png" alt="A bowl of katsudon">
+            </div>
+            <div class="recipe-ingredientbox">
+              <h2>Ingredients</h2>
+              <ul>
+                <li>1 onion</li>
+                <li>1 green onion</li>
+                <li>2-3 eggs</li>
+                <li>1 pork or chicken cutlet, sliced into thin strips</li>
+                <li>1 cup of rice (cooked)</li>
+              </ul>
+              <h5>Dashi soup stock</h5>
+              <ul>
+                <li>Dashi</li>
+                <li>Soy sauce</li>
+                <li>Mirin</li>
+              </ul>
+              <h5>Garnish</h5>
+              <ul>
+                <li>Katsuobushi</li>
+                <li>Pickled ginger/onion</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Recipe</h2>
+          <h3>Making the stock</h3>
+          <ol class="recipe-steps">
+            <li>Mix the dashi, soy sauce, and mirin in about equal
+              parts until you have about 1/2 a cup of broth. Adjust
+              the proportions to taste. The aim should be to have
+              a strong flavor that's just on the edge of being too
+              salty/fishy. Also, make more than you need rather than
+              less, it's not a big deal if you don't use it all.</li>
+          </ol>
+
+          <h3>Cooking the katsudon</h3>
+          <ol class="recipe-steps">
+            <li>First, lightly beat the egg. You want a broken yolk, but
+              the yolk and white should still be mostly separate.</li>
+            <li>Start by sauteing the onions in the pan until translucent.
+              Next, nestle the cutlet into the onions.</li>
+            <li>Pour the egg over the top of everything. If it feels like
+              the egg isn't properly covering what you have, quickly break
+              the yolk of another egg and add it. Pour the broth over
+              everything, until the bottom of the pan is covered in about
+              a centimeter of liquid. Add a lid, and let everything steam
+              together.</li>
+            <li>Take the pan off the flame once the egg is still slightly
+              translucent (adjust based on how raw you are willing to eat
+              your eggs, but lean towards the raw side). Serve everything
+              over the rice, and garnish with the green onion,
+              katsuobushi, and pickled ginger and/or onion.</li>
+          </ol>
+        </div>
+      </div>
+			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+  </body>
+</html>

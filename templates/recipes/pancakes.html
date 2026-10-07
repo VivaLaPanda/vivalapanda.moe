@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttermilk Pancakes · Panda's Recipe Book</title>
+    <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/textpage.css?version=3" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/recipes.css?version=1" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <div id="audio-player-container">
+    <audio id="music" loop preload controls>
+      <source src="" id="music-src" crossOrigin="anonymous" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+	<div class="main-container">
+		<div class="main-window">
+			<div class="subwindow" id="main-image-tall">
+        <div id="talltext" class="recipe-page">
+          <a class="recipe-back" href="/recipes.html">← Recipe book</a>
+          <h1>Buttermilk Pancakes</h1>
+
+          <hr>
+
+          <div class="recipe-header">
+            <div class="recipe-imagebox">
+              <img src="/img/recipes/pancakes-pc98.png" alt="A stack of buttermilk pancakes">
+            </div>
+            <div class="recipe-ingredientbox">
+              <h2>Ingredients</h2>
+              <ul>
+                <li>1 cup flour</li>
+                <li>1/2 tsp baking soda</li>
+                <li>1/4 tsp salt</li>
+                <li>1 cup buttermilk</li>
+                <li>1 tbsp melted butter</li>
+                <li>1 egg, separated</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Recipe</h2>
+          <ol class="recipe-steps">
+            <li>In a small bowl, beat egg white until it forms moist peaks.</li>
+            <li>In a medium bowl mix egg yolk and buttermilk until blended.</li>
+            <li>Mix the flour, baking soda and salt (optionally: sift them together).
+              Then mix in the egg and milk. Stir until just blended.</li>
+            <li>Add butter, and then fold in the egg white gently.</li>
+            <li>Cook on a hot cast iron pan with a generous amount of oil.
+              A drop of batter should sizzle immediately when dropped in.
+              Flip approximately when the top of the batter starts and then
+              stops bubbling.</li>
+          </ol>
+        </div>
+      </div>
+			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+  </body>
+</html>

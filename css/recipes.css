@@ -1,0 +1,137 @@
+/* The recipe book: /recipes.html is a list, and each recipe has its own page under /recipes/ */
+
+/* section label, like the blog's "★ Pinned" */
+#talltext .recipe-section {
+    margin: 18px 0 6px 0;
+    padding: 2px 10px;
+    font-size: 20px;
+    color: #ffaaba;
+    background-color: #664477;
+    border: 3px ridge #8899ff;
+    display: inline-block;
+}
+
+/* the index: one row per recipe, title on the left and the date on the right */
+.recipe-index {
+    list-style: none;
+    margin: 0 0 24px 0;
+    padding: 0;
+}
+
+#talltext .recipe-index li {
+    border-bottom: 2px dotted #8799ff;
+}
+
+/* #talltext for specificity: style.css's `.subwindow a` would shrink the row to a centred 80% */
+#talltext .recipe-index a {
+    width: auto;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 8px 10px;
+    font-family: 'pc-98-bold';
+    font-size: 24px;
+    color: #664477;
+}
+
+.recipe-index a::before {
+    content: "→";
+    margin-right: 12px;
+}
+
+.recipe-index .recipe-title {
+    flex: 1;
+}
+
+.recipe-index time {
+    font-family: 'pc-98';
+    font-size: 18px;
+    color: #8799ff;
+    white-space: nowrap;
+}
+
+/* the selected row is an inverted bar, PC-98 menu style */
+#talltext .recipe-index a:hover,
+#talltext .recipe-index a:focus-visible {
+    background-color: #664477;
+    color: #ffaaba;
+    outline: none;
+}
+
+#talltext .recipe-index a:hover time,
+#talltext .recipe-index a:focus-visible time {
+    color: #ffaaba;
+}
+
+/* a recipe's own page */
+#talltext .recipe-back {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 20px;
+}
+
+#talltext .recipe-page h1 {
+    margin-top: 4px;
+}
+
+#talltext .recipe-page h2 {
+    margin: 22px 0 8px 0;
+}
+
+.recipe-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 27px;
+}
+
+.recipe-imagebox {
+    flex: 0 0 48%;
+    margin-top: 8px;
+}
+
+/* the photos are PC-98 renders (js/pc98.js at 320px), so scale them without smoothing */
+.recipe-imagebox img {
+    image-rendering: pixelated;
+}
+
+.recipe-ingredientbox {
+    flex: 1;
+}
+
+#talltext .recipe-ingredientbox h2 {
+    margin-top: 4px;
+}
+
+/* the steps read like the body text, not like the bold purple lists */
+#talltext .recipe-steps li {
+    font-family: 'pc-98';
+    font-size: 22px;
+    line-height: 1.2em;
+    color: black;
+    margin-bottom: 12px;
+}
+
+#talltext .recipe-steps li::marker {
+    font-family: 'pc-98-bold';
+    color: #664477;
+}
+
+@media (max-width: 768px) {
+    .recipe-header {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .recipe-imagebox {
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    #talltext .recipe-index a {
+        font-size: 20px;
+        padding: 8px 4px;
+    }
+}

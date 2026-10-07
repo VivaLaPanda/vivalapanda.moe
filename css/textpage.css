@@ -123,28 +123,7 @@ time {
     background: #664477;
 }
 
-.recipe-imagebox {
-    width: 48%;
-    display: inline;
-    height: fit-content;
-    margin-top: 21px;
-    /* margin-bottom: auto; */
-}
-
-/* the photos are PC-98 renders (js/pc98.js at 320px), so scale them without smoothing */
-.recipe-imagebox img {
-    image-rendering: pixelated;
-}
-
-.recipe-ingredientbox {
-    width: 48%;
-    padding-left: 27px;
-}
-
-.recipe-header {
-    display: flex;
-    flex-direction: row;
-}
+/* recipe styles live in recipes.css */
 
 .blogpost-body {
     width: 88%;

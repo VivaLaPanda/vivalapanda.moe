@@ -115,9 +115,12 @@ body {
     overflow: hidden;
 }
 
-/* full-height pages: the standard frame only borders the picture area above the text box */
-.main-window:has(#main-image-tall) {
-    background-image: url("/img/background-frame-tall.png");
+/* full-height pages: the standard frame only borders the picture area above the text box.
+   Desktop only: phones drop the frame image, and this selector would outrank that */
+@media (min-width: 769px) {
+    .main-window:has(#main-image-tall) {
+        background-image: url("/img/background-frame-tall.png");
+    }
 }
 
 .page-image {
