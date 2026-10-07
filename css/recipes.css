@@ -213,3 +213,12 @@
         padding: 10px 0;
     }
 }
+
+/* Holo reacts to each recipe's verdict; scripts/build_recipes.py picks the face (happy is style.css's default) */
+#right-sidebar.holo-surprise {
+    background-image: url("/img/holo/HolosurpriseBGTransparent.png");
+}
+
+#right-sidebar.holo-sad {
+    background-image: url("/img/holo/HolosadBGTransparent.png");
+}

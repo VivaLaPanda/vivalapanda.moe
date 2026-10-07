@@ -68,8 +68,25 @@ OLDER = {
     "Mains": [("Katsudon", "katsudon"), ("Buttermilk Pancakes", "pancakes")],
 }
 
+# Holo (the right sidebar) reacts to the verdict: wide-eyed for the raves, glum for the thumbs-down, her usual grin
+# otherwise. HOLO_OVERRIDES pins a face for a recipe whose verdict the patterns read wrong.
+HOLO_FACES = [
+    ("surprise", r"\bepic\b|best things|really, really good"),
+    ("sad", r"\binstead\b|\bsucked\b|not memorable"),
+]
+HOLO_OVERRIDES = {}
+
 # the pc-98 font has ½ ¼ ¾ but no thirds or eighths; spell those the way period games did
 FRACTIONS = {"⅓": "1/3", "⅔": "2/3", "⅛": "1/8"}
+
+
+def holo_face(recipe):
+    if recipe["slug"] in HOLO_OVERRIDES:
+        return HOLO_OVERRIDES[recipe["slug"]]
+    for face, pattern in HOLO_FACES:
+        if re.search(pattern, recipe["verdict"], re.IGNORECASE):
+            return face
+    return "happy"
 
 
 def slugify(title):
@@ -191,7 +208,7 @@ HEAD = """<!DOCTYPE html>
     <title>{title}</title>
     <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
     <link href="/css/textpage.css?version=5" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/recipes.css?version=5" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/recipes.css?version=6" rel="stylesheet" type="text/css" media="all">
   </head>
   <body>
   <div id="audio-player-container">
@@ -207,7 +224,7 @@ HEAD = """<!DOCTYPE html>
 
 FOOT = """      </div>
 			{{ template "t_lsidebar.html" . }}
-			<div class="subwindow" id="right-sidebar"></div>
+			<div class="subwindow{holo}" id="right-sidebar"></div>
 		</div>
 	</div>
   </body>
@@ -230,8 +247,10 @@ def recipe_page(recipe):
     if recipe["meta"]:
         body.append(f'<p class="recipe-meta">{inline(recipe["meta"], links_left)}</p>')
     body += render_body(recipe["body"], links_left)
+    face = holo_face(recipe)
     return (HEAD.format(title=f"{html.escape(recipe['title'])} · Panda's Recipe Book") + GENERATED
-            + '        <div id="talltext" class="recipe-page">\n' + indent(body, 10) + "\n        </div>\n" + FOOT)
+            + '        <div id="talltext" class="recipe-page">\n' + indent(body, 10) + "\n        </div>\n"
+            + FOOT.replace("{holo}", "" if face == "happy" else f" holo-{face}"))
 
 
 def index_page(courses):
@@ -261,7 +280,7 @@ def index_page(courses):
              '      <span class="recipe-title">Venki\'s recipes</span>',
              '      <span class="recipe-host">venki.com</span>', "    </a>", "  </li>", "</ul>"]
     return (HEAD.format(title="Panda's Recipe Book") + GENERATED
-            + '        <div id="talltext">\n' + indent(body, 10) + "\n        </div>\n" + FOOT)
+            + '        <div id="talltext">\n' + indent(body, 10) + "\n        </div>\n" + FOOT.replace("{holo}", ""))
 
 
 def main():
@@ -273,9 +292,13 @@ def main():
     assert not set(slugs) & {s for rows in OLDER.values() for _, s in rows}, "a recipe would overwrite a hand-written page"
     assert set(OLDER) <= {c["name"] for c in courses}, "OLDER names a course the doc doesn't have"
     assert set(STARRED) <= set(slugs), "STARRED names a recipe the doc doesn't have"
+    faces = {}
     for course in courses:
         for recipe in course["recipes"]:
             (out / f"{recipe['slug']}.html").write_text(recipe_page(recipe), encoding="utf-8")
+            faces.setdefault(holo_face(recipe), []).append(recipe["slug"])
+    for face in ("surprise", "sad"):
+        print(f"Holo {face}: {', '.join(faces.get(face, [])) or '-'}")
     (TEMPLATES / "recipes.html").write_text(index_page(courses), encoding="utf-8")
     print(f"{len(slugs)} recipes in {len(courses)} courses -> templates/recipes/, templates/recipes.html")
 

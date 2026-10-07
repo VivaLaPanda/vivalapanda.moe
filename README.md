@@ -31,6 +31,6 @@ The blog reads `blog/posts.json`, generated from the Substack feed (and its pinn
 The recipe book is generated from `content/recipes.md` (an export of the recipe doc: `## Course`, `### Recipe`,
 `**Verdict:**`, a "Serves · Source" line, then `**Ingredients**` / `**Method**` / `**Notes**` sections). After
 editing it, run `python3 scripts/build_recipes.py`, which writes `templates/recipes.html` and
-`templates/recipes/<slug>.html`, then rebuild with microtemplate. Short URLs, the links between recipes and the
-"★ Starred" list are set at the top of the script; the pancakes and katsudon pages are hand-written
+`templates/recipes/<slug>.html`, then rebuild with microtemplate. Short URLs, the links between recipes, the
+"★ Starred" list and Holo's face per verdict (`HOLO_FACES`, `HOLO_OVERRIDES`) are set at the top of the script; the pancakes and katsudon pages are hand-written
 (listed under Mains via `OLDER` in the script).
