@@ -45,7 +45,8 @@
     flex: 1;
 }
 
-.recipe-index time {
+.recipe-index time,
+.recipe-index .recipe-host {
     font-family: 'pc-98';
     font-size: 18px;
     color: #8799ff;
@@ -61,8 +62,20 @@
 }
 
 #talltext .recipe-index a:hover time,
-#talltext .recipe-index a:focus-visible time {
+#talltext .recipe-index a:focus-visible time,
+#talltext .recipe-index a:hover .recipe-host,
+#talltext .recipe-index a:focus-visible .recipe-host {
     color: #ffaaba;
+}
+
+/* someone else's recipe book: a boxed row with a double arrow, since it leaves the site */
+#talltext .recipe-elsewhere li {
+    border: 3px ridge #8899ff;
+    background-color: #ffc4cf;
+}
+
+.recipe-elsewhere a::before {
+    content: "⇒";
 }
 
 /* a recipe's own page */
