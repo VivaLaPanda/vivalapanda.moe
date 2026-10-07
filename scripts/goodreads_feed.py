@@ -22,8 +22,9 @@ from pathlib import Path
 
 USER_ID = "29012397"
 PROFILE_URL = f"https://www.goodreads.com/user/show/{USER_ID}-vivalapanda"
-# the to-read shelf is left out on purpose: it hasn't changed since 2015
-SHELVES = ["currently-reading", "read"]
+# the to-read shelf is left out on purpose: it hasn't changed since 2015. "favorites" is a shelf Panda curates on
+# Goodreads (the page's ★ Favourites); until it exists the section stays hidden.
+SHELVES = ["currently-reading", "read", "favorites"]
 FEED_URL = "https://www.goodreads.com/review/list_rss/{user}?shelf={shelf}&per_page=100&page={page}"
 USER_AGENT = "vivalapanda.moe reading list (+https://vivalapanda.moe/reading/)"
 DEFAULT_OUTPUT = Path(__file__).resolve().parent.parent / "reading" / "books.json"
@@ -82,6 +83,10 @@ def shelf(name):
         channel = ET.fromstring(fetch(FEED_URL.format(user=USER_ID, shelf=name, page=page))).find("channel")
         if channel is None:
             raise ValueError(f"{name} feed has no <channel>")
+        # a shelf that doesn't exist (yet) comes back as some other shelf, not as an empty feed; the channel title
+        # ("Vivalapanda's bookshelf: read") says which shelf it really is
+        if not (channel.findtext("title") or "").strip().endswith(": " + name):
+            return []
         items = channel.findall("item")
         books += [book(item) for item in items]
         if len(items) < 100:

@@ -1,5 +1,5 @@
 // Renders /reading/books.json (written hourly on the server by scripts/goodreads_feed.py) into the reading list:
-// what Panda's reading now, the five-star favourites as a shelf of covers, then everything read, newest first
+// what Panda's reading now, the favourites (Goodreads "favorites" shelf) as a shelf of covers, then everything read, newest first
 // (by date read where Goodreads has one, grouped by year; the undated backlog after that). Covers go through the
 // PC-98 filter (js/pc98.js); Goodreads' image CDN allows that (Access-Control-Allow-Origin).
 (function () {
@@ -228,7 +228,8 @@
             out.appendChild(now);
         }
 
-        var favourites = read.filter(function (b) { return b.rating === 5; });
+        // the "favorites" shelf Panda curates on Goodreads (hidden until it has books)
+        var favourites = shelves.favorites || [];
         if (favourites.length) {
             section("★ Favourites");
             var shelf = el("ul", "reading-shelf");

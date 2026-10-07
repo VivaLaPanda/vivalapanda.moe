@@ -30,7 +30,8 @@ The blog reads `blog/posts.json`, generated from the Substack feed (and its pinn
 
 The reading list (`/reading/`) works the same way: `python3 scripts/goodreads_feed.py` turns Panda's public Goodreads
 shelves (their RSS feeds; the API is closed) into `reading/books.json`, gitignored, refreshed hourly on the server by
-`goodreads-feed.timer`. Read dates and reviews added on Goodreads show up on the page automatically.
+`goodreads-feed.timer`. Read dates and reviews added on Goodreads show up on the page automatically. The ★ Favourites section is the Goodreads
+shelf named `favorites` (hidden while it doesn't exist or is empty).
 
 The recipe book is generated from `content/recipes.md` (an export of the recipe doc: `## Course`, `### Recipe`,
 `**Verdict:**`, a "Serves · Source" line, then `**Ingredients**` / `**Method**` / `**Notes**` sections). After
