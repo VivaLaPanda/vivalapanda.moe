@@ -17,21 +17,54 @@
     margin: 0;
 }
 
-/* PC-98 covers: crisp pixels in the site's ridge frame */
+/* PC-98 covers: a fixed 2:3 frame from the start (a PC-98 checker while the art loads), so nothing moves when it arrives */
 .reading-cover {
     display: block;
     width: 98px;
-    height: auto;
-    image-rendering: pixelated;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
     border: 3px ridge #8899ff;
     background-color: #ffc4cf;
+    background-image: repeating-conic-gradient(#ffaaba 0% 25%, #ffc4cf 0% 50%);
+    background-size: 4px 4px;
+}
+
+.reading-cover-art {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.reading-cover-art.shown {
+    opacity: 1;
 }
 
 .reading-cover-missing {
-    height: 140px;
-    line-height: 140px;
-    text-align: center;
-    color: #664477;
+    background-image: none;
+}
+
+/* the whole list arrives in one piece and fades in, instead of pushing what's below it down */
+#reading.reading-in {
+    animation: reading-in 0.35s ease-out;
+}
+
+@keyframes reading-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #reading.reading-in {
+        animation: none;
+    }
+
+    .reading-cover-art {
+        transition: none;
+    }
 }
 
 /* currently reading: cover beside the title */

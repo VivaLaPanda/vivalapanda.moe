@@ -8,9 +8,9 @@
     <link href="/css/textpage.css?version=5" rel="stylesheet" type="text/css" media="all">
     <!-- recipes.css for the shared section labels and the boxed ⇒ "Elsewhere" row -->
     <link href="/css/recipes.css?version=6" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/reading.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/reading.css?version=2" rel="stylesheet" type="text/css" media="all">
     <script src="/js/pc98.js?version=1" defer></script>
-    <script src="/js/reading.js?version=1" defer></script>
+    <script src="/js/reading.js?version=3" defer></script>
   </head>
   <body>
   <div id="audio-player-container">
@@ -27,7 +27,8 @@
 
           <hr>
 
-          <!-- filled in by js/reading.js from /reading/books.json (scripts/goodreads_feed.py, hourly on the server) -->
+          <!-- filled in by js/reading.js from /reading/books.json (scripts/goodreads_feed.py, hourly on the server),
+               Elsewhere row included -->
           <div id="reading" aria-live="polite">
             <p class="reading-status">Dusting off the shelves...</p>
           </div>
@@ -37,16 +38,6 @@
             </p>
           </noscript>
 
-          <!-- other places: ⇒ rows open in a new tab (the pc-98 font has no ↗) -->
-          <div class="recipe-section">Elsewhere</div>
-          <ul class="recipe-index recipe-elsewhere">
-            <li>
-              <a href="https://www.goodreads.com/user/show/29012397-vivalapanda" target="_blank" rel="noopener">
-                <span class="recipe-title">Follow along on Goodreads</span>
-                <span class="recipe-host">goodreads.com</span>
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
 			{{ template "t_lsidebar.html" . }}

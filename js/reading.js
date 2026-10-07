@@ -1,9 +1,10 @@
 // Renders /reading/books.json (written hourly on the server by scripts/goodreads_feed.py) into the reading list:
 // what Panda's reading now, the five-star favourites as a shelf of covers, then everything read, newest first
 // (by date read where Goodreads has one, grouped by year; the undated backlog after that). Covers go through the
-// PC-98 filter (js/pc98.js) as they scroll into view; Goodreads' image CDN allows that (Access-Control-Allow-Origin).
+// PC-98 filter (js/pc98.js); Goodreads' image CDN allows that (Access-Control-Allow-Origin).
 (function () {
     var root = document.getElementById("reading");
+    var PROFILE = "https://www.goodreads.com/user/show/29012397-vivalapanda";
 
     function el(tag, className, text) {
         var node = document.createElement(tag);
@@ -30,53 +31,131 @@
         return date.replace(/-/g, ".");
     }
 
-    // covers are filtered only once they're near the screen: a hundred canvases at load would be wasteful
-    var pending = new Map();
-    var observer = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            observer.unobserve(entry.target);
-            var job = pending.get(entry.target);
-            pending.delete(entry.target);
-            if (job) job();
-        });
-    }, { rootMargin: "300px" }) : null;
-
-    function cover(book, width, large) {
-        var img = new Image();
-        img.crossOrigin = "anonymous";
-        img.alt = book.title;
-        img.className = "reading-cover";
-        img.width = width;
-        var src = large ? book.cover_large : book.cover;
-        if (!src) return el("span", "reading-cover reading-cover-missing", "?");
-        var start = function () {
-            if (window.PC98 && typeof window.PC98.render === "function") {
-                img.addEventListener("load", function () {
-                    try {
-                        var art = window.PC98.render(img, { width: width });
-                        art.className = "reading-cover";
-                        art.setAttribute("role", "img");
-                        art.setAttribute("aria-label", book.title);
-                        img.replaceWith(art);
-                    } catch (err) {
-                        console.warn("pc98 filter failed for", book.title, err);
-                    }
-                }, { once: true });
-            }
-            img.src = src;
+    // Covers sit in a fixed 2:3 frame from the start (a PC-98 checker until the art is ready), so nothing below moves
+    // as they arrive. Each is cropped to 2:3 and run through the PC-98 filter in a worker (js/pc98-worker.js; a
+    // cover takes 25-75ms to filter, which on the main thread made scrolling hitch), one at a time, then fades in.
+    // Without workers it falls back to the main-thread filter, with a breather between covers.
+    var queue = [];
+    var worker = null, waiting = {}, nextId = 0;
+    try {
+        worker = new Worker("/js/pc98-worker.js?version=1");
+        worker.onmessage = function (e) {
+            var cb = waiting[e.data.id];
+            delete waiting[e.data.id];
+            if (cb) cb(e.data);
         };
-        if (observer) {
-            pending.set(img, start);
-            observer.observe(img);
-        } else {
-            start();
-        }
-        return img;
+        worker.onerror = function (e) {
+            console.warn("pc98 worker failed, filtering on the main thread:", e.message);
+            worker = null;
+            Object.keys(waiting).forEach(function (id) { waiting[id]({ error: "worker failed" }); });
+            waiting = {};
+        };
+    } catch (err) {
+        worker = null;
     }
 
+    // the filtered art as a canvas, from the worker or (fallback) the main thread
+    function filter(source, width, callback) {
+        if (!worker) {
+            if (!window.PC98 || typeof window.PC98.render !== "function") return callback(null);
+            try { return callback(window.PC98.render(source, { width: width })); }
+            catch (err) { console.warn("pc98 filter failed:", err); return callback(null); }
+        }
+        var id = nextId++;
+        waiting[id] = function (res) {
+            if (res.error) {
+                // the worker can't do this one: try the main thread before giving up
+                if (window.PC98 && typeof window.PC98.render === "function") {
+                    try { return callback(window.PC98.render(source, { width: width })); } catch (err) { /* plain */ }
+                }
+                return callback(null);
+            }
+            var c = document.createElement("canvas");
+            c.width = res.width;
+            c.height = res.height;
+            c.getContext("2d").putImageData(new ImageData(res.data, res.width, res.height), 0, 0);
+            callback(c);
+        };
+        var px = source.getContext("2d").getImageData(0, 0, source.width, source.height);
+        worker.postMessage({ id: id, rgba: px.data, width: source.width, height: source.height, opts: { width: width } },
+            [px.data.buffer]);
+    }
+    var running = false;
+
+    function next() {
+        var job = queue.shift();
+        if (!job) { running = false; return; }
+        running = true;
+        job(function () { setTimeout(next, worker ? 0 : 16); });
+    }
+
+    function enqueue(job) {
+        queue.push(job);
+        if (!running) next();
+    }
+
+    function show(frame, art) {
+        art.classList.add("reading-cover-art");
+        frame.appendChild(art);
+        requestAnimationFrame(function () { art.classList.add("shown"); });
+    }
+
+    // the middle of the image at 2:3, at its own resolution
+    function cropTo2by3(img) {
+        var w = img.naturalWidth, h = img.naturalHeight;
+        var cw = Math.min(w, Math.round(h * 2 / 3)), ch = Math.min(h, Math.round(w * 3 / 2));
+        var c = document.createElement("canvas");
+        c.width = cw;
+        c.height = ch;
+        c.getContext("2d", { willReadFrequently: true }).drawImage(img, (w - cw) / 2, (h - ch) / 2, cw, ch, 0, 0, cw, ch);
+        return c;
+    }
+
+    function cover(book, width, large) {
+        var frame = el("span", "reading-cover");
+        frame.setAttribute("role", "img");
+        frame.setAttribute("aria-label", book.title);
+        var src = large ? book.cover_large : book.cover;
+        if (!src) {
+            frame.classList.add("reading-cover-missing");
+            return frame;
+        }
+        enqueue(function (done) {
+            var img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = function () {
+                var cropped;
+                try { cropped = cropTo2by3(img); } catch (err) { cropped = null; }
+                if (!cropped) { show(frame, img); return done(); } // the plain cover, still in its frame
+                filter(cropped, width, function (art) {
+                    show(frame, art || img);
+                    done();
+                });
+            };
+            img.onerror = function () {
+                frame.classList.add("reading-cover-missing");
+                done();
+            };
+            img.src = src;
+        });
+        return frame;
+    }
+
+    var out = null; // the fragment being built; swapped in all at once
+
     function section(label) {
-        root.appendChild(el("div", "recipe-section", label));
+        out.appendChild(el("div", "recipe-section", label));
+    }
+
+    function elsewhere(profile) {
+        out.appendChild(el("div", "recipe-section", "Elsewhere"));
+        var ul = el("ul", "recipe-index recipe-elsewhere");
+        var li = el("li");
+        var a = outLink(profile, el("span", "recipe-title", "Follow along on Goodreads"));
+        a.appendChild(el("span", "recipe-host", "goodreads.com"));
+        li.appendChild(a);
+        ul.appendChild(li);
+        out.appendChild(ul);
     }
 
     // a book with its cover: what's being read now
@@ -132,7 +211,7 @@
     function list(books) {
         var ul = el("ul", "reading-list");
         books.forEach(function (b) { ul.appendChild(row(b)); });
-        root.appendChild(ul);
+        out.appendChild(ul);
     }
 
     function render(data) {
@@ -140,13 +219,13 @@
         var reading = shelves["currently-reading"] || [];
         var read = shelves.read || [];
         if (!read.length && !reading.length) throw new Error("empty shelves");
-        root.replaceChildren();
+        out = document.createDocumentFragment();
 
         if (reading.length) {
             section("Currently reading");
             var now = el("div", "reading-now");
             reading.forEach(function (b) { now.appendChild(coverCard(b)); });
-            root.appendChild(now);
+            out.appendChild(now);
         }
 
         var favourites = read.filter(function (b) { return b.rating === 5; });
@@ -154,7 +233,7 @@
             section("★ Favourites");
             var shelf = el("ul", "reading-shelf");
             favourites.forEach(function (b) { shelf.appendChild(shelfItem(b)); });
-            root.appendChild(shelf);
+            out.appendChild(shelf);
         }
 
         // books with a date read, by year; the books from before Panda logged dates come after, as "Read"
@@ -174,12 +253,16 @@
             section(years.length ? "Earlier" : "Read");
             list(undated);
         }
+        elsewhere(data.profile || PROFILE);
+
+        root.replaceChildren(out);
+        root.classList.add("reading-in");
     }
 
     function fail() {
         root.replaceChildren();
         var p = el("p", "reading-status", "The shelves are out of reach right now. They're on ");
-        p.appendChild(outLink("https://www.goodreads.com/user/show/29012397-vivalapanda", "Goodreads"));
+        p.appendChild(outLink(PROFILE, "Goodreads"));
         p.appendChild(document.createTextNode("."));
         root.appendChild(p);
     }
