@@ -307,7 +307,8 @@
     function choiceKey(e) {
         var items = Array.from(choicesEl.children);
         var i = items.indexOf(e.currentTarget);
-        var cols = choicesEl.classList.contains("room-choices-grid") ? 2 : 1;
+        var cols = choicesEl.classList.contains("room-choices-grid")
+            ? getComputedStyle(choicesEl).gridTemplateColumns.split(" ").length : 1;
         var to = null;
         if (e.key === "ArrowDown") to = i + cols;
         else if (e.key === "ArrowUp") to = i - cols;

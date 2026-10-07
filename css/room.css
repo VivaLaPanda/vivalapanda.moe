@@ -161,11 +161,12 @@
     margin-left: 18px;
 }
 
+/* the LOOK list: every object plus "Never mind" has to fit the 252px box, so four tight columns */
 #room-choices.room-choices-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(220px, 1fr));
-    column-gap: 30px;
-    row-gap: 2px;
+    grid-template-columns: repeat(4, max-content);
+    column-gap: 14px;
+    row-gap: 0;
 }
 
 /* #room-choices for specificity: style.css's `.subwindow a` would stretch link choices to 80% */
@@ -185,7 +186,8 @@
 }
 
 #room-choices.room-choices-grid .room-choice {
-    font-size: 22px;
+    font-size: 20px;
+    line-height: 1.15;
 }
 
 #room-choices .room-choice.dim {
