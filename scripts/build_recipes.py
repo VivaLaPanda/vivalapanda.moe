@@ -60,11 +60,10 @@ CROSS_LINKS = [
     ("tri-tip", "tri-tip"),
 ]
 
-# hand-written pages from before the recipe doc, listed after the doc's courses
-OLDER = [
-    ("Buttermilk Pancakes", "pancakes"),
-    ("Katsudon", "katsudon"),
-]
+# hand-written pages from before the recipe doc: the course they're listed under, after the doc's own recipes
+OLDER = {
+    "Mains": [("Katsudon", "katsudon"), ("Buttermilk Pancakes", "pancakes")],
+}
 
 # the pc-98 font has ½ ¼ ¾ but no thirds or eighths; spell those the way period games did
 FRACTIONS = {"⅓": "1/3", "⅔": "2/3", "⅛": "1/8"}
@@ -232,26 +231,22 @@ def recipe_page(recipe):
             + '        <div id="talltext" class="recipe-page">\n' + indent(body, 10) + "\n        </div>\n" + FOOT)
 
 
-def index_page(intro, courses):
-    body = ["<h1>Panda's Recipe Book</h1>", ""]
-    if intro:
-        body.append(f'<p class="recipe-intro">{inline(" ".join(intro), [])}</p>')
-    body += ["", "<hr>"]
+def index_page(courses):
+    # the doc's intro paragraph ("23 recipes we cook...") stays in the doc, not on the page
+    body = ["<h1>Panda's Recipe Book</h1>", "", "<hr>"]
 
-    def row(href, title, verdict, extra=""):
-        line = f'<span class="recipe-verdict-line">{inline(verdict, [])}</span>' if verdict else ""
-        return ["  <li>", f'    <a href="{href}"{extra}>', f'      <span class="recipe-title">{title}</span>'] \
-            + ([f"      {line}"] if line else []) + ["    </a>", "  </li>"]
+    # titles only: each recipe's verdict is on its own page
+    def row(href, title):
+        return ["  <li>", f'    <a href="{href}">', f'      <span class="recipe-title">{title}</span>', "    </a>", "  </li>"]
 
     for course in courses:
         body += ["", f'<div class="recipe-section">{html.escape(course["name"])}</div>', '<ul class="recipe-index">']
         for r in course["recipes"]:
-            body += row(f"/recipes/{r['slug']}.html", inline(r["title"], []), r["verdict"])
+            body += row(f"/recipes/{r['slug']}.html", inline(r["title"], []))
+        for title, slug in OLDER.get(course["name"], []):
+            body += row(f"/recipes/{slug}.html", title)
         body.append("</ul>")
-    body += ["", '<div class="recipe-section">Older recipes</div>', '<ul class="recipe-index">']
-    for title, slug in OLDER:
-        body += row(f"/recipes/{slug}.html", title, "")
-    body += ["</ul>", "",
+    body += ["",
              "<!-- other people's recipe books: ⇒ rows open in a new tab (the pc-98 font has no ↗) -->",
              '<div class="recipe-section">Elsewhere</div>', '<ul class="recipe-index recipe-elsewhere">',
              "  <li>", '    <a href="https://venki.com/recipes" target="_blank" rel="noopener">',
@@ -262,16 +257,17 @@ def index_page(intro, courses):
 
 
 def main():
-    intro, courses = parse(SOURCE.read_text(encoding="utf-8"))
+    _, courses = parse(SOURCE.read_text(encoding="utf-8"))
     out = TEMPLATES / "recipes"
     out.mkdir(exist_ok=True)
     slugs = [r["slug"] for c in courses for r in c["recipes"]]
     assert len(slugs) == len(set(slugs)), "two recipes share a slug"
-    assert not set(slugs) & {s for _, s in OLDER}, "a recipe would overwrite a hand-written page"
+    assert not set(slugs) & {s for rows in OLDER.values() for _, s in rows}, "a recipe would overwrite a hand-written page"
+    assert set(OLDER) <= {c["name"] for c in courses}, "OLDER names a course the doc doesn't have"
     for course in courses:
         for recipe in course["recipes"]:
             (out / f"{recipe['slug']}.html").write_text(recipe_page(recipe), encoding="utf-8")
-    (TEMPLATES / "recipes.html").write_text(index_page(intro, courses), encoding="utf-8")
+    (TEMPLATES / "recipes.html").write_text(index_page(courses), encoding="utf-8")
     print(f"{len(slugs)} recipes in {len(courses)} courses -> templates/recipes/, templates/recipes.html")
 
 

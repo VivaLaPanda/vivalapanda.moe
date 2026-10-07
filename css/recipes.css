@@ -11,7 +11,7 @@
     display: inline-block;
 }
 
-/* the index: one row per recipe: arrow, title (and a host on the right for other sites), its verdict below */
+/* the index: one row per recipe: arrow, title, and a host on the right for other sites */
 .recipe-index {
     list-style: none;
     margin: 0 0 24px 0;
@@ -47,16 +47,6 @@
     grid-row: 1;
 }
 
-.recipe-index .recipe-verdict-line {
-    grid-column: 2 / 4;
-    grid-row: 2;
-    margin-top: 3px;
-    font-family: 'pc-98';
-    font-size: 17px;
-    line-height: 1.25;
-    color: #553366;
-}
-
 .recipe-index time,
 .recipe-index .recipe-host {
     grid-column: 3;
@@ -75,8 +65,6 @@
     outline: none;
 }
 
-#talltext .recipe-index a:hover .recipe-verdict-line,
-#talltext .recipe-index a:focus-visible .recipe-verdict-line,
 #talltext .recipe-index a:hover time,
 #talltext .recipe-index a:focus-visible time,
 #talltext .recipe-index a:hover .recipe-host,
@@ -92,12 +80,6 @@
 
 .recipe-elsewhere a::before {
     content: "⇒";
-}
-
-#talltext .recipe-intro {
-    text-align: center;
-    font-size: 20px;
-    margin: 4px 30px 0 30px;
 }
 
 /* a recipe's own page */

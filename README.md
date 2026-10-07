@@ -32,4 +32,5 @@ The recipe book is generated from `content/recipes.md` (an export of the recipe 
 `**Verdict:**`, a "Serves · Source" line, then `**Ingredients**` / `**Method**` / `**Notes**` sections). After
 editing it, run `python3 scripts/build_recipes.py`, which writes `templates/recipes.html` and
 `templates/recipes/<slug>.html`, then rebuild with microtemplate. Short URLs and the links between recipes are set at
-the top of the script; the pancakes and katsudon pages are hand-written.
+the top of the script; the pancakes and katsudon pages are hand-written
+(listed under Mains via `OLDER` in the script).
