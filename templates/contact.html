@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda's Digiverse</title>
     <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/contact.css?version=3" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/contact.js?version=1" crossorigin="anonymous"></script>
+    <link href="/css/contact.css?version=5" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/contact.js?version=2" defer></script>
   </head>
   <body>
 	<div class="main-container">
@@ -19,18 +19,17 @@
 			<div class="subwindow" id="text-box">
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
-					<p class="dialog-text">
-						You can email me at <a target="_blank" href="mailto:me@panda.moe">me@panda.moe</a>
-					</p>
-					<p class="dialog-text">
-						Or find me on twitter at <a target="_blank" href="https://twitter.com/vivalapanda">@vivalapanda</a>
-					</p>
-					<p class="dialog-text">
-						Or message me on <a target="_blank" href="https://signal.me/#eu/MIrm4ig1ASPFMk21aOIshA8-K9WukBzeRf-EyQ0YWOGqG6brSNlHlqtuk1IbLs5H">Signal</a>
-					</p>
-					<p class="dialog-text">
-						But I mostly hang out on Discord as <span class="handle" title="Discord username">vivalapanda</span>
-					</p>
+					<!-- a VN choice menu: the choices are plain links, so they work without JS too; js/contact.js
+					     types the prompt, copies the Discord handle and has Panda answer each choice -->
+					<p class="dialog-text" id="contact-text" aria-live="polite">How do you want to reach me?</p>
+					<div id="contact-choices">
+						<a class="contact-choice" data-line="twitter" href="https://twitter.com/vivalapanda" target="_blank" rel="noopener">→ DM me on Twitter</a>
+						<a class="contact-choice" data-line="signal" href="https://signal.me/#eu/MIrm4ig1ASPFMk21aOIshA8-K9WukBzeRf-EyQ0YWOGqG6brSNlHlqtuk1IbLs5H" target="_blank" rel="noopener">→ Whisper on Signal</a>
+						<button class="contact-choice" type="button" data-line="discord" data-copy="vivalapanda">→ Come hang out on Discord</button>
+						<a class="contact-choice" data-line="letter" href="mailto:me@panda.moe">→ Send a letter</a>
+						<a class="contact-choice" href="/room.html">→ Where else are you online?</a>
+					</div>
+					<noscript><p class="dialog-text contact-noscript">Discord: vivalapanda · Email: me@panda.moe</p></noscript>
 				</div>
 			</div>
 			<div class="subwindow" id="right-sidebar"></div>

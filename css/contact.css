@@ -5,20 +5,111 @@
     background-position: center;
 }
 
-/* four contact lines need to fit the dialog box */
+/* the VN choice menu (js/contact.js), styled like Panda's Room's */
 #text-box .speaker-text {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
-#text-box .dialog-text {
+#contact-text {
     font-size: 26px;
-    margin-top: 0px;
-    margin-bottom: 12px;
+    min-height: 1.3em;
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
-/* a username rather than a link: its own colour, and one click selects it for copying */
-.handle {
+#contact-choices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-left: 18px;
+    transition: opacity 0.25s;
+}
+
+/* hidden while the question types out (only when JS is running; without it the menu just shows) */
+#contact-choices.waiting {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* #contact-choices for specificity: style.css's `.subwindow a` would stretch the choices to 80% */
+#contact-choices .contact-choice {
+    font-family: 'pc-98';
+    font-size: 24px;
+    line-height: 1.25;
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 0 8px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    width: auto;
+    margin: 0;
+}
+
+/* a choice already picked dims, like a seen object in the room's LOOK list */
+#contact-choices .contact-choice.dim {
     color: #8799ff;
-    user-select: all;
-    cursor: text;
+}
+
+/* the selected choice is an inverted bar, PC-98 menu style */
+#contact-choices .contact-choice:hover,
+#contact-choices .contact-choice:focus-visible {
+    background-color: #ffaaba;
+    color: #000;
+    outline: none;
+}
+
+.contact-noscript {
+    font-size: 20px;
+    color: #8799ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #contact-choices {
+        transition: none;
+    }
+}
+
+@media (max-width: 768px) {
+    /* phones: the picture on top at the window's 740:528, the dialog box below it (as in Panda's Room) */
+    #main-image,
+    #text-box {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    #main-image {
+        height: auto;
+        aspect-ratio: 740 / 528;
+    }
+
+    #text-box {
+        height: auto;
+        min-height: 230px;
+        background-color: #000;
+        border-top: 2px solid #8799ff;
+    }
+
+    #text-box .text-container {
+        position: relative;
+        padding: 8px 6px 24px 6px;
+    }
+
+    #contact-text {
+        font-size: 19px;
+    }
+
+    #contact-choices {
+        margin-left: 6px;
+    }
+
+    /* a full-height tap target on phones */
+    #contact-choices .contact-choice {
+        font-size: 19px;
+        padding: 8px;
+    }
 }
