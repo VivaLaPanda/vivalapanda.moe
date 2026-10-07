@@ -27,3 +27,9 @@ python3 -m http.server 8765        # from the repo root, in another terminal
 The blog reads `blog/posts.json`, generated from the Substack feed (and its pinned posts) by
 `python3 scripts/substack_feed.py`. It's gitignored. On the server, a systemd timer refreshes it hourly
 (`scripts/systemd/`).
+
+The recipe book is generated from `content/recipes.md` (an export of the recipe doc: `## Course`, `### Recipe`,
+`**Verdict:**`, a "Serves · Source" line, then `**Ingredients**` / `**Method**` / `**Notes**` sections). After
+editing it, run `python3 scripts/build_recipes.py`, which writes `templates/recipes.html` and
+`templates/recipes/<slug>.html`, then rebuild with microtemplate. Short URLs and the links between recipes are set at
+the top of the script; the pancakes and katsudon pages are hand-written.
