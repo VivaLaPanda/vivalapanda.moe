@@ -14,6 +14,7 @@
     "  speakers: hover_playing / hover_quiet / hover_unknown; lines, lines_playing.",
     "  kotatsu: hover_on / hover_off / hover_unknown (its plug); lines, lines_on.",
     "  thermostat: hover and lines may use {temp} (F), {heat} (on/off), {humidity}; hover_unknown when there's no reading.",
+    "  blinds: hover_open / hover_partial / hover_closed / hover_unknown; {pct} (percent open) in hover_partial.",
     "  door_outside: hover_blind_down when the living room's blind is (almost) down.",
     "Bedroom lines are adapted visual-novel lines; their sources: pc98-assets/assets/panda-room/dialogue-sources.md."
   ],
@@ -515,6 +516,28 @@
         "lines": [
           "It's {temp}°F in here. Heat's {heat}.",
           "That's the real reading from my thermostat."
+        ]
+      },
+      "blind_living": {
+        "name": "Living room blind",
+        "hover_open": "The blind's all the way up.",
+        "hover_partial": "The blind's {pct}% open.",
+        "hover_closed": "The blind's all the way down.",
+        "hover_unknown": "A roller blind.",
+        "lines": [
+          "It's my real blind in the living room.",
+          "It rolls up and down by itself."
+        ]
+      },
+      "blind_dining": {
+        "name": "Dining room blind",
+        "hover_open": "The blind's all the way up.",
+        "hover_partial": "The blind's {pct}% open.",
+        "hover_closed": "The blind's all the way down.",
+        "hover_unknown": "A roller blind.",
+        "lines": [
+          "It's my real blind in the dining room.",
+          "It rolls up and down by itself."
         ]
       }
     },

@@ -77,18 +77,38 @@ window.HOUSE = window.HOUSE || {};
         };
     }
 
+    // a roller blind: hover_open / hover_partial / hover_closed / hover_unknown, lines; {pct} (percent open)
+    function blind(id, name) {
+        function pct() { return H.blindPct ? H.blindPct(name) : null; }
+        function variant(s) {
+            var p = pct();
+            return p === null ? "unknown" : p >= 95 ? "open" : p <= 5 ? "closed" : "partial";
+        }
+        return {
+            hover: function () {
+                var s = said(id);
+                return fill(s["hover_" + variant(s)], { pct: pct() }, s.hover_unknown);
+            },
+            lines: function () {
+                var s = said(id);
+                return fillAll(s["lines_" + variant(s)] || s.lines, { pct: pct() }, "...");
+            }
+        };
+    }
+
     var sun = lamp("lamp_sun", "sun"), dining = lamp("lamp_dining", "dining"),
         corner = lamp("lamp_corner", "corner"), windowside = lamp("lamp_window", "window"),
-        spkL = speaker("speaker_l"), spkR = speaker("speaker_r");
+        spkL = speaker("speaker_l"), spkR = speaker("speaker_r"),
+        blindL = blind("blind_living", "Living Room Blinds"), blindD = blind("blind_dining", "Dining Room Blinds");
 
     R = window.ROOM = {
         dialogue: "living_room",
-        house: { base: "/img/living-room/", v: "5", hud: true },
+        house: { base: "/img/living-room/", v: "6", hud: true },
         seenKey: "pandaLivingRoomSeen",
-        scene: { src: "/img/living-room/noon@4x.png?v=5", width: 500, height: 357 },
+        scene: { src: "/img/living-room/noon@4x.png?v=6", width: 500, height: 357 },
 
         zOrder: ["lamp_dining", "lamp_window", "speaker_r", "kotatsu", "lamp_sun", "lamp_corner", "speaker_l",
-                 "thermostat", "tv", "door_bedroom", "door_outside"],
+                 "thermostat", "tv", "blind_living", "blind_dining", "door_bedroom", "door_outside"],
 
         objects: [
             {
@@ -131,6 +151,8 @@ window.HOUSE = window.HOUSE || {};
             { id: "lamp_window", rank: 8, hover: windowside.hover, lines: windowside.lines },
             { id: "speaker_l", rank: 9, hover: spkL.hover, lines: spkL.lines },
             { id: "speaker_r", rank: 10, hover: spkR.hover, lines: spkR.lines },
+            { id: "blind_living", rank: 12, hover: blindL.hover, lines: blindL.lines },
+            { id: "blind_dining", rank: 13, hover: blindD.hover, lines: blindD.lines },
             {
                 id: "thermostat", rank: 11,
                 hover: function () {
