@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda's Room</title>
     <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/room.css?version=4" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/room.css?version=5" rel="stylesheet" type="text/css" media="all">
     <script src="/js/house-render.js?version=4" defer></script>
-    <script src="/js/room-data.js?version=10" defer></script>
+    <script src="/js/room-data.js?version=11" defer></script>
     <script src="/js/house-room.js?version=8" defer></script>
     <script src="/js/room.js?version=8" defer></script>
+    <script src="/js/room-music.js?version=1" defer></script>
   </head>
   <body>
+	<div id="audio-player-container">
+		<audio id="music" loop preload="none">
+			<source src="/audio/cosmic-psycho-neptune.mp3" type="audio/mpeg">
+		</audio>
+	</div>
 	<div class="main-container">
 		<div class="main-window">
 			<div class="subwindow" id="main-image">
@@ -21,6 +27,7 @@
 						<svg id="room-hotspots" role="group" aria-label="Things in Panda's room" xmlns="http://www.w3.org/2000/svg"></svg>
 					</div>
 				</div>
+				<input type="image" id="mute" alt="mute" aria-label="Mute the music" src="/img/icons/playing_big.png">
 			</div>
 			<div class="subwindow" id="left-sidebar">
 

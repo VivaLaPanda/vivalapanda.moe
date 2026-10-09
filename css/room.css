@@ -135,6 +135,12 @@
     outline: none;
 }
 
+/* the music's speaker: the explore pages' corner button (style.css #mute), over the scene */
+#main-image #mute {
+    z-index: 1;
+    cursor: pointer;
+}
+
 /* dialog box */
 #room-text {
     font-size: 26px;
@@ -239,6 +245,11 @@
 
     #main-image {
         height: auto;
+    }
+
+    #main-image #mute {
+        width: 56px;
+        height: 56px;
     }
 
     #room-cmds {
