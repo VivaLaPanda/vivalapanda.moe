@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch the house snapshot from rodney's home API and write house/state.json for the living room.
 
-On the server this runs every 5 minutes (see scripts/systemd/house-feed.*). The home API only answers this server
+On the server this runs every minute (see scripts/systemd/house-feed.*). The home API only answers this server
 (token + IP allowlist), so visitors never reach the house; they read the static file. A failed fetch keeps the last
 good file, marked stale by its "updated" time.
 

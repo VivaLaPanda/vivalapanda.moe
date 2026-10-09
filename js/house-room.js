@@ -1,4 +1,4 @@
-// A room of Panda's house, live: the house's state (/house/state.json, written every 5 minutes on the server from the
+// A room of Panda's house, live: the house's state (/house/state.json, written every minute on the server from the
 // home API on rodney) drawn into the room by js/house-render.js. Both rooms follow the real time of day (the
 // registers) and show their lamps at their real brightness and colour, and every hover state is drawn in the same
 // light. What else a room shows is whatever its scene has: the living room's blinds come down to their real height,
@@ -12,7 +12,7 @@
     var R = window.ROOM;
     var BASE = R.house.base;
     var V = R.house.v;
-    var REFRESH_MS = 2.5 * 60 * 1000;   // the file changes every 5 minutes
+    var REFRESH_MS = 60 * 1000;         // the file changes every minute
     var STALE_MIN = 30;
 
     var scene = null, state = null, api = null;
@@ -64,9 +64,6 @@
         Object.keys(scene.light_names).forEach(function (real) {
             var lamp = scene.light_names[real], l = light(lamp);
             if (l) out[lamp] = l;
-        });
-        Object.keys(R.house.local || {}).forEach(function (k) {     // lights only this page has (the desk lamp)
-            if (R.house.local[k].on) out[k] = R.house.local[k];
         });
         var tv = scene.tv && H.tv();
         if (tv && tv.on) out.tv = { on: true, brightness_pct: tv.playing ? 100 : 70 };
@@ -213,7 +210,7 @@
         if (c && c.temperature_f != null) parts.push(Math.round(c.temperature_f) + "°F");
         var age = (Date.now() - Date.parse(state.updated)) / 60000;
         hud.textContent = parts.join(" · ") + (age > STALE_MIN ? " (as of " + Math.round(age / 60) + "h ago)" : "");
-        hud.title = "Panda's real house, updated every 5 minutes";
+        hud.title = "Panda's real house, updated every minute";
     }
 
     // the house's clock now: its UTC offset from the feed (local_time against updated), applied to this browser's clock,

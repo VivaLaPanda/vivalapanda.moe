@@ -331,29 +331,18 @@
           "Abracadabra! Welcome to life as a magical girl!"
         ]
       },
-      "stand_lamp": {
-        "name": "Stand lamp",
+      "desk_lamp": {
+        "name": "Desk lamp",
         "hover_on": "My lamp's on right now. {brightness}%.",
         "hover_off": "My lamp's off right now.",
-        "hover_unknown": "My reading lamp.",
+        "hover_unknown": "My desk lamp.",
         "lines": [
-          "It's my real bedroom lamp.",
+          "It's my real bedroom lamp, mirrored.",
           "When I switch it at home, it switches here."
         ],
         "lines_on": [
           "It's on in my real room right now.",
-          "Two bulbs. Very cozy."
-        ]
-      },
-      "desk_lamp": {
-        "name": "Desk lamp",
-        "hover_off": "My desk lamp. Click to switch it on.",
-        "hover_on": "My desk lamp. Click to switch it off.",
-        "lines_on": [
-          "Click! There we go."
-        ],
-        "lines_off": [
-          "Click. Back to the screen's glow."
+          "Somebody's still up."
         ]
       }
     },

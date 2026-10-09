@@ -14,12 +14,12 @@
 // them in): edit them there.
 window.HOUSE = window.HOUSE || {};
 
-// the stand lamp mirrors Panda's real bedroom lamp (js/house-room.js reads the house): its lines pick a variant
-function standLampLine(key) {
+// the desk lamp mirrors Panda's real bedroom lamp (js/house-room.js reads the house; read-only): its lines pick a variant
+function deskLampLine(key) {
     return function () {
-        var s = (window.ROOM.said && window.ROOM.said.objects.stand_lamp) || {};
-        var on = window.HOUSE.lampOn ? window.HOUSE.lampOn("stand") : null;
-        var l = window.HOUSE.light ? window.HOUSE.light("stand") : null;
+        var s = (window.ROOM.said && window.ROOM.said.objects.desk_lamp) || {};
+        var on = window.HOUSE.lampOn ? window.HOUSE.lampOn("desk") : null;
+        var l = window.HOUSE.light ? window.HOUSE.light("desk") : null;
         var pick = key === "hover"
             ? (on === null ? s.hover_unknown : on ? s.hover_on : s.hover_off)
             : (on ? (s.lines_on || s.lines) : s.lines);
@@ -32,9 +32,8 @@ function standLampLine(key) {
 
 window.ROOM = {
     dialogue: "bedroom",
-    // the room follows the real time of day, and its stand lamp the real bedroom lamp (js/house-room.js)
-    house: { base: "/img/room/house/", v: "2", hud: false,
-             local: { desk: { on: false, brightness_pct: 100, kelvin: 3000 } } },   // the desk lamp: a visitor's
+    // the room follows the real time of day, and its desk lamp the real bedroom lamp (js/house-room.js)
+    house: { base: "/img/room/house/", v: "3", hud: false },
 
     scene: {
         src: "/img/room/room@4x.png?v=6",
@@ -169,25 +168,10 @@ window.ROOM = {
     // no link: just a line. With a polygon they're hotspots too; without one, LOOK list only.
     knickKnacks: [
         {
-            // the desk lamp: clicking it switches it (here only; it isn't one of Panda's real lights)
+            // the desk lamp: Panda's real bedroom lamp, mirrored (its outline comes from img/room/house/scene.json)
             id: "desk_lamp",
-            hover: function () {
-                var s = (window.ROOM.said && window.ROOM.said.objects.desk_lamp) || {};
-                return window.ROOM.house.local.desk.on ? s.hover_on : s.hover_off;
-            },
-            lines: function () {
-                var s = (window.ROOM.said && window.ROOM.said.objects.desk_lamp) || {};
-                var d = window.ROOM.house.local.desk;
-                d.on = !d.on;
-                if (window.HOUSE.redraw) window.HOUSE.redraw();
-                return d.on ? s.lines_on : s.lines_off;
-            }
-        },
-        {
-            // the stand lamp in the corner: its outline comes from the live scene (img/room/house/scene.json)
-            id: "stand_lamp",
-            hover: standLampLine("hover"),
-            lines: standLampLine("lines")
+            hover: deskLampLine("hover"),
+            lines: deskLampLine("lines")
         },
         {
             id: "plush",

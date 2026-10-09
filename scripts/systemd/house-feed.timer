@@ -1,9 +1,10 @@
 [Unit]
-Description=Every-5-minutes refresh of the living room's house state
+Description=Every-minute refresh of the living room's house state
 
 [Timer]
 OnBootSec=1min
-OnCalendar=*:0/5
+# every minute: the home API caches 60s, so each run gets a fresh snapshot (Nest's API is well within its limits)
+OnCalendar=*:*:00
 Persistent=true
 
 [Install]
