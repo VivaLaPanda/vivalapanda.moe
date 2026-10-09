@@ -337,10 +337,10 @@
  },
  "tv": {
   "screen": {
-   "x": 297,
-   "y": 135,
-   "w": 60,
-   "h": 38
+   "x": 298,
+   "y": 136,
+   "w": 57,
+   "h": 36
   },
   "mask": "mask-screen.png",
   "glow": "light-tv.png",

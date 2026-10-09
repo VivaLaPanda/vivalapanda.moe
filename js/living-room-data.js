@@ -103,9 +103,9 @@ window.HOUSE = window.HOUSE || {};
 
     R = window.ROOM = {
         dialogue: "living_room",
-        house: { base: "/img/living-room/", v: "10", hud: true },
+        house: { base: "/img/living-room/", v: "11", hud: true },
         seenKey: "pandaLivingRoomSeen",
-        scene: { src: "/img/living-room/noon@4x.png?v=10", width: 500, height: 357 },
+        scene: { src: "/img/living-room/noon@4x.png?v=11", width: 500, height: 357 },
 
         zOrder: ["lamp_dining", "lamp_window", "speaker_r", "kotatsu", "lamp_sun", "lamp_corner", "speaker_l",
                  "thermostat", "tv", "blind_living", "blind_dining", "door_bedroom", "door_outside"],
