@@ -1,0 +1,17 @@
+# Install: cp scripts/systemd/house-feed.* /etc/systemd/system/ && systemctl daemon-reload
+#          && systemctl enable --now house-feed.timer
+# Needs the read-only house token in /etc/vivalapanda/house_token (mode 600; minted on rodney with
+# `home-mcp house-token --allow <this server's IP>`).
+[Unit]
+Description=Refresh /house/state.json (the living room) from rodney's home API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /var/www/html/vivalapanda.moe/scripts/house_feed.py /var/www/html/vivalapanda.moe/house/state.json
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/www/html/vivalapanda.moe/house

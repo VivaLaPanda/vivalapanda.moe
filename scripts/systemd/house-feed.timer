@@ -1,0 +1,10 @@
+[Unit]
+Description=Every-5-minutes refresh of the living room's house state
+
+[Timer]
+OnBootSec=1min
+OnCalendar=*:0/5
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -8,3 +8,6 @@ __pycache__/
 
 # generated hourly on the server by scripts/goodreads_feed.py
 reading/books.json
+
+# generated every 5 minutes on the server by scripts/house_feed.py
+house/state.json

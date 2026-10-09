@@ -17,7 +17,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-GENERATED = {"reading/books.json", "blog/posts.json"}  # written by the feed scripts; gitignored
+GENERATED = {"reading/books.json", "blog/posts.json", "house/state.json"}  # written by the feed scripts; gitignored
 REFRESH_S = 10
 
 
