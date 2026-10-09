@@ -529,19 +529,19 @@
   "butterfly": {
    "mask": "mask-obj-butterfly.png",
    "lit": {
-    "x": 152,
-    "y": 100,
-    "w": 33,
-    "h": 24
+    "x": 160,
+    "y": 105,
+    "w": 17,
+    "h": 13
    }
   },
   "linkedin": {
    "mask": "mask-obj-linkedin.png",
    "lit": {
-    "x": 302,
-    "y": 159,
-    "w": 29,
-    "h": 46
+    "x": 75,
+    "y": 158,
+    "w": 98,
+    "h": 65
    }
   },
   "letter": {
