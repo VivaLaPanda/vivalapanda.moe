@@ -3,3 +3,63 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+@media (max-width: 768px) {
+    /* phones: the picture on top at the window's 740:528, the dialog box below it (as on the other pages) */
+    #main-image,
+    #text-box {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    #main-image {
+        height: auto;
+        aspect-ratio: 740 / 528;
+    }
+
+    #fourohfour-img {
+        background-position: center;
+    }
+
+    #text-box {
+        height: auto;
+        min-height: 160px;
+        background-color: #000;
+        border-top: 2px solid #8799ff;
+    }
+
+    #text-box .text-container {
+        position: relative;
+        padding: 8px 6px 24px 6px;
+    }
+
+    #text-box .dialog-text {
+        font-size: 19px;
+    }
+}
+
+/* #text-box for specificity: style.css's `.subwindow a` would stretch the link to 80% */
+#text-box .fourohfour-home {
+    font-family: 'pc-98';
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    width: auto;
+    margin: 4px 0 0 18px;
+    display: inline-block;
+}
+
+#text-box .fourohfour-home:hover,
+#text-box .fourohfour-home:focus-visible {
+    background: #fff;
+    color: #000;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    #text-box .fourohfour-home {
+        font-size: 19px;
+        margin-left: 6px;
+    }
+}
