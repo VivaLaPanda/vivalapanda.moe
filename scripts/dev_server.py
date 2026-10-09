@@ -47,7 +47,7 @@ TRACKED = Tracked()
 class Handler(SimpleHTTPRequestHandler):
     def send_head(self):
         rel = urllib.parse.unquote(urllib.parse.urlsplit(self.path).path).strip("/")
-        if rel in FROM_PRODUCTION and not (ROOT / rel).exists():
+        if rel in FROM_PRODUCTION:                         # always live: a local copy is only ever stale
             return self.from_production(FROM_PRODUCTION[rel])
         paths = TRACKED.get()
         index = f"{rel}/index.html" if rel else "index.html"
