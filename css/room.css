@@ -30,6 +30,11 @@
     pointer-events: none;
 }
 
+/* its night lights are the room's own night view: by day the glass shows the day's view, nothing over it */
+#room-twinkle[hidden] {
+    display: none;
+}
+
 
 #room-twinkle {
     background-repeat: no-repeat;
