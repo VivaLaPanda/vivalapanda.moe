@@ -1,28 +1,58 @@
 #!/usr/bin/env python3
 """Serve this checkout for dev.vivalapanda.moe (through the Cloudflare tunnel on rodney).
 
-Static files only, like nginx in production. Anything under a dot path (.git, .artifact-staging) and stray logs are
-refused, since the tunnel makes this public.
+The tunnel makes this public, so it serves only what production would: files tracked in git, plus the feed files
+the server generates (gitignored). Anything else in the working tree (downloads, logs, .artifact-staging) is a 404,
+and there are no directory listings.
 
 Usage: dev_server.py [PORT]   (default 8080, localhost only)
 """
 
+import subprocess
 import sys
+import time
+import urllib.parse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-HIDDEN_NAMES = {"dl.log"}
+GENERATED = {"reading/books.json", "blog/posts.json"}  # written by the feed scripts; gitignored
+REFRESH_S = 10
+
+
+class Tracked:
+    """The set of servable paths, re-read from git every few seconds so new commits show up."""
+
+    def __init__(self) -> None:
+        self.paths: set[str] = set()
+        self.at = 0.0
+
+    def get(self) -> set[str]:
+        if time.monotonic() - self.at > REFRESH_S:
+            out = subprocess.run(["git", "-C", str(ROOT), "ls-files", "-z"], capture_output=True, check=True).stdout
+            paths = {p for p in out.decode().split("\0") if p} | GENERATED
+            self.paths = paths
+            self.at = time.monotonic()
+        return self.paths
+
+
+TRACKED = Tracked()
 
 
 class Handler(SimpleHTTPRequestHandler):
     def send_head(self):
-        parts = [p for p in self.path.split("?")[0].split("#")[0].split("/") if p]
-        if any(p.startswith(".") or p in HIDDEN_NAMES for p in parts):
+        rel = urllib.parse.unquote(urllib.parse.urlsplit(self.path).path).strip("/")
+        paths = TRACKED.get()
+        index = f"{rel}/index.html" if rel else "index.html"
+        if rel not in paths and index not in paths:
             self.send_error(404)
             return None
-        return super().send_head()
+        return super().send_head()  # a folder with a tracked index.html redirects to "/" and serves it
+
+    def list_directory(self, path):
+        self.send_error(404)
+        return None
 
     def end_headers(self):
         self.send_header("Cache-Control", "no-cache")  # dev: always the working copy
