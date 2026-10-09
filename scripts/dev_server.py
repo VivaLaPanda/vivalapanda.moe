@@ -8,10 +8,12 @@ and there are no directory listings.
 Usage: dev_server.py [PORT]   (default 8080, localhost only)
 """
 
+import io
 import subprocess
 import sys
 import time
 import urllib.parse
+import urllib.request
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -19,6 +21,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 GENERATED = {"reading/books.json", "blog/posts.json", "house/state.json"}  # written by the feed scripts; gitignored
 REFRESH_S = 10
+# rodney can't call the house API (it answers only the VPS), so dev reads production's copy
+FROM_PRODUCTION = {"house/state.json": "https://vivalapanda.moe/house/state.json"}
 
 
 class Tracked:
@@ -43,12 +47,27 @@ TRACKED = Tracked()
 class Handler(SimpleHTTPRequestHandler):
     def send_head(self):
         rel = urllib.parse.unquote(urllib.parse.urlsplit(self.path).path).strip("/")
+        if rel in FROM_PRODUCTION and not (ROOT / rel).exists():
+            return self.from_production(FROM_PRODUCTION[rel])
         paths = TRACKED.get()
         index = f"{rel}/index.html" if rel else "index.html"
         if rel not in paths and index not in paths:
             self.send_error(404)
             return None
         return super().send_head()  # a folder with a tracked index.html redirects to "/" and serves it
+
+    def from_production(self, url: str):
+        try:
+            with urllib.request.urlopen(url, timeout=10) as resp:
+                body = resp.read()
+        except OSError:
+            self.send_error(502)
+            return None
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        return io.BytesIO(body)
 
     def list_directory(self, path):
         self.send_error(404)
