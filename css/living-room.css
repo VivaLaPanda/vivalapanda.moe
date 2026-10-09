@@ -1,0 +1,66 @@
+/* the living room (living-room.html): Panda's real house drawn live (js/living-room.js); room.css does the rest */
+
+/* overlays on the scene at native-pixel rects (placed in % by room.js's placeNative) */
+.lr-layer {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+}
+
+/* the TV's picture: the idle backdrop, or a strip of frames stepped through while something plays */
+.lr-tv {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering: auto;
+}
+
+.lr-tv-play {
+    background-size: calc(var(--frames) * 100%) 100%;
+    animation: lr-tv-play 2s steps(6) infinite;
+}
+
+@keyframes lr-tv-play {
+    from { background-position: 0% 0%; }
+    to { background-position: 120% 0%; }
+}
+
+/* the speakers' light bar while music plays */
+.lr-led {
+    background: #fff;
+    box-shadow: 0 0 2px #fff;
+}
+
+/* a note rising off a speaker */
+.lr-note {
+    animation: lr-note 2.6s steps(13) forwards;
+}
+
+@keyframes lr-note {
+    from { transform: translate(0, 0); opacity: 1; }
+    to { transform: translate(40%, -260%); opacity: 0; }
+}
+
+/* the house's clock, phase and temperature, in the scene's top-left corner */
+#lr-hud {
+    position: absolute;
+    left: 1%;
+    top: 1.2%;
+    padding: 1px 6px;
+    font-family: 'pc-98';
+    font-size: 14px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+    letter-spacing: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lr-tv-play { animation: none; }
+}
+
+@media (max-width: 768px) {
+    #lr-hud {
+        font-size: 10px;
+        padding: 0 4px;
+    }
+}

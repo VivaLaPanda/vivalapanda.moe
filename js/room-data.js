@@ -12,8 +12,28 @@
 // overlap (the blazer over the window, the console over the TV), the front one wins.
 // Every line and each object's menu (its links) are in /data/dialogue.json, section "bedroom" (js/room.js merges
 // them in): edit them there.
+window.HOUSE = window.HOUSE || {};
+
+// the stand lamp mirrors Panda's real bedroom lamp (js/house-room.js reads the house): its lines pick a variant
+function standLampLine(key) {
+    return function () {
+        var s = (window.ROOM.said && window.ROOM.said.objects.stand_lamp) || {};
+        var on = window.HOUSE.lampOn ? window.HOUSE.lampOn("stand") : null;
+        var l = window.HOUSE.light ? window.HOUSE.light("stand") : null;
+        var pick = key === "hover"
+            ? (on === null ? s.hover_unknown : on ? s.hover_on : s.hover_off)
+            : (on ? (s.lines_on || s.lines) : s.lines);
+        var fill = function (t) {
+            return String(t).replace(/\{brightness\}/g, l && l.brightness_pct != null ? l.brightness_pct : "?");
+        };
+        return Array.isArray(pick) ? pick.map(fill) : fill(pick || "");
+    };
+}
+
 window.ROOM = {
     dialogue: "bedroom",
+    // the room follows the real time of day, and its stand lamp the real bedroom lamp (js/house-room.js)
+    house: { base: "/img/room/house/", v: "1", hud: false },
 
     scene: {
         src: "/img/room/room@4x.png?v=6",
@@ -147,6 +167,12 @@ window.ROOM = {
 
     // no link: just a line. With a polygon they're hotspots too; without one, LOOK list only.
     knickKnacks: [
+        {
+            // the stand lamp in the corner: its outline comes from the live scene (img/room/house/scene.json)
+            id: "stand_lamp",
+            hover: standLampLine("hover"),
+            lines: standLampLine("lines")
+        },
         {
             id: "plush",
             polygon: [[38, 167], [41, 167], [41, 168], [43, 168], [43, 169], [44, 169], [45, 171], [54, 171], [54, 170], [55, 170], [56, 168], [58, 168], [58, 167], [61, 167], [61, 168], [63, 168], [63, 170], [64, 170], [64, 173], [63, 173], [63, 175], [62, 175], [62, 178], [63, 178], [63, 180], [64, 180], [64, 185], [63, 185], [62, 189], [61, 189], [61, 190], [59, 191], [59, 193], [60, 193], [60, 194], [61, 194], [61, 195], [62, 195], [62, 196], [63, 196], [63, 197], [65, 198], [65, 203], [64, 203], [64, 204], [63, 204], [63, 205], [62, 205], [62, 206], [60, 207], [60, 209], [61, 209], [61, 210], [60, 210], [59, 212], [56, 212], [56, 211], [55, 211], [54, 213], [45, 213], [44, 211], [43, 211], [43, 212], [40, 212], [40, 211], [38, 210], [38, 209], [39, 209], [39, 207], [38, 207], [38, 206], [37, 206], [37, 205], [36, 205], [36, 204], [34, 203], [34, 198], [35, 198], [35, 197], [36, 197], [36, 196], [37, 196], [37, 195], [38, 195], [38, 194], [40, 193], [40, 191], [39, 191], [39, 190], [37, 189], [37, 187], [36, 187], [36, 185], [35, 185], [35, 180], [36, 180], [36, 178], [37, 178], [37, 175], [36, 175], [36, 173], [35, 173], [35, 170], [36, 170], [36, 168], [38, 168]],

@@ -31,7 +31,7 @@
     var byRank = R.objects.slice().sort(function (a, b) { return a.rank - b.rank; });
     // every hotspot: the linked objects by rank, then knick-knacks that are drawn in the scene
     var knickKnacks = R.knickKnacks || [];
-    var spots = byRank.concat(knickKnacks.filter(function (k) { return k.polygon; }));
+    var spots = [];        // filled at start: a room may get its outlines late (R.ready)
     var shapes = {};       // id -> hit polygon (the focusable element)
     var outlines = {};     // id -> exact outline polygon (LOOK's flash)
     var lits = {};         // id -> lit sprite <img>
@@ -515,6 +515,7 @@
     }
 
     function start() {
+        spots = byRank.concat(knickKnacks.filter(function (k) { return k.polygon; }));
         buildScene();
         if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, lits: lits, placeNative: placeNative });
         say(lines(R.greeting), null, true);
@@ -522,14 +523,18 @@
         if (!reduceMotion) setInterval(glint, GLINT_MS);
     }
 
-    fetch(DIALOGUE, { cache: "no-cache" }).then(function (r) {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.json();
-    }).catch(function (err) {
-        console.warn("dialogue unavailable:", err);
-        return null;
-    }).then(function (all) {
-        applyDialogue(all);
+    // a room's own setup (R.ready: the living room loads its scene first) and the lines, then the room
+    Promise.all([
+        fetch(DIALOGUE, { cache: "no-cache" }).then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+        }).catch(function (err) {
+            console.warn("dialogue unavailable:", err);
+            return null;
+        }),
+        R.ready || null
+    ]).then(function (got) {
+        applyDialogue(got[0]);
         start();
     });
 })();

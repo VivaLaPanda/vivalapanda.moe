@@ -1,0 +1,221 @@
+// Panda's house, drawn live: a room's index map painted at the real time of day, with its real lamps' light on it.
+// Time of day is a register change, the PC-98 way: the same pixels with a phase's 16 colours (scene.json "phases").
+// The view through the glass is its own layer per phase. A lamp that's on adds its light: its traced field (a
+// greyscale PNG) times its colour (from Kelvin, or a hex colour) and brightness, on each pixel's day ink. The light
+// steps in the period's tile bands (Bayer 4x4 cut at 0, 2, 4, 8, 12, 14, 16 of 16), between neighbours on one ramp,
+// and every colour lands on the 4096-colour grid. Runs in the browser and in Node (HouseRender.renderPixels).
+(function (root) {
+    "use strict";
+
+    var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+    var CUTS = [0, 2, 4, 8, 12, 14, 16];
+    var STEPS = 5;                       // light levels per unit of field: the bands a glow falls off in
+
+    var S2L = new Float32Array(256);
+    for (var i = 0; i < 256; i++) {
+        var c = i / 255;
+        S2L[i] = c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    }
+
+    function lin2s(v) {
+        v = v <= 0 ? 0 : v >= 1 ? 1 : v;
+        return 255 * (v <= 0.0031308 ? 12.92 * v : 1.055 * Math.pow(v, 1 / 2.4) - 0.055);
+    }
+
+    function hexRGB(h) {
+        h = h.replace("#", "");
+        if (h.length === 3) return [0, 1, 2].map(function (k) { return parseInt(h[k], 16) * 17; });
+        return [0, 2, 4].map(function (k) { return parseInt(h.substr(k, 2), 16); });
+    }
+
+    function hexLin(h) {
+        return hexRGB(h).map(function (v) { return S2L[v]; });
+    }
+
+    // a light's colour from its Kelvin (Tanner Helland's fit of the blackbody locus), linear, brightest channel 1
+    function kelvinLin(k) {
+        var t = Math.max(1000, Math.min(40000, k)) / 100, r, g, b;
+        r = t <= 66 ? 255 : 329.698727446 * Math.pow(t - 60, -0.1332047592);
+        g = t <= 66 ? 99.4708025861 * Math.log(t) - 161.1195681661 : 288.1221695283 * Math.pow(t - 60, -0.0755148492);
+        b = t >= 66 ? 255 : t <= 19 ? 0 : 138.5177312231 * Math.log(t - 10) - 305.0447927307;
+        var rgb = [r, g, b].map(function (v) { return S2L[Math.max(0, Math.min(255, Math.round(v)))]; });
+        var top = Math.max(rgb[0], rgb[1], rgb[2]) || 1;
+        return rgb.map(function (v) { return v / top; });
+    }
+
+    function lightColour(l) {
+        if (l.color) {
+            var c = hexLin(l.color), top = Math.max(c[0], c[1], c[2]) || 1;
+            return c.map(function (v) { return v / top; });
+        }
+        return kelvinLin(l.kelvin || 2700);
+    }
+
+    function snap(v) {
+        return Math.round(v / 17) * 17;
+    }
+
+    // the nearest period tile level for a fraction
+    function cut(f) {
+        var best = 0, d = 99;
+        for (var k = 0; k < CUTS.length; k++) {
+            var e = Math.abs(f * 16 - CUTS[k]);
+            if (e < d) { d = e; best = CUTS[k]; }
+        }
+        return best;
+    }
+
+    /**
+     * The room at a phase with its lights, as RGBA pixels (native size).
+     * scene: { w, h, idx: Uint8Array, phases: {phase: [16 hex]}, albedo: [16 hex],
+     *          outside: { mask: Uint8Array, layers: {phase: Uint8ClampedArray rgba} } | null,
+     *          lights: { name: { field: Uint8Array, gain: number, shade: Uint8Array | null } } }
+     * state: { phase, lights: { name: { on, brightness_pct, kelvin, color } }, override: Uint8Array | null }
+     *   override: per-pixel index replacements (255 = none), for blinds and hover states.
+     */
+    function renderPixels(scene, state, rect) {
+        var w = scene.w, h = scene.h;
+        rect = rect || { x: 0, y: 0, w: w, h: h };
+        var pal = (scene.phases[state.phase] || scene.phases.noon).map(hexLin);
+        var alb = scene.albedo.map(hexLin);
+        var out = new Uint8ClampedArray(rect.w * rect.h * 4);
+        var on = [];
+        Object.keys(scene.lights || {}).forEach(function (name) {
+            var l = (state.lights || {})[name];
+            if (!l || !l.on) return;
+            var spec = scene.lights[name];
+            var bri = l.brightness_pct == null ? 1 : Math.max(0.05, l.brightness_pct / 100);
+            on.push({ field: spec.field, shade: spec.shade, col: spec.color ? lightColour({ color: spec.color }) : lightColour(l),
+                      gain: (spec.gain || 1) * bri * (spec.phaseGain ? spec.phaseGain[state.phase] || 0 : 1),
+                      glow: bri });
+        });
+        var layer = scene.outside && scene.outside.layers[state.phase];
+        var omask = scene.outside && scene.outside.mask;
+        var ov = state.override;
+        for (var ry = 0; ry < rect.h; ry++) for (var rx = 0; rx < rect.w; rx++) {
+            var p = (rect.y + ry) * w + rect.x + rx;
+            var o = (ry * rect.w + rx) * 4;
+            var ix = ov && ov[p] !== 255 ? ov[p] : scene.idx[p];
+            if (layer && omask[p] && !(ov && ov[p] !== 255)) {
+                out[o] = layer[p * 4]; out[o + 1] = layer[p * 4 + 1]; out[o + 2] = layer[p * 4 + 2]; out[o + 3] = 255;
+                continue;
+            }
+            var base = pal[ix], a = alb[ix];
+            var r = 0, g = 0, b = 0, shade = 0, sc = null;
+            for (var k = 0; k < on.length; k++) {
+                var L = on[k];
+                if (L.shade && L.shade[p] && L.glow > shade) { shade = L.glow; sc = L.col; }
+                var f = L.field[p];
+                if (!f) continue;
+                var e = L.gain * f / 255;
+                r += L.col[0] * e; g += L.col[1] * e; b += L.col[2] * e;
+            }
+            var R = base[0], G = base[1], B = base[2];
+            var m = Math.max(r, g, b);
+            if (m > 0) {
+                // the light's strength in bands: floor, then the next level in a period tile
+                var q = m * STEPS, fl = Math.floor(q), lv = cut(q - fl);
+                var x = rect.x + rx, y = rect.y + ry;
+                var s = (fl + (BAYER[(y & 3) * 4 + (x & 3)] < lv ? 1 : 0)) / STEPS / m;
+                R += a[0] * r * s; G += a[1] * g * s; B += a[2] * b * s;
+            }
+            if (shade) {
+                // a lit shade: the lamp's own colour, cream-hot
+                var k2 = 0.55 + 0.45 * shade;
+                R = Math.max(R, k2 * (0.6 + 0.4 * sc[0]) * Math.max(a[0], 0.75));
+                G = Math.max(G, k2 * (0.6 + 0.4 * sc[1]) * Math.max(a[1], 0.75));
+                B = Math.max(B, k2 * (0.6 + 0.4 * sc[2]) * Math.max(a[2], 0.75));
+            }
+            out[o] = snap(lin2s(R)); out[o + 1] = snap(lin2s(G)); out[o + 2] = snap(lin2s(B)); out[o + 3] = 255;
+        }
+        return out;
+    }
+
+    // ---------- loading (browser) ----------
+
+    function image(src) {
+        return new Promise(function (ok, fail) {
+            var im = new Image();
+            im.onload = function () { ok(im); };
+            im.onerror = function () { fail(new Error("couldn't load " + src)); };
+            im.src = src;
+        });
+    }
+
+    function pixels(im) {
+        var c = document.createElement("canvas");
+        c.width = im.naturalWidth; c.height = im.naturalHeight;
+        var x = c.getContext("2d");
+        x.drawImage(im, 0, 0);
+        return x.getImageData(0, 0, c.width, c.height).data;
+    }
+
+    // a greyscale map's channel (an index map stores index * 16 + 8)
+    function grey(data, f) {
+        var n = data.length / 4, out = new Uint8Array(n);
+        for (var p = 0; p < n; p++) out[p] = f(data[p * 4]);
+        return out;
+    }
+
+    function load(base, v) {
+        var q = v ? "?v=" + v : "";
+        return fetch(base + "scene.json" + q, { cache: "no-cache" }).then(function (r) {
+            if (!r.ok) throw new Error("scene.json HTTP " + r.status);
+            return r.json();
+        }).then(function (spec) {
+            var jobs = [image(base + spec.idx + q).then(function (im) {
+                spec.idx = grey(pixels(im), function (v) { return v >> 4; });
+            })];
+            if (spec.outside) {
+                jobs.push(image(base + spec.outside.mask + q).then(function (im) {
+                    spec.outside.mask = grey(pixels(im), function (v) { return v > 127 ? 1 : 0; });
+                }));
+                var layers = spec.outside.layers;
+                Object.keys(layers).forEach(function (ph) {
+                    jobs.push(image(base + layers[ph] + q).then(function (im) { layers[ph] = pixels(im); }));
+                });
+            }
+            spec.mask = {};
+            (spec.masks || []).forEach(function (f) {
+                jobs.push(image(base + f + q).then(function (im) {
+                    spec.mask[f] = grey(pixels(im), function (v) { return v > 127 ? 1 : 0; });
+                }));
+            });
+            Object.keys(spec.lights || {}).forEach(function (name) {
+                var l = spec.lights[name];
+                jobs.push(image(base + l.field + q).then(function (im) {
+                    l.field = grey(pixels(im), function (v) { return v; });
+                }));
+                if (l.shade) {
+                    jobs.push(image(base + l.shade + q).then(function (im) {
+                        l.shade = grey(pixels(im), function (v) { return v > 127 ? 1 : 0; });
+                    }));
+                } else {
+                    l.shade = null;
+                }
+            });
+            return Promise.all(jobs).then(function () {
+                spec.w = spec.size[0]; spec.h = spec.size[1];
+                return spec;
+            });
+        });
+    }
+
+    // a render at 4x, nearest neighbour, as a data URL for an <img>
+    function toURL(rgba, w, h, scale) {
+        scale = scale || 4;
+        var c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        c.getContext("2d").putImageData(new ImageData(rgba, w, h), 0, 0);
+        var big = document.createElement("canvas");
+        big.width = w * scale; big.height = h * scale;
+        var x = big.getContext("2d");
+        x.imageSmoothingEnabled = false;
+        x.drawImage(c, 0, 0, big.width, big.height);
+        return big.toDataURL("image/png");
+    }
+
+    var api = { load: load, renderPixels: renderPixels, toURL: toURL, kelvinLin: kelvinLin };
+    if (typeof module !== "undefined" && module.exports) module.exports = api;
+    else root.HouseRender = api;
+})(typeof self !== "undefined" ? self : this);

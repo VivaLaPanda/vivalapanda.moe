@@ -4,11 +4,17 @@
     "Edit freely; the pages read this file on load (no build step). Keys starting with _ are notes and are ignored.",
     "Keep each line <= 48 characters (one dialog-box line; longer ones log a warning in the browser console).",
     "Use straight quotes: the PC-98 font draws curly ones full-width.",
-    "greeting: the opening box. hover: the line shown on pointing at an object. click: the box on first opening it this",
-    "visit; repeat: on opening it again. lines (on an object): what a no-link object says. choices: the menu after click.",
-    "lines (on a room): idle (said after a while with no input), empty (clicking nothing), and the menu replies.",
-    "Living room only, for live state: hover_on / hover_off / hover_unknown (lamp on, off, house feed down);",
-    "hover_blind_down (balcony door with its blind down); {temp} and {heat} in the thermostat lines (unknown -> hover_unknown).",
+    "greeting: the opening box. hover: the line on pointing at an object. click: the box on first opening it this visit;",
+    "repeat: on opening it again. lines (on an object): what a no-link object says. choices: the menu after click",
+    "(label, and href or copy). lines (on a room): idle (after a while with no input), empty (clicking nothing), replies.",
+    "Living room only, for live state (the house's real devices): a variant per state, chosen by the page:",
+    "  lamps: hover_on / hover_off / hover_unknown (feed down); lines, or lines_on / lines_off. {brightness} (percent),",
+    "  {kelvin}, {warmth} (warm / soft white / daylight) fill in when the lamp is on.",
+    "  tv: hover_off / hover_on (an idle screen) / hover_playing / hover_unknown; lines, lines_playing.",
+    "  speakers: hover_playing / hover_quiet / hover_unknown; lines, lines_playing.",
+    "  kotatsu: hover_on / hover_off / hover_unknown (its plug); lines, lines_on.",
+    "  thermostat: hover and lines may use {temp} (F), {heat} (on/off), {humidity}; hover_unknown when there's no reading.",
+    "  door_outside: hover_blind_down when the living room's blind is (almost) down.",
     "Bedroom lines are adapted visual-novel lines; their sources: pc98-assets/assets/panda-room/dialogue-sources.md."
   ],
   "bedroom": {
@@ -324,6 +330,20 @@
           "That's my favorite magical girl!",
           "Abracadabra! Welcome to life as a magical girl!"
         ]
+      },
+      "stand_lamp": {
+        "name": "Stand lamp",
+        "hover_on": "My lamp's on right now. {brightness}%.",
+        "hover_off": "My lamp's off right now.",
+        "hover_unknown": "My reading lamp.",
+        "lines": [
+          "It's my real bedroom lamp.",
+          "When I switch it at home, it switches here."
+        ],
+        "lines_on": [
+          "It's on in my real room right now.",
+          "Two bulbs. Very cozy."
+        ]
       }
     },
     "lines": {
@@ -356,7 +376,7 @@
     "objects": {
       "door_bedroom": {
         "name": "Bedroom door",
-        "hover": "My room's through there. Everything's in it.",
+        "hover": "My room's through there. All my stuff's in it.",
         "click": [
           "My room: all my places on the web.",
           "Twitter, GitHub, my reading list..."
@@ -395,42 +415,97 @@
           }
         ]
       },
-      "lamp_dining": {
-        "name": "Dining room light",
-        "hover_on": "The dining light's on right now.",
-        "hover_off": "The dining light's off right now.",
-        "hover_unknown": "The dining light. On? Off? Who knows.",
+      "tv": {
+        "name": "TV",
+        "hover_off": "The TV's off right now.",
+        "hover_on": "The TV's on, but nothing's playing.",
+        "hover_playing": "Something's playing on the TV right now!",
+        "hover_unknown": "The TV. On? Off? Can't tell.",
         "lines": [
-          "It's my real lamp. When I flip it at home,",
-          "it flips here too, within five minutes."
+          "It's my real TV, mirrored here.",
+          "When I cast something, it plays here too."
+        ],
+        "lines_playing": [
+          "I'm watching something right now.",
+          "No spoilers, okay?"
+        ]
+      },
+      "kotatsu": {
+        "name": "Kotatsu",
+        "hover_on": "The kotatsu's on. Get under the blanket!",
+        "hover_off": "The kotatsu's off right now.",
+        "hover_unknown": "My kotatsu. Best seat in the house.",
+        "lines": [
+          "A kotatsu: a table with a heater under it.",
+          "Once you're under, you can't leave."
+        ],
+        "lines_on": [
+          "It's warm under there right now.",
+          "Once you're under, you can't leave."
         ]
       },
       "lamp_sun": {
         "name": "The Sun",
-        "hover_on": "The Sun is on. It's a very bright lamp.",
-        "hover_off": "The Sun is off. A little sunset indoors.",
+        "hover_on": "The Sun is on: {brightness}%, {warmth}.",
+        "hover_off": "The Sun is off.",
         "hover_unknown": "The Sun. My brightest lamp.",
         "lines": [
-          "I named my Brighter lamp The Sun.",
-          "It helps on gray mornings."
+          "It's a Brighter lamp. I call it The Sun.",
+          "It helps a lot on gray mornings."
+        ]
+      },
+      "lamp_dining": {
+        "name": "Arc lamp",
+        "hover_on": "The arc lamp's on: {brightness}%.",
+        "hover_off": "The arc lamp's off.",
+        "hover_unknown": "The arc lamp over the couch.",
+        "lines": [
+          "It hangs right over the couch.",
+          "Perfect for reading."
         ]
       },
       "lamp_corner": {
         "name": "Corner lamp",
-        "hover_on": "The corner lamp's on.",
+        "hover_on": "The corner lamp's on: {brightness}%.",
         "hover_off": "The corner lamp's off.",
         "hover_unknown": "The corner lamp.",
         "lines": [
-          "A little lamp for reading in the corner."
+          "A little lamp in the TV corner."
         ]
       },
       "lamp_window": {
         "name": "Windowside lamp",
-        "hover_on": "The windowside lamp's on.",
+        "hover_on": "The windowside lamp's on: {brightness}%.",
         "hover_off": "The windowside lamp's off.",
         "hover_unknown": "The windowside lamp.",
         "lines": [
           "It sits by the window. Very cozy at night."
+        ]
+      },
+      "speaker_l": {
+        "name": "Speaker (left)",
+        "hover_playing": "Music's playing in my house right now!",
+        "hover_quiet": "The speakers are quiet right now.",
+        "hover_unknown": "My speakers.",
+        "lines": [
+          "They're real. When I play music, it shows."
+        ],
+        "lines_playing": [
+          "Something's on right now!",
+          "Can you hear it?"
+        ]
+      },
+      "speaker_r": {
+        "name": "Speaker (right)",
+        "hover_playing": "Music's playing in my house right now!",
+        "hover_quiet": "The speakers are quiet right now.",
+        "hover_unknown": "My speakers.",
+        "lines": [
+          "They're real. When I play music, it shows."
+        ],
+        "lines_playing": [
+          "Something's on right now!",
+          "Can you hear it?"
         ]
       },
       "thermostat": {
