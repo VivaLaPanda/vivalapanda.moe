@@ -65,6 +65,24 @@
         return best;
     }
 
+    // a lamp's halo: the pixels within 3px of its shade (worked out once per scene)
+    function haloOf(spec, w, h) {
+        if (spec._halo || !spec.shade) return spec._halo || null;
+        var m = spec.shade, out = new Uint8Array(w * h);
+        for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+            var p = y * w + x;
+            if (!m[p]) continue;
+            for (var dy = -3; dy <= 3; dy++) for (var dx = -3; dx <= 3; dx++) {
+                var yy = y + dy, xx = x + dx;
+                if (yy < 0 || yy >= h || xx < 0 || xx >= w) continue;
+                var q = yy * w + xx, d = Math.abs(dx) + Math.abs(dy);
+                if (!m[q] && d <= 4 && (!out[q] || out[q] > d)) out[q] = d;
+            }
+        }
+        spec._halo = out;
+        return out;
+    }
+
     /**
      * The room at a phase with its lights, as RGBA pixels (native size).
      * scene: { w, h, idx: Uint8Array, phases: {phase: [16 hex]}, albedo: [16 hex],
@@ -82,17 +100,22 @@
         });
         var alb = scene.albedo.map(hexLin);
         var out = new Uint8ClampedArray(rect.w * rect.h * 4);
-        var on = [];
+        var on = [], offShades = [];
         Object.keys(scene.lights || {}).forEach(function (name) {
             var l = (state.lights || {})[name];
-            if (!l || !l.on) return;
+            if (!l || !l.on) {
+                if (scene.lights[name].shade) offShades.push(scene.lights[name].shade);
+                return;
+            }
             var spec = scene.lights[name];
             var bri = l.brightness_pct == null ? 1 : Math.max(0.05, l.brightness_pct / 100);
             var fixed = spec.phaseColor ? spec.phaseColor[state.phase] : spec.color;
-            on.push({ field: spec.field, shade: spec.shade, col: fixed ? lightColour({ color: fixed }) : lightColour(l),
+            on.push({ field: spec.field, shade: spec.shade, halo: haloOf(spec, w, h),
+                      col: fixed ? lightColour({ color: fixed }) : lightColour(l),
                       gain: (spec.gain || 1) * bri * (spec.phaseGain ? spec.phaseGain[state.phase] || 0 : 1),
                       glow: bri });
         });
+        var phaseDark = { night: 1, dusk: 0.8, dawn: 0.8, sunset: 0.5, evening: 0.4 }[state.phase] || 0;
         var layer = scene.outside && scene.outside.layers[state.phase];
         var omask = scene.outside && scene.outside.mask;
         var ov = state.override;
@@ -115,6 +138,9 @@
                 r += L.col[0] * e; g += L.col[1] * e; b += L.col[2] * e;
             }
             var R = base[0], G = base[1], B = base[2];
+            for (var k3 = 0; k3 < offShades.length; k3++) {
+                if (offShades[k3][p]) { R *= 0.62; G *= 0.62; B *= 0.66; break; }     // a lamp that's off: its shade unlit
+            }
             var m = Math.max(r, g, b);
             if (m > 0) {
                 // the light's strength in bands: floor, then the next level in a period tile
@@ -123,12 +149,25 @@
                 var s = (fl + (BAYER[(y & 3) * 4 + (x & 3)] < lv ? 1 : 0)) / STEPS / m;
                 R += a[0] * r * s; G += a[1] * g * s; B += a[2] * b * s;
             }
+            // a lit lamp's halo: its colour over the 3px round its shade, in the period's tile steps (2px solid-ish,
+            // then a checker, then sparse dots), stronger after dark
+            for (var k4 = 0; k4 < on.length; k4++) {
+                var Lh = on[k4], hd = Lh.halo ? Lh.halo[p] : 0;
+                if (!hd || (Lh.shade && Lh.shade[p])) continue;
+                var cutH = hd <= 1 ? 12 : hd <= 2 ? 8 : 4;
+                var bx = p % w, by = (p / w) | 0;
+                if (BAYER[(by & 3) * 4 + (bx & 3)] < cutH) {
+                    var hk = (0.45 + 0.55 * Lh.glow) * (0.6 + 0.4 * (phaseDark || 0));
+                    R = Math.max(R, hk * Lh.col[0]); G = Math.max(G, hk * Lh.col[1]); B = Math.max(B, hk * Lh.col[2]);
+                }
+                break;
+            }
             if (shade) {
-                // a lit shade: the lamp's own colour, cream-hot
-                var k2 = 0.55 + 0.45 * shade;
-                R = Math.max(R, k2 * (0.6 + 0.4 * sc[0]) * Math.max(a[0], 0.75));
-                G = Math.max(G, k2 * (0.6 + 0.4 * sc[1]) * Math.max(a[1], 0.75));
-                B = Math.max(B, k2 * (0.6 + 0.4 * sc[2]) * Math.max(a[2], 0.75));
+                // a lit shade glows in the lamp's own colour, as bright as the lamp is set
+                var k2 = 0.7 + 0.3 * shade;
+                R = k2 * (0.35 + 0.65 * sc[0]);
+                G = k2 * (0.35 + 0.65 * sc[1]);
+                B = k2 * (0.35 + 0.65 * sc[2]);
             }
             out[o] = snap(lin2s(R)); out[o + 1] = snap(lin2s(G)); out[o + 2] = snap(lin2s(B)); out[o + 3] = 255;
         }

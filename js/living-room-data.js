@@ -111,17 +111,14 @@ window.HOUSE = window.HOUSE || {};
                  "thermostat", "tv", "blind_living", "blind_dining", "door_bedroom", "door_outside"],
 
         objects: [
-            {
-                id: "door_bedroom", rank: 1,
-                choices: [{ href: "/room.html" }, {}]
-            },
+            { id: "door_bedroom", rank: 1, go: "/room.html" },         // hover: its line; click: through it
             {
                 id: "door_outside", rank: 2,
                 hover: function () {
                     var s = said("door_outside"), pct = H.blindPct ? H.blindPct("Living Room Blinds") : null;
                     return pct !== null && pct < 15 ? (s.hover_blind_down || s.hover) : s.hover;
                 },
-                choices: [{ href: "/explore/explore.html" }, {}]
+                go: "/explore/explore.html"
             },
             {
                 id: "tv", rank: 3,

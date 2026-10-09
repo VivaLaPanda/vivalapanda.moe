@@ -23,6 +23,7 @@
     var art = document.getElementById("room-art");
     var svg = document.getElementById("room-hotspots");
     var lookBtn = document.getElementById("room-look");
+    var backBtn = document.getElementById("room-back");
     var textBox = document.getElementById("text-box");
     var text = document.getElementById("room-text");
     var choicesEl = document.getElementById("room-choices");
@@ -353,6 +354,10 @@
         seen[o.id] = true;
         saveSeen();
         markSeen();
+        if (o.go) {       // a door: its hover line says where it goes, a click goes there
+            window.location.href = o.go;
+            return;
+        }
         if (!o.choices) { // a knick-knack: just a line
             say(lines(o.lines));
             return;
@@ -449,6 +454,25 @@
         e.stopPropagation();
         look();
     });
+
+    // BACK: the page before this one if it was on this site, else the room's own way out (R.back); with neither
+    // (the living room opened directly) there's nowhere to go, so no button
+    function cameFromSite() {
+        try {
+            return history.length > 1 && !!document.referrer && new URL(document.referrer).origin === location.origin;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    if (backBtn && (cameFromSite() || R.back)) {
+        backBtn.hidden = false;
+        backBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (cameFromSite()) history.back();
+            else window.location.href = R.back;
+        });
+    }
 
     ["pointermove", "pointerdown", "keydown", "touchstart"].forEach(function (ev) {
         document.addEventListener(ev, resetIdle, { passive: true });

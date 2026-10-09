@@ -4,6 +4,7 @@
     "Edit freely; the pages read this file on load (no build step). Keys starting with _ are notes and are ignored.",
     "Keep each line <= 48 characters (one dialog-box line; longer ones log a warning in the browser console).",
     "Use straight quotes: the PC-98 font draws curly ones full-width.",
+    "Doors (door_bedroom, door_outside) only have hover lines: clicking a door goes straight through it.",
     "greeting: the opening box. hover: the line on pointing at an object. click: the box on first opening it this visit;",
     "repeat: on opening it again. lines (on an object): what a no-link object says. choices: the menu after click",
     "(label, and href or copy). lines (on a room): idle (after a while with no input), empty (clicking nothing), replies.",
@@ -377,44 +378,12 @@
     "objects": {
       "door_bedroom": {
         "name": "Bedroom door",
-        "hover": "My room's through there. All my stuff's in it.",
-        "click": [
-          "My room: all my places on the web.",
-          "Twitter, GitHub, my reading list..."
-        ],
-        "repeat": [
-          "Back to my room?"
-        ],
-        "choices": [
-          {
-            "label": "Go to Panda's room",
-            "href": "/room.html"
-          },
-          {
-            "label": "Stay here"
-          }
-        ]
+        "hover": "My room's through there. All my stuff's in it."
       },
       "door_outside": {
         "name": "Balcony door",
         "hover": "The city's right out there. Get some air?",
-        "hover_blind_down": "The blind's down, but the city's out there.",
-        "click": [
-          "Outside's a whole city to wander.",
-          "Want to go explore?"
-        ],
-        "repeat": [
-          "Going out again?"
-        ],
-        "choices": [
-          {
-            "label": "Step outside",
-            "href": "/explore/explore.html"
-          },
-          {
-            "label": "Stay in"
-          }
-        ]
+        "hover_blind_down": "The blind's down, but the city's out there."
       },
       "tv": {
         "name": "TV",

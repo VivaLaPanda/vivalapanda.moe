@@ -108,12 +108,17 @@
     100% { transform: scale(0.2); opacity: 0; }
 }
 
-/* LOOK sits in the dialog box's top-right corner, like a PC-98 command button */
-#room-look {
+/* BACK and LOOK sit in the dialog box's top-right corner, like PC-98 command buttons */
+#room-cmds {
     position: absolute;
     top: 8px;
     right: 14px;
     z-index: 1;
+    display: flex;
+    gap: 10px;
+}
+
+#room-cmds button {
     font-family: 'pc-98';
     font-size: 22px;
     color: #fff;
@@ -123,8 +128,8 @@
     cursor: pointer;
 }
 
-#room-look:hover,
-#room-look:focus-visible {
+#room-cmds button:hover,
+#room-cmds button:focus-visible {
     background-color: #ffaaba;
     color: #000;
     outline: none;
@@ -236,10 +241,15 @@
         height: auto;
     }
 
-    #room-look {
-        font-size: 18px;
+    #room-cmds {
         top: 6px;
         right: 8px;
+        gap: 6px;
+    }
+
+    #room-cmds button {
+        font-size: 18px;
+        padding: 2px 8px;
     }
 
     #text-box {

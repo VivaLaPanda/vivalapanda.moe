@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda's House</title>
     <link href="/css/style.css?version=5" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/room.css?version=3" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/room.css?version=4" rel="stylesheet" type="text/css" media="all">
     <link href="/css/living-room.css?version=1" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/house-render.js?version=3" defer></script>
-    <script src="/js/living-room-data.js?version=5" defer></script>
-    <script src="/js/house-room.js?version=7" defer></script>
-    <script src="/js/room.js?version=7" defer></script>
+    <script src="/js/house-render.js?version=4" defer></script>
+    <script src="/js/living-room-data.js?version=6" defer></script>
+    <script src="/js/house-room.js?version=8" defer></script>
+    <script src="/js/room.js?version=8" defer></script>
   </head>
   <body>
 	<div class="main-container">
@@ -25,7 +25,10 @@
 			</div>
 			{{ template "t_lsidebar.html" . }}
 			<div class="subwindow" id="text-box">
-				<button type="button" id="room-look" aria-label="Look: list everything in the room">見る LOOK</button>
+				<div id="room-cmds">
+					<button type="button" id="room-back" aria-label="Back: where you came from" hidden>戻る BACK</button>
+					<button type="button" id="room-look" aria-label="Look: list everything in the room">見る LOOK</button>
+				</div>
 				<div class="text-container">
 					<p class="speaker-text">Ｐａｎｄａ</p>
 					<p class="dialog-text" id="room-text" aria-live="polite"></p>
