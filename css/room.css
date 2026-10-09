@@ -23,22 +23,13 @@
     height: 100%;
 }
 
-/* lit sprites and the city twinkle sit over the art at native-pixel rects (set in % by room.js) */
-.room-lit,
+/* the city twinkle sits over the art at a native-pixel rect (set in % by room.js) */
 #room-twinkle {
     position: absolute;
     display: block;
     pointer-events: none;
 }
 
-.room-lit {
-    visibility: hidden;
-}
-
-/* hover and keyboard focus light the object up, instantly, PC-98 style */
-.room-lit.on {
-    visibility: visible;
-}
 
 #room-twinkle {
     background-repeat: no-repeat;
@@ -60,12 +51,6 @@
     height: 100%;
 }
 
-/* night lighting: everything but the hotspots sits a little darker */
-.room-shade {
-    fill: #000;
-    opacity: 0.38;
-    pointer-events: none;
-}
 
 .room-hotspot {
     fill: transparent;

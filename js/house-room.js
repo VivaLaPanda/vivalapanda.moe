@@ -1,7 +1,6 @@
 // A room of Panda's house, live: the house's state (/house/state.json, written every minute on the server from the
 // home API on rodney) drawn into the room by js/house-render.js. Both rooms follow the real time of day (the
-// registers) and show their lamps at their real brightness and colour, and every hover state is drawn in the same
-// light. What else a room shows is whatever its scene has: the living room's blinds come down to their real height,
+// registers) and show their lamps at their real brightness and colour. What else a room shows is whatever its scene has: the living room's blinds come down to their real height,
 // its thermostat's face warms when the heat is on, its kotatsu glows when plugged in, its TV shows a picture when on
 // (a moving one when something plays), notes rise off its speakers while music plays, and a small readout gives the
 // house's clock and temperature; the bedroom's city lights twinkle only after dark. Without the state (the feed down)
@@ -114,7 +113,6 @@
         var ov = overrides();
         var px = HouseRender.renderPixels(scene, stateNow(ov));
         api.art.src = HouseRender.toURL(px, scene.w, scene.h, 4);
-        drawLits(ov);
         if (scene.tv) drawTV();
         if (scene.speakers) drawMusic();
         if (R.house.hud) drawHud();
@@ -124,40 +122,13 @@
         }
     }
 
-    // each object's hover state in the same light: its inks one step up the ramp, a 1px rim of light round it
-    function drawLits(ov) {
-        R.objects.concat(R.knickKnacks || []).forEach(function (o) {
-            var img = api.lits[o.id], hs = scene.hotspots[o.id];
-            if (!img || !hs) return;
-            var m = scene.mask[hs.mask], L = hs.lit, w = scene.w;
-            var rimInk = scene.rim != null ? scene.rim : scene.registers.paper;
-            var lov = new Uint8Array(ov), keep = new Uint8Array(L.w * L.h);
-            for (var y = L.y; y < L.y + L.h; y++) for (var x = L.x; x < L.x + L.w; x++) {
-                var p = y * w + x, k0 = (y - L.y) * L.w + (x - L.x);
-                if (m[p]) {
-                    var ix = lov[p] !== 255 ? lov[p] : scene.idx[p];
-                    var up = scene.ramp[ix];
-                    if (up !== undefined) lov[p] = up;
-                    keep[k0] = 1;
-                } else if ((x > 0 && m[p - 1]) || (x < w - 1 && m[p + 1]) || m[p - w] || m[p + w]) {
-                    lov[p] = rimInk;                            // a 1px rim of light round it
-                    keep[k0] = 1;
-                }
-            }
-            var px = HouseRender.renderPixels(scene, stateNow(lov), L);
-            for (var k1 = 0; k1 < keep.length; k1++) if (!keep[k1]) px[k1 * 4 + 3] = 0;
-            img.src = HouseRender.toURL(px, L.w, L.h, 4);
-        });
-    }
-
     function overlay(id, tag) {
         var node = overlays[id];
         if (!node) {
             node = document.createElement(tag || "div");
             node.className = "lr-layer";
             node.setAttribute("aria-hidden", "true");
-            var firstLit = api.stage.querySelector(".room-lit");
-            api.stage.insertBefore(node, firstLit || api.svg);
+            api.stage.insertBefore(node, api.svg);
             overlays[id] = node;
         }
         return node;

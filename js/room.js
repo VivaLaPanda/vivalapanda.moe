@@ -34,7 +34,6 @@
     var spots = [];        // filled at start: a room may get its outlines late (R.ready)
     var shapes = {};       // id -> hit polygon (the focusable element)
     var outlines = {};     // id -> exact outline polygon (LOOK's flash)
-    var lits = {};         // id -> lit sprite <img>
     var seen = loadSeen(); // id -> true
     var state = "idle";    // idle | talking | choosing
     var typing = null;     // { timer, line, onDone }
@@ -93,25 +92,8 @@
             stage.insertBefore(tw, svg);
         }
 
-        // each object's lit state (brightened, with a warm rim), shown on hover and focus
-        spots.forEach(function (o) {
-            if (!o.lit) return;
-            var img = el("img", { "class": "room-lit", src: o.lit.src, alt: "", "aria-hidden": "true" });
-            placeNative(img, o.lit.x, o.lit.y, o.lit.w, o.lit.h);
-            stage.insertBefore(img, svg);
-            lits[o.id] = img;
-        });
-
-        // dim everything except the hotspots, so the objects read as lit
-        var defs = el("defs", {}, true);
-        var mask = el("mask", { id: "room-lit" }, true);
-        mask.appendChild(el("rect", { width: s.width, height: s.height, fill: "white" }, true));
-        spots.forEach(function (o) {
-            mask.appendChild(el("polygon", { points: points(o.polygon), fill: "black" }, true));
-        });
-        defs.appendChild(mask);
-        svg.appendChild(defs);
-        svg.appendChild(el("rect", { "class": "room-shade", width: s.width, height: s.height, mask: "url(#room-lit)" }, true));
+        // (no hover glow and no shade over the rest: the user found both made the room's light read wrong;
+        // the magnifier cursor and LOOK's outline flash are how things are found)
 
         // exact outlines, for LOOK's flash
         var og = el("g", {}, true);
@@ -352,7 +334,6 @@
 
     function hover(o) {
         shapes[o.id].classList.add("active");
-        if (lits[o.id]) lits[o.id].classList.add("on");
         // a greeting box that's finished typing gives way to the first thing you point at
         if (inGreeting && !typing) toIdle();
         // the line stays up after the pointer leaves (WCAG 1.4.13), until something else replaces it
@@ -361,7 +342,6 @@
 
     function unhover(o) {
         shapes[o.id].classList.remove("active");
-        if (lits[o.id]) lits[o.id].classList.remove("on");
     }
 
     // a line, or a function giving it now (a room with live state)
@@ -517,7 +497,7 @@
     function start() {
         spots = byRank.concat(knickKnacks.filter(function (k) { return k.polygon; }));
         buildScene();
-        if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, lits: lits, placeNative: placeNative });
+        if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, placeNative: placeNative });
         say(lines(R.greeting), null, true);
         resetIdle();
         if (!reduceMotion) setInterval(glint, GLINT_MS);
