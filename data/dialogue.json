@@ -1,0 +1,464 @@
+{
+  "_readme": [
+    "Every line Panda says in the two rooms: the bedroom (/room.html) and the living room (Home, /living-room.html).",
+    "Edit freely; the pages read this file on load (no build step). Keys starting with _ are notes and are ignored.",
+    "Keep each line <= 48 characters (one dialog-box line; longer ones log a warning in the browser console).",
+    "Use straight quotes: the PC-98 font draws curly ones full-width.",
+    "greeting: the opening box. hover: the line shown on pointing at an object. click: the box on first opening it this",
+    "visit; repeat: on opening it again. lines (on an object): what a no-link object says. choices: the menu after click.",
+    "lines (on a room): idle (said after a while with no input), empty (clicking nothing), and the menu replies.",
+    "Living room only, for live state: hover_on / hover_off / hover_unknown (lamp on, off, house feed down);",
+    "hover_blind_down (balcony door with its blind down); {temp} and {heat} in the thermostat lines (unknown -> hover_unknown).",
+    "Bedroom lines are adapted visual-novel lines; their sources: pc98-assets/assets/panda-room/dialogue-sources.md."
+  ],
+  "bedroom": {
+    "greeting": [
+      "Welcome, traveler, to my room of mysteries.",
+      "Don't be shy now, come on in.",
+      "Poke around all you like! Lost? Press LOOK."
+    ],
+    "objects": {
+      "window": {
+        "name": "Window",
+        "hover": "E-everything looks so p-pretty at night...",
+        "click": [
+          "The town, the people... we're all family.",
+          "I tweet about it way too much. Mostly zoning."
+        ],
+        "repeat": [
+          "Pleeease... take me somewhere~"
+        ],
+        "choices": [
+          {
+            "label": "Visit Twitter",
+            "href": "https://twitter.com/vivalapanda"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "phone": {
+        "name": "Phone",
+        "hover": "Eh? My phone's buzzing... is that you?",
+        "click": [
+          "On Discord, you can call me vivalapanda.",
+          "Secrets go on Signal. They're safe with me."
+        ],
+        "repeat": [
+          "If friends gossip about us... how embarrassing."
+        ],
+        "choices": [
+          {
+            "label": "Copy my Discord handle",
+            "copy": "vivalapanda"
+          },
+          {
+            "label": "Message on Signal",
+            "href": "https://signal.me/#eu/MIrm4ig1ASPFMk21aOIshA8-K9WukBzeRf-EyQ0YWOGqG6brSNlHlqtuk1IbLs5H"
+          },
+          {
+            "label": "Never mind"
+          }
+        ]
+      },
+      "pc": {
+        "name": "PC",
+        "hover": "I keep falling asleep at that computer...",
+        "click": [
+          "My true love has always been my computer.",
+          "Everything I make ends up on GitHub."
+        ],
+        "repeat": [
+          "Back again? It's an infinitely repeating game."
+        ],
+        "choices": [
+          {
+            "label": "Visit GitHub",
+            "href": "https://github.com/VivaLaPanda"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "newspaper": {
+        "name": "Newspaper",
+        "hover": "Heh. Who knew my essays could be interesting?",
+        "click": [
+          "I write about cities on my Substack.",
+          "Well, you can read it at your own pace."
+        ],
+        "repeat": [
+          "Are you ready to continue reading?"
+        ],
+        "choices": [
+          {
+            "label": "Read the Portal",
+            "href": "https://vlpanda.substack.com"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "bookshelf": {
+        "name": "Bookshelf",
+        "_note": "The one on-site link in the room: Panda chose the bookshelf over a sidebar icon (2026-10-07).",
+        "hover": "If it's books you want, leave it to me.",
+        "click": [
+          "You could say I really enjoy reading...",
+          "I barely got to do any reading today, so..."
+        ],
+        "repeat": [
+          "Coffee can be nice with books too, you know?"
+        ],
+        "choices": [
+          {
+            "label": "Browse my reading list",
+            "href": "/reading/"
+          },
+          {
+            "label": "Visit Goodreads",
+            "href": "https://www.goodreads.com/user/show/89085265-vivalapanda"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "butterfly": {
+        "name": "Butterfly",
+        "hover": "I love butterflies. They are the best animal.",
+        "click": [
+          "That one's my Bluesky. I'm there sometimes.",
+          "It wouldn't be so bad to be the sky."
+        ],
+        "repeat": [
+          "Why would it be a bird? It's a butterfly!"
+        ],
+        "choices": [
+          {
+            "label": "Visit Bluesky",
+            "href": "https://bsky.app/profile/vivalapanda.moe"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "tv": {
+        "name": "TV",
+        "hover": "You've found the television, then.",
+        "click": [
+          "Every movie I watch goes on my Letterboxd.",
+          "Let's go watch!"
+        ],
+        "repeat": [
+          "It's pro wrestling! Woo! Woo!"
+        ],
+        "choices": [
+          {
+            "label": "Visit Letterboxd",
+            "href": "https://letterboxd.com/VivaLaPanda/"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "letter": {
+        "name": "Letter",
+        "hover": "I wrote to my parents last week.",
+        "click": [
+          "You can write to me too! I'm at me@panda.moe.",
+          "Everything that you write is a treasure to me."
+        ],
+        "repeat": [
+          "Write to me, okay? I'll write back."
+        ],
+        "choices": [
+          {
+            "label": "Write to me@panda.moe",
+            "href": "mailto:me@panda.moe"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "controller": {
+        "name": "Game console",
+        "_note": "Verified 2026-10-04: profile VivaLaPanda, summary \"I play games rarely.\"",
+        "hover": "Eh? Just playing some Cities: Skylines.",
+        "click": [
+          "I play games rarely. ...Very rarely.",
+          "Hey, what's your favorite game?"
+        ],
+        "repeat": [
+          "Fancy another game?"
+        ],
+        "choices": [
+          {
+            "label": "Visit Steam",
+            "href": "https://steamcommunity.com/id/vivalapanda"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "lesswrong": {
+        "name": "Tome",
+        "hover": "Ah, now I started thinking again. This is bad.",
+        "click": [
+          "My nerdier essays go up on LessWrong.",
+          "I could go on, but I think you get the point..."
+        ],
+        "repeat": [
+          "As rational as ever, I see."
+        ],
+        "choices": [
+          {
+            "label": "Visit LessWrong",
+            "href": "https://www.lesswrong.com/users/vivalapanda"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "linkedin": {
+        "name": "Blazer",
+        "hover": "Is it hard, being an adult?",
+        "click": [
+          "I wear it to interviews. And on LinkedIn.",
+          "Need me for work stuff? LinkedIn's the place."
+        ],
+        "repeat": [
+          "Thank you for your hard work today."
+        ],
+        "choices": [
+          {
+            "label": "Visit LinkedIn",
+            "href": "https://www.linkedin.com/in/smithdevio/"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "kitsu": {
+        "name": "Anime tapes",
+        "_note": "Verified 2026-10-06: last list update 2022-07-10, 544 entries, ~93 days of anime. More current than MAL (last update 2018).",
+        "hover": "Gaze upon my anime tapes and despair!",
+        "click": [
+          "Kitsu says I've watched 93 days of anime.",
+          "...And I stopped logging in 2022. Oops."
+        ],
+        "repeat": [
+          "Holy moly! Anime is so extreme these days"
+        ],
+        "choices": [
+          {
+            "label": "Visit Kitsu",
+            "href": "https://kitsu.io/users/VivaLaPanda"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "stackoverflow": {
+        "name": "Rubber duck",
+        "hover": "You think rubber ducks are creepy?",
+        "click": [
+          "I asked the duck for an answer. It was no use.",
+          "So I took my question to Stack Overflow."
+        ],
+        "repeat": [
+          "That's a good question. ...Closed as duplicate."
+        ],
+        "choices": [
+          {
+            "label": "Visit Stack Overflow",
+            "href": "https://stackoverflow.com/users/4951118/adrian-smith"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "bump": {
+        "name": "City map",
+        "hover": "I'm not lost. I just don't know where I am.",
+        "click": [
+          "On Bump, my friends are pins on a map.",
+          "I can tell where you went without a GPS."
+        ],
+        "repeat": [
+          "I've got to go meet up with a friend of mine."
+        ],
+        "choices": [
+          {
+            "label": "Add me on Bump",
+            "href": "https://bump.app/p/pAIOBwqINtUQR"
+          },
+          {
+            "label": "Look at something else"
+          }
+        ]
+      },
+      "plush": {
+        "name": "Panda plush",
+        "hover": "The panda says, 'Gao, gao!'",
+        "lines": [
+          "He's the original Panda. I'm the sequel.",
+          "Sorry, I was born cute."
+        ]
+      },
+      "poster": {
+        "name": "Poster",
+        "hover": "Cuteness wins in the end. Cuteness is justice!",
+        "lines": [
+          "That's my favorite magical girl!",
+          "Abracadabra! Welcome to life as a magical girl!"
+        ]
+      }
+    },
+    "lines": {
+      "idle": [
+        "It's nice and quiet in here, isn't it?",
+        "Do... would you like some tea?",
+        "Luck comes to those who smile. So, smile!",
+        "Hear that? The last train's heading home."
+      ],
+      "empty": [
+        "Hm? Are you talking to moi?",
+        "If you need something, just say it!",
+        "Hey, don't make that face.",
+        "Uguu..."
+      ],
+      "lookPrompt": "What do you want to look at?",
+      "leaving": "It's not good bye, it's see you again.",
+      "copied": "Copied! It's vivalapanda.",
+      "copyFailed": "Huh? It didn't copy... it's vivalapanda!",
+      "backToRoom": "Okkei!",
+      "allSeen": "Congratulations! You found everything~!"
+    }
+  },
+  "living_room": {
+    "greeting": [
+      "Welcome home! This is my living room.",
+      "It's my real house, live. Lights and all!",
+      "The doors lead on. Have a look around!"
+    ],
+    "objects": {
+      "door_bedroom": {
+        "name": "Bedroom door",
+        "hover": "My room's through there. Everything's in it.",
+        "click": [
+          "My room: all my places on the web.",
+          "Twitter, GitHub, my reading list..."
+        ],
+        "repeat": [
+          "Back to my room?"
+        ],
+        "choices": [
+          {
+            "label": "Go to Panda's room",
+            "href": "/room.html"
+          },
+          {
+            "label": "Stay here"
+          }
+        ]
+      },
+      "door_outside": {
+        "name": "Balcony door",
+        "hover": "The city's right out there. Get some air?",
+        "hover_blind_down": "The blind's down, but the city's out there.",
+        "click": [
+          "Outside's a whole city to wander.",
+          "Want to go explore?"
+        ],
+        "repeat": [
+          "Going out again?"
+        ],
+        "choices": [
+          {
+            "label": "Step outside",
+            "href": "/explore/explore.html"
+          },
+          {
+            "label": "Stay in"
+          }
+        ]
+      },
+      "lamp_dining": {
+        "name": "Dining room light",
+        "hover_on": "The dining light's on right now.",
+        "hover_off": "The dining light's off right now.",
+        "hover_unknown": "The dining light. On? Off? Who knows.",
+        "lines": [
+          "It's my real lamp. When I flip it at home,",
+          "it flips here too, within five minutes."
+        ]
+      },
+      "lamp_sun": {
+        "name": "The Sun",
+        "hover_on": "The Sun is on. It's a very bright lamp.",
+        "hover_off": "The Sun is off. A little sunset indoors.",
+        "hover_unknown": "The Sun. My brightest lamp.",
+        "lines": [
+          "I named my Brighter lamp The Sun.",
+          "It helps on gray mornings."
+        ]
+      },
+      "lamp_corner": {
+        "name": "Corner lamp",
+        "hover_on": "The corner lamp's on.",
+        "hover_off": "The corner lamp's off.",
+        "hover_unknown": "The corner lamp.",
+        "lines": [
+          "A little lamp for reading in the corner."
+        ]
+      },
+      "lamp_window": {
+        "name": "Windowside lamp",
+        "hover_on": "The windowside lamp's on.",
+        "hover_off": "The windowside lamp's off.",
+        "hover_unknown": "The windowside lamp.",
+        "lines": [
+          "It sits by the window. Very cozy at night."
+        ]
+      },
+      "thermostat": {
+        "name": "Thermostat",
+        "hover": "It's {temp}°F in here. Heat's {heat}.",
+        "hover_unknown": "The thermostat's not talking right now.",
+        "lines": [
+          "It's {temp}°F in here. Heat's {heat}.",
+          "That's the real reading from my thermostat."
+        ]
+      }
+    },
+    "lines": {
+      "empty": [
+        "That's just the room. Try the doors?",
+        "Mm, nothing there.",
+        "Look around! Press LOOK if you're lost."
+      ],
+      "idle": [
+        "The doors go places. Just so you know.",
+        "Still here? Make yourself at home."
+      ],
+      "allSeen": "You've seen the whole room. Thanks for visiting!",
+      "leaving": "See you around!",
+      "backToRoom": "Okay! Take your time.",
+      "lookPrompt": "What do you want to look at?",
+      "copied": "Copied!",
+      "copyFailed": "Hm, that didn't copy."
+    }
+  }
+}

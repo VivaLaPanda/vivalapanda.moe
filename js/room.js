@@ -1,5 +1,8 @@
 // Panda's Room: hotspots over the scene, Panda narrating in the dialog box.
-// Content (art, polygons, lines, links) lives in js/room-data.js; this file is only mechanics.
+// Art, polygons and anchors live in js/room-data.js (the bedroom) or js/living-room-data.js; every line Panda says,
+// and each object's menu, in /data/dialogue.json (R.dialogue names the room's section), merged in before the room
+// starts. This file is only mechanics. A room's data may give a line as a function instead, for state that changes
+// (the living room's lamps), and R.onBuilt(api) hands the built scene to a room's own script.
 (function () {
     "use strict";
 
@@ -10,7 +13,9 @@
     var IDLE_NEXT_MS = 45000;  // then this often...
     var IDLE_MAX = 3;          // ...at most this many per visit
     var GLINT_MS = 9000;
-    var SEEN_KEY = "pandaRoomSeen";
+    var MAX_LINE = 48;         // characters in one dialog-box line
+    var DIALOGUE = "/data/dialogue.json";
+    var SEEN_KEY = R.seenKey || "pandaRoomSeen";
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     var frame = document.getElementById("room-frame");
@@ -25,7 +30,8 @@
 
     var byRank = R.objects.slice().sort(function (a, b) { return a.rank - b.rank; });
     // every hotspot: the linked objects by rank, then knick-knacks that are drawn in the scene
-    var spots = byRank.concat(R.knickKnacks.filter(function (k) { return k.polygon; }));
+    var knickKnacks = R.knickKnacks || [];
+    var spots = byRank.concat(knickKnacks.filter(function (k) { return k.polygon; }));
     var shapes = {};       // id -> hit polygon (the focusable element)
     var outlines = {};     // id -> exact outline polygon (LOOK's flash)
     var lits = {};         // id -> lit sprite <img>
@@ -350,7 +356,7 @@
         // a greeting box that's finished typing gives way to the first thing you point at
         if (inGreeting && !typing) toIdle();
         // the line stays up after the pointer leaves (WCAG 1.4.13), until something else replaces it
-        if (state === "idle") show(o.hover, true);
+        if (state === "idle") show(lines(o.hover), true);
     }
 
     function unhover(o) {
@@ -358,16 +364,21 @@
         if (lits[o.id]) lits[o.id].classList.remove("on");
     }
 
+    // a line, or a function giving it now (a room with live state)
+    function lines(x) {
+        return typeof x === "function" ? x() : x;
+    }
+
     function open(o) {
         seen[o.id] = true;
         saveSeen();
         markSeen();
         if (!o.choices) { // a knick-knack: just a line
-            say(o.lines);
+            say(lines(o.lines));
             return;
         }
         // the first click this visit gets the full lines; clicking again gets the repeat joke
-        say(o.visited && o.repeat ? o.repeat : o.click, function () { offer(o.choices); });
+        say(lines(o.visited && o.repeat ? o.repeat : o.click), function () { offer(o.choices); });
         o.visited = true;
     }
 
@@ -377,7 +388,7 @@
         svg.classList.add("reveal");
         setTimeout(function () { svg.classList.remove("reveal"); }, 1600);
 
-        var list = byRank.concat(R.knickKnacks).map(function (o) {
+        var list = byRank.concat(knickKnacks).map(function (o) {
             return { label: o.name, object: o, dim: seen[o.id] };
         });
         list.push({ label: "Never mind" });
@@ -463,8 +474,62 @@
         document.addEventListener(ev, resetIdle, { passive: true });
     });
 
-    buildScene();
-    say(R.greeting, null, true);
-    resetIdle();
-    if (!reduceMotion) setInterval(glint, GLINT_MS);
+    // ---------- dialogue ----------
+
+    // the room's section of dialogue.json onto R and its objects (keys starting with _ are notes; a field the data
+    // gives as a function stays, and reads R.said itself)
+    function applyDialogue(all) {
+        var d = all && all[R.dialogue];
+        if (!d) {
+            d = { objects: {}, greeting: ["Hm, my lines didn't load. Try reloading?"], lines: FALLBACK_LINES };
+            console.warn("dialogue: no section " + R.dialogue + " in " + DIALOGUE);
+        }
+        R.said = d;
+        if (typeof R.greeting !== "function") R.greeting = d.greeting;
+        R.lines = d.lines;
+        R.objects.concat(knickKnacks).forEach(function (o) {
+            var t = d.objects[o.id] || {};
+            Object.keys(t).forEach(function (k) {
+                if (k.charAt(0) !== "_" && typeof o[k] !== "function") o[k] = t[k];
+            });
+            if (!o.name) o.name = o.id;
+            if (!o.choices && !o.lines) o.lines = ["..."];
+        });
+        checkLengths(d, R.dialogue);
+    }
+
+    var FALLBACK_LINES = { empty: ["..."], idle: ["..."], allSeen: "...", leaving: "...", backToRoom: "...",
+                           lookPrompt: "Look at:", copied: "Copied!", copyFailed: "That didn't copy." };
+
+    // a warning for any line too long for the box, so hand edits show up in the console
+    function checkLengths(x, path) {
+        if (typeof x === "string") {
+            if (x.length > MAX_LINE && !/^(https?:|mailto:|\/)/.test(x)) {
+                console.warn("dialogue: " + path + " is " + x.length + " characters (max " + MAX_LINE + "): " + x);
+            }
+        } else if (x && typeof x === "object") {
+            Object.keys(x).forEach(function (k) {
+                if (k.charAt(0) !== "_" && k !== "href" && k !== "copy") checkLengths(x[k], path + "." + k);
+            });
+        }
+    }
+
+    function start() {
+        buildScene();
+        if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, lits: lits, placeNative: placeNative });
+        say(lines(R.greeting), null, true);
+        resetIdle();
+        if (!reduceMotion) setInterval(glint, GLINT_MS);
+    }
+
+    fetch(DIALOGUE, { cache: "no-cache" }).then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+    }).catch(function (err) {
+        console.warn("dialogue unavailable:", err);
+        return null;
+    }).then(function (all) {
+        applyDialogue(all);
+        start();
+    });
 })();
