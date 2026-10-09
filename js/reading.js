@@ -27,6 +27,13 @@
         return "★★★★★".slice(0, rating) + "☆☆☆☆☆".slice(0, 5 - rating);
     }
 
+    // "Bog Standard Isekai #1" / "Butcher of Gadobhra, #3" / "Dune, #1-6" -> "Bog Standard Isekai · book 1"
+    function seriesLabel(series) {
+        var m = /^(.*?),?\s*#\s*(\S+)$/.exec(series);
+        if (!m) return series;
+        return m[1] + " · book" + (/[-–]/.test(m[2]) ? "s " : " ") + m[2].replace("-", "–");
+    }
+
     function dotted(date) {
         return date.replace(/-/g, ".");
     }
@@ -111,13 +118,19 @@
         return c;
     }
 
+    // no cover art: the title lettered on a plain frame
+    function missing(frame, book) {
+        frame.classList.add("reading-cover-missing");
+        frame.appendChild(el("span", "reading-cover-text", book.title));
+    }
+
     function cover(book, width, large) {
         var frame = el("span", "reading-cover");
         frame.setAttribute("role", "img");
         frame.setAttribute("aria-label", book.title);
         var src = large ? book.cover_large : book.cover;
         if (!src) {
-            frame.classList.add("reading-cover-missing");
+            missing(frame, book);
             return frame;
         }
         enqueue(function (done) {
@@ -133,7 +146,7 @@
                 });
             };
             img.onerror = function () {
-                frame.classList.add("reading-cover-missing");
+                missing(frame, book);
                 done();
             };
             img.src = src;
@@ -158,24 +171,22 @@
         out.appendChild(ul);
     }
 
-    // a book with its cover: what's being read now
-    function coverCard(book) {
-        var card = el("article", "reading-current");
-        card.appendChild(outLink(book.link, cover(book, 98, true), "reading-current-cover"));
-        var meta = el("div", "reading-meta");
-        meta.appendChild(outLink(book.link, book.title, "reading-title"));
-        if (book.series) meta.appendChild(el("span", "reading-series", "(" + book.series + ")"));
-        meta.appendChild(el("div", "reading-author", book.author));
-        card.appendChild(meta);
-        return card;
+    // a labelled grid of covers with titles and authors (what's being read now)
+    function coverGrid(label, books) {
+        if (!books.length) return;
+        section(label);
+        var grid = el("ul", "reading-shelf reading-now");
+        books.forEach(function (b) { grid.appendChild(shelfItem(b, true)); });
+        out.appendChild(grid);
     }
 
     // the favourites shelf: covers with their titles underneath
-    function shelfItem(book) {
+    function shelfItem(book, withAuthor) {
         var li = el("li", "reading-shelf-item");
         var a = outLink(book.link, cover(book, 98, false), "reading-shelf-link");
         a.title = book.title + " by " + book.author;
         a.appendChild(el("span", "reading-shelf-title", book.title));
+        if (withAuthor) a.appendChild(el("span", "reading-shelf-author", book.author));
         li.appendChild(a);
         return li;
     }
@@ -185,7 +196,7 @@
         var li = el("li", "reading-book");
         var main = el("div", "reading-meta");
         main.appendChild(outLink(book.link, book.title, "reading-title"));
-        if (book.series) main.appendChild(el("span", "reading-series", "(" + book.series + ")"));
+        if (book.series) main.appendChild(el("span", "reading-series", seriesLabel(book.series)));
         main.appendChild(el("div", "reading-author", book.author));
         if (book.review) {
             var review = el("p", "reading-review", book.review);
@@ -221,12 +232,10 @@
         if (!read.length && !reading.length) throw new Error("empty shelves");
         out = document.createDocumentFragment();
 
-        if (reading.length) {
-            section("Currently reading");
-            var now = el("div", "reading-now");
-            reading.forEach(function (b) { now.appendChild(coverCard(b)); });
-            out.appendChild(now);
-        }
+        var caughtUp = reading.filter(function (b) { return (b.shelves || []).indexOf("caught-up") >= 0; });
+        var active = reading.filter(function (b) { return caughtUp.indexOf(b) < 0; });
+        coverGrid("Currently reading", active);
+        coverGrid("Caught up, waiting for more", caughtUp);
 
         // the "favorites" shelf Panda curates on Goodreads (hidden until it has books)
         var favourites = shelves.favorites || [];

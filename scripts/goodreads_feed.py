@@ -51,6 +51,10 @@ def when(text):
     return parsedate_to_datetime(text).astimezone(timezone.utc).date().isoformat() if text else None
 
 
+def real_cover(url):
+    return None if not url or "/nophoto/" in url else url
+
+
 def book(item):
     get = lambda tag: (item.findtext(tag) or "").strip()
     title, series = get("title").translate(QUOTES), None
@@ -65,8 +69,10 @@ def book(item):
         "link": f"https://www.goodreads.com/book/show/{get('book_id')}",
         "review_link": get("link"),
         # i.gr-assets.com sends Access-Control-Allow-Origin: *, so the page can run covers through the PC-98 filter
-        "cover": get("book_medium_image_url") or get("book_image_url"),
-        "cover_large": get("book_large_image_url") or get("book_medium_image_url"),
+        # books without a cover get Goodreads' "nophoto" placeholder, which has no CORS header: the page draws its own
+        "cover": real_cover(get("book_medium_image_url") or get("book_image_url")),
+        "cover_large": real_cover(get("book_large_image_url") or get("book_medium_image_url")),
+        "shelves": [s for s in re.split(r"[,\s]+", get("user_shelves")) if s],
         "rating": int(get("user_rating") or 0),
         "read": when(get("user_read_at")),
         "added": when(get("user_date_added")),
@@ -106,6 +112,7 @@ def main():
         sys.exit("the read shelf came back empty; keeping the existing file")
     # newest first: by date read where there is one, otherwise by when the book was added
     for books in shelves.values():
+        books.sort(key=lambda b: b["title"].lower())  # ties (a bulk import shares one date) read A to Z
         books.sort(key=lambda b: (b["read"] or "", b["added"] or ""), reverse=True)
     data = {
         "profile": PROFILE_URL,

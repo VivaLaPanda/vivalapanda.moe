@@ -43,10 +43,6 @@
     opacity: 1;
 }
 
-.reading-cover-missing {
-    background-image: none;
-}
-
 /* the whole list arrives in one piece and fades in, instead of pushing what's below it down */
 #reading.reading-in {
     animation: reading-in 0.35s ease-out;
@@ -221,4 +217,31 @@
     #talltext .reading-title {
         font-size: 19px;
     }
+}
+
+/* the shelf grids also name the author under the title */
+.reading-shelf-author {
+    margin-top: 2px;
+    font-size: 13px;
+    line-height: 1.2;
+    color: #8866aa;
+}
+
+/* no cover art: the title, lettered on the frame */
+.reading-cover-missing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #664477;
+    background-image: none;
+}
+
+.reading-cover-text {
+    padding: 6px;
+    font-family: 'pc-98-bold';
+    font-size: 13px;
+    line-height: 1.25;
+    text-align: center;
+    color: #ffc4cf;
+    overflow-wrap: anywhere;
 }
