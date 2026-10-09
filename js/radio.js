@@ -46,7 +46,17 @@ function advent() {
 }
 
 
+// phones: the radio's face keeps its 740x528 layout (its controls sit on its pixels) and the management panel its
+// 762x252 one; both are scaled to the screen's width (css/radio.css reads these)
+function fitPhone() {
+	var root = document.documentElement.style;
+	root.setProperty('--radio-scale', document.getElementById('main-image').clientWidth / 740);
+	root.setProperty('--manage-scale', document.getElementById('text-box').clientWidth / 762);
+}
+window.addEventListener('resize', fitPhone);
+
 window.onload = function(){
+    fitPhone();
     setup();
 	const adventCode = advent()	
 	

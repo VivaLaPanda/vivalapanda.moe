@@ -572,3 +572,54 @@
     height: 100%;
     z-index: 1;
 }
+@media (max-width: 768px) {
+    /* phones: the radio on top at the window's 740:528, its face scaled to fit (its controls are placed on its
+       pixels: js/radio.js sets --radio-scale), the dialog box below it as on the other pages */
+    #radio-window {
+        background-image: none;
+    }
+
+    #main-image,
+    #text-box {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    #main-image {
+        height: auto;
+        aspect-ratio: 740 / 528;
+    }
+
+    #radio-img {
+        width: 740px;
+        height: 528px;
+        transform-origin: 0 0;
+        transform: scale(var(--radio-scale, 0.527));
+    }
+
+    #text-box {
+        height: auto;
+        min-height: 230px;
+        background-color: #000;
+        border-top: 2px solid #8799ff;
+    }
+
+    #text-box .text-container {
+        position: relative;
+        padding: 8px 6px 24px 6px;
+    }
+
+    #radio-dialog {
+        font-size: 19px;
+    }
+
+    /* the management panel keeps its desktop layout, scaled to the box (--manage-scale) */
+    #manage-container {
+        width: 762px;
+        height: 252px;
+        transform-origin: 0 0;
+        transform: scale(var(--manage-scale, 0.512));
+    }
+}
