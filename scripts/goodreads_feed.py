@@ -26,7 +26,9 @@ PROFILE_URL = f"https://www.goodreads.com/user/show/{USER_ID}-vivalapanda"
 # the to-read shelf is left out on purpose: it's a wishlist, not reading. "favorites" is a shelf Panda curates on
 # Goodreads (the page's ★ Favourites); until it exists the section stays hidden.
 SHELVES = ["currently-reading", "read", "favorites"]
-FEED_URL = "https://www.goodreads.com/review/list_rss/{user}?shelf={shelf}&per_page=100&page={page}"
+# sorted by title so the pages are stable: by default the feed sorts by date added, and when many books share one (a
+# bulk import) its pages overlap and skip books
+FEED_URL = "https://www.goodreads.com/review/list_rss/{user}?shelf={shelf}&per_page=100&page={page}&sort=title"
 USER_AGENT = "vivalapanda.moe reading list (+https://vivalapanda.moe/reading/)"
 DEFAULT_OUTPUT = Path(__file__).resolve().parent.parent / "reading" / "books.json"
 
@@ -89,7 +91,8 @@ def shelf(name):
         if not (channel.findtext("title") or "").strip().endswith(": " + name):
             return []
         items = channel.findall("item")
-        books += [book(item) for item in items]
+        seen = {b["id"] for b in books}
+        books += [b for b in map(book, items) if b["id"] not in seen]
         if len(items) < 100:
             return books
         page += 1
