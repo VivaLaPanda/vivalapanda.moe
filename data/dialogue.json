@@ -344,6 +344,17 @@
           "It's on in my real room right now.",
           "Two bulbs. Very cozy."
         ]
+      },
+      "desk_lamp": {
+        "name": "Desk lamp",
+        "hover_off": "My desk lamp. Click to switch it on.",
+        "hover_on": "My desk lamp. Click to switch it off.",
+        "lines_on": [
+          "Click! There we go."
+        ],
+        "lines_off": [
+          "Click. Back to the screen's glow."
+        ]
       }
     },
     "lines": {

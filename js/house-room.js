@@ -51,6 +51,7 @@
     H.music = function () { return state && state.music; };
     H.kotatsuOn = function () { return scene && scene.kotatsu ? plug(scene.kotatsu.plug) : null; };
     H.blindPct = blindPct;
+    H.redraw = function () { draw(); };
 
     // ---------- rendering ----------
 
@@ -63,6 +64,9 @@
         Object.keys(scene.light_names).forEach(function (real) {
             var lamp = scene.light_names[real], l = light(lamp);
             if (l) out[lamp] = l;
+        });
+        Object.keys(R.house.local || {}).forEach(function (k) {     // lights only this page has (the desk lamp)
+            if (R.house.local[k].on) out[k] = R.house.local[k];
         });
         var tv = scene.tv && H.tv();
         if (tv && tv.on) out.tv = { on: true, brightness_pct: tv.playing ? 100 : 70 };

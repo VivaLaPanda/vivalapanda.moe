@@ -33,7 +33,8 @@ function standLampLine(key) {
 window.ROOM = {
     dialogue: "bedroom",
     // the room follows the real time of day, and its stand lamp the real bedroom lamp (js/house-room.js)
-    house: { base: "/img/room/house/", v: "1", hud: false },
+    house: { base: "/img/room/house/", v: "2", hud: false,
+             local: { desk: { on: false, brightness_pct: 100, kelvin: 3000 } } },   // the desk lamp: a visitor's
 
     scene: {
         src: "/img/room/room@4x.png?v=6",
@@ -167,6 +168,21 @@ window.ROOM = {
 
     // no link: just a line. With a polygon they're hotspots too; without one, LOOK list only.
     knickKnacks: [
+        {
+            // the desk lamp: clicking it switches it (here only; it isn't one of Panda's real lights)
+            id: "desk_lamp",
+            hover: function () {
+                var s = (window.ROOM.said && window.ROOM.said.objects.desk_lamp) || {};
+                return window.ROOM.house.local.desk.on ? s.hover_on : s.hover_off;
+            },
+            lines: function () {
+                var s = (window.ROOM.said && window.ROOM.said.objects.desk_lamp) || {};
+                var d = window.ROOM.house.local.desk;
+                d.on = !d.on;
+                if (window.HOUSE.redraw) window.HOUSE.redraw();
+                return d.on ? s.lines_on : s.lines_off;
+            }
+        },
         {
             // the stand lamp in the corner: its outline comes from the live scene (img/room/house/scene.json)
             id: "stand_lamp",
