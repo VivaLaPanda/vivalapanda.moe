@@ -7,7 +7,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-# a failed fetch retries instead of waiting for the next daily run; the last good books.json stays in place
+# a failed fetch retries instead of waiting for the next hourly run; the last good books.json stays in place
 Restart=on-failure
 RestartSec=5min
 ExecStart=/usr/bin/python3 /var/www/html/vivalapanda.moe/scripts/goodreads_feed.py /var/www/html/vivalapanda.moe/reading/books.json
