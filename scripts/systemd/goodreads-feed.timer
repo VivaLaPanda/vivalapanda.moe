@@ -1,10 +1,10 @@
 [Unit]
-Description=Hourly refresh of the reading list's Goodreads shelves
+Description=Daily refresh of the reading list's Goodreads shelves
 
 [Timer]
 OnBootSec=3min
-OnCalendar=hourly
-RandomizedDelaySec=10min
+OnCalendar=daily
+RandomizedDelaySec=1h
 Persistent=true
 
 [Install]

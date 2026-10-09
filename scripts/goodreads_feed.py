@@ -2,7 +2,7 @@
 """Fetch Panda's Goodreads shelves and write a compact books.json for /reading/.
 
 Goodreads closed its API to new keys in 2020, but every public shelf still has an RSS feed. On the server this runs
-hourly (see scripts/systemd/) and writes into the webroot; a failed fetch leaves the last good file in place.
+daily (see scripts/systemd/) and writes into the webroot; a failed fetch leaves the last good file in place.
 
 Usage: goodreads_feed.py [OUTPUT_PATH]   (default: reading/books.json next to this repo)
 """
