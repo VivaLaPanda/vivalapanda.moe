@@ -128,7 +128,7 @@ window.ROOM = {
             choices: [
                 // the one on-site link in the room: the user chose the bookshelf over a sidebar icon (2026-10-07)
                 { label: "Browse my reading list", href: "/reading/" },
-                { label: "Visit Goodreads", href: "https://www.goodreads.com/user/show/29012397-vivalapanda" },
+                { label: "Visit Goodreads", href: "https://www.goodreads.com/user/show/89085265-vivalapanda" },
                 { label: "Look at something else" }
             ]
         },

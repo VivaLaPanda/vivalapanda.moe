@@ -4,7 +4,7 @@
 // PC-98 filter (js/pc98.js); Goodreads' image CDN allows that (Access-Control-Allow-Origin).
 (function () {
     var root = document.getElementById("reading");
-    var PROFILE = "https://www.goodreads.com/user/show/29012397-vivalapanda";
+    var PROFILE = "https://www.goodreads.com/user/show/89085265-vivalapanda";
 
     function el(tag, className, text) {
         var node = document.createElement(tag);

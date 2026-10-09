@@ -20,9 +20,10 @@ from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
-USER_ID = "29012397"
+# Panda's main account since 2026-10 (the older 29012397 was folded into it)
+USER_ID = "89085265"
 PROFILE_URL = f"https://www.goodreads.com/user/show/{USER_ID}-vivalapanda"
-# the to-read shelf is left out on purpose: it hasn't changed since 2015. "favorites" is a shelf Panda curates on
+# the to-read shelf is left out on purpose: it's a wishlist, not reading. "favorites" is a shelf Panda curates on
 # Goodreads (the page's ★ Favourites); until it exists the section stays hidden.
 SHELVES = ["currently-reading", "read", "favorites"]
 FEED_URL = "https://www.goodreads.com/review/list_rss/{user}?shelf={shelf}&per_page=100&page={page}"
