@@ -204,12 +204,26 @@
             api.stage.appendChild(hud);
         }
         if (!state) { hud.textContent = "Panda's house · offline"; return; }
-        var parts = [state.local_time, phaseNow().toUpperCase()];
+        var parts = [houseClock(), phaseNow().toUpperCase()];
         var c = state.climate;
         if (c && c.temperature_f != null) parts.push(Math.round(c.temperature_f) + "°F");
         var age = (Date.now() - Date.parse(state.updated)) / 60000;
         hud.textContent = parts.join(" · ") + (age > STALE_MIN ? " (as of " + Math.round(age / 60) + "h ago)" : "");
         hud.title = "Panda's real house, updated every 5 minutes";
+    }
+
+    // the house's clock now: its UTC offset from the feed (local_time against updated), applied to this browser's clock,
+    // so the readout ticks instead of showing the feed's 5-minute-old time
+    function houseClock() {
+        var hm = /^(\d\d):(\d\d)$/.exec(state.local_time || "");
+        var u = new Date(state.updated);
+        if (!hm || isNaN(u)) return state.local_time;
+        var off = (+hm[1] * 60 + +hm[2]) - (u.getUTCHours() * 60 + u.getUTCMinutes());
+        off = ((off + 720) % 1440 + 1440) % 1440 - 720;          // into -12h..+12h
+        off = Math.round(off / 15) * 15;
+        var t = new Date(Date.now() + off * 60000);
+        var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+        return pad(t.getUTCHours()) + ":" + pad(t.getUTCMinutes());
     }
 
     // ---------- loading ----------
@@ -246,5 +260,6 @@
         setInterval(function () {
             if (!document.hidden) getState().then(draw);
         }, REFRESH_MS);
+        if (R.house.hud) setInterval(function () { if (state) drawHud(); }, 20000);
     };
 })();
