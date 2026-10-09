@@ -83,16 +83,18 @@
         Object.keys(scene.blinds || {}).forEach(function (name) {
             var pct = blindPct(name);
             if (pct === null || pct >= 98) return;
-            var b = scene.blinds[name];
+            // per column: the roll's foot and the track (both run to the VP), the weave's threads (spaced by depth),
+            // and the cloth's mask (nothing over the sofa or the arc lamp, which stand in front)
+            var b = scene.blinds[name], cloth = b.mask ? scene.mask[b.mask] : null;
             for (var x = b.x0; x <= b.x1; x++) {
-                var t = (x - b.x0) / Math.max(1, b.x1 - b.x0);
-                var top = Math.round(b.top[0] + (b.top[1] - b.top[0]) * t);
-                var bot = b.bottom[0] + (b.bottom[1] - b.bottom[0]) * t;
+                var i = x - b.x0, top = b.top[i], bot = b.bottom[i];
                 var end = Math.round(top + (bot - top) * (100 - pct) / 100);
-                for (var y = top; y <= end; y++) {
-                    var ink = (x - b.x0) % 5 === 0 ? I.desk : I.paper;   // a cream cloth, a faint weave
+                for (var y = Math.ceil(top); y <= end; y++) {
+                    var p = y * w + x;
+                    if (cloth && !cloth[p]) continue;
+                    var ink = b.weave[i] ? I.desk : I.paper;              // a cream cloth, a faint weave
                     if (y >= end - 1) ink = y === end ? I.dark : I.wood;  // its bottom bar
-                    o[y * w + x] = ink;
+                    o[p] = ink;
                 }
             }
         });

@@ -5,8 +5,8 @@
 // object's outline in before the room is built. Every line is in /data/dialogue.json, section "living_room": an
 // object's line can depend on the house (a lamp on or off), so the keys there come in variants (hover_on, hover_off,
 // hover_unknown, ...) and may hold {placeholders}; the functions below pick the variant and fill it in.
-// Two doors: the bedroom (Panda's Room, /room.html) on the left wall, the balcony's sliding doors (outside: the
-// explore map) on the right.
+// Two doors: the bedroom (Panda's Room, /room.html) on the left wall, and the front door beside it on the back wall
+// (outside: the explore map). The balcony's sliding doors on the right belong to the blinds over them.
 window.HOUSE = window.HOUSE || {};
 
 (function () {
@@ -103,23 +103,16 @@ window.HOUSE = window.HOUSE || {};
 
     R = window.ROOM = {
         dialogue: "living_room",
-        house: { base: "/img/living-room/", v: "8", hud: true },
+        house: { base: "/img/living-room/", v: "9", hud: true },
         seenKey: "pandaLivingRoomSeen",
-        scene: { src: "/img/living-room/noon@4x.png?v=8", width: 500, height: 357 },
+        scene: { src: "/img/living-room/noon@4x.png?v=9", width: 500, height: 357 },
 
         zOrder: ["lamp_dining", "lamp_window", "speaker_r", "kotatsu", "lamp_sun", "lamp_corner", "speaker_l",
                  "thermostat", "tv", "blind_living", "blind_dining", "door_bedroom", "door_outside"],
 
         objects: [
             { id: "door_bedroom", rank: 1, go: "/room.html" },         // hover: its line; click: through it
-            {
-                id: "door_outside", rank: 2,
-                hover: function () {
-                    var s = said("door_outside"), pct = H.blindPct ? H.blindPct("Living Room Blinds") : null;
-                    return pct !== null && pct < 15 ? (s.hover_blind_down || s.hover) : s.hover;
-                },
-                go: "/explore/explore.html"
-            },
+            { id: "door_outside", rank: 2, go: "/explore/explore.html" },   // the front door: out to the city
             {
                 id: "tv", rank: 3,
                 hover: function () {
