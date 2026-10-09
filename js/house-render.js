@@ -76,7 +76,10 @@
     function renderPixels(scene, state, rect) {
         var w = scene.w, h = scene.h;
         rect = rect || { x: 0, y: 0, w: w, h: h };
-        var pal = (scene.phases[state.phase] || scene.phases.noon).map(hexLin);
+        var amb = scene.ambient ? (scene.ambient[state.phase] || 1) : 1;      // a little under full by day: the
+        var pal = (scene.phases[state.phase] || scene.phases.noon).map(function (h) {   // glass's light gives direction
+            return hexLin(h).map(function (v) { return v * amb; });
+        });
         var alb = scene.albedo.map(hexLin);
         var out = new Uint8ClampedArray(rect.w * rect.h * 4);
         var on = [];
@@ -85,7 +88,8 @@
             if (!l || !l.on) return;
             var spec = scene.lights[name];
             var bri = l.brightness_pct == null ? 1 : Math.max(0.05, l.brightness_pct / 100);
-            on.push({ field: spec.field, shade: spec.shade, col: spec.color ? lightColour({ color: spec.color }) : lightColour(l),
+            var fixed = spec.phaseColor ? spec.phaseColor[state.phase] : spec.color;
+            on.push({ field: spec.field, shade: spec.shade, col: fixed ? lightColour({ color: fixed }) : lightColour(l),
                       gain: (spec.gain || 1) * bri * (spec.phaseGain ? spec.phaseGain[state.phase] || 0 : 1),
                       glow: bri });
         });

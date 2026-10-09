@@ -33,7 +33,7 @@ function deskLampLine(key) {
 window.ROOM = {
     dialogue: "bedroom",
     // the room follows the real time of day, and its desk lamp the real bedroom lamp (js/house-room.js)
-    house: { base: "/img/room/house/", v: "3", hud: false },
+    house: { base: "/img/room/house/", v: "4", hud: false },
 
     scene: {
         src: "/img/room/room@4x.png?v=6",

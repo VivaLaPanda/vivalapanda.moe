@@ -65,6 +65,12 @@
             var lamp = scene.light_names[real], l = light(lamp);
             if (l) out[lamp] = l;
         });
+        if (scene.lights.daylight) {
+            // the day through the glass, as far as the blinds let it in (all of it where the house has no blinds)
+            var names = Object.keys(scene.blinds || {}), open = 0, known = 0;
+            names.forEach(function (n) { var p = blindPct(n); if (p !== null) { open += p; known++; } });
+            out.daylight = { on: true, brightness_pct: known ? Math.max(8, open / known) : 100 };
+        }
         var tv = scene.tv && H.tv();
         if (tv && tv.on) out.tv = { on: true, brightness_pct: tv.playing ? 100 : 70 };
         if (scene.kotatsu && H.kotatsuOn()) out.kotatsu = { on: true, brightness_pct: 100 };

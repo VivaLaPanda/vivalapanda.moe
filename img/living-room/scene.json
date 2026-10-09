@@ -187,6 +187,16 @@
   "#fff",
   "#111"
  ],
+ "ambient": {
+  "noon": 0.84,
+  "morning": 0.85,
+  "afternoon": 0.84,
+  "evening": 0.88,
+  "sunset": 0.9,
+  "dusk": 0.96,
+  "dawn": 0.96,
+  "night": 1.0
+ },
  "outside": {
   "mask": "outside.png",
   "layers": {
@@ -206,13 +216,13 @@
    "shade": "mask-shade-dining.png",
    "gain": 0.9,
    "phaseGain": {
-    "noon": 0.25,
-    "morning": 0.35,
-    "afternoon": 0.35,
-    "evening": 0.65,
-    "sunset": 0.75,
-    "dusk": 0.9,
-    "dawn": 0.9,
+    "noon": 0.12,
+    "morning": 0.18,
+    "afternoon": 0.18,
+    "evening": 0.5,
+    "sunset": 0.6,
+    "dusk": 0.85,
+    "dawn": 0.85,
     "night": 1.0
    }
   },
@@ -221,13 +231,13 @@
    "shade": "mask-shade-corner.png",
    "gain": 0.9,
    "phaseGain": {
-    "noon": 0.25,
-    "morning": 0.35,
-    "afternoon": 0.35,
-    "evening": 0.65,
-    "sunset": 0.75,
-    "dusk": 0.9,
-    "dawn": 0.9,
+    "noon": 0.12,
+    "morning": 0.18,
+    "afternoon": 0.18,
+    "evening": 0.5,
+    "sunset": 0.6,
+    "dusk": 0.85,
+    "dawn": 0.85,
     "night": 1.0
    }
   },
@@ -236,13 +246,13 @@
    "shade": "mask-shade-window.png",
    "gain": 0.9,
    "phaseGain": {
-    "noon": 0.25,
-    "morning": 0.35,
-    "afternoon": 0.35,
-    "evening": 0.65,
-    "sunset": 0.75,
-    "dusk": 0.9,
-    "dawn": 0.9,
+    "noon": 0.12,
+    "morning": 0.18,
+    "afternoon": 0.18,
+    "evening": 0.5,
+    "sunset": 0.6,
+    "dusk": 0.85,
+    "dawn": 0.85,
     "night": 1.0
    }
   },
@@ -251,13 +261,13 @@
    "shade": "mask-shade-sun.png",
    "gain": 0.9,
    "phaseGain": {
-    "noon": 0.25,
-    "morning": 0.35,
-    "afternoon": 0.35,
-    "evening": 0.65,
-    "sunset": 0.75,
-    "dusk": 0.9,
-    "dawn": 0.9,
+    "noon": 0.12,
+    "morning": 0.18,
+    "afternoon": 0.18,
+    "evening": 0.5,
+    "sunset": 0.6,
+    "dusk": 0.85,
+    "dawn": 0.85,
     "night": 1.0
    }
   },
@@ -267,30 +277,55 @@
    "gain": 0.45,
    "color": "#8bf",
    "phaseGain": {
-    "noon": 0.25,
-    "morning": 0.35,
-    "afternoon": 0.35,
-    "evening": 0.65,
-    "sunset": 0.75,
-    "dusk": 0.9,
-    "dawn": 0.9,
+    "noon": 0.12,
+    "morning": 0.18,
+    "afternoon": 0.18,
+    "evening": 0.5,
+    "sunset": 0.6,
+    "dusk": 0.85,
+    "dawn": 0.85,
     "night": 1.0
    }
   },
   "kotatsu": {
    "field": "light-kotatsu.png",
    "shade": null,
-   "gain": 0.8,
+   "gain": 0.5,
    "color": "#f52",
    "phaseGain": {
-    "noon": 0.25,
-    "morning": 0.35,
-    "afternoon": 0.35,
-    "evening": 0.65,
-    "sunset": 0.75,
-    "dusk": 0.9,
-    "dawn": 0.9,
+    "noon": 0.12,
+    "morning": 0.18,
+    "afternoon": 0.18,
+    "evening": 0.5,
+    "sunset": 0.6,
+    "dusk": 0.85,
+    "dawn": 0.85,
     "night": 1.0
+   }
+  },
+  "daylight": {
+   "field": "light-daylight.png",
+   "shade": null,
+   "gain": 1.0,
+   "phaseGain": {
+    "noon": 0.8,
+    "morning": 0.72,
+    "afternoon": 0.75,
+    "evening": 0.6,
+    "sunset": 0.65,
+    "dusk": 0.22,
+    "dawn": 0.26,
+    "night": 0.0
+   },
+   "phaseColor": {
+    "noon": "#fff8f0",
+    "morning": "#f2f4ff",
+    "afternoon": "#fff0dc",
+    "evening": "#ffd6a0",
+    "sunset": "#ff9a60",
+    "dusk": "#a898ff",
+    "dawn": "#ffc0c8",
+    "night": "#000000"
    }
   }
  },
