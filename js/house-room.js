@@ -1,10 +1,13 @@
 // A room of Panda's house, live: the house's state (/house/state.json, written every minute on the server from the
 // home API on rodney) drawn into the room by js/house-render.js. Both rooms follow the real time of day (the
-// registers) and show their lamps at their real brightness and colour. What else a room shows is whatever its scene has: the living room's blinds come down to their real height,
-// its thermostat's face warms when the heat is on, its kotatsu glows when plugged in, its TV shows a picture when on
-// (a moving one when something plays), notes rise off its speakers while music plays, and a small readout gives the
-// house's clock and temperature; the bedroom's city lights twinkle only after dark. Without the state (the feed down)
-// a room is noon with everything off. The room's data sets R.house = { base, v, hud }.
+// registers) and show their lamps at their real brightness and colour. What else a room shows is whatever its scene
+// has: the living room's blinds come down to their real height, its thermostat's face warms when the heat is on, its
+// kotatsu glows when plugged in, its TV shows a picture when on (a moving one when something plays), notes rise off its
+// speakers while music plays, and a small readout gives the house's clock and temperature; the bedroom's city lights
+// twinkle only after dark. The room's data sets R.house = { base, v, hud }.
+// When the feed is down (no file, or older than STALE_MIN) nothing about the devices is known: lamps are off and the
+// lines say "unknown", but the time of day still follows the house's clock (worked out here from the sun), so the
+// rooms keep working if the feed never comes back. If the scene itself can't load, the room is its static picture.
 (function () {
     "use strict";
 
@@ -12,7 +15,8 @@
     var BASE = R.house.base;
     var V = R.house.v;
     var REFRESH_MS = 60 * 1000;         // the file changes every minute
-    var STALE_MIN = 30;
+    var STALE_MIN = 30;                 // older than this, the devices are unknown (the feed is down)
+    var HOUSE = { tz: "America/Los_Angeles", lat: 37.77, lon: -122.42 };   // for the clock without a feed
 
     var scene = null, state = null, api = null;
     var overlays = {};                  // id -> element on the stage
@@ -23,8 +27,17 @@
 
     var H = window.HOUSE = window.HOUSE || {};
 
+    function ageMin() {
+        return state ? (Date.now() - Date.parse(state.updated)) / 60000 : Infinity;
+    }
+
+    // the state's devices, if it's fresh (a stale one is the house as it was, not as it is)
+    function live() {
+        return ageMin() <= STALE_MIN;
+    }
+
     function light(lamp) {
-        if (!state || !state.lights || !scene) return null;
+        if (!live() || !state.lights || !scene) return null;
         var hit = null;
         state.lights.forEach(function (l) {
             if (scene.light_names[l.name] === lamp && (!hit || l.on)) hit = l;
@@ -33,22 +46,22 @@
     }
 
     function plug(name) {
-        if (!state || !state.plugs) return null;
+        if (!live() || !state.plugs) return null;
         var p = state.plugs.filter(function (x) { return x.name === name; })[0];
         return p ? p.on : null;
     }
 
     function blindPct(name) {
-        if (!state || !state.blinds) return null;
+        if (!live() || !state.blinds) return null;
         var b = state.blinds.filter(function (x) { return x.name === name; })[0];
         return b && b.open_pct != null ? b.open_pct : null;
     }
 
     H.light = light;
     H.lampOn = function (lamp) { var l = light(lamp); return l ? l.on : null; };
-    H.climate = function () { return state && state.climate; };
-    H.tv = function () { return state && state.tv; };
-    H.music = function () { return state && state.music; };
+    H.climate = function () { return live() ? state.climate : null; };
+    H.tv = function () { return live() ? state.tv : null; };
+    H.music = function () { return live() ? state.music : null; };
     H.kotatsuOn = function () { return scene && scene.kotatsu ? plug(scene.kotatsu.plug) : null; };
     H.blindPct = blindPct;
     H.redraw = function () { draw(); };
@@ -56,7 +69,9 @@
     // ---------- rendering ----------
 
     function phaseNow() {
-        return state && scene.phases[state.phase] ? state.phase : "noon";
+        if (live() && scene.phases[state.phase]) return state.phase;
+        var p = sunPhase();
+        return scene.phases[p] ? p : "noon";
     }
 
     function lightsNow() {
@@ -203,27 +218,74 @@
             hud.setAttribute("role", "status");
             api.stage.appendChild(hud);
         }
-        if (!state) { hud.textContent = "Panda's house · offline"; return; }
         var parts = [houseClock(), phaseNow().toUpperCase()];
-        var c = state.climate;
+        var c = H.climate();
         if (c && c.temperature_f != null) parts.push(Math.round(c.temperature_f) + "°F");
-        var age = (Date.now() - Date.parse(state.updated)) / 60000;
-        hud.textContent = parts.join(" · ") + (age > STALE_MIN ? " (as of " + Math.round(age / 60) + "h ago)" : "");
+        var age = ageMin();
+        if (age > STALE_MIN) parts.push(isFinite(age) ? "offline since " + Math.round(age / 60) + "h ago" : "offline");
+        hud.textContent = parts.join(" · ");
         hud.title = "Panda's real house, updated every minute";
     }
 
-    // the house's clock now: its UTC offset from the feed (local_time against updated), applied to this browser's clock,
-    // so the readout ticks instead of showing the feed's 5-minute-old time
+    // ---------- the house's clock and the sun (for when the feed can't say) ----------
+
+    // the house's UTC offset in minutes: from the feed (its local_time against updated), else from its time zone
+    function offsetMin() {
+        var hm = state && /^(\d\d):(\d\d)$/.exec(state.local_time || "");
+        var u = state && new Date(state.updated);
+        if (hm && !isNaN(u)) {
+            var off = (+hm[1] * 60 + +hm[2]) - (u.getUTCHours() * 60 + u.getUTCMinutes());
+            off = ((off + 720) % 1440 + 1440) % 1440 - 720;          // into -12h..+12h
+            return Math.round(off / 15) * 15;
+        }
+        try {
+            var now = new Date();
+            var p = new Intl.DateTimeFormat("en-US", { timeZone: HOUSE.tz, hour: "numeric", minute: "numeric",
+                                                       hourCycle: "h23" }).formatToParts(now);
+            var get = function (t) { return +p.filter(function (x) { return x.type === t; })[0].value; };
+            var o = get("hour") * 60 + get("minute") - (now.getUTCHours() * 60 + now.getUTCMinutes());
+            return ((o + 720) % 1440 + 1440) % 1440 - 720;
+        } catch (e) {
+            return -new Date().getTimezoneOffset();               // this browser's own, as a last resort
+        }
+    }
+
+    // the house's time now, as a Date whose UTC fields read as the house's wall clock (so the readout ticks instead of
+    // showing the feed's minute-old time)
+    function houseNow() {
+        return new Date(Date.now() + offsetMin() * 60000);
+    }
+
     function houseClock() {
-        var hm = /^(\d\d):(\d\d)$/.exec(state.local_time || "");
-        var u = new Date(state.updated);
-        if (!hm || isNaN(u)) return state.local_time;
-        var off = (+hm[1] * 60 + +hm[2]) - (u.getUTCHours() * 60 + u.getUTCMinutes());
-        off = ((off + 720) % 1440 + 1440) % 1440 - 720;          // into -12h..+12h
-        off = Math.round(off / 15) * 15;
-        var t = new Date(Date.now() + off * 60000);
+        var t = houseNow();
         var pad = function (n) { return (n < 10 ? "0" : "") + n; };
         return pad(t.getUTCHours()) + ":" + pad(t.getUTCMinutes());
+    }
+
+    // the time of day from the sun at the house, with the home API's edges (home-mcp house.py sun_phase): sunrise,
+    // sunset (sun at -0.833 deg), dawn and dusk (-6 deg) from the usual approximations (declination and the equation of
+    // time by day of year), good to a few minutes, which is plenty for a fallback
+    function sunPhase() {
+        var t = houseNow(), rad = Math.PI / 180;
+        var n = Math.floor((Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()) -
+                            Date.UTC(t.getUTCFullYear(), 0, 0)) / 86400000);
+        var decl = 23.44 * Math.sin(2 * Math.PI * (284 + n) / 365) * rad;
+        var B = 2 * Math.PI * (n - 81) / 364;
+        var eot = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);   // minutes
+        var noon = 720 - 4 * HOUSE.lon - eot + offsetMin();          // the sun's highest, in house minutes
+        function half(alt) {                                           // minutes from noon to the sun at `alt`
+            var c = (Math.sin(alt * rad) - Math.sin(HOUSE.lat * rad) * Math.sin(decl)) /
+                    (Math.cos(HOUSE.lat * rad) * Math.cos(decl));
+            return Math.acos(Math.max(-1, Math.min(1, c))) / rad * 4;
+        }
+        var rise = noon - half(-0.833), set = noon + half(-0.833);
+        var dawn = noon - half(-6), dusk = noon + half(-6);
+        var m = t.getUTCHours() * 60 + t.getUTCMinutes();
+        var edges = [[dawn, "dawn"], [rise, "morning"], [noon - 60, "noon"], [noon + 60, "afternoon"],
+                     [set - 120, "evening"], [set - 20, "sunset"], [set + 10, "dusk"], [dusk, "night"]];
+        var phase = "night";
+        edges.forEach(function (e) { if (m >= e[0]) phase = e[1]; });
+        return phase;
     }
 
     // ---------- loading ----------
@@ -249,12 +311,17 @@
                 o.polygon = hs.polygon;
                 o.anchor = hs.anchor;
             }
-            o.lit = { src: (o.lit && o.lit.src) || "data:,", x: hs.lit.x, y: hs.lit.y, w: hs.lit.w, h: hs.lit.h };
         });
         return HouseRender.need(scene, phaseNow(), lightsNow());
     }).catch(function (err) {
         scene = null;                                    // the room stays the picture it was drawn as
         console.warn("house scene unavailable:", err);
+        R.objects.forEach(function (o) {                 // (the doors still work)
+            if (!o.polygon && o.fallback) {
+                o.polygon = o.fallback;
+                o.anchor = [Math.round((o.fallback[0][0] + o.fallback[1][0]) / 2), Math.round((o.fallback[0][1] + o.fallback[2][1]) / 2)];
+            }
+        });
     });
 
     R.onBuilt = function (a) {
@@ -263,6 +330,6 @@
         setInterval(function () {
             if (!document.hidden) getState().then(draw);
         }, REFRESH_MS);
-        if (R.house.hud) setInterval(function () { if (state) drawHud(); }, 20000);
+        if (R.house.hud) setInterval(drawHud, 20000);
     };
 })();

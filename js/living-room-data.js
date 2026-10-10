@@ -111,8 +111,10 @@ window.HOUSE = window.HOUSE || {};
                  "thermostat", "tv", "blind_living", "blind_dining", "door_bedroom", "door_outside"],
 
         objects: [
-            { id: "door_bedroom", rank: 1, go: "/room.html" },         // hover: its line; click: through it
-            { id: "door_outside", rank: 2, go: "/explore/explore.html" },   // the front door: out to the city
+            // the doors: hover says where, a click goes through. Their outlines come from the scene like everything
+            // else; `fallback` is used only if the scene can't load, so the way on and out always works
+            { id: "door_bedroom", rank: 1, go: "/room.html", fallback: [[10, 56], [48, 68], [48, 215], [10, 228]] },
+            { id: "door_outside", rank: 2, go: "/explore/explore.html", fallback: [[62, 70], [130, 70], [130, 209], [62, 209]] },
             {
                 id: "tv", rank: 3,
                 hover: function () {

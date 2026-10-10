@@ -2,7 +2,7 @@
    (woff2 ~384KB, the ttf a fallback) for any other character, fetched only when a page shows one */
 @font-face {
     font-family: pc-98;
-    src: url('/fonts/pc-9800-core.woff2') format('woff2');
+    src: url('/fonts/pc-9800-core.woff2') format('woff2'), url('/fonts/pc-9800.woff2') format('woff2'), url('/fonts/pc-9800.ttf') format('truetype');   /* the full font if the core can't load */
     unicode-range: U+0-FF, U+2010-2027, U+2030-203B, U+2190-21FF, U+2500-266F, U+3000-30FF, U+4F7F, U+53EF, U+5922, U+5E7B, U+623B, U+7528, U+7D44, U+80FD, U+898B, U+8B5A, U+8FBC, U+FF00-FFEF;
 }
 
@@ -14,7 +14,7 @@
 
 @font-face {
     font-family: pc-98-bold;
-    src: url('/fonts/pc-9800-bold-core.woff2') format('woff2');
+    src: url('/fonts/pc-9800-bold-core.woff2') format('woff2'), url('/fonts/pc-9800-bold.woff2') format('woff2'), url('/fonts/pc-9800-bold.ttf') format('truetype');
     unicode-range: U+0-FF, U+2010-2027, U+2030-203B, U+2190-21FF, U+2500-266F, U+3000-30FF, U+4F7F, U+53EF, U+5922, U+5E7B, U+623B, U+7528, U+7D44, U+80FD, U+898B, U+8B5A, U+8FBC, U+FF00-FFEF;
 }
 

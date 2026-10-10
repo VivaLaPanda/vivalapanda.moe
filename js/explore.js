@@ -60,7 +60,7 @@ function loadLocation(event) {
 	music.muted = window.localStorage.getItem('muted') == 'true'; // Localstorage always gives strings, not bools
 
 	music.load();
-    music.play();
+	startMusic(music);
     updateMute();
 
 	// Set strings
@@ -112,9 +112,24 @@ function loadLocation(event) {
 	});
 }
 
+// a browser holds sound back until the visitor touches the page: then it starts on the first tap or key
+function startMusic(music) {
+	var played = music.play();
+	if (!played || !played.catch) return;
+	played.catch(function () {
+		var go = function () {
+			document.removeEventListener('pointerdown', go, true);
+			document.removeEventListener('keydown', go, true);
+			music.play().catch(function () {});
+		};
+		document.addEventListener('pointerdown', go, true);
+		document.addEventListener('keydown', go, true);
+	});
+}
+
 function toggleMute() {
 	if (window.localStorage.getItem('muted') == 'true') {
-		music.play();
+		startMusic(document.getElementById('music'));
 		window.localStorage.setItem('muted', false);
 	} else {
 		window.localStorage.setItem('muted', true);

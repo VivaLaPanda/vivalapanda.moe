@@ -1,0 +1,13 @@
+# The dev server on rodney (Panda's home server), a *user* unit, not on the VPS:
+#   cp scripts/systemd/vivalapanda-dev.service ~/.config/systemd/user/ && systemctl --user daemon-reload
+#   && systemctl --user enable --now vivalapanda-dev   (and `loginctl enable-linger panda` so it runs logged out)
+# The home-mcp Cloudflare tunnel routes dev.vivalapanda.moe to 127.0.0.1:8080 (see home-mcp's CLAUDE.md).
+[Unit]
+Description=vivalapanda.moe dev server (dev.vivalapanda.moe via the home-mcp Cloudflare tunnel)
+
+[Service]
+ExecStart=/usr/bin/python3 /home/panda/code/vivalapanda.moe/scripts/dev_server.py 8080
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

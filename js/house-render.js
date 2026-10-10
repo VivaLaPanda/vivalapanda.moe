@@ -108,7 +108,7 @@
      *          outside: { mask: Uint8Array, layers: {phase: Uint8ClampedArray rgba} } | null,
      *          lights: { name: { field: Uint8Array, gain: number, shade: Uint8Array | null } } }
      * state: { phase, lights: { name: { on, brightness_pct, kelvin, color } }, override: Uint8Array | null }
-     *   override: per-pixel index replacements (255 = none), for blinds and hover states.
+     *   override: per-pixel index replacements (255 = none): the blinds' cloth, the thermostat's heating face.
      */
     function renderPixels(scene, state, rect) {
         var w = scene.w, h = scene.h;
@@ -238,7 +238,14 @@
             spec.w = spec.size[0]; spec.h = spec.size[1];
             spec.later = { get: get, layers: {}, fields: {}, pending: {} };
             var jobs = [get(spec.idx, function (d) { return grey(d, function (v) { return v >> 4; }); })
-                .then(function (a) { spec.idx = a; })];
+                .then(function (a) {
+                    // a browser that won't read back a canvas (anti-fingerprinting) hands back one flat colour: then
+                    // there's nothing to draw from, and the room keeps its static picture
+                    var seen = {}, kinds = 0;
+                    for (var p = 0; p < a.length && kinds < 4; p += 97) if (!seen[a[p]]) { seen[a[p]] = 1; kinds++; }
+                    if (kinds < 4) throw new Error("canvas readback looks blocked");
+                    spec.idx = a;
+                })];
             if (spec.outside) {
                 jobs.push(get(spec.outside.mask, function (d) { return grey(d, bit); })
                     .then(function (a) { spec.outside.mask = a; }));

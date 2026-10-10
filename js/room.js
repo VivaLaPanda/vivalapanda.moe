@@ -166,7 +166,7 @@
 
     function glint() {
         if (document.hidden) return;
-        var unseen = byRank.filter(function (o) { return !seen[o.id]; });
+        var unseen = byRank.filter(function (o) { return o.anchor && !seen[o.id]; });
         if (!unseen.length) return;
         var o = unseen[glintIdx++ % unseen.length];
         var x = o.anchor[0], y = o.anchor[1];
@@ -373,7 +373,7 @@
         svg.classList.add("reveal");
         setTimeout(function () { svg.classList.remove("reveal"); }, 1600);
 
-        var list = byRank.concat(knickKnacks).map(function (o) {
+        var list = spots.map(function (o) {
             return { label: o.name, object: o, dim: seen[o.id] };
         });
         list.push({ label: "Never mind" });
@@ -519,7 +519,8 @@
     }
 
     function start() {
-        spots = byRank.concat(knickKnacks.filter(function (k) { return k.polygon; }));
+        // only what has an outline (the living room's come from its scene; without one, only the doors' fallbacks)
+        spots = byRank.concat(knickKnacks).filter(function (o) { return o.polygon; });
         buildScene();
         if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, placeNative: placeNative });
         say(lines(R.greeting), null, true);
