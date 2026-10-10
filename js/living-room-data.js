@@ -64,11 +64,16 @@ window.HOUSE = window.HOUSE || {};
         return { temp: Math.round(c.temperature_f), heat: c.heating ? "on" : "off", humidity: c.humidity_pct };
     }
 
+    // a speaker: hover_playing / hover_quiet / hover_unknown, and while music plays, what it is when its app says:
+    // hover_track ({title}, {artist}), hover_title ({title})
     function speaker(id) {
         return {
             hover: function () {
                 var s = said(id), m = H.music ? H.music() : null;
-                return m == null ? s.hover_unknown : m.playing ? s.hover_playing : s.hover_quiet;
+                if (m == null) return s.hover_unknown;
+                if (!m.playing) return s.hover_quiet;
+                var v = { title: m.title, artist: m.artist, app: m.app };
+                return fill(s.hover_track, v, fill(s.hover_title, v, s.hover_playing));
             },
             lines: function () {
                 var s = said(id), m = H.music ? H.music() : null;
@@ -117,9 +122,14 @@ window.HOUSE = window.HOUSE || {};
             { id: "door_outside", rank: 2, go: "/explore/explore.html", fallback: [[62, 70], [130, 70], [130, 209], [62, 209]] },
             {
                 id: "tv", rank: 3,
+                // while something plays, what it is when its app says: hover_episode ({show}, {episode}),
+                // hover_show ({show})
                 hover: function () {
                     var s = said("tv"), tv = H.tv ? H.tv() : null;
-                    return !tv ? s.hover_unknown : tv.playing ? s.hover_playing : tv.on ? s.hover_on : s.hover_off;
+                    if (!tv) return s.hover_unknown;
+                    if (!tv.playing) return tv.on ? s.hover_on : s.hover_off;
+                    var v = { show: tv.show, episode: tv.episode, app: tv.app };
+                    return fill(s.hover_episode, v, fill(s.hover_show, v, s.hover_playing));
                 },
                 lines: function () {
                     var s = said("tv"), tv = H.tv ? H.tv() : null;

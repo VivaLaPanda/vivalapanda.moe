@@ -11,8 +11,8 @@
     "Living room only, for live state (the house's real devices): a variant per state, chosen by the page:",
     "  lamps: hover_on / hover_off / hover_unknown (feed down); lines, or lines_on / lines_off. {brightness} (percent),",
     "  {kelvin}, {warmth} (warm / soft white / daylight) fill in when the lamp is on.",
-    "  tv: hover_off / hover_on (an idle screen) / hover_playing / hover_unknown; lines, lines_playing.",
-    "  speakers: hover_playing / hover_quiet / hover_unknown; lines, lines_playing.",
+    "  tv: hover_off / hover_on (an idle screen) / hover_playing / hover_unknown; lines, lines_playing. While something plays, hover_episode ({show}, {episode}) or hover_show ({show}) when the app says what it is, else hover_playing.",
+    "  speakers: hover_playing / hover_quiet / hover_unknown; lines, lines_playing. While music plays, hover_track ({title}, {artist}) or hover_title ({title}) when the app says what it is, else hover_playing.",
     "  kotatsu: hover_on / hover_off / hover_unknown (its plug); lines, lines_on.",
     "  thermostat: hover and lines may use {temp} (F), {heat} (on/off), {humidity}; hover_unknown when there's no reading.",
     "  blinds: hover_open / hover_partial / hover_closed / hover_unknown; {pct} (percent open) in hover_partial.",
@@ -378,6 +378,8 @@
         "hover_off": "The TV's off right now.",
         "hover_on": "The TV's on, but nothing's playing.",
         "hover_playing": "Something's playing on the TV right now!",
+        "hover_episode": "Watching {show}: {episode}.",
+        "hover_show": "Watching {show} right now.",
         "hover_unknown": "The TV. On? Off? Can't tell.",
         "lines": [
           "I mostly watch cooking videos and old movies."
@@ -440,6 +442,8 @@
       "speaker_l": {
         "name": "Speaker (left)",
         "hover_playing": "Music's playing in my house right now!",
+        "hover_track": "Now playing: {title}, by {artist}.",
+        "hover_title": "Now playing: {title}.",
         "hover_quiet": "The speakers are quiet right now.",
         "hover_unknown": "My speakers.",
         "lines": [
@@ -453,6 +457,8 @@
       "speaker_r": {
         "name": "Speaker (right)",
         "hover_playing": "Music's playing in my house right now!",
+        "hover_track": "Now playing: {title}, by {artist}.",
+        "hover_title": "Now playing: {title}.",
         "hover_quiet": "The speakers are quiet right now.",
         "hover_unknown": "My speakers.",
         "lines": [
