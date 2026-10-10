@@ -54,10 +54,15 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// the player can't be clicked (css/train.css), so it starts muted, which browsers always let autoplay; the first tap or
-// key anywhere on the page turns its sound on, and starts the music if the browser held that back too
+// the train plays with its sound: a visitor arriving from the site has already clicked, which lets this page autoplay
+// with sound. Someone landing here cold may be refused: YouTube then plays muted, or waits on its play button, and the
+// player can't be clicked (css/train.css), so the first tap or key anywhere turns the sound on and starts whatever the
+// browser held back (the train, the music).
 function soundOn() {
-	if (video && video.unMute) video.unMute();
+	if (video && video.getPlayerState) {
+		if (video.isMuted()) video.unMute();
+		if (video.getPlayerState() !== YT.PlayerState.PLAYING) video.playVideo();
+	}
 	var music = document.getElementById("music");
 	if (music && music.paused) {
 		var played = music.play();
@@ -69,9 +74,8 @@ function soundOn() {
 });
 
 function onPlayerReady(event) {
-	event.target.mute();
 	event.target.playVideo();
-	event.target.setLoop(true);  
+	event.target.setLoop(true);
 	setTimeout(setShuffleFunction, 1000);
 }
 
