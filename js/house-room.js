@@ -114,6 +114,11 @@
                 }
             }
         });
+        // the kotatsu's heater on: the gap under its quilt glows a dim warm red (a checker, so it stays dark-ish)
+        if (scene.kotatsu && scene.kotatsu.gap && H.kotatsuOn()) {
+            var gap = scene.mask[scene.kotatsu.gap];
+            if (gap) for (var q = 0; q < n; q++) if (gap[q]) o[q] = ((q + ((q / w) | 0)) % 2) ? I.red : I.dark;
+        }
         var c = scene.thermostat && H.climate();
         if (c && c.heating) {
             var face = scene.mask["mask-thermostat_face.png"];

@@ -290,8 +290,8 @@
   "kotatsu": {
    "field": "light-kotatsu.png",
    "shade": null,
-   "gain": 0.5,
-   "color": "#f52",
+   "gain": 1.6,
+   "color": "#f83",
    "phaseGain": {
     "noon": 0.12,
     "morning": 0.18,
@@ -354,7 +354,8 @@
  },
  "kotatsu": {
   "glow": "light-kotatsu.png",
-  "plug": "Kotatsu"
+  "plug": "Kotatsu",
+  "gap": "mask-kotatsu_gap.png"
  },
  "thermostat": {
   "face": "mask-thermostat_face.png"
@@ -4012,6 +4013,7 @@
  "masks": [
   "mask-screen.png",
   "mask-thermostat_face.png",
+  "mask-kotatsu_gap.png",
   "mask-speaker_l_led.png",
   "mask-speaker_r_led.png",
   "mask-cloth-blind_living.png",
