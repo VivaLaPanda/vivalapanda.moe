@@ -13,7 +13,7 @@
     var IDLE_NEXT_MS = 45000;  // then this often...
     var IDLE_MAX = 3;          // ...at most this many per visit
     var GLINT_MS = 9000;
-    var MAX_LINE = 48;         // characters in one dialog-box line
+    var MAX_LINE = 96;         // characters in two dialog-box lines (longer still wraps, but crowds the menu)
     var DIALOGUE = "/data/dialogue.json";
     var SEEN_KEY = R.seenKey || "pandaRoomSeen";
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

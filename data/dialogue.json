@@ -2,7 +2,7 @@
   "_readme": [
     "Every line Panda says in the two rooms: the bedroom (/room.html) and the living room (Home, /living-room.html).",
     "Edit freely; the pages read this file on load (no build step). Keys starting with _ are notes and are ignored.",
-    "Keep each line <= 48 characters (one dialog-box line; longer ones log a warning in the browser console).",
+    "Keep each line <= 96 characters (two dialog-box lines; longer ones log a warning in the browser console).",
     "Use straight quotes: the PC-98 font draws curly ones full-width.",
     "Doors (door_bedroom, door_outside) only have hover lines: clicking a door goes straight through it.",
     "greeting: the opening box. hover: the line on pointing at an object. click: the box on first opening it this visit;",
@@ -21,19 +21,17 @@
   "bedroom": {
     "greeting": [
       "Welcome, traveler, to my room of mysteries.",
-      "Don't be shy now, come on in.",
       "Poke around all you like! Lost? Press LOOK."
     ],
     "objects": {
       "window": {
         "name": "Window",
-        "hover": "E-everything looks so p-pretty at night...",
+        "hover": "All the people I talk to are out there...",
         "click": [
-          "The town, the people... we're all family.",
-          "I tweet about it way too much. Mostly zoning."
+          "You can see mee talk to them on my Twitter"
         ],
         "repeat": [
-          "Pleeease... take me somewhere~"
+          "If you keep this up my neighbors will think you're L. B. Jefferies"
         ],
         "choices": [
           {
@@ -47,13 +45,13 @@
       },
       "phone": {
         "name": "Phone",
-        "hover": "Eh? My phone's buzzing... is that you?",
+        "hover": "Eh? My phone's buzzing...",
         "click": [
-          "On Discord, you can call me vivalapanda.",
-          "Secrets go on Signal. They're safe with me."
+          "You could put yourself inside my phone",
+          "I like that my friends are inside of this."
         ],
         "repeat": [
-          "If friends gossip about us... how embarrassing."
+          "... are you just going to let it ring?"
         ],
         "choices": [
           {
@@ -71,10 +69,9 @@
       },
       "pc": {
         "name": "PC",
-        "hover": "I keep falling asleep at that computer...",
+        "hover": "Is it concerning that this never turns off?",
         "click": [
-          "My true love has always been my computer.",
-          "Everything I make ends up on GitHub."
+          "You can see all of the little things I've made"
         ],
         "repeat": [
           "Back again? It's an infinitely repeating game."
@@ -91,9 +88,9 @@
       },
       "newspaper": {
         "name": "Newspaper",
-        "hover": "Heh. Who knew my essays could be interesting?",
+        "hover": "I write my thoughts down, so that greater understanding can come to be.",
         "click": [
-          "I write about cities on my Substack.",
+          "I hope that you enjoy reading about them.",
           "Well, you can read it at your own pace."
         ],
         "repeat": [
@@ -111,11 +108,10 @@
       },
       "bookshelf": {
         "name": "Bookshelf",
-        "_note": "The one on-site link in the room: Panda chose the bookshelf over a sidebar icon (2026-10-07).",
-        "hover": "If it's books you want, leave it to me.",
+        "hover": "This is where my books live",
         "click": [
-          "You could say I really enjoy reading...",
-          "I barely got to do any reading today, so..."
+          "Reading is the main way I spend my time.",
+          "I still need to organize this, so forgive its out-of-dateness."
         ],
         "repeat": [
           "Coffee can be nice with books too, you know?"
@@ -136,13 +132,13 @@
       },
       "butterfly": {
         "name": "Butterfly",
-        "hover": "I love butterflies. They are the best animal.",
+        "hover": "There once was a dream called Bluesky.",
         "click": [
-          "That one's my Bluesky. I'm there sometimes.",
+          "I post here rarely, but I'm glad of its existence.",
           "It wouldn't be so bad to be the sky."
         ],
         "repeat": [
-          "Why would it be a bird? It's a butterfly!"
+          "You can just go read my Twitter instead..."
         ],
         "choices": [
           {
@@ -158,11 +154,11 @@
         "name": "TV",
         "hover": "You've found the television, then.",
         "click": [
-          "Every movie I watch goes on my Letterboxd.",
-          "Let's go watch!"
+          "I like stuff thats earnest, which usually means stuff thats old.",
+          "I dislike that so many films seem so pessimistic with regards to the human condition."
         ],
         "repeat": [
-          "It's pro wrestling! Woo! Woo!"
+          "It won't actually show anything interesting you know."
         ],
         "choices": [
           {
@@ -176,10 +172,9 @@
       },
       "letter": {
         "name": "Letter",
-        "hover": "I wrote to my parents last week.",
+        "hover": "I sometimes read my email",
         "click": [
-          "You can write to me too! I'm at me@panda.moe.",
-          "Everything that you write is a treasure to me."
+          "I like writing letters, but I hate reading emails."
         ],
         "repeat": [
           "Write to me, okay? I'll write back."
@@ -196,11 +191,10 @@
       },
       "controller": {
         "name": "Game console",
-        "_note": "Verified 2026-10-04: profile VivaLaPanda, summary \"I play games rarely.\"",
-        "hover": "Eh? Just playing some Cities: Skylines.",
+        "hover": "Come see what games I play, and maybe play them with me.",
         "click": [
-          "I play games rarely. ...Very rarely.",
-          "Hey, what's your favorite game?"
+          "I used to play a lot of Minecraft and civilization.",
+          "These days, I mostly play Slay the Spire."
         ],
         "repeat": [
           "Fancy another game?"
@@ -219,11 +213,11 @@
         "name": "Tome",
         "hover": "Ah, now I started thinking again. This is bad.",
         "click": [
-          "My nerdier essays go up on LessWrong.",
-          "I could go on, but I think you get the point..."
+          "I mostly just lurk on LessWrong, instead of posting.",
+          "One might say I'm rationalist adjacent..."
         ],
         "repeat": [
-          "As rational as ever, I see."
+          "You can just read my Substack instead."
         ],
         "choices": [
           {
@@ -239,8 +233,7 @@
         "name": "Blazer",
         "hover": "Is it hard, being an adult?",
         "click": [
-          "I wear it to interviews. And on LinkedIn.",
-          "Need me for work stuff? LinkedIn's the place."
+          "You can see what I've been doing with my life so far."
         ],
         "repeat": [
           "Thank you for your hard work today."
@@ -257,14 +250,13 @@
       },
       "kitsu": {
         "name": "Anime tapes",
-        "_note": "Verified 2026-10-06: last list update 2022-07-10, 544 entries, ~93 days of anime. More current than MAL (last update 2018).",
-        "hover": "Gaze upon my anime tapes and despair!",
+        "hover": "See what anime I've watched.",
         "click": [
-          "Kitsu says I've watched 93 days of anime.",
-          "...And I stopped logging in 2022. Oops."
+          "I used to watch a huge quantity of anime.",
+          "It's a big part of my upbringing."
         ],
         "repeat": [
-          "Holy moly! Anime is so extreme these days"
+          "Yeah I'm kind of over it too..."
         ],
         "choices": [
           {
@@ -278,10 +270,10 @@
       },
       "stackoverflow": {
         "name": "Rubber duck",
-        "hover": "You think rubber ducks are creepy?",
+        "hover": "I used to ask other humans questions about code.",
         "click": [
           "I asked the duck for an answer. It was no use.",
-          "So I took my question to Stack Overflow."
+          "Now this is just a nice archive."
         ],
         "repeat": [
           "That's a good question. ...Closed as duplicate."
@@ -320,8 +312,8 @@
         "name": "Panda plush",
         "hover": "The panda says, 'Gao, gao!'",
         "lines": [
-          "He's the original Panda. I'm the sequel.",
-          "Sorry, I was born cute."
+          "I don't actually think Pandas are that good, but its what I am.",
+          "I appreciate how my name confuses small children."
         ]
       },
       "poster": {
@@ -338,11 +330,10 @@
         "hover_off": "My lamp's off right now.",
         "hover_unknown": "My desk lamp.",
         "lines": [
-          "It's my real bedroom lamp, mirrored.",
-          "When I switch it at home, it switches here."
+          "If its off, I'm probably asleep."
         ],
         "lines_on": [
-          "It's on in my real room right now.",
+          "It's on, so I'm probably awake.",
           "Somebody's still up."
         ]
       }
@@ -357,7 +348,6 @@
       "empty": [
         "Hm? Are you talking to moi?",
         "If you need something, just say it!",
-        "Hey, don't make that face.",
         "Uguu..."
       ],
       "lookPrompt": "What do you want to look at?",
@@ -370,8 +360,8 @@
   },
   "living_room": {
     "greeting": [
-      "Welcome home! This is my living room.",
-      "It's my real house, live. Lights and all!",
+      "Welcome to my home! This is my living room.",
+      "If you're a friend, you can see the real thing.",
       "The doors lead on. Have a look around!"
     ],
     "objects": {
@@ -390,8 +380,7 @@
         "hover_playing": "Something's playing on the TV right now!",
         "hover_unknown": "The TV. On? Off? Can't tell.",
         "lines": [
-          "It's my real TV, mirrored here.",
-          "When I cast something, it plays here too."
+          "I mostly watch cooking videos and old movies."
         ],
         "lines_playing": [
           "I'm watching something right now.",
@@ -404,7 +393,6 @@
         "hover_off": "The kotatsu's off right now.",
         "hover_unknown": "My kotatsu. Best seat in the house.",
         "lines": [
-          "A kotatsu: a table with a heater under it.",
           "Once you're under, you can't leave."
         ],
         "lines_on": [
@@ -428,7 +416,6 @@
         "hover_off": "The arc lamp's off.",
         "hover_unknown": "The arc lamp over the couch.",
         "lines": [
-          "It hangs right over the couch.",
           "Perfect for reading."
         ]
       },
@@ -438,7 +425,7 @@
         "hover_off": "The corner lamp's off.",
         "hover_unknown": "The corner lamp.",
         "lines": [
-          "A little lamp in the TV corner."
+          "This is where I stack all my books!"
         ]
       },
       "lamp_window": {
@@ -456,7 +443,7 @@
         "hover_quiet": "The speakers are quiet right now.",
         "hover_unknown": "My speakers.",
         "lines": [
-          "They're real. When I play music, it shows."
+          "I love finding new music <3"
         ],
         "lines_playing": [
           "Something's on right now!",
@@ -469,7 +456,7 @@
         "hover_quiet": "The speakers are quiet right now.",
         "hover_unknown": "My speakers.",
         "lines": [
-          "They're real. When I play music, it shows."
+          "I love finding new music <3"
         ],
         "lines_playing": [
           "Something's on right now!",
@@ -481,8 +468,7 @@
         "hover": "It's {temp}°F in here. Heat's {heat}.",
         "hover_unknown": "The thermostat's not talking right now.",
         "lines": [
-          "It's {temp}°F in here. Heat's {heat}.",
-          "That's the real reading from my thermostat."
+          "I love when its cold inside, but the kotatsu is warm."
         ]
       },
       "blind_living": {
@@ -492,8 +478,7 @@
         "hover_closed": "The blind's all the way down.",
         "hover_unknown": "A roller blind.",
         "lines": [
-          "It's my real blind in the living room.",
-          "It rolls up and down by itself."
+          "This is how I hide from sun"
         ]
       },
       "blind_dining": {
@@ -503,8 +488,7 @@
         "hover_closed": "The blind's all the way down.",
         "hover_unknown": "A roller blind.",
         "lines": [
-          "It's my real blind in the dining room.",
-          "It rolls up and down by itself."
+          "This is how I hide from sun"
         ]
       }
     },
