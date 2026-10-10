@@ -14,7 +14,8 @@ window.onload = function(){
     music.src = randomTrainMusic();
     
     music.load();
-    music.play();
+    var played = music.play();                 // held back until a tap or key on a first visit (soundOn retries)
+    if (played && played.catch) played.catch(function () {});
 }
 
 // mostly all copied from http://vimutv.com/
@@ -37,12 +38,14 @@ function onYouTubeIframeAPIReady() {
         listType: 'playlist',
         list: playlistID,
         playerVars: {
-            'list': playlistID, 	
-            'autoplay': 1, 
-            'controls': 0,
-            'autohide': 0, 
-            'index':randomSong,
-            'showinfo':0
+            'list': playlistID,
+            'autoplay': 1,
+            'controls': 0,          // no control bar
+            'disablekb': 1,         // no keyboard shortcuts
+            'fs': 0,                // no fullscreen button
+            'iv_load_policy': 3,    // no annotations
+            'playsinline': 1,
+            'index': randomSong
         },
         events: {
             'onReady': onPlayerReady,
@@ -51,10 +54,22 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
+// the player can't be clicked (css/train.css), so it starts muted, which browsers always let autoplay; the first tap or
+// key anywhere on the page turns its sound on, and starts the music if the browser held that back too
+function soundOn() {
+	if (video && video.unMute) video.unMute();
+	var music = document.getElementById("music");
+	if (music && music.paused) {
+		var played = music.play();
+		if (played && played.catch) played.catch(function () {});
+	}
+}
+["pointerdown", "keydown"].forEach(function (ev) {
+	document.addEventListener(ev, soundOn, { once: true });
+});
+
 function onPlayerReady(event) {
-	//alert("onPlayerReady"+event.data)
-	//event.target.setShuffle(true);
-	//event.target.mute();
+	event.target.mute();
 	event.target.playVideo();
 	event.target.setLoop(true);  
 	setTimeout(setShuffleFunction, 1000);

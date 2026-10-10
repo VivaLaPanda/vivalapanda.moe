@@ -1,5 +1,8 @@
+/* the train window: YouTube's player, cropped (its title bar above the frame, its logo below) and never pointed at,
+   so its hover controls (the playlist's prev / pause / next, which controls=0 no longer hides) never appear */
 #tallvideo {
     width: 100%;
     height: 118%;
     margin-top: -60px;
+    pointer-events: none;
 }
