@@ -34,14 +34,14 @@ window.ROOM = {
     dialogue: "bedroom",
     back: "/living-room.html",     // BACK when you didn't come from the site: the bedroom's door is the living room's
     // the room follows the real time of day, and its desk lamp the real bedroom lamp (js/house-room.js)
-    house: { base: "/img/room/house/", v: "5", hud: false },
+    house: { base: "/img/room/house/", v: "6", hud: false },
 
     scene: {
-        src: "/img/room/room@4x.png?v=7",
+        src: "/img/room/room@4x.png?v=8",
         width: 500,
         height: 357,
         // city lights: an 8-frame strip stepped like PC-98 palette cycling (the export's twinkle.json)
-        twinkle: { src: "/img/room/twinkle@4x.png?v=6", x: 191, y: 68, w: 92, h: 87, frames: 8, fps: 2 }
+        twinkle: { src: "/img/room/twinkle@4x.png?v=7", x: 191, y: 68, w: 92, h: 128, frames: 8, fps: 2 }
     },
 
     zOrder: ["controller", "kitsu", "tv", "butterfly", "linkedin", "letter", "stackoverflow", "phone", "lesswrong",
