@@ -252,6 +252,11 @@
         height: auto;
     }
 
+    /* the scene's space held before the room is built, so the dialog box doesn't jump down when it is */
+    #room-frame {
+        aspect-ratio: 500 / 357;
+    }
+
     #main-image #mute {
         width: 56px;
         height: 56px;
@@ -293,4 +298,30 @@
     #room-choices.room-choices-grid .room-choice {
         font-size: 17px;
     }
+}
+
+/* a slow connection: NOW LOADING blinks in the empty frame until the room is drawn (after a moment, so a quick load
+   never shows it) */
+#room-frame:has(#room-art:not([src])) {
+    position: relative;
+}
+
+#room-frame:has(#room-art:not([src]))::after {
+    content: "NOW LOADING";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    font-family: 'pc-98';
+    font-size: 22px;
+    color: #8799ff;
+    opacity: 0;
+    animation: room-loading 1.2s step-end 0.5s infinite;
+}
+
+@keyframes room-loading {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 0; }
 }

@@ -55,6 +55,25 @@
         return Math.round(v / 17) * 17;
     }
 
+    // snap(lin2s(v)) without the pow: the linear values where each of the 16 output levels starts, found by bisecting
+    // the same function, so the result is identical
+    var LEVEL_AT = [];
+    for (var lv = 1; lv < 16; lv++) {
+        var lo = 0, hi = 1;
+        while (true) {
+            var mid = (lo + hi) / 2;
+            if (mid === lo || mid === hi) break;
+            if (snap(lin2s(mid)) >= lv * 17) hi = mid; else lo = mid;
+        }
+        LEVEL_AT.push(hi);
+    }
+
+    function snapLin(v) {
+        var k = 0;
+        while (k < 15 && v >= LEVEL_AT[k]) k++;
+        return k * 17;
+    }
+
     // the nearest period tile level for a fraction
     function cut(f) {
         var best = 0, d = 99;
@@ -132,7 +151,7 @@
             for (var k = 0; k < on.length; k++) {
                 var L = on[k];
                 if (L.shade && L.shade[p] && L.glow > shade) { shade = L.glow; sc = L.col; }
-                var f = L.field[p];
+                var f = L.field ? L.field[p] : 0;          // (a light still loading adds nothing)
                 if (!f) continue;
                 var e = L.gain * f / 255;
                 r += L.col[0] * e; g += L.col[1] * e; b += L.col[2] * e;
@@ -169,7 +188,7 @@
                 G = k2 * (0.35 + 0.65 * sc[1]);
                 B = k2 * (0.35 + 0.65 * sc[2]);
             }
-            out[o] = snap(lin2s(R)); out[o + 1] = snap(lin2s(G)); out[o + 2] = snap(lin2s(B)); out[o + 3] = 255;
+            out[o] = snapLin(R); out[o + 1] = snapLin(G); out[o + 2] = snapLin(B); out[o + 3] = 255;
         }
         return out;
     }
@@ -200,48 +219,82 @@
         return out;
     }
 
+    function bit(v) { return v > 127 ? 1 : 0; }
+    function same(v) { return v; }
+
+    // The scene, as soon as scene.json is in, with what every frame reads already on its way: the index map, the glass's
+    // mask, the lamps' shades, the masks the room's overrides use. need() waits for those and asks for the rest of a
+    // frame's files (a lamp's light, the view at a time of day) in the same go, so the first frame waits on one round of
+    // its own files. The hotspots' masks aren't loaded: nothing reads them.
     function load(base, v) {
         var q = v ? "?v=" + v : "";
-        return fetch(base + "scene.json" + q, { cache: "no-cache" }).then(function (r) {
+        function get(file, decode) {
+            return image(base + file + q).then(function (im) { return decode(pixels(im)); });
+        }
+        return fetch(base + "scene.json" + q).then(function (r) {
             if (!r.ok) throw new Error("scene.json HTTP " + r.status);
             return r.json();
         }).then(function (spec) {
-            var jobs = [image(base + spec.idx + q).then(function (im) {
-                spec.idx = grey(pixels(im), function (v) { return v >> 4; });
-            })];
+            spec.w = spec.size[0]; spec.h = spec.size[1];
+            spec.later = { get: get, layers: {}, fields: {}, pending: {} };
+            var jobs = [get(spec.idx, function (d) { return grey(d, function (v) { return v >> 4; }); })
+                .then(function (a) { spec.idx = a; })];
             if (spec.outside) {
-                jobs.push(image(base + spec.outside.mask + q).then(function (im) {
-                    spec.outside.mask = grey(pixels(im), function (v) { return v > 127 ? 1 : 0; });
-                }));
-                var layers = spec.outside.layers;
-                Object.keys(layers).forEach(function (ph) {
-                    jobs.push(image(base + layers[ph] + q).then(function (im) { layers[ph] = pixels(im); }));
-                });
+                jobs.push(get(spec.outside.mask, function (d) { return grey(d, bit); })
+                    .then(function (a) { spec.outside.mask = a; }));
+                spec.later.layers = spec.outside.layers;
+                spec.outside.layers = {};
             }
             spec.mask = {};
+            var hotspot = {};
+            Object.keys(spec.hotspots || {}).forEach(function (id) { hotspot[spec.hotspots[id].mask] = true; });
             (spec.masks || []).forEach(function (f) {
-                jobs.push(image(base + f + q).then(function (im) {
-                    spec.mask[f] = grey(pixels(im), function (v) { return v > 127 ? 1 : 0; });
-                }));
+                if (hotspot[f]) return;
+                jobs.push(get(f, function (d) { return grey(d, bit); }).then(function (a) { spec.mask[f] = a; }));
             });
             Object.keys(spec.lights || {}).forEach(function (name) {
                 var l = spec.lights[name];
-                jobs.push(image(base + l.field + q).then(function (im) {
-                    l.field = grey(pixels(im), function (v) { return v; });
-                }));
+                spec.later.fields[name] = l.field;
+                l.field = null;
                 if (l.shade) {
-                    jobs.push(image(base + l.shade + q).then(function (im) {
-                        l.shade = grey(pixels(im), function (v) { return v > 127 ? 1 : 0; });
-                    }));
+                    jobs.push(get(l.shade, function (d) { return grey(d, bit); }).then(function (a) { l.shade = a; }));
                 } else {
                     l.shade = null;
                 }
             });
-            return Promise.all(jobs).then(function () {
-                spec.w = spec.size[0]; spec.h = spec.size[1];
-                return spec;
-            });
+            spec.later.base = Promise.all(jobs).then(function () { spec.later.based = true; });
+            spec.later.base.catch(function () {});               // (need() hands a failure on)
+            return spec;
         });
+    }
+
+    // the files a frame at `phase` with `lights` on still lacks: null when it has them all, else a promise that settles
+    // once they're in (it rejects if the scene's own files failed; a light or a view that fails is left out: the frame
+    // draws without it)
+    function need(spec, phase, lights) {
+        var L = spec.later;
+        if (!L) return null;
+        var jobs = L.based ? [] : [L.base], done = L.done = L.done || {};
+        function want(key, file, decode, put) {
+            if (!file) return;
+            if (!L.pending[key]) {
+                L.pending[key] = L.get(file, decode).then(put, function (err) {
+                    console.warn("house: " + err.message);
+                }).then(function () { done[key] = true; });
+            }
+            if (!done[key]) jobs.push(L.pending[key]);
+        }
+        if (spec.outside && !spec.outside.layers[phase]) {
+            want("view:" + phase, L.layers[phase], same, function (a) { spec.outside.layers[phase] = a; });
+        }
+        Object.keys(lights || {}).forEach(function (name) {
+            var l = spec.lights[name];
+            if (!l || l.field || !lights[name] || !lights[name].on) return;
+            if (l.phaseGain && !l.phaseGain[phase]) return;              // (daylight at night: no light to add)
+            want("light:" + name, L.fields[name], function (d) { return grey(d, same); },
+                 function (a) { l.field = a; });
+        });
+        return jobs.length ? Promise.all(jobs) : null;
     }
 
     // a render at 4x, nearest neighbour, as a data URL for an <img>
@@ -258,7 +311,7 @@
         return big.toDataURL("image/png");
     }
 
-    var api = { load: load, renderPixels: renderPixels, toURL: toURL, kelvinLin: kelvinLin };
+    var api = { load: load, need: need, renderPixels: renderPixels, toURL: toURL, kelvinLin: kelvinLin };
     if (typeof module !== "undefined" && module.exports) module.exports = api;
     else root.HouseRender = api;
 })(typeof self !== "undefined" ? self : this);

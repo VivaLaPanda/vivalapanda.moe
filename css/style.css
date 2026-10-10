@@ -1,12 +1,27 @@
-/* woff2 is ~384KB vs 1.9MB for the ttf (same tables); the ttf stays as a fallback */
+/* each pc-98 font in two: the glyphs the site's pages use (~12KB, scripts/subset_fonts.py) and the full font
+   (woff2 ~384KB, the ttf a fallback) for any other character, fetched only when a page shows one */
+@font-face {
+    font-family: pc-98;
+    src: url('/fonts/pc-9800-core.woff2') format('woff2');
+    unicode-range: U+0-FF, U+2010-2027, U+2030-203B, U+2190-21FF, U+2500-266F, U+3000-30FF, U+4F7F, U+53EF, U+5922, U+5E7B, U+623B, U+7528, U+7D44, U+80FD, U+898B, U+8B5A, U+8FBC, U+FF00-FFEF;
+}
+
 @font-face {
     font-family: pc-98;
     src: url('/fonts/pc-9800.woff2') format('woff2'), url('/fonts/pc-9800.ttf') format('truetype');
+    unicode-range: U+100-200F, U+2028-202F, U+203C-218F, U+2200-24FF, U+2670-2FFF, U+3100-4F7E, U+4F80-53EE, U+53F0-5921, U+5923-5E7A, U+5E7C-623A, U+623C-7527, U+7529-7D43, U+7D45-80FC, U+80FE-898A, U+898C-8B59, U+8B5B-8FBB, U+8FBD-FEFF, U+FFF0-10FFFF;
+}
+
+@font-face {
+    font-family: pc-98-bold;
+    src: url('/fonts/pc-9800-bold-core.woff2') format('woff2');
+    unicode-range: U+0-FF, U+2010-2027, U+2030-203B, U+2190-21FF, U+2500-266F, U+3000-30FF, U+4F7F, U+53EF, U+5922, U+5E7B, U+623B, U+7528, U+7D44, U+80FD, U+898B, U+8B5A, U+8FBC, U+FF00-FFEF;
 }
 
 @font-face {
     font-family: pc-98-bold;
     src: url('/fonts/pc-9800-bold.woff2') format('woff2'), url('/fonts/pc-9800-bold.ttf') format('truetype');
+    unicode-range: U+100-200F, U+2028-202F, U+203C-218F, U+2200-24FF, U+2670-2FFF, U+3100-4F7E, U+4F80-53EE, U+53F0-5921, U+5923-5E7A, U+5E7C-623A, U+623C-7527, U+7529-7D43, U+7D45-80FC, U+80FE-898A, U+898C-8B59, U+8B5B-8FBB, U+8FBD-FEFF, U+FFF0-10FFFF;
 }
 
 @font-face {

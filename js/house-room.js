@@ -112,6 +112,8 @@
 
     function draw() {
         if (!scene || !api) return;
+        var wait = HouseRender.need(scene, phaseNow(), lightsNow());
+        if (wait) { wait.then(draw); return; }          // a lamp just came on, or a new time of day: its file first
         var ov = overrides();
         var px = HouseRender.renderPixels(scene, stateNow(ov));
         api.art.src = HouseRender.toURL(px, scene.w, scene.h, 4);
@@ -217,9 +219,11 @@
         });
     }
 
-    // room.js waits for this before building: the hotspots' outlines come from the scene
-    R.ready = HouseRender.load(BASE, V).then(function (s) {
-        scene = s;
+    // room.js waits for this before building: the hotspots' outlines come from the scene, and the first frame's files
+    // (the state comes in alongside, so the room starts drawn as the house is)
+    var firstState = getState();
+    R.ready = Promise.all([HouseRender.load(BASE, V), firstState]).then(function (got) {
+        scene = got[0];
         R.objects.concat(R.knickKnacks || []).forEach(function (o) {
             var hs = scene.hotspots[o.id];
             if (!hs) return;
@@ -229,9 +233,10 @@
             }
             o.lit = { src: (o.lit && o.lit.src) || "data:,", x: hs.lit.x, y: hs.lit.y, w: hs.lit.w, h: hs.lit.h };
         });
-        return getState();
+        return HouseRender.need(scene, phaseNow(), lightsNow());
     }).catch(function (err) {
-        console.warn("living room scene unavailable:", err);
+        scene = null;                                    // the room stays the picture it was drawn as
+        console.warn("house scene unavailable:", err);
     });
 
     R.onBuilt = function (a) {
