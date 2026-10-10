@@ -108,7 +108,7 @@ window.HOUSE = window.HOUSE || {};
 
     R = window.ROOM = {
         dialogue: "living_room",
-        house: { base: "/img/living-room/", v: "20", hud: true },
+        house: { base: "/img/living-room/", v: "20", hud: true, debugClock: { x: 204, y: 61, w: 33, h: 35 } },
         seenKey: "pandaLivingRoomSeen",
         scene: { src: "/img/living-room/noon@4x.png?v=20", width: 500, height: 357 },
 

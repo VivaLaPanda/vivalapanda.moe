@@ -19,6 +19,7 @@
     var HOUSE = { tz: "America/Los_Angeles", lat: 37.77, lon: -122.42 };   // for the clock without a feed
 
     var scene = null, state = null, api = null;
+    var liveState = null, debug = null;   // the feed's state; the debug panel's copy while it's open (debugPanel)
     var overlays = {};                  // id -> element on the stage
     var hud = null, noteTimer = null;
     var tvTimer = null, tvFrame = 0;    // the TV's loop: which frame it's on (kept across redraws)
@@ -222,6 +223,7 @@
             hud.id = "lr-hud";
             hud.setAttribute("role", "status");
             api.stage.appendChild(hud);
+
         }
         var parts = [houseClock(), phaseNow().toUpperCase()];
         var c = H.climate();
@@ -293,13 +295,131 @@
         return phase;
     }
 
+
+    // ---------- the debug panel (ten clicks on the clock) ----------
+
+    // A copy of the live state the panel edits: every change redraws the room (and the lines) as if the house were in
+    // that state. Nothing reaches the house. "Back to live" drops the copy.
+    function debugPanel() {
+        if (document.getElementById("lr-debug")) return;
+        var base = liveState || { lights: [], blinds: [], plugs: [], climate: null, tv: null, music: null };
+        debug = JSON.parse(JSON.stringify(base));
+        debug.lights = debug.lights || []; debug.blinds = debug.blinds || []; debug.plugs = debug.plugs || [];
+        debug.climate = debug.climate || { temperature_f: 70, humidity_pct: null, heating: false };
+        debug.tv = debug.tv || { on: false, playing: false };
+        debug.music = debug.music || { playing: false, speakers: [] };
+        Object.keys(scene.light_names).forEach(function (real) {
+            if (!debug.lights.some(function (l) { return l.name === real; })) {
+                debug.lights.push({ name: real, on: false, brightness_pct: 100, kelvin: 2700, color: null });
+            }
+        });
+        Object.keys(scene.blinds || {}).forEach(function (name) {
+            if (!debug.blinds.some(function (b) { return b.name === name; })) debug.blinds.push({ name: name, open_pct: 100 });
+        });
+        if (scene.kotatsu && !debug.plugs.some(function (p) { return p.name === scene.kotatsu.plug; })) {
+            debug.plugs.push({ name: scene.kotatsu.plug, on: false });
+        }
+        var phase = debug.phase && scene.phases[debug.phase] ? debug.phase : phaseNow();
+
+        function apply() {
+            debug.phase = phase;
+            debug.updated = new Date().toISOString();
+            state = debug;
+            draw();
+        }
+
+        var box = document.createElement("div");
+        box.id = "lr-debug";
+        box.addEventListener("click", function (e) { e.stopPropagation(); });
+        function row(label, input) {
+            var r = document.createElement("label");
+            r.textContent = label;
+            r.appendChild(input);
+            box.appendChild(r);
+            return input;
+        }
+        function head(text) {
+            var h = document.createElement("div");
+            h.className = "lr-debug-head";
+            h.textContent = text;
+            box.appendChild(h);
+        }
+        function check(v, set) {
+            var i = document.createElement("input");
+            i.type = "checkbox"; i.checked = !!v;
+            i.addEventListener("change", function () { set(i.checked); apply(); });
+            return i;
+        }
+        function range(v, min, max, step, set) {
+            var i = document.createElement("input");
+            i.type = "range"; i.min = min; i.max = max; i.step = step; i.value = v;
+            i.addEventListener("input", function () { set(+i.value); apply(); });
+            return i;
+        }
+        function text(v, set) {
+            var i = document.createElement("input");
+            i.type = "text"; i.value = v || "";
+            i.addEventListener("input", function () { set(i.value || null); apply(); });
+            return i;
+        }
+
+        head("DEBUG · not the real house");
+        var sel = document.createElement("select");
+        Object.keys(scene.phases).forEach(function (p) {
+            var o = document.createElement("option");
+            o.value = o.textContent = p;
+            o.selected = p === phase;
+            sel.appendChild(o);
+        });
+        sel.addEventListener("change", function () { phase = sel.value; apply(); });
+        row("time of day ", sel);
+
+        head("lamps");
+        debug.lights.forEach(function (l) {
+            if (!scene.light_names[l.name]) return;
+            row(l.name + " ", check(l.on, function (v) { l.on = v; }));
+            row("  brightness ", range(l.brightness_pct || 100, 1, 100, 1, function (v) { l.brightness_pct = v; }));
+            row("  kelvin ", range(l.kelvin || 2700, 2000, 6500, 100, function (v) { l.kelvin = v; l.color = null; }));
+        });
+        if (debug.blinds.length) head("blinds (% open)");
+        debug.blinds.forEach(function (b) {
+            row(b.name + " ", range(b.open_pct == null ? 100 : b.open_pct, 0, 100, 1, function (v) { b.open_pct = v; }));
+        });
+        head("devices");
+        debug.plugs.forEach(function (p) {
+            row(p.name + " ", check(p.on, function (v) { p.on = v; }));
+        });
+        row("heating ", check(debug.climate.heating, function (v) { debug.climate.heating = v; }));
+        row("temperature °F ", range(debug.climate.temperature_f || 70, 50, 90, 1, function (v) { debug.climate.temperature_f = v; }));
+        row("TV on ", check(debug.tv.on, function (v) { debug.tv.on = v; if (!v) debug.tv.playing = false; }));
+        row("TV playing ", check(debug.tv.playing, function (v) { debug.tv.playing = v; if (v) debug.tv.on = true; }));
+        row("  show ", text(debug.tv.show, function (v) { debug.tv.show = v; }));
+        row("  episode ", text(debug.tv.episode, function (v) { debug.tv.episode = v; }));
+        row("music playing ", check(debug.music.playing, function (v) { debug.music.playing = v; }));
+        row("  title ", text(debug.music.title, function (v) { debug.music.title = v; }));
+        row("  artist ", text(debug.music.artist, function (v) { debug.music.artist = v; }));
+
+        var back = document.createElement("button");
+        back.type = "button";
+        back.textContent = "Back to live";
+        back.addEventListener("click", function () {
+            debug = null;
+            state = liveState;
+            box.remove();
+            draw();
+        });
+        box.appendChild(back);
+        document.body.appendChild(box);
+        apply();
+    }
+
     // ---------- loading ----------
 
     function getState() {
         return fetch("/house/state.json", { cache: "no-cache" }).then(function (r) {
             if (!r.ok) throw new Error("HTTP " + r.status);
             return r.json();
-        }).then(function (s) { state = s; }, function (err) {
+        }).then(function (s) { liveState = s; if (!debug) state = s; }, function (err) {
             console.warn("house state unavailable:", err);
         });
     }
@@ -329,8 +449,27 @@
         });
     });
 
+    // the wall clock in the art (R.house.debugClock, native px): ten clicks within 4s open the debug panel. An unmarked
+    // target, not a hotspot: no outline, no line, nothing in LOOK
+    function debugClock() {
+        var r = R.house.debugClock;
+        if (!r) return;
+        var t = document.createElement("div");
+        t.className = "lr-layer lr-debug-clock";
+        api.placeNative(t, r.x, r.y, r.w, r.h);
+        api.stage.insertBefore(t, null);
+        var clicks = [];
+        t.addEventListener("click", function (e) {
+            e.stopPropagation();
+            var now = Date.now();
+            clicks = clicks.filter(function (c) { return now - c < 4000; }).concat(now);
+            if (clicks.length >= 10 && scene) { clicks = []; debugPanel(); }
+        });
+    }
+
     R.onBuilt = function (a) {
         api = a;
+        debugClock();
         draw();
         setInterval(function () {
             if (!document.hidden) getState().then(draw);
