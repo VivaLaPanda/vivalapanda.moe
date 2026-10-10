@@ -347,8 +347,9 @@
   "backdrop": "tv-backdrop@4x.png",
   "play": {
    "src": "tv-play@4x.png",
-   "frames": 6,
-   "fps": 3
+   "frames": 72,
+   "cols": 9,
+   "fps": 6
   }
  },
  "kotatsu": {

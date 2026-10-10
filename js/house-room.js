@@ -17,6 +17,7 @@
     var scene = null, state = null, api = null;
     var overlays = {};                  // id -> element on the stage
     var hud = null, noteTimer = null;
+    var tvTimer = null, tvFrame = 0;    // the TV's loop: which frame it's on (kept across redraws)
 
     // ---------- the state, read for the dialogue (living-room-data.js) ----------
 
@@ -138,20 +139,37 @@
         return node;
     }
 
+    // the TV: its picture already projected onto the glass (scene.tv); playing, a loop of frames in a grid, stepped
+    // one way round at its own pace (the last frame leads into the first, so it never runs back)
     function drawTV() {
-        var tv = H.tv(), s = scene.tv.screen;
+        var tv = H.tv(), s = scene.tv.screen, play = scene.tv.play;
         var node = overlay("tv");
+        clearInterval(tvTimer);
+        tvTimer = null;
         if (!tv || !tv.on) { node.hidden = true; return; }
         node.hidden = false;
+        node.className = "lr-layer lr-tv";
         api.placeNative(node, s.x, s.y, s.w, s.h);
-        if (tv.playing) {
-            node.className = "lr-layer lr-tv lr-tv-play";
-            node.style.backgroundImage = "url(" + BASE + scene.tv.play.src + "?v=" + V + ")";
-            node.style.setProperty("--frames", scene.tv.play.frames);
-        } else {
-            node.className = "lr-layer lr-tv";
+        if (!tv.playing) {
             node.style.backgroundImage = "url(" + BASE + scene.tv.backdrop + "?v=" + V + ")";
+            node.style.backgroundSize = node.style.backgroundPosition = "";
+            return;
         }
+        var cols = play.cols, rows = Math.ceil(play.frames / cols);
+        node.style.backgroundImage = "url(" + BASE + play.src + "?v=" + V + ")";
+        node.style.backgroundSize = cols * 100 + "% " + rows * 100 + "%";
+        function show() {
+            var c = tvFrame % cols, r = Math.floor(tvFrame / cols);
+            node.style.backgroundPosition = (cols > 1 ? c / (cols - 1) * 100 : 0) + "% " +
+                                            (rows > 1 ? r / (rows - 1) * 100 : 0) + "%";
+        }
+        show();
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        tvTimer = setInterval(function () {
+            if (document.hidden) return;
+            tvFrame = (tvFrame + 1) % play.frames;
+            show();
+        }, 1000 / play.fps);
     }
 
     function drawMusic() {

@@ -7,21 +7,11 @@
     pointer-events: none;
 }
 
-/* the TV's picture: the idle backdrop, or a strip of frames stepped through while something plays */
+/* the TV's picture: the idle backdrop, or (playing) a grid of frames js/house-room.js steps through */
 .lr-tv {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     image-rendering: auto;
-}
-
-.lr-tv-play {
-    background-size: calc(var(--frames) * 100%) 100%;
-    animation: lr-tv-play 2s steps(6) infinite;
-}
-
-@keyframes lr-tv-play {
-    from { background-position: 0% 0%; }
-    to { background-position: 120% 0%; }
 }
 
 /* the speakers' light bar while music plays */
@@ -54,9 +44,6 @@
     letter-spacing: 1px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .lr-tv-play { animation: none; }
-}
 
 @media (max-width: 768px) {
     #lr-hud {
