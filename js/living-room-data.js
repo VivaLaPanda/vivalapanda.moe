@@ -108,12 +108,12 @@ window.HOUSE = window.HOUSE || {};
 
     R = window.ROOM = {
         dialogue: "living_room",
-        house: { base: "/img/living-room/", v: "20", hud: true, debugClock: { x: 204, y: 61, w: 33, h: 35 } },
+        house: { base: "/img/living-room/", v: "21", hud: true, debugClock: { x: 204, y: 61, w: 33, h: 35 } },
         seenKey: "pandaLivingRoomSeen",
-        scene: { src: "/img/living-room/noon@4x.png?v=20", width: 500, height: 357 },
+        scene: { src: "/img/living-room/noon@4x.png?v=21", width: 500, height: 357 },
 
         zOrder: ["lamp_dining", "lamp_window", "speaker_r", "kotatsu", "lamp_sun", "lamp_corner", "speaker_l",
-                 "thermostat", "tv", "blind_living", "blind_dining", "door_bedroom", "door_outside"],
+                 "thermostat", "tv", "ac", "blind_living", "blind_dining", "door_bedroom", "door_outside"],
 
         objects: [
             // the doors: hover says where, a click goes through. Their outlines come from the scene like everything
@@ -153,6 +153,22 @@ window.HOUSE = window.HOUSE || {};
             { id: "lamp_window", rank: 8, hover: windowside.hover, lines: windowside.lines },
             { id: "speaker_l", rank: 9, hover: spkL.hover, lines: spkL.lines },
             { id: "speaker_r", rank: 10, hover: spkR.hover, lines: spkR.lines },
+            {
+                // the AC: hover_on ({mode}, {temp}: its setpoint, {fan}), hover_off, hover_unknown; lines, lines_on
+                id: "ac", rank: 14,
+                hover: function () {
+                    var s = said("ac"), ac = H.aircon ? H.aircon() : null;
+                    if (!ac) return s.hover_unknown;
+                    if (!ac.on) return s.hover_off;
+                    var mode = { cool: "cooling", fan_only: "just the fan", dry: "drying the air" }[ac.mode] || ac.mode;
+                    var v = { mode: mode, temp: ac.setpoint_f != null ? Math.round(ac.setpoint_f) : null, fan: ac.fan };
+                    return fill(s.hover_on, v, fill(s.hover_on_notemp, v, s.hover_unknown));
+                },
+                lines: function () {
+                    var s = said("ac"), ac = H.aircon ? H.aircon() : null;
+                    return ac && ac.on ? (s.lines_on || s.lines) : s.lines;
+                }
+            },
             { id: "blind_living", rank: 12, hover: blindL.hover, lines: blindL.lines },
             { id: "blind_dining", rank: 13, hover: blindD.hover, lines: blindD.lines },
             {

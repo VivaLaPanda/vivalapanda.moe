@@ -23,6 +23,7 @@
     var overlays = {};                  // id -> element on the stage
     var hud = null, noteTimer = null;
     var tvTimer = null, tvFrame = 0;    // the TV's loop: which frame it's on (kept across redraws)
+    var acTimer = null, acFrame = 0, acSheet = {};   // the AC's streamers: their loop, and their frames per time of day
 
     // ---------- the state, read for the dialogue (living-room-data.js) ----------
 
@@ -63,6 +64,7 @@
     H.climate = function () { return live() ? state.climate : null; };
     H.tv = function () { return live() ? state.tv : null; };
     H.music = function () { return live() ? state.music : null; };
+    H.aircon = function () { return live() ? state.aircon || null : null; };
     H.kotatsuOn = function () { return scene && scene.kotatsu ? plug(scene.kotatsu.plug) : null; };
     H.blindPct = blindPct;
     H.redraw = function () { draw(); };
@@ -141,6 +143,7 @@
         api.art.src = HouseRender.toURL(px, scene.w, scene.h, 4);
         if (scene.tv) drawTV();
         if (scene.speakers) drawMusic();
+        if (scene.ac) drawAC();
         if (R.house.hud) drawHud();
         if (scene.twinkle_phases) {
             var tw = document.getElementById("room-twinkle");
@@ -191,6 +194,56 @@
             tvFrame = (tvFrame + 1) % play.frames;
             show();
         }, 1000 / play.fps);
+    }
+
+
+    // the AC on: paper streamers flutter from its vent (scene.ac: frames of ink indices, coloured here with the time of
+    // day's registers, at 4x so they scale like the art); faster with the fan. Off, or unknown: nothing
+    function acFrames(phase) {
+        if (acSheet[phase]) return acSheet[phase];
+        var src = scene.ac.pixels, a = scene.ac, w = a.box[2] * a.frames, h = a.box[3];
+        var pal = scene.phases[phase].map(function (hx) {
+            hx = hx.replace("#", "");
+            return [0, 1, 2].map(function (k) { return parseInt(hx[k], 16) * 17; });
+        });
+        var c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        var img = c.getContext("2d").createImageData(w, h);
+        for (var p = 0; p < w * h; p++) {
+            if (!src[p * 4 + 3]) continue;
+            var col = pal[src[p * 4] >> 4];
+            img.data[p * 4] = col[0]; img.data[p * 4 + 1] = col[1]; img.data[p * 4 + 2] = col[2]; img.data[p * 4 + 3] = 255;
+        }
+        c.getContext("2d").putImageData(img, 0, 0);
+        var big = document.createElement("canvas");
+        big.width = w * 4; big.height = h * 4;
+        var x = big.getContext("2d");
+        x.imageSmoothingEnabled = false;
+        x.drawImage(c, 0, 0, big.width, big.height);
+        return (acSheet[phase] = big.toDataURL("image/png"));
+    }
+
+    function drawAC() {
+        var ac = H.aircon(), a = scene.ac, node = overlay("ac");
+        clearInterval(acTimer);
+        acTimer = null;
+        if (!ac || !ac.on || !a.pixels) { node.hidden = true; return; }
+        node.hidden = false;
+        node.className = "lr-layer lr-ac";
+        api.placeNative(node, a.box[0], a.box[1], a.box[2], a.box[3]);
+        node.style.backgroundImage = "url(" + acFrames(phaseNow()) + ")";
+        node.style.backgroundSize = a.frames * 100 + "% 100%";
+        function show() {
+            node.style.backgroundPosition = (acFrame / (a.frames - 1) * 100) + "% 0%";
+        }
+        show();
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var fps = { low: 4, medium: 6, high: 9 }[ac.fan] || 6;
+        acTimer = setInterval(function () {
+            if (document.hidden) return;
+            acFrame = (acFrame + 1) % a.frames;
+            show();
+        }, 1000 / fps);
     }
 
     function drawMusic() {
@@ -395,6 +448,25 @@
         row("TV playing ", check(debug.tv.playing, function (v) { debug.tv.playing = v; if (v) debug.tv.on = true; }));
         row("  show ", text(debug.tv.show, function (v) { debug.tv.show = v; }));
         row("  episode ", text(debug.tv.episode, function (v) { debug.tv.episode = v; }));
+        if (scene.ac) {
+            debug.aircon = debug.aircon || { on: false, mode: "cool", setpoint_f: 70, fan: "auto", room_f: 72 };
+            row("AC on ", check(debug.aircon.on, function (v) { debug.aircon.on = v; }));
+            var am = document.createElement("select");
+            ["cool", "fan_only", "dry"].forEach(function (m) {
+                var o = document.createElement("option"); o.value = o.textContent = m; o.selected = m === debug.aircon.mode;
+                am.appendChild(o);
+            });
+            am.addEventListener("change", function () { debug.aircon.mode = am.value; apply(); });
+            row("  mode ", am);
+            row("  set to °F ", range(debug.aircon.setpoint_f || 70, 60, 86, 1, function (v) { debug.aircon.setpoint_f = v; }));
+            var af = document.createElement("select");
+            ["auto", "low", "medium", "high"].forEach(function (m) {
+                var o = document.createElement("option"); o.value = o.textContent = m; o.selected = m === debug.aircon.fan;
+                af.appendChild(o);
+            });
+            af.addEventListener("change", function () { debug.aircon.fan = af.value; apply(); });
+            row("  fan ", af);
+        }
         row("music playing ", check(debug.music.playing, function (v) { debug.music.playing = v; }));
         row("  title ", text(debug.music.title, function (v) { debug.music.title = v; }));
         row("  artist ", text(debug.music.artist, function (v) { debug.music.artist = v; }));
@@ -427,8 +499,25 @@
     // room.js waits for this before building: the hotspots' outlines come from the scene, and the first frame's files
     // (the state comes in alongside, so the room starts drawn as the house is)
     var firstState = getState();
+    function acPixels(s) {                               // the AC's streamer frames, as raw RGBA (ink indices)
+        if (!s || !s.ac) return null;
+        return new Promise(function (ok) {
+            var im = new Image();
+            im.onload = function () {
+                var c = document.createElement("canvas");
+                c.width = im.naturalWidth; c.height = im.naturalHeight;
+                c.getContext("2d").drawImage(im, 0, 0);
+                s.ac.pixels = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+                ok();
+            };
+            im.onerror = function () { ok(); };              // no streamers: the AC just doesn't flutter
+            im.src = BASE + s.ac.streamers + "?v=" + V;
+        });
+    }
+
     R.ready = Promise.all([HouseRender.load(BASE, V), firstState]).then(function (got) {
         scene = got[0];
+        var acLoad = acPixels(scene);
         R.objects.concat(R.knickKnacks || []).forEach(function (o) {
             var hs = scene.hotspots[o.id];
             if (!hs) return;
@@ -437,7 +526,7 @@
                 o.anchor = hs.anchor;
             }
         });
-        return HouseRender.need(scene, phaseNow(), lightsNow());
+        return Promise.all([acLoad, HouseRender.need(scene, phaseNow(), lightsNow())]);
     }).catch(function (err) {
         scene = null;                                    // the room stays the picture it was drawn as
         console.warn("house scene unavailable:", err);
