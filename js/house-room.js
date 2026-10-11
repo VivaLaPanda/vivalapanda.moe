@@ -197,11 +197,13 @@
     }
 
 
-    // the AC on: paper streamers flutter from its vent (scene.ac: frames of ink indices, coloured here with the time of
-    // day's registers, at 4x so they scale like the art); faster with the fan. Off, or unknown: nothing
-    function acFrames(phase) {
-        if (acSheet[phase]) return acSheet[phase];
-        var src = scene.ac.pixels, a = scene.ac, w = a.box[2] * a.frames, h = a.box[3];
+    // the AC's paper streamers, always there: on, they stream out of the vent and flutter (faster with the fan); off
+    // or unknown, they hang and barely stir. Their frames are ink indices (scene.ac, scene.ac.off), coloured here with
+    // the time of day's registers at 4x so they scale like the art
+    function acFrames(sheet, phase) {
+        sheet.urls = sheet.urls || {};
+        if (sheet.urls[phase]) return sheet.urls[phase];
+        var src = sheet.pixels, a = scene.ac, w = a.box[2] * sheet.frames, h = a.box[3];
         var pal = scene.phases[phase].map(function (hx) {
             hx = hx.replace("#", "");
             return [0, 1, 2].map(function (k) { return parseInt(hx[k], 16) * 17; });
@@ -220,28 +222,31 @@
         var x = big.getContext("2d");
         x.imageSmoothingEnabled = false;
         x.drawImage(c, 0, 0, big.width, big.height);
-        return (acSheet[phase] = big.toDataURL("image/png"));
+        return (sheet.urls[phase] = big.toDataURL("image/png"));
     }
 
     function drawAC() {
         var ac = H.aircon(), a = scene.ac, node = overlay("ac");
+        var on = !!(ac && ac.on);
+        var sheet = on ? a : a.off;
         clearInterval(acTimer);
         acTimer = null;
-        if (!ac || !ac.on || !a.pixels) { node.hidden = true; return; }
+        if (!sheet || !sheet.pixels) { node.hidden = true; return; }
         node.hidden = false;
         node.className = "lr-layer lr-ac";
         api.placeNative(node, a.box[0], a.box[1], a.box[2], a.box[3]);
-        node.style.backgroundImage = "url(" + acFrames(phaseNow()) + ")";
-        node.style.backgroundSize = a.frames * 100 + "% 100%";
+        node.style.backgroundImage = "url(" + acFrames(sheet, phaseNow()) + ")";
+        node.style.backgroundSize = sheet.frames * 100 + "% 100%";
+        acFrame = acFrame % sheet.frames;
         function show() {
-            node.style.backgroundPosition = (acFrame / (a.frames - 1) * 100) + "% 0%";
+            node.style.backgroundPosition = (acFrame / (sheet.frames - 1) * 100) + "% 0%";
         }
         show();
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        var fps = { low: 7, medium: 10, high: 14 }[ac.fan] || 10;   // a streamer in a jet flicks fast
+        var fps = on ? ({ low: 9, medium: 12, high: 16 }[ac.fan] || 12) : 3;   // in the jet a strip flicks fast
         acTimer = setInterval(function () {
             if (document.hidden) return;
-            acFrame = (acFrame + 1) % a.frames;
+            acFrame = (acFrame + 1) % sheet.frames;
             show();
         }, 1000 / fps);
     }
@@ -499,20 +504,24 @@
     // room.js waits for this before building: the hotspots' outlines come from the scene, and the first frame's files
     // (the state comes in alongside, so the room starts drawn as the house is)
     var firstState = getState();
-    function acPixels(s) {                               // the AC's streamer frames, as raw RGBA (ink indices)
-        if (!s || !s.ac) return null;
+    function sheetPixels(sheet) {                          // a streamer sheet's raw RGBA (ink indices)
         return new Promise(function (ok) {
             var im = new Image();
             im.onload = function () {
                 var c = document.createElement("canvas");
                 c.width = im.naturalWidth; c.height = im.naturalHeight;
                 c.getContext("2d").drawImage(im, 0, 0);
-                s.ac.pixels = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+                sheet.pixels = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
                 ok();
             };
-            im.onerror = function () { ok(); };              // no streamers: the AC just doesn't flutter
-            im.src = BASE + s.ac.streamers + "?v=" + V;
+            im.onerror = function () { ok(); };              // no streamers: the AC just has none
+            im.src = BASE + sheet.streamers + "?v=" + V;
         });
+    }
+
+    function acPixels(s) {
+        if (!s || !s.ac) return null;
+        return Promise.all([sheetPixels(s.ac), s.ac.off ? sheetPixels(s.ac.off) : null]);
     }
 
     R.ready = Promise.all([HouseRender.load(BASE, V), firstState]).then(function (got) {

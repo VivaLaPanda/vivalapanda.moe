@@ -363,12 +363,16 @@
  "ac": {
   "streamers": "ac-streamers.png",
   "box": [
-   338,
-   62,
-   48,
-   34
+   318,
+   60,
+   68,
+   42
   ],
-  "frames": 8
+  "frames": 32,
+  "off": {
+   "streamers": "ac-streamers-off.png",
+   "frames": 12
+  }
  },
  "speakers": {
   "leds": [
