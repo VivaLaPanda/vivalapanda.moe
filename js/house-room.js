@@ -238,7 +238,7 @@
         }
         show();
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        var fps = { low: 4, medium: 6, high: 9 }[ac.fan] || 6;
+        var fps = { low: 7, medium: 10, high: 14 }[ac.fan] || 10;   // a streamer in a jet flicks fast
         acTimer = setInterval(function () {
             if (document.hidden) return;
             acFrame = (acFrame + 1) % a.frames;
