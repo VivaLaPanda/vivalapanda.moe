@@ -48,13 +48,20 @@ blinds, the thermostat, the TV, music on the speakers, the kotatsu's plug. Plain
 
 - `js/house-render.js`: paints a room's index map in the current time of day's 16 colours plus each lit lamp's light.
 - `js/house-room.js`: loads the room's scene and the house state, draws, and redraws every minute.
-- `js/room.js`: the hotspots and Panda's dialogue box (shared by both rooms).
+- `js/scene.js`: the hotspots and Panda's dialogue box. It runs both rooms and every Explore page.
 - `js/living-room-data.js`, `js/room-data.js`: each room's objects; `data/dialogue.json`: every line Panda says
   (hand-edited; its `_readme` lists the variants and placeholders).
-- `js/room-music.js`: the room music and the mute speaker (the explore pages' `muted` setting).
+- `js/scene-music.js`: the music and the mute speaker (the site's shared `muted` setting).
+- `templates/t_scene.html`, `css/scene.css`: the scene page's markup and style. Each page sets its music, alt text
+  and noscript fallback through `{{ define }}` blocks.
 - `img/living-room/`, `img/room/house/`: the exported scenes. They're made in pc98-assets
   (`easel/pieces/living-room`, `easel/pieces/panda-room`): edit the passages there, run the export, copy the
   output here, and bump the room's `house.v` (and the scene `?v=`) in its data file.
+
+**Explore** uses the same engine. `js/explore-locations.js` lists every place: its art, music, exits (rects in
+the 740×528 picture) and views. Its adapter at the bottom turns the current place (`?loc=` or the page's
+`data-scene`) into the scene. Explore's lines are in `data/dialogue.json` under `explore.<place>`. Explore has no LOOK
+button, and its exits aren't outlined.
 
 **The feed.** The house state is a static file, `house/state.json` (gitignored), so visitors never reach the house:
 

@@ -7,12 +7,12 @@
     <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
     <link rel="preload" href="/fonts/pc-9800-core.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/house/state.json" as="fetch" crossorigin>
-    <link href="/css/room.css?version=7" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/scene.css?version=1" rel="stylesheet" type="text/css" media="all">
     <script src="/js/house-render.js?version=6" defer></script>
     <script src="/js/room-data.js?version=14" defer></script>
     <script src="/js/house-room.js?version=19" defer></script>
-    <script src="/js/room.js?version=10" defer></script>
-    <script src="/js/room-music.js?version=1" defer></script>
+    <script src="/js/scene.js?version=1" defer></script>
+    <script src="/js/scene-music.js?version=1" defer></script>
   </head>
   <body>
 	<div id="audio-player-container">
@@ -21,7 +21,7 @@
 		</audio>
 	</div>
 	<div class="main-container">
-		<div class="main-window">
+		<div class="main-window" id="frame">
 			<div class="subwindow" id="main-image">
 				<div id="room-frame">
 					<div id="room-stage">
@@ -60,10 +60,10 @@
 			<div class="subwindow" id="text-box">
 				<div id="room-cmds">
 					<button type="button" id="room-back" aria-label="Back: where you came from" hidden>戻る BACK</button>
-					<button type="button" id="room-look" aria-label="Look: list everything in the room">見る LOOK</button>
+					<button type="button" id="room-look" aria-label="Look: list everything here">見る LOOK</button>
 				</div>
 				<div class="text-container">
-					<p class="speaker-text">Ｐａｎｄａ</p>
+					<p class="speaker-text" id="room-speaker">Ｐａｎｄａ</p>
 					<p class="dialog-text" id="room-text" aria-live="polite"></p>
 					<div id="room-choices" role="menu"></div>
 					<noscript>
@@ -75,7 +75,7 @@
 							<a href="https://vlpanda.substack.com">Substack</a> ·
 							<a href="https://bsky.app/profile/vivalapanda.moe">Bluesky</a> ·
 							<a href="https://letterboxd.com/VivaLaPanda/">Letterboxd</a>
-						</p>
+</p>
 					</noscript>
 				</div>
 				<img class="bounce" id="text-arrow" src="/img/icons/text-arrow.png" alt="" hidden>
@@ -83,5 +83,6 @@
 			<div class="subwindow" id="right-sidebar"></div>
 		</div>
 	</div>
+
   </body>
 </html>

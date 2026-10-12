@@ -1,0 +1,41 @@
+	<div id="audio-player-container">
+		<audio id="music" loop preload="none"{{ template "scene_volume" . }}>
+			{{ template "scene_music" . }}
+		</audio>
+	</div>
+	<div class="main-container">
+		<div class="main-window" id="frame">
+			<div class="subwindow" id="main-image">
+				<div id="room-frame">
+					<div id="room-stage">
+						<img id="room-art" alt="{{ template "scene_alt" . }}">
+						<svg id="room-hotspots" role="group" aria-label="{{ template "scene_label" . }}" xmlns="http://www.w3.org/2000/svg"></svg>
+					</div>
+				</div>
+				<input type="image" id="mute" alt="mute" aria-label="Mute the music" src="/img/icons/playing_big.png">
+			</div>
+			{{ template "t_lsidebar.html" . }}
+			<div class="subwindow" id="text-box">
+				<div id="room-cmds">
+					<button type="button" id="room-back" aria-label="Back: where you came from" hidden>戻る BACK</button>
+					<button type="button" id="room-look" aria-label="Look: list everything here">見る LOOK</button>
+				</div>
+				<div class="text-container">
+					<p class="speaker-text" id="room-speaker">Ｐａｎｄａ</p>
+					<p class="dialog-text" id="room-text" aria-live="polite"></p>
+					<div id="room-choices" role="menu"></div>
+					<noscript>
+						<p class="dialog-text">{{ template "scene_noscript" . }}</p>
+					</noscript>
+				</div>
+				<img class="bounce" id="text-arrow" src="/img/icons/text-arrow.png" alt="" hidden>
+			</div>
+			<div class="subwindow" id="right-sidebar"></div>
+		</div>
+	</div>
+{{- /* A scene page: the frame, the picture with its hotspots, the dialog box (BACK, LOOK) and the mute speaker,
+     shared by the rooms and Explore (js/scene.js runs it). A page fills these in (defaults below):
+       scene_music     the <source> of its music          scene_volume  e.g. ` data-volume="0.4"` for loud rips
+       scene_alt       the picture's description          scene_label   the hotspots' group name
+       scene_noscript  links for visitors without JS */ -}}
+{{ define "scene_music" }}{{ end }}{{ define "scene_volume" }}{{ end }}{{ define "scene_alt" }}{{ end }}{{ define "scene_label" }}Things here{{ end }}{{ define "scene_noscript" }}{{ end }}

@@ -1,3 +1,5 @@
+{{ define "scene_label" }}Places to go{{ end -}}
+{{ define "scene_noscript" }}<a href="/living-room.html">Back home</a>{{ end -}}
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,66 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tokugawa Tower Lobby</title>
     <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/explore.css?version=1" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/explore.js?version=2" crossorigin="anonymous"></script>
-
-	<style>
-		#explore-img {
-			background-image: url("/img/explore/places/front_desk.gif");
-			background-repeat: no-repeat;
-			background-size: cover;
-			background-position: left;
-		}
-
-		#penthouse-nav {
-			left: 146px;
-    		top: 7px;
-		}
-		#penthouse-nav img {
-			width: 113px;
-		}
-
-		#bar-nav {
-			top: 98px;
-			left: 170px;
-		}
-		#bar-nav img {
-			width: 70px;
-		}
-	</style>
+    <link rel="preload" href="/fonts/pc-9800-core.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/css/scene.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/explore-locations.js?version=2" defer></script>
+    <script src="/js/scene.js?version=1" defer></script>
+    <script src="/js/scene-music.js?version=1" defer></script>
   </head>
-  <body>
-	<div id="audio-player-container">
-		<audio id="music" loop preload controls>
-			<source src="/audio/possessioner-abandoned-district.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
-			Your browser does not support the audio element.
-		</audio>
-	</div>
-	<div class="main-container">
-		<div class="main-window">
-			<div class="subwindow" id="main-image">
-				<div class="page-image" id="explore-img">
-					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
-				</div>
-
-				<a id="penthouse-nav" class="explore-nav" href="penthouse.html">
-					<img src="/img/explore/overlays/penthouse-button.png"/>
-				</a>
-				<a id="bar-nav" class="explore-nav" href="towerbar.html">
-					<img src="/img/explore/overlays/bar-button.png"/>
-				</a>
-			</div>
-			{{ template "t_lsidebar.html" . }}
-			<div class="subwindow" id="text-box">
-				<div class="text-container">
-					<p class="speaker-text">3 7</p>
-					<p class="dialog-text">
-						"Welcome to the Tokugawa tower sir, how may I assist?"
-					</p>
-				</div>
-			</div>
-			<div class="subwindow" id="right-sidebar"></div>
-		</div>
-	</div>
+  <body data-scene="frontdesk">
+{{ template "t_scene.html" . }}
   </body>
 </html>

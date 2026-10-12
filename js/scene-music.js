@@ -1,4 +1,4 @@
-// A room's music, the explore pages' way: it plays unless the visitor muted it (localStorage "muted", shared with
+// A scene's music, the site's way: it plays unless the visitor muted it (localStorage "muted", shared with
 // every room on the site); the speaker in the scene's corner toggles it. Starts once the page has loaded, so the
 // track doesn't compete with the room's art; if the browser refuses sound before a touch, it starts on the first one.
 (function () {
@@ -7,6 +7,7 @@
     var music = document.getElementById("music");
     var btn = document.getElementById("mute");
     if (!music || !btn) return;
+    if (window.ROOM && window.ROOM.music) music.src = window.ROOM.music;   // a scene that sets its own (Explore's)
     if (music.dataset.volume) music.volume = parseFloat(music.dataset.volume);   // evens out loud rips
 
     var muted = false;

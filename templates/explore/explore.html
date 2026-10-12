@@ -1,60 +1,25 @@
+{{ define "scene_label" }}Places to go{{ end -}}
+{{ define "scene_noscript" }}<a href="/living-room.html">Back home</a>{{ end -}}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/explore.css?version=1" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/explore-locations.js?version=1" crossorigin="anonymous"></script>
-    <script src="/js/explore.js?version=2" crossorigin="anonymous"></script>
-
-    <!-- 
+    <title>Pandopolis</title>
+    <!--
         Big ups to AccelJoe on YouTube, the source for most of the audio tracks here.
-        Most of the PC98 images are from the TOUR94 Tumblr account https://jazzisthebestformofmusic.tumblr.com/archive 
+        Most of the PC98 images are from the TOUR94 Tumblr account https://jazzisthebestformofmusic.tumblr.com/archive
 
         Sidebar and other assets I made myself mostly
      -->
-
-	<style>
-		#explore-img {
-			background-repeat: no-repeat;
-			background-size: cover;
-             
-			background-color: black;
-			background-position: center;
-		}
-
-        .main-window {
-            background-image: url("/img/background-frame-dark.png");
-        }
-	</style>
+    <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
+    <link rel="preload" href="/fonts/pc-9800-core.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/css/scene.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/explore-locations.js?version=2" defer></script>
+    <script src="/js/scene.js?version=1" defer></script>
+    <script src="/js/scene-music.js?version=1" defer></script>
   </head>
   <body>
-	<div id="audio-player-container">
-		<audio id="music" loop preload controls>
-			<source src="/audio/dance_in_the_memories.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
-			Your browser does not support the audio element.
-		</audio>
-	</div>
-	<div class="main-container">
-		<div id="frame" class="main-window">
-			<div class="subwindow" id="main-image">
-				<div class="page-image" id="explore-img">
-					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
-				</div>
-			</div>
-			{{ template "t_lsidebar.html" . }}
-			<div class="subwindow" id="text-box">
-				<div class="text-container">
-					<p class="speaker-text">P a ｎｄa</p>
-					<p class="dialog-text">
-						
-					</p>
-				</div>
-			</div>
-			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
-		</div>
-	</div>
+{{ template "t_scene.html" . }}
   </body>
 </html>

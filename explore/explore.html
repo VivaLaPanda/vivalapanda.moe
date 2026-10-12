@@ -3,46 +3,36 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/explore.css?version=1" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/explore-locations.js?version=1" crossorigin="anonymous"></script>
-    <script src="/js/explore.js?version=2" crossorigin="anonymous"></script>
-
-    <!-- 
+    <title>Pandopolis</title>
+    <!--
         Big ups to AccelJoe on YouTube, the source for most of the audio tracks here.
-        Most of the PC98 images are from the TOUR94 Tumblr account https://jazzisthebestformofmusic.tumblr.com/archive 
+        Most of the PC98 images are from the TOUR94 Tumblr account https://jazzisthebestformofmusic.tumblr.com/archive
 
         Sidebar and other assets I made myself mostly
      -->
-
-	<style>
-		#explore-img {
-			background-repeat: no-repeat;
-			background-size: cover;
-             
-			background-color: black;
-			background-position: center;
-		}
-
-        .main-window {
-            background-image: url("/img/background-frame-dark.png");
-        }
-	</style>
+    <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
+    <link rel="preload" href="/fonts/pc-9800-core.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/css/scene.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/explore-locations.js?version=2" defer></script>
+    <script src="/js/scene.js?version=1" defer></script>
+    <script src="/js/scene-music.js?version=1" defer></script>
   </head>
   <body>
 	<div id="audio-player-container">
-		<audio id="music" loop preload controls>
-			<source src="/audio/dance_in_the_memories.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
-			Your browser does not support the audio element.
+		<audio id="music" loop preload="none">
+			
 		</audio>
 	</div>
 	<div class="main-container">
-		<div id="frame" class="main-window">
+		<div class="main-window" id="frame">
 			<div class="subwindow" id="main-image">
-				<div class="page-image" id="explore-img">
-					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
+				<div id="room-frame">
+					<div id="room-stage">
+						<img id="room-art" alt="">
+						<svg id="room-hotspots" role="group" aria-label="Places to go" xmlns="http://www.w3.org/2000/svg"></svg>
+					</div>
 				</div>
+				<input type="image" id="mute" alt="mute" aria-label="Mute the music" src="/img/icons/playing_big.png">
 			</div>
 			<div class="subwindow" id="left-sidebar">
 
@@ -71,15 +61,23 @@
 </div>
 
 			<div class="subwindow" id="text-box">
-				<div class="text-container">
-					<p class="speaker-text">P a ｎｄa</p>
-					<p class="dialog-text">
-						
-					</p>
+				<div id="room-cmds">
+					<button type="button" id="room-back" aria-label="Back: where you came from" hidden>戻る BACK</button>
+					<button type="button" id="room-look" aria-label="Look: list everything here">見る LOOK</button>
 				</div>
+				<div class="text-container">
+					<p class="speaker-text" id="room-speaker">Ｐａｎｄａ</p>
+					<p class="dialog-text" id="room-text" aria-live="polite"></p>
+					<div id="room-choices" role="menu"></div>
+					<noscript>
+						<p class="dialog-text"><a href="/living-room.html">Back home</a></p>
+					</noscript>
+				</div>
+				<img class="bounce" id="text-arrow" src="/img/icons/text-arrow.png" alt="" hidden>
 			</div>
-			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
+			<div class="subwindow" id="right-sidebar"></div>
 		</div>
 	</div>
+
   </body>
 </html>

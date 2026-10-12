@@ -10,7 +10,7 @@
 // keyboard focus and which unvisited object glints first.
 // zOrder = the art's objects front to back (hotspots.json z_order_front_to_back): where hit areas
 // overlap (the blazer over the window, the console over the TV), the front one wins.
-// Every line and each object's menu (its links) are in /data/dialogue.json, section "bedroom" (js/room.js merges
+// Every line and each object's menu (its links) are in /data/dialogue.json, section "bedroom" (js/scene.js merges
 // them in): edit them there.
 window.HOUSE = window.HOUSE || {};
 

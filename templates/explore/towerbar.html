@@ -1,72 +1,19 @@
+{{ define "scene_label" }}Places to go{{ end -}}
+{{ define "scene_noscript" }}<a href="/living-room.html">Back home</a>{{ end -}}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skybar</title>
+    <title>Tokugawa Tower Bar</title>
     <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/explore.css?version=1" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/explore.js?version=2" crossorigin="anonymous"></script>
-
-	<script>
-		var haveTalkedToBarshoujo = false;
-		function talkToBarshoujo(event) {
-			if (haveTalkedToBarshoujo) {
-				haveTalkedToBarshoujo = false;
-				document.getElementById("explore-img").setAttribute("style", "");
-				document.getElementById("towerbar-text").innerHTML = "\"Come over here friend, grab yourself a seat!\""
-				document.getElementById("towerbar-speaker").innerHTML = "T o n y"
-			} else {
-				haveTalkedToBarshoujo = true;
-				document.getElementById("explore-img").setAttribute("style", "background-image: url('/img/explore/portraits/bar_lady.png');background-position: center;");
-				document.getElementById("towerbar-text").innerHTML = "\"Hey cutie, haven't seen you here before. Come share a drink with me\""
-				document.getElementById("towerbar-speaker").innerHTML = "B a r s h o u j o"
-			}
-		}
-	</script>
-
-	<style>
-		#explore-img {
-			background-image: url("/img/explore/places/bar_crowded.png");
-			background-repeat: no-repeat;
-			background-size: cover;
-			background-position: left;
-		}
-
-		#talk-to-her {
-			width: 141px;
-			height: 357px;
-			right: 114px;
-			bottom: 112px;
-		}
-	</style>
+    <link rel="preload" href="/fonts/pc-9800-core.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/css/scene.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/explore-locations.js?version=2" defer></script>
+    <script src="/js/scene.js?version=1" defer></script>
+    <script src="/js/scene-music.js?version=1" defer></script>
   </head>
-  <body>
-	<div id="audio-player-container">
-		<audio id="music" loop preload controls>
-			<source src="/audio/cosmic-psycho-bar.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
-			Your browser does not support the audio element.
-		</audio>
-	</div>
-	<div class="main-container">
-		<div class="main-window">
-			<div class="subwindow" id="main-image">
-				<div class="page-image" id="explore-img">
-					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
-				</div>
-				<button id="talk-to-her" class="explore-nav" onclick="talkToBarshoujo()"></button>
-			</div>
-			{{ template "t_lsidebar.html" . }}
-			<div class="subwindow" id="text-box">
-				<div class="text-container">
-					<p id="towerbar-speaker" class="speaker-text">T o n y</p>
-					<p id="towerbar-text" class="dialog-text">
-						"Come over here friend, grab yourself a seat!"
-					</p>
-				</div>
-			</div>
-			<div class="subwindow" id="right-sidebar"></div>
-		</div>
-	</div>
+  <body data-scene="towerbar">
+{{ template "t_scene.html" . }}
   </body>
 </html>

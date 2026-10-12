@@ -529,5 +529,211 @@
       "copied": "Copied!",
       "copyFailed": "Hm, that didn't copy."
     }
+  },
+  "explore": {
+    "_readme": [
+      "Explore's words: one entry per location (the key is its ?loc= name, or the page's data-scene for the tower's pages).",
+      "  speaker: the name over the box (spaced letters, as the city writes them); greeting: the lines shown on arrival, one box each.",
+      "  objects: lines for things you can click that aren't exits (the girl on the residential street); views: a second",
+      "  speaker and greeting the scene switches to (the tower bar's regular)."
+    ],
+    "mainstreet": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."
+      ]
+    },
+    "agency": {
+      "speaker": "J o h n n y  U p p e r c u t",
+      "greeting": [
+        "\"Welcome stranger, to my humble office. I'm this town's information broker.",
+        "What are you looking to find out?\""
+      ]
+    },
+    "casino": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."
+      ]
+    },
+    "club": {
+      "speaker": "P a n d a",
+      "greeting": [
+        ":cattodance:"
+      ]
+    },
+    "forestedge": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "It's almost sunrise, perfect time to wander into the mysterious forest!"
+      ]
+    },
+    "forestglade": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "There's definitely a mythical sword somewhere around here..."
+      ]
+    },
+    "musicianbedroom": {
+      "speaker": "A n d y",
+      "greeting": [
+        "*You hear muffled breakcore, but Andy doesn't turn around*"
+      ]
+    },
+    "nightapartments": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "Hey you don't think these people will mind us wandering into their houses right?"
+      ]
+    },
+    "nightpark": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "Wow this seems like a great spot to get murdered.",
+        "...Maybe we should leave?"
+      ]
+    },
+    "nightplaza": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "It's so quiet here at night..."
+      ]
+    },
+    "nightresidential": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "Hey you don't think these people will mind us wandering into their houses right?"
+      ]
+    },
+    "nightresidential2": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "Hey you don't think these people will mind us wandering into their houses right?"
+      ]
+    },
+    "partystreet": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "This part of a town is a blast! Just don't accept any mysterious packages from strangers..."
+      ]
+    },
+    "stationcrossing": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "Yeah, its normal for it to suddenly become day when you come here, don't worry about it"
+      ]
+    },
+    "trainplatform": {
+      "speaker": "S t a t i o n   A t t e n d a n t",
+      "greeting": [
+        "\"Please stay behind the yellow line\""
+      ]
+    },
+    "trainwetlands": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "I just love looking out at the world through a train window ^_^"
+      ]
+    },
+    "electronicstore": {
+      "speaker": "S a k u r a",
+      "greeting": [
+        "\"Go ahead, go for a spin!\""
+      ]
+    },
+    "weaponshop": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "I uhh, promise this place is definitely legal...",
+        "probably."
+      ]
+    },
+    "nightalley": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Ah, now we're exploring properly"
+      ]
+    },
+    "cutiebar": {
+      "speaker": "S a b r i n a",
+      "greeting": [
+        "\"Wow anon, you finally made it\""
+      ]
+    },
+    "shizukastreet": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Ah, now we're exploring properly"
+      ]
+    },
+    "weirdstore": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "This place is definitely a front for *something*"
+      ]
+    },
+    "livehouse": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Namba is the place to be for fun obscure music shows"
+      ]
+    },
+    "smallbathhouse": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Let's take a break and relax a while"
+      ]
+    },
+    "bathhouseentry": {
+      "speaker": "Brownie",
+      "greeting": [
+        "\"Welcome to my fine establishment, hope you enjoy yourself\""
+      ]
+    },
+    "frontdesk": {
+      "speaker": "3 7",
+      "greeting": [
+        "\"Welcome to the Tokugawa tower sir, how may I assist?\""
+      ]
+    },
+    "penthouse": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "Looking out over the skyline always puts me in a contemplative mood..."
+      ]
+    },
+    "nightresidential_girl": {
+      "speaker": "Ｐａｎｄａ",
+      "greeting": [
+        "Hey you don't think these people will mind us wandering into their houses right?"
+      ],
+      "objects": {
+        "girl": {
+          "name": "The person on the street",
+          "lines": [
+            "\"Uhh, that person is definitely a ghost. Let's not talk to them.\""
+          ]
+        }
+      }
+    },
+    "towerbar": {
+      "speaker": "T o n y",
+      "greeting": [
+        "\"Come over here friend, grab yourself a seat!\""
+      ],
+      "objects": {
+        "regular": {
+          "name": "The woman at the bar"
+        }
+      },
+      "views": {
+        "barshoujo": {
+          "speaker": "B a r s h o u j o",
+          "greeting": [
+            "\"Hey cutie, haven't seen you here before. Come share a drink with me\""
+          ]
+        }
+      }
+    }
   }
 }

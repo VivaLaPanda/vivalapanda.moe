@@ -1,75 +1,19 @@
+{{ define "scene_label" }}Places to go{{ end -}}
+{{ define "scene_noscript" }}<a href="/living-room.html">Back home</a>{{ end -}}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Definitely Not a Ghost Girl</title>
+    <title>Residential District</title>
     <link href="/css/style.css?version=7" rel="stylesheet" type="text/css" media="all">
-    <link href="/css/explore.css?version=1" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/explore.js?version=2" crossorigin="anonymous"></script>
-
-    <script>
-        function talkToSpookyGirl(event) {
-            document.getElementById("spookygirl-text").innerHTML = "\"Uhh, that person is definitely a ghost. Let's <i>not</i> talk to them.\""
-        }
-    </script>
-
-	<style>
-		#explore-img {
-			background-image: url("/img/explore/pathways/night_residential_girl.png");
-			background-repeat: no-repeat;
-			background-size: cover;
-			background-position: center;
-		}
-
-        .main-window {
-            background-image: url("/img/background-frame-dark.png");
-        }
-
-		#cross-street {
-			width: 80px;
-            height: 157px;
-            right: 643px;
-            bottom: 93px;
-		}
-
-        #girl {
-            width: 80px;
-            height: 187px;
-            right: 283px;
-            bottom: 13px;
-        }
-	</style>
+    <link rel="preload" href="/fonts/pc-9800-core.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/css/scene.css?version=1" rel="stylesheet" type="text/css" media="all">
+    <script src="/js/explore-locations.js?version=2" defer></script>
+    <script src="/js/scene.js?version=1" defer></script>
+    <script src="/js/scene-music.js?version=1" defer></script>
   </head>
-  <body>
-	<div id="audio-player-container">
-		<audio id="music" loop preload controls>
-			<source src="/audio/iskaku-horror-1.mp3" id="music-src" crossOrigin="anonymous" type="audio/ogg">
-			Your browser does not support the audio element.
-		</audio>
-	</div>
-	<div class="main-container">
-		<div class="main-window">
-			<div class="subwindow" id="main-image">
-				<div class="page-image" id="explore-img">
-					<input type="image" id="mute" alt="mute" onclick="toggleMute(event)" src="/img/icons/playing_big.png">
-				</div>
-
-				<a id="cross-street" class="explore-nav" href="explore.html?loc=nightapartments">
-				</a>
-				<button id="girl" class="explore-nav" onclick="talkToSpookyGirl()"></button>
-			</div>
-			{{ template "t_lsidebar.html" . }}
-			<div class="subwindow" id="text-box">
-				<div class="text-container">
-					<p class="speaker-text">Ｐａｎｄａ</p>
-					<p id="spookygirl-text" class="dialog-text">
-						Hey you don't think these people will mind us wandering into their houses right?
-					</p>
-				</div>
-			</div>
-			<div class="subwindow" id="right-sidebar" style="background-image: url(/img/holo/HoloHappyBGTransparent.png);"></div>
-		</div>
-	</div>
+  <body data-scene="nightresidential_girl">
+{{ template "t_scene.html" . }}
   </body>
 </html>

@@ -13,6 +13,7 @@
     position: relative;
     flex: none;
     margin: 0 auto;
+    isolation: isolate;     /* its own stacking context: a layer under the art stays inside the stage */
 }
 
 /* the art is a nearest-neighbour 4x copy scaled down smoothly ("sharp bilinear"): at the window's
@@ -23,7 +24,7 @@
     height: 100%;
 }
 
-/* the city twinkle sits over the art at a native-pixel rect (set in % by room.js) */
+/* the city twinkle sits over the art at a native-pixel rect (set in % by scene.js) */
 #room-twinkle {
     position: absolute;
     display: block;
@@ -324,4 +325,16 @@
     0% { opacity: 1; }
     50% { opacity: 0; }
     100% { opacity: 0; }
+}
+
+/* Explore (R.illegible): its hotspots are plain links, a pointer and nothing more (no magnifier, no outlines) */
+.scene-illegible .room-hotspot {
+    cursor: pointer;
+}
+
+/* a scene's extra pictures (layers under or over the art) and visible buttons: placed by native rect */
+.scene-layer {
+    position: absolute;
+    pointer-events: none;
+    image-rendering: auto;
 }

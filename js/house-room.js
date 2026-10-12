@@ -501,7 +501,7 @@
         });
     }
 
-    // room.js waits for this before building: the hotspots' outlines come from the scene, and the first frame's files
+    // scene.js waits for this before building: the hotspots' outlines come from the scene, and the first frame's files
     // (the state comes in alongside, so the room starts drawn as the house is)
     var firstState = getState();
     function sheetPixels(sheet) {                          // a streamer sheet's raw RGBA (ink indices)

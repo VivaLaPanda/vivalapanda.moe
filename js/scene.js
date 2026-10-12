@@ -1,14 +1,23 @@
-// Panda's Room: hotspots over the scene, Panda narrating in the dialog box.
-// Art, polygons and anchors live in js/room-data.js (the bedroom) or js/living-room-data.js; every line Panda says,
-// and each object's menu, in /data/dialogue.json (R.dialogue names the room's section), merged in before the room
-// starts. This file is only mechanics. A room's data may give a line as a function instead, for state that changes
-// (the living room's lamps), and R.onBuilt(api) hands the built scene to a room's own script.
+// A scene: a picture with hotspots, someone narrating in the dialog box. The rooms (js/room-data.js,
+// js/living-room-data.js) and every Explore location (js/explore-locations.js) run on this; their data sets
+// window.ROOM, and every line anyone says lives in /data/dialogue.json (R.dialogue names the section, e.g.
+// "living_room" or "explore.agency"), merged in before the scene starts. This file is only mechanics.
+// A scene's data may give a line as a function instead, for state that changes (the living room's lamps), and
+// R.onBuilt(api) hands the built scene to its own script. Options, all optional (the rooms use the defaults):
+//   R.illegible   Explore's way: no LOOK, no outlines, no glints, no idle or "seen it all" lines, no reply to a click
+//                 on nothing (the map is meant to be poked at, not read)
+//   R.typeMs      ms per typed character (22)                 R.speaker  the name over the box (from dialogue.json)
+//   R.title       the page's title                             R.frame    "dark" for the dark window frame
+//   R.holo        the right sidebar's picture                  R.back     where BACK goes when you didn't come from the site
+//   R.scene       { src, width, height, fit, pos, layers: [{ src, x, y, w, h, under }] }  (fit/pos: the art's object-fit)
+//   an object's   go (a link), sprite ({ src, x, y, w, h }: a visible button), view (a name in R.views: clicking
+//                 swaps to that picture and speaker and back again)
 (function () {
     "use strict";
 
     var R = window.ROOM;
     var SVGNS = "http://www.w3.org/2000/svg";
-    var TYPE_MS = 22;          // per character for typed lines
+    var TYPE_MS = R.typeMs || 22;   // per character for typed lines
     var IDLE_FIRST_MS = 30000; // first idle line after this long without input
     var IDLE_NEXT_MS = 45000;  // then this often...
     var IDLE_MAX = 3;          // ...at most this many per visit
@@ -23,6 +32,8 @@
     var art = document.getElementById("room-art");
     var svg = document.getElementById("room-hotspots");
     var lookBtn = document.getElementById("room-look");
+    var speakerEl = document.getElementById("room-speaker");
+    var view = null;       // the R.views entry showing, if any
     var backBtn = document.getElementById("room-back");
     var textBox = document.getElementById("text-box");
     var text = document.getElementById("room-text");
@@ -79,7 +90,25 @@
     function buildScene() {
         var s = R.scene;
         art.src = s.src;
+        if (s.fit) art.style.objectFit = s.fit;
+        if (s.pos) art.style.objectPosition = s.pos;
+        if (R.alt) art.alt = R.alt;
         svg.setAttribute("viewBox", "0 0 " + s.width + " " + s.height);
+        if (R.illegible) stage.classList.add("scene-illegible");
+
+        // more pictures in the scene (the penthouse's skyline under its window), and visible buttons (the tower's
+        // lobby signs): images at native rects, under or over the art
+        (s.layers || []).forEach(function (l) {
+            var im = el("img", { src: l.src, alt: "", "class": "scene-layer" });
+            placeNative(im, l.x, l.y, l.w, l.h);
+            if (l.under) { im.style.zIndex = "-1"; stage.insertBefore(im, art); } else stage.insertBefore(im, svg);
+        });
+        R.objects.concat(knickKnacks).forEach(function (o) {
+            if (!o.sprite) return;
+            var im = el("img", { src: o.sprite.src, alt: "", "class": "scene-layer" });
+            placeNative(im, o.sprite.x, o.sprite.y, o.sprite.w, o.sprite.h);
+            stage.insertBefore(im, svg);
+        });
 
         // city lights: step through the twinkle strip's frames, like PC-98 palette cycling
         if (s.twinkle && !reduceMotion) {
@@ -96,13 +125,15 @@
         // (no hover glow and no shade over the rest: the user found both made the room's light read wrong;
         // the magnifier cursor and LOOK's outline flash are how things are found)
 
-        // exact outlines, for LOOK's flash
-        var og = el("g", {}, true);
-        spots.forEach(function (o) {
-            outlines[o.id] = el("polygon", { "class": "room-outline", points: points(o.polygon) }, true);
-            og.appendChild(outlines[o.id]);
-        });
-        svg.appendChild(og);
+        // exact outlines, for LOOK's flash (none where the map is meant to stay illegible)
+        if (!R.illegible) {
+            var og = el("g", {}, true);
+            spots.forEach(function (o) {
+                outlines[o.id] = el("polygon", { "class": "room-outline", points: points(o.polygon) }, true);
+                og.appendChild(outlines[o.id]);
+            });
+            svg.appendChild(og);
+        }
 
         // hit areas back to front, so the front object wins the pointer where they overlap (the
         // blazer over the window, the console over the TV): the art's zOrder (front to back) when
@@ -138,6 +169,7 @@
         // clicking the room itself (not an object)
         stage.addEventListener("click", function () {
             if (state === "talking") { next(); return; }
+            if (R.illegible) return;
             say([R.lines.empty[emptyIdx++ % R.lines.empty.length]], toIdle);
         });
 
@@ -160,7 +192,7 @@
     // in its list, and a blue rather than pink flash), plus which objects still glint
     function markSeen() {
         spots.forEach(function (o) {
-            outlines[o.id].classList.toggle("seen", !!seen[o.id]);
+            if (outlines[o.id]) outlines[o.id].classList.toggle("seen", !!seen[o.id]);
         });
     }
 
@@ -252,7 +284,7 @@
         clearChoices();
         arrow.hidden = true;
         advance = null;
-        if (!announcedAllSeen && allSeen()) {
+        if (!R.illegible && !announcedAllSeen && allSeen()) {
             announcedAllSeen = true;
             say([R.lines.allSeen]);
         }
@@ -338,7 +370,7 @@
         // a greeting box that's finished typing gives way to the first thing you point at
         if (inGreeting && !typing) toIdle();
         // the line stays up after the pointer leaves (WCAG 1.4.13), until something else replaces it
-        if (state === "idle") show(lines(o.hover), true);
+        if (state === "idle" && o.hover != null) show(lines(o.hover), true);
     }
 
     function unhover(o) {
@@ -358,6 +390,10 @@
             window.location.href = o.go;
             return;
         }
+        if (o.view) {     // a picture of its own (the tower bar's regular): there, and back again
+            showView(view === R.views[o.view] ? null : R.views[o.view]);
+            return;
+        }
         if (!o.choices) { // a knick-knack: just a line
             say(lines(o.lines));
             return;
@@ -365,6 +401,16 @@
         // the first click this visit gets the full lines; clicking again gets the repeat joke
         say(lines(o.visited && o.repeat ? o.repeat : o.click), function () { offer(o.choices); });
         o.visited = true;
+    }
+
+    // swap the scene to one of R.views ({ src, pos, speaker, greeting }), or back to its own (null)
+    function showView(v) {
+        view = v;
+        var d = v || { src: R.scene.src, pos: R.scene.pos, speaker: R.speaker, greeting: R.greeting };
+        art.src = d.src;
+        art.style.objectPosition = d.pos || "";
+        if (d.speaker) speakerEl.textContent = d.speaker;
+        say(lines(d.greeting));
     }
 
     function look() {
@@ -427,6 +473,7 @@
     function resetIdle() {
         clearTimeout(idleTimer);
         if (idleCount >= IDLE_MAX) return;
+        if (R.illegible) return;
         idleTimer = setTimeout(function () {
             if (state === "idle") say([R.lines.idle[idleCount % R.lines.idle.length]]);
             idleCount++;
@@ -483,14 +530,23 @@
     // the room's section of dialogue.json onto R and its objects (keys starting with _ are notes; a field the data
     // gives as a function stays, and reads R.said itself)
     function applyDialogue(all) {
-        var d = all && all[R.dialogue];
+        var parent = null, d = all;
+        R.dialogue.split(".").forEach(function (k) { parent = d; d = d && d[k]; });   // "explore.agency": a nested one
         if (!d) {
             d = { objects: {}, greeting: ["Hm, my lines didn't load. Try reloading?"], lines: FALLBACK_LINES };
             console.warn("dialogue: no section " + R.dialogue + " in " + DIALOGUE);
         }
+        d.objects = d.objects || {};
         R.said = d;
         if (typeof R.greeting !== "function") R.greeting = d.greeting;
-        R.lines = d.lines;
+        R.lines = d.lines || (parent && parent !== all && parent.lines) || FALLBACK_LINES;
+        if (d.speaker) R.speaker = d.speaker;
+        if (R.views) {
+            Object.keys(R.views).forEach(function (k) {              // a view's words live beside the scene's
+                var vt = d.views && d.views[k];
+                if (vt) { R.views[k].speaker = vt.speaker; R.views[k].greeting = vt.greeting; }
+            });
+        }
         R.objects.concat(knickKnacks).forEach(function (o) {
             var t = d.objects[o.id] || {};
             Object.keys(t).forEach(function (k) {
@@ -521,11 +577,16 @@
     function start() {
         // only what has an outline (the living room's come from its scene; without one, only the doors' fallbacks)
         spots = byRank.concat(knickKnacks).filter(function (o) { return o.polygon; });
+        if (R.speaker) speakerEl.textContent = R.speaker;
+        if (R.title) document.title = R.title;
+        if (R.frame === "dark") document.getElementById("frame").style.backgroundImage = "url(/img/background-frame-dark.png)";
+        if (R.holo) document.getElementById("right-sidebar").style.backgroundImage = "url(" + R.holo + ")";
+        if (R.illegible) lookBtn.hidden = true;
         buildScene();
         if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, placeNative: placeNative });
         say(lines(R.greeting), null, true);
         resetIdle();
-        if (!reduceMotion) setInterval(glint, GLINT_MS);
+        if (!reduceMotion && !R.illegible) setInterval(glint, GLINT_MS);
     }
 
     // a room's own setup (R.ready: the living room loads its scene first) and the lines, then the room

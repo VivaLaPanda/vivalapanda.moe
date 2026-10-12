@@ -1,6 +1,6 @@
-/* the living room (living-room.html): Panda's real house drawn live (js/living-room.js); room.css does the rest */
+/* the living room (living-room.html): Panda's real house drawn live (js/living-room.js); scene.css does the rest */
 
-/* overlays on the scene at native-pixel rects (placed in % by room.js's placeNative) */
+/* overlays on the scene at native-pixel rects (placed in % by scene.js's placeNative) */
 .lr-layer {
     position: absolute;
     display: block;
