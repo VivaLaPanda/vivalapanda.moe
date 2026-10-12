@@ -1,0 +1,23 @@
+# Install: cp scripts/systemd/house-key.service /etc/systemd/system/ && systemctl daemon-reload
+#          && systemctl enable --now house-key
+# nginx (the vivalapanda.moe server block):
+#   location ^~ /house/api/ { proxy_pass http://127.0.0.1:8791; proxy_set_header X-Real-IP $remote_addr; }
+# Needs /etc/vivalapanda/house_write_token (mode 600; minted on rodney with `home-mcp house-write-token`). The PC
+# password and the hunt's words are set with scripts/house_key.py set-password / set-hunt (see its header).
+[Unit]
+Description=Panda's house key: key holders switch the living room's lamps, blinds and AC (/house/api/)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /var/www/html/vivalapanda.moe/scripts/house_key.py serve
+Restart=always
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/www/html/vivalapanda.moe/house /var/log/vivalapanda /etc/vivalapanda
+
+[Install]
+WantedBy=multi-user.target
