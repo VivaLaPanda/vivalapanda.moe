@@ -150,6 +150,7 @@
 /* dialog box */
 #room-text {
     font-size: 26px;
+    white-space: pre-line; /* the PC's login answers span lines */
     min-height: 1.3em;
     margin-top: 0;
     margin-bottom: 10px;
@@ -337,4 +338,54 @@
     position: absolute;
     pointer-events: none;
     image-rendering: auto;
+}
+
+/* a typed answer (the PC's PASSWORD:), in the menu's place */
+#room-choices .room-input {
+    font-family: 'pc-98';
+    font-size: 26px;
+    color: #fff;
+    background: #000;
+    border: none;
+    border-bottom: 3px solid #8799ff;
+    padding: 0 8px;
+    margin-left: 8px;
+    width: 80%;
+    caret-color: #ffaaba;
+    outline: none;
+}
+
+/* what you're carrying (js/house-key.js): the house key's slot and the hunt's items, by the ▼ */
+#hk-inventory {
+    position: absolute;
+    right: 52px;
+    bottom: 8px;
+    display: flex;
+    gap: 6px;
+    z-index: 1;
+}
+
+#hk-inventory button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#hk-inventory img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+#hk-inventory button:hover img,
+#hk-inventory button:focus-visible img {
+    filter: drop-shadow(0 0 2px #ffaaba);
+}
+
+#hk-inventory button:focus-visible {
+    outline: none;
 }

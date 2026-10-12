@@ -83,6 +83,10 @@
             "href": "https://github.com/VivaLaPanda"
           },
           {
+            "label": "Log in",
+            "action": "pc_login"
+          },
+          {
             "label": "Look at something else"
           }
         ]
@@ -520,6 +524,7 @@
       ],
       "idle": [
         "The doors go places. Just so you know.",
+        "I hid a spare key somewhere in town. Friends only.",
         "Still here? Make yourself at home."
       ],
       "allSeen": "You've seen the whole room. Thanks for visiting!",
@@ -572,7 +577,13 @@
       "speaker": "P a n d a",
       "greeting": [
         "There's definitely a mythical sword somewhere around here..."
-      ]
+      ],
+      "objects": {
+        "pond": {
+          "name": "The pond",
+          "_note": "its lines are in house_key.pond"
+        }
+      }
     },
     "musicianbedroom": {
       "speaker": "A n d y",
@@ -734,6 +745,104 @@
           ]
         }
       }
+    }
+  },
+  "house_key": {
+    "_readme": [
+      "Panda's spare key (js/house-key.js): found through Explore (Johnny's hunt) or the bedroom PC's login.",
+      "Holding it, a visitor can switch the living room's lamps, blinds and AC (not the TV, kotatsu, bedroom lamp or music).",
+      "{item} is an item's name, {word} the word written on it, {left} how many favours are still owed.",
+      "The four words themselves are in js/house-key.js (ITEMS); the server checks them (scripts/house_key.py set-hunt)."
+    ],
+    "slot_empty": "My spare key's hidden somewhere in town. Friends only.",
+    "slot_key": "My spare key. Make yourself at home: the lamps, the blinds and the AC are yours.",
+    "pickup": "You found my spare key! Make yourself at home.",
+    "johnny": {
+      "choice": "Panda's spare key",
+      "job": [
+        "\"Ah, the spare key. A fine piece of information, stranger, and not one I part with cheaply.\"",
+        "\"Four souls in this town owe Panda a favour. Collect all four, and I'll tell you where it lies.\""
+      ],
+      "names": [
+        "\"Sabrina at Rabu Rabu. Brownie at the bathhouse.",
+        "The attendant on Platform 1. And Andy, if he'll turn around.\""
+      ],
+      "short": "\"Still {left} short, stranger. Come back when they've all paid up.\"",
+      "done": "\"The forest. The glade past its edge. Look where the sword should be.\""
+    },
+    "favour_choice": "Panda's favour",
+    "items": {
+      "matchbook": {
+        "name": "matchbook",
+        "place": "cutiebar",
+        "give": [
+          "\"Took you long enough, anon. Here.\""
+        ],
+        "got": "(You got a Rabu Rabu matchbook. Written inside the flap: \"{word}\".)",
+        "look": "A matchbook from Rabu Rabu. Inside the flap: \"{word}\"."
+      },
+      "token": {
+        "name": "bath token",
+        "place": "bathhouseentry",
+        "give": [
+          "\"For Panda's friend? Of course.\""
+        ],
+        "got": "(You got a wooden bath token. Burned into the back: \"{word}\".)",
+        "look": "A bath token from Brownie's. On the back: \"{word}\"."
+      },
+      "ticket": {
+        "name": "ticket stub",
+        "place": "trainplatform",
+        "ask": [
+          "\"Excuse me, did you drop this?\""
+        ],
+        "take": "Take it",
+        "got": "(You got a ticket stub. Scribbled on it: \"{word}\".)",
+        "look": "A ticket stub from Platform 1. Scribbled on it: \"{word}\"."
+      },
+      "pick": {
+        "name": "guitar pick",
+        "place": "musicianbedroom",
+        "give": [
+          "*Without turning around, Andy holds something out behind him.*"
+        ],
+        "got": "(You got a guitar pick. Written on it in marker: \"{word}\".)",
+        "look": "Andy's guitar pick. In marker: \"{word}\"."
+      }
+    },
+    "pond": {
+      "still": "The water's perfectly still.",
+      "waiting": "The water's perfectly still, like it's waiting for something.",
+      "drop": "Drop in the {item}",
+      "sinks": "The {item} sinks without a ripple.",
+      "rises": [
+        "A hand rises out of the water.",
+        "It isn't holding a sword. It's holding a key."
+      ],
+      "take": "Take the key",
+      "refused": "The water spits everything back out.",
+      "offline": "Nothing happens. Maybe try again later?"
+    },
+    "pc": {
+      "prompt": "A>LOGIN panda\nPASSWORD:",
+      "denied": "Access denied.",
+      "welcome": "Welcome, panda.",
+      "already": "Welcome back, panda.",
+      "offline": "The login program isn't answering. Try again later?"
+    },
+    "switch": {
+      "on": "Turn it on",
+      "off": "Turn it off",
+      "open": "Open them",
+      "close": "Close them",
+      "leave": "Leave it",
+      "lamp_done": "Click.",
+      "blind_done": "There they go. They take a minute.",
+      "ac_done": "Beep!",
+      "slow": "Easy! Give it a few seconds.",
+      "off_now": "The house isn't taking requests right now.",
+      "failed": "Hm, the house didn't answer. Try again in a bit?",
+      "bad_key": "Huh, the key doesn't fit anymore."
     }
   }
 }

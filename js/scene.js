@@ -11,7 +11,10 @@
 //   R.holo        the right sidebar's picture                  R.back     where BACK goes when you didn't come from the site
 //   R.scene       { src, width, height, fit, pos, layers: [{ src, x, y, w, h, under }] }  (fit/pos: the art's object-fit)
 //   an object's   go (a link), sprite ({ src, x, y, w, h }: a visible button), view (a name in R.views: clicking
-//                 swaps to that picture and speaker and back again)
+//                 swaps to that picture and speaker and back again), choices (may be a function; null: just lines)
+//   R.afterGreeting  a function giving choices to offer once the greeting's typed (or none; true: it said something)
+// Other scripts (js/house-key.js) drive the box through window.SCENE: say, offer, ask, actions (a choice's
+// "action" names one), lines; a choice may also carry act (a function).
 (function () {
     "use strict";
 
@@ -315,6 +318,8 @@
                     e.stopPropagation();
                     if (c.copy) copy(c.copy);
                     else if (c.object) open(c.object);
+                    else if (c.act) c.act();
+                    else if (c.action && SCENE.actions[c.action]) SCENE.actions[c.action]();
                     else say([R.lines.backToRoom]);
                 });
             }
@@ -394,12 +399,13 @@
             showView(view === R.views[o.view] ? null : R.views[o.view]);
             return;
         }
-        if (!o.choices) { // a knick-knack: just a line
+        var choices = lines(o.choices);
+        if (!choices) {   // a knick-knack: just a line
             say(lines(o.lines));
             return;
         }
         // the first click this visit gets the full lines; clicking again gets the repeat joke
-        say(lines(o.visited && o.repeat ? o.repeat : o.click), function () { offer(o.choices); });
+        say(lines(o.visited && o.repeat ? o.repeat : o.click || o.lines), function () { offer(choices); });
         o.visited = true;
     }
 
@@ -411,6 +417,24 @@
         art.style.objectPosition = d.pos || "";
         if (d.speaker) speakerEl.textContent = d.speaker;
         say(lines(d.greeting));
+    }
+
+    // a typed answer: the prompt, then a text field in the menu's place; Enter hands its value to onAnswer
+    function ask(prompt, onAnswer) {
+        say(prompt, function () {
+            state = "choosing";
+            clearChoices();
+            var input = el("input", { type: "text", "class": "room-input", maxlength: "80", autocomplete: "off",
+                                      autocapitalize: "off", spellcheck: "false", "aria-label": prompt[prompt.length - 1] });
+            input.addEventListener("click", function (e) { e.stopPropagation(); });
+            input.addEventListener("keydown", function (e) {
+                e.stopPropagation();
+                if (e.key === "Enter") { e.preventDefault(); onAnswer(input.value); }
+                else if (e.key === "Escape") { e.preventDefault(); say([R.lines.backToRoom]); }
+            });
+            choicesEl.appendChild(input);
+            input.focus({ preventScroll: true });
+        });
     }
 
     function look() {
@@ -538,6 +562,7 @@
         }
         d.objects = d.objects || {};
         R.said = d;
+        R.dialogueAll = all || {};
         if (typeof R.greeting !== "function") R.greeting = d.greeting;
         R.lines = d.lines || (parent && parent !== all && parent.lines) || FALLBACK_LINES;
         if (d.speaker) R.speaker = d.speaker;
@@ -584,10 +609,17 @@
         if (R.illegible) lookBtn.hidden = true;
         buildScene();
         if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, placeNative: placeNative });
-        say(lines(R.greeting), null, true);
+        say(lines(R.greeting), R.afterGreeting ? function () {
+            var c = R.afterGreeting();
+            if (c === true) return;                  // it took the box over itself
+            if (c && c.length) offer(c); else toIdle();
+        } : null, true);
+        document.dispatchEvent(new Event("scenestart"));
         resetIdle();
         if (!reduceMotion && !R.illegible) setInterval(glint, GLINT_MS);
     }
+
+    var SCENE = window.SCENE = { say: say, offer: offer, ask: ask, lines: lines, actions: {} };
 
     // a room's own setup (R.ready: the living room loads its scene first) and the lines, then the room
     Promise.all([

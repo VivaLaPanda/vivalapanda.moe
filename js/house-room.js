@@ -68,6 +68,18 @@
     H.kotatsuOn = function () { return scene && scene.kotatsu ? plug(scene.kotatsu.plug) : null; };
     H.blindPct = blindPct;
     H.redraw = function () { draw(); };
+    // for the house key's switches (js/house-key.js): a lamp's real name; the change shown before the feed catches
+    // up (fn edits the state); the feed read again now
+    H.lampDevice = function (lamp) {
+        if (!scene) return null;
+        return Object.keys(scene.light_names).filter(function (n) { return scene.light_names[n] === lamp; })[0] || null;
+    };
+    H.patch = function (fn) {
+        if (!liveState || !live()) return;
+        fn(liveState);
+        if (!debug) { state = liveState; draw(); }
+    };
+    H.refresh = function () { getState().then(draw); };
 
     // ---------- rendering ----------
 

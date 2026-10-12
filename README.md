@@ -63,6 +63,20 @@ the 740×528 picture) and views. Its adapter at the bottom turns the current pla
 `data-scene`) into the scene. Explore's lines are in `data/dialogue.json` under `explore.<place>`. Explore has no LOOK
 button, and its exits aren't outlined.
 
+**The house key.** Visitors who find Panda's spare key can switch the living room's lamps, blinds and AC on and off
+(nothing else). `js/house-key.js` runs on every scene page: the key slot and the hunt's items by the dialog box's ▼,
+Johnny Uppercut's hunt (four favours around Explore, dropped in the Hidden Glade's pond), the bedroom PC's login (the
+real password, or an SQL injection), and the living room's switches. Lines: `data/dialogue.json` under `house_key`.
+- `scripts/house_key.py` (VPS, `house-key.service`, nginx `/house/api/`): issues keys (permanent, signed tokens) and
+  forwards switches to rodney's `POST /api/house/act` with its own write token (`/etc/vivalapanda/house_write_token`).
+  Per-key and global rate limits; every key and action is logged with its key id and IP to
+  `/var/log/vivalapanda/house_keys.jsonl` (rodney logs each action too, in `~/.config/home-mcp/house_actions.jsonl`).
+- **Kill switch:** `touch /etc/vivalapanda/house_writes_off` on the VPS, or `home-mcp house-write-token --off` on
+  rodney. Revoke one key: add its id to `revoked` in `/etc/vivalapanda/house_keys.json`; all: change its `secret`.
+- **The PC password** is in `~/.config/vivalapanda/house_pc_password` on rodney (hashed on the VPS). To change it:
+  `ssh root@<vps> python3 /var/www/html/vivalapanda.moe/scripts/house_key.py set-password < newfile`.
+- **The hunt's words** are in `js/house-key.js` (ITEMS); after changing them, run `house_key.py set-hunt` with the four.
+
 **The feed.** The house state is a static file, `house/state.json` (gitignored), so visitors never reach the house:
 
 1. rodney (Panda's home server) runs home-mcp, which answers `GET /api/house` at `home.vivalapanda.moe` through its

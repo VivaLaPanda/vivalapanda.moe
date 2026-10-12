@@ -43,7 +43,8 @@ var LOCATIONS = {
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
         links: [
             { to: "../train.html", rect: [174, 189, 416, 297] }
-        ]
+        ],
+        objects: [{ id: "pond", rect: [0, 420, 740, 108] }]   // the house key's hunt ends here (js/house-key.js)
     },
     "musicianbedroom": {
         title: "Andy's House", image: "../img/explore/places/night_musician_bedroom.png", pos: "left",
