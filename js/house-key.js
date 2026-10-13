@@ -63,6 +63,7 @@
 
     function gotKey(token) {
         put(KEY, token);
+        put("pandaHeard_house_key", "1");   // Explore's places can notice (dialogue.json greeting_after)
         drawInventory();
     }
 

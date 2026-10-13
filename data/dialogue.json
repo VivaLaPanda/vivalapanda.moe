@@ -1163,6 +1163,14 @@
       ],
       "rare": [
         "\"Shh. Somebody's tailing you, stranger. ...Kidding. Or am I. Sit down.\""
+      ],
+      "greeting_after": [
+        {
+          "need": "house_key",
+          "greeting": [
+            "\"So you found it. The spare key. Welcome to the family, stranger. Don't make me regret it.\""
+          ]
+        }
       ]
     },
     "casino": {
@@ -1293,6 +1301,14 @@
       ],
       "linger": [
         "...Did something just wave at us from the pond?"
+      ],
+      "greeting_after": [
+        {
+          "need": "house_key",
+          "greeting": [
+            "The glade. The pond's perfectly still. Somewhere in your pocket, a key feels warm."
+          ]
+        }
       ]
     },
     "musicianbedroom": {
