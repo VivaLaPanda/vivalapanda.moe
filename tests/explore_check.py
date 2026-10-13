@@ -12,16 +12,18 @@ Run: uv run --with playwright tests/explore_check.py [base-url] [place ...]
 """
 import re
 import sys
-from concurrent.futures import ThreadPoolExecutor
+from queue import Empty, Queue
+from threading import Thread
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from playwright.sync_api import Page, sync_playwright
+from playwright.sync_api import Browser, Page, sync_playwright
 
 REPO = Path(__file__).resolve().parent.parent
 SPECIAL = {"frontdesk", "penthouse", "towerbar", "nightresidential_girl"}   # places with their own page
 VIEWPORTS = {"desktop": (1280, 860), "phone": (390, 844)}
 MAX_CHOICES = 5
+WORKERS = 8
 MIN_REACHABLE = 0.4
 MAX_AREA = 0.4   # of the picture, for one zone
 KNOWN_NOISE = ("Failed to load resource", "youtube", "YouTube")
@@ -137,16 +139,20 @@ def settle(pg: Page, where: str, res: Result, vp: str) -> list[str]:
 
 
 def walk(pg: Page, where: str, res: Result, vp: str) -> list[str]:
-    for _ in range(30):
-        pg.wait_for_timeout(200)
+    idle = 0
+    for _ in range(160):   # 8s at most
+        pg.wait_for_timeout(50)
         if c := choices(pg):
             fits(pg, where + " (menu)", res, vp)
             return c
         if pg.is_visible("#text-arrow"):
+            idle = 0
             fits(pg, where, res, vp)
             pg.click("#text-box", position={"x": 30, "y": 15})
-        elif not pg.evaluate("(document.getElementById('room-text') || {}).textContent"):
-            return []
+        else:
+            idle += 1
+            if idle > 8 and pg.evaluate("(document.getElementById('room-text') || {}).textContent"):
+                return []   # a line with nothing after it: the idle room
     return choices(pg)
 
 
@@ -156,7 +162,7 @@ def click_choice(pg: Page, label: str, base: str, place: str) -> bool:
         pg.locator("#room-choices .room-choice", has_text=label).first.click(timeout=1500, no_wait_after=True)
     except Exception:
         return False
-    pg.wait_for_timeout(300)
+    pg.wait_for_timeout(150)
     return pg.url == url(base, place)
 
 
@@ -171,39 +177,60 @@ def check_zones(pg: Page, res: Result, vp: str) -> None:
         res.problems += [f"{vp}: zone (panned) {b}" for b in pg.evaluate(ZONES_JS, [MIN_REACHABLE, MAX_AREA])]
 
 
-def check_place(base: str, place: str) -> Result:
+def page(browser: Browser, size: tuple[int, int], base: str, errs: list[str], motion: str) -> Page:
+    ctx = browser.new_context(viewport={"width": size[0], "height": size[1]}, reduced_motion=motion)
+    ctx.route("**/house/api/**", lambda r: r.fulfill(status=503, body="{}"))   # never mint real house keys
+    ctx.route(re.compile(r"\.(mp3|mp4|ogg|m4a|wav)(\?|$)"), lambda r: r.abort())   # the music isn't under test
+    pg = ctx.new_page()
+    noise = KNOWN_NOISE + (() if base == PROD else DEV_ONLY)
+    pg.on("pageerror", lambda e: errs.append(str(e)))
+    pg.on("console", lambda m: m.type in ("error", "warning") and not any(n in m.text for n in noise)
+          and errs.append(m.text))
+    return pg
+
+
+def check_place(browser: Browser, base: str, place: str) -> Result:
     res = Result(place)
+    for vp, size in VIEWPORTS.items():
+        errs: list[str] = []
+        # zones with everything moving (an animated overlay could block clicks)
+        pg = page(browser, size, base, errs, "no-preference")
+        pg.goto(url(base, place), wait_until="domcontentloaded")
+        settle(pg, "greeting", Result(place), vp)
+        check_zones(pg, res, vp)
+        pg.context.close()
+        # the words with reduced motion, so lines appear at once instead of typing out
+        pg = page(browser, size, base, errs, "reduce")
+        pg.goto(url(base, place), wait_until="domcontentloaded")
+        home = settle(pg, "greeting", res, vp)
+        if vp == "desktop" and len(home) > MAX_CHOICES:
+            res.warnings.append(f"{len(home)} choices at home: {home}")
+        for label in home[:MAX_CHOICES + 3]:
+            pg.goto(url(base, place), wait_until="domcontentloaded")
+            if label not in settle(pg, "greeting", Result(place), vp):
+                continue
+            if not click_choice(pg, label, base, place):
+                continue   # it left the page
+            for sub in settle(pg, label, res, vp):   # one level further: the first new choice
+                if sub not in home:
+                    if click_choice(pg, sub, base, place):
+                        settle(pg, f"{label} > {sub}", res, vp)
+                    break
+        pg.context.close()
+        res.problems += [f"{vp}: {e}" for e in dict.fromkeys(errs)]
+    return res
+
+
+def worker(base: str, todo: "Queue[str]", out: list[Result]) -> None:
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        for vp, size in VIEWPORTS.items():
-            ctx = browser.new_context(viewport={"width": size[0], "height": size[1]})
-            ctx.route("**/house/api/**", lambda r: r.fulfill(status=503, body="{}"))   # never mint real house keys
-            pg = ctx.new_page()
-            errs: list[str] = []
-            pg.on("pageerror", lambda e: errs.append(str(e)))
-            noise = KNOWN_NOISE + (() if base == PROD else DEV_ONLY)
-            pg.on("console", lambda m: m.type in ("error", "warning") and not any(n in m.text for n in noise)
-                  and errs.append(m.text))
-            pg.goto(url(base, place), wait_until="networkidle")
-            home = settle(pg, "greeting", res, vp)
-            if vp == "desktop" and len(home) > MAX_CHOICES:
-                res.warnings.append(f"{len(home)} choices at home: {home}")
-            check_zones(pg, res, vp)
-            for label in home[:MAX_CHOICES + 3]:
-                pg.goto(url(base, place), wait_until="networkidle")
-                if label not in settle(pg, "greeting", Result(place), vp):
-                    continue
-                if not click_choice(pg, label, base, place):
-                    continue   # it left the page
-                for sub in settle(pg, label, res, vp):   # one level further: the first new choice
-                    if sub not in home:
-                        if click_choice(pg, sub, base, place):
-                            settle(pg, f"{label} > {sub}", res, vp)
-                        break
-            res.problems += [f"{vp}: {e}" for e in dict.fromkeys(errs)]
-            ctx.close()
+        while True:
+            try:
+                place = todo.get_nowait()
+            except Empty:
+                break
+            out.append(check_place(browser, base, place))
         browser.close()
-    return res
 
 
 def main() -> None:
@@ -211,11 +238,19 @@ def main() -> None:
     base = args.pop(0).rstrip("/") if args and args[0].startswith("http") else "https://dev.vivalapanda.moe"
     todo = args or places()
     problems = check_graph()
-    with ThreadPoolExecutor(6) as pool:
-        for res in pool.map(lambda k: check_place(base, k), todo):
-            problems += [f"{res.place}: {p}" for p in dict.fromkeys(res.problems)]
-            for w in res.warnings:
-                print(f"warn {res.place}: {w}")
+    queue: Queue[str] = Queue()
+    for k in todo:
+        queue.put(k)
+    results: list[Result] = []
+    threads = [Thread(target=worker, args=(base, queue, results)) for _ in range(min(WORKERS, len(todo)))]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    for res in sorted(results, key=lambda r: todo.index(r.place)):
+        problems += [f"{res.place}: {p}" for p in dict.fromkeys(res.problems)]
+        for w in res.warnings:
+            print(f"warn {res.place}: {w}")
     for p in problems:
         print("FAIL", p)
     print(f"{len(todo)} places, {len(problems)} problems")
