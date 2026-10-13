@@ -2099,6 +2099,12 @@
               "say": [
                 "Steam over the Alley. Taisho's still open. Of course he is."
               ]
+            },
+            {
+              "src": "/img/explore/places/pier.png",
+              "say": [
+                "Across the bay at Otojima, a Ferris wheel, turning with nobody on it."
+              ]
             }
           ]
         }
@@ -4412,6 +4418,14 @@
           "say": [
             "(It takes the ferry a long time to get anywhere. Nobody on it seems to mind.)"
           ]
+        },
+        {
+          "label": "Take the ferry across",
+          "say": [
+            "(The ferry takes forever. Nobody aboard minds. The mountain gets bigger.)",
+            "(On the far shore, a path climbs up into the hills.)"
+          ],
+          "go": "?loc=hilltop"
         }
       ]
     },
