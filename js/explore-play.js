@@ -1817,8 +1817,15 @@
             var all = Object.keys(LOCATIONS), been = all.filter(function (k) { return get("pandaVisits_" + k); }).length;
             out.push(fill(it.visited, { n: Math.max(been, 1), total: all.length }));
         }
-        if (todo.length) out.push(it.todo_head + " " + todo.join(" "));
-        if (done.length) out.push(it.done_head + " " + done.join(" "));
+        function boxes(head, items) {   // as many boxes as it takes, each short enough for the dialog box
+            var cur = head;
+            items.forEach(function (t) {
+                if ((cur + " " + t).length > 90) { out.push(cur); cur = t; } else cur += " " + t;
+            });
+            out.push(cur);
+        }
+        if (todo.length) boxes(it.todo_head, todo);
+        if (done.length) boxes(it.done_head, done);
         return out.length > 1 || todo.length || done.length ? out : arr(it.empty).concat(out);
     };
 
