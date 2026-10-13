@@ -1488,6 +1488,9 @@
       ],
       "rare": [
         "Somebody's proposing in the middle of the boulevard! The whole street cheers."
+      ],
+      "greeting_saturday": [
+        "Saturday night on Isogashii Boulevard. You can barely move. Everyone's having the best time."
       ]
     },
     "stationcrossing": {
@@ -2554,7 +2557,10 @@
         "07-07": [
           "Tanabata! Bamboo by the shrine, covered in paper wishes. Somewhere up there, two stars meet."
         ]
-      }
+      },
+      "greeting_sunday": [
+        "Sunday night at the shrine. Quiet. Someone's sweeping the steps very slowly."
+      ]
     },
     "backpassage": {
       "speaker": "P a n d a",
@@ -3819,6 +3825,9 @@
       ],
       "rare": [
         "The power flickers off. Every screen goes black. Then on. Somebody groans about their save."
+      ],
+      "greeting_monday": [
+        "Monday at Net Cafe Noa. Every booth has someone avoiding the week."
       ]
     },
     "forestpath": {
@@ -4134,7 +4143,10 @@
             "\"Three in a row. Fine.\" (She flicks you a card.) \"Keep the ace. You'll need it.\""
           ]
         }
-      }
+      },
+      "greeting_tuesday": [
+        "\"Tuesday. Rematch night. Sit down, kid, I've been practising.\""
+      ]
     },
     "gallery": {
       "speaker": "P a n d a",
@@ -4290,7 +4302,10 @@
             "\"...Ah, put your wallet away. First one's still on me.\""
           ]
         }
-      }
+      },
+      "greeting_friday": [
+        "\"FRIDAY! Every salaryman in the city is here! Squeeze in, squeeze in!\""
+      ]
     },
     "nightcafe": {
       "speaker": "P a n d a",
