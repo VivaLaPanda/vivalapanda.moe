@@ -472,7 +472,37 @@
         });
     }
 
+    // a train's headlights coming up the tunnel now and then: two dots from the vanishing point, spreading and
+    // growing, a flash as it reaches the platform (vp: the tunnel's vanishing point, canvas px)
+    function headlights(vp, every) {
+        var next = 6, t = -1;
+        ambient(function (ctx, dt) {
+            next -= dt;
+            if (t < 0 && next <= 0) { t = 0; next = every + rand(0, every / 2); }
+            if (t < 0) return;
+            t += dt / 3.2;
+            if (t >= 1) { t = -1; return; }
+            var k = t * t * t, gap = 1 + k * 40, size = Math.max(1, Math.round(k * 5)), y = vp[1] + k * 50;
+            [-1, 1].forEach(function (side) {
+                var x = Math.round(vp[0] + side * gap / 2);
+                ctx.fillStyle = "#ffddbb";
+                for (var dy = -size; dy <= size; dy++) {       // a dithered glow round each lamp
+                    for (var dx = -size; dx <= size; dx++) {
+                        if ((dx + dy) % 2 === 0 && dx * dx + dy * dy <= size * size * 2) ctx.fillRect(x + dx, Math.round(y) + dy, 1, 1);
+                    }
+                }
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(x - (size >> 1), Math.round(y) - (size >> 1), Math.max(1, size), Math.max(1, size));
+            });
+            if (t > .9) {                                      // it's here: the platform lights up for a moment
+                ctx.fillStyle = "rgba(255,255,230," + (1 - t) * 4 + ")";
+                ctx.fillRect(0, 0, 185, 132);
+            }
+        });
+    }
+
     var AMBIENT = {
+        trainplatform: function () { headlights([130, 46], 30); },
         forestedge: function () { fireflies([0, 25, 152, 66], 18, "#ffffff", "#99cc66"); },
         smallbathhouse: function () { steam([0, 64, 185, 28], ["#ffffff", "#bdceff"]); },
         ramen: function () {   // off the two pots, either side of the chef (not over his face)
