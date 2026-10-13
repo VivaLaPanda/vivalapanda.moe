@@ -2093,6 +2093,14 @@
             "\"Oh, I'm not hungry.\" (Her stomach growls.) \"...Fine. Tell Taisho thank you.\"",
             "\"Here. A free soak, on the house. Take your time in there.\""
           ]
+        },
+        "persimmon": {
+          "label": "Give Brownie the persimmon",
+          "take": true,
+          "say": [
+            "\"A persimmon! My grandfather's favourite.\"",
+            "(She sets it on the shelf behind the counter, like a treasure.)"
+          ]
         }
       },
       "greeting_after": [
@@ -2856,6 +2864,20 @@
           "label": "Look at the garden",
           "say": [
             "(Moss, a stone lantern, a persimmon tree. Someone keeps it very neatly.)"
+          ],
+          "menu": [
+            {
+              "label": "Pick a persimmon",
+              "unless": "persimmon_got",
+              "pocket": "persimmon",
+              "hear": "persimmon_got",
+              "say": [
+                "(You pick the ripest one. It's warm from the day. Taisho won't mind. Probably.)"
+              ]
+            },
+            {
+              "label": "Leave the garden be"
+            }
           ]
         }
       ]
@@ -2898,6 +2920,12 @@
               "say": [
                 "The cat watches the yo-yo go up and down, up and down, without moving its head.",
                 "Then it swats it once, decisively, and goes back to sleep."
+              ]
+            },
+            "persimmon": {
+              "label": "Offer the cat the persimmon",
+              "say": [
+                "The cat sniffs it, looks at you with deep disappointment, and goes back to sleep."
               ]
             }
           }
@@ -3466,6 +3494,14 @@
           "label": "Show Taisho your photos",
           "say": [
             "\"The roof of the apartments? I can see my house from there. Well. The cat's house.\""
+          ]
+        },
+        "persimmon": {
+          "label": "Give Taisho the persimmon",
+          "take": true,
+          "say": [
+            "\"From my tree? You thief.\" (He's grinning.) \"Fine. I'll make you something with it.\"",
+            "(A little dish of sliced persimmon appears. Best thing you've eaten all night.)"
           ]
         }
       },
@@ -6180,6 +6216,11 @@
       "name": "tissue packets",
       "icon": "tissues",
       "look": "Tissue packets with ads on them. You have a lot. Someone might need one."
+    },
+    "persimmon": {
+      "name": "persimmon",
+      "icon": "persimmon",
+      "look": "A ripe persimmon from the old house's tree. Someone would love this."
     }
   },
   "letters": {
