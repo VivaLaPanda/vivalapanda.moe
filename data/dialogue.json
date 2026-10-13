@@ -3778,6 +3778,10 @@
             },
             {
               "text": "TRANSIT: Night bus route \"still a mystery,\" admits city. Passengers \"seem fine\"."
+            },
+            {
+              "text": "IZAKAYA OWNER LOSES AT JAN-KEN-PON. Demands rematch \"at once\". Staff tired.",
+              "need": "gonta_beaten"
             }
           ]
         }
@@ -4596,6 +4600,15 @@
       ],
       "linger": [
         "The 9:40 express goes over. Every glass on the counter sings."
+      ],
+      "greeting_after": [
+        {
+          "need": "gonta_beaten",
+          "once": true,
+          "greeting": [
+            "\"YOU! The one who beat me! I've been practising paper on my staff. REMATCH!\""
+          ]
+        }
       ]
     },
     "nightcafe": {

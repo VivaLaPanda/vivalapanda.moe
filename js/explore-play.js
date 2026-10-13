@@ -1211,6 +1211,7 @@
             var his = Math.floor(Math.random() * 3), r = (mine - his + 3) % 3;   // 0 draw, 1 you win, 2 he wins
             var line = fill(p.thrown, { you: p.hands[hands[mine]], him: p.hands[hands[his]] });
             if (r === 0) { S.say([line, p.draw], offerHands); return; }
+            if (r === 1) hear("gonta_beaten");
             S.say([line].concat(arr(r === 1 ? p.you_win : p.he_wins)), function () { S.home(false); });
         }
         function offerHands() {
