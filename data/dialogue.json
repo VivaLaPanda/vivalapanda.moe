@@ -2115,8 +2115,13 @@
         },
         "laundry": {
           "name": "Laundry",
-          "lines": [
-            "Someone's towels. They'll be crispy by morning."
+          "click": [
+            "Someone's towels. And, pegged on the end all by itself, a single sock."
+          ],
+          "choices": [
+            {
+              "label": "Leave the laundry be"
+            }
           ]
         },
         "tank": {
@@ -2146,6 +2151,17 @@
       },
       "greeting_late": [
         "The roof at this hour. Even the city's asleep. Mostly."
+      ],
+      "menu": [
+        {
+          "label": "Take down the lone sock",
+          "unless": "sock_taken",
+          "pocket": "sock",
+          "hear": "sock_taken",
+          "say": [
+            "(You unpeg the sock. It's been up here a while. It looks lonely.)"
+          ]
+        }
       ]
     },
     "konbini": {
@@ -2557,7 +2573,19 @@
           "name": "A sock",
           "lines": [
             "A single sock. Its partner is out there somewhere. They'll find each other."
-          ]
+          ],
+          "accepts": {
+            "sock": {
+              "label": "Put the rooftop sock next to it",
+              "take": true,
+              "hear": "socks_reunited",
+              "say": [
+                "You set the rooftop sock down next to the lone one.",
+                "...They match. They actually match.",
+                "(Somewhere, a dryer buzzes, like applause.)"
+              ]
+            }
+          }
         }
       }
     }
@@ -2830,6 +2858,15 @@
             "brownie_fed"
           ],
           "text": "Take Taisho's ramen to Brownie."
+        },
+        {
+          "flags": [
+            "sock_taken"
+          ],
+          "not": [
+            "socks_reunited"
+          ],
+          "text": "Find the rooftop sock's partner."
         }
       ],
       "done": [
@@ -2875,6 +2912,12 @@
             "brownie_fed"
           ],
           "text": "Brownie ate."
+        },
+        {
+          "flags": [
+            "socks_reunited"
+          ],
+          "text": "Reunited two socks."
         }
       ]
     },
@@ -2887,6 +2930,11 @@
       "name": "free-soak token",
       "icon": "soak-token",
       "look": "A wooden token from Brownie: one free soak in the inner bath."
+    },
+    "sock": {
+      "name": "a lone sock",
+      "icon": "sock",
+      "look": "A single sock from the rooftop washing line. Its partner must be somewhere."
     }
   }
 }
