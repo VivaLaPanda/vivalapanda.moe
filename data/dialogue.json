@@ -2986,6 +2986,24 @@
       "greeting": [
         "Wait, it's daytime again?",
         "...I've stopped asking questions about this city."
+      ],
+      "menu": [
+        {
+          "label": "Trail your hand in the water",
+          "say": [
+            "(The river's cold and quick. Something nibbles your fingers and lets go.)"
+          ]
+        },
+        {
+          "label": "Talk to the boatman",
+          "pick": [
+            "\"Upriver to the glade, down to the sea. Thirty years. Same river, different water.\"",
+            "\"The lighthouse keeper and I wave every night. Never met him. Good man.\""
+          ]
+        }
+      ],
+      "linger": [
+        "A heron on the bank watches the boat go by, unimpressed."
       ]
     },
     "zengarden": {
