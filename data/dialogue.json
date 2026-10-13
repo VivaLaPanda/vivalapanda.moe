@@ -1181,6 +1181,9 @@
           ],
           "once": true
         }
+      ],
+      "linger": [
+        "Johnny shuffles papers. You get the feeling he's reading you, not them."
       ]
     },
     "casino": {
@@ -1242,7 +1245,10 @@
             "\"Ruri sent you? ...Say no more.\" (Your chips double. Don't ask.)"
           ]
         }
-      }
+      },
+      "linger": [
+        "Somewhere a slot machine pays out. Nobody cheers. It's that kind of casino."
+      ]
     },
     "club": {
       "speaker": "P a n d a",
@@ -1279,7 +1285,10 @@
         "05-02": [
           "It's the night of the Pumpo rave! The flyer was right. There's a bus painted on the DJ booth."
         ]
-      }
+      },
+      "linger": [
+        "The bass drops. Every glass on the bar jumps a millimetre."
+      ]
     },
     "forestedge": {
       "speaker": "P a n d a",
@@ -1293,6 +1302,9 @@
             "(Fireflies, crickets, and very far away, the festival drums.)"
           ]
         }
+      ],
+      "linger": [
+        "An owl, very close. Then wingbeats. Then nothing."
       ]
     },
     "forestglade": {
@@ -1389,6 +1401,9 @@
             "*Andy looks over his shoulder.* \"Oh hey. The fuse person.\" *He turns back around.*"
           ]
         }
+      ],
+      "linger": [
+        "The breakcore stops for one second. Andy sighs. It starts again, faster."
       ]
     },
     "nightapartments": {
@@ -1401,6 +1416,9 @@
       },
       "greeting_rain": [
         "Rain on the stairs, rain on the bikes. The cat's probably somewhere dry."
+      ],
+      "linger": [
+        "A window upstairs slides open. Someone shakes out a futon. It slides shut."
       ]
     },
     "nightpark": {
@@ -1465,6 +1483,9 @@
           "label": "Wait for the night bus",
           "action": "nightbus"
         }
+      ],
+      "linger": [
+        "A vending machine hums to itself on the corner. It's the loudest thing here."
       ]
     },
     "nightresidential2": {
@@ -1545,6 +1566,9 @@
             "(You wait for the walking man. Everyone else waits too, even with no traffic.)"
           ]
         }
+      ],
+      "linger": [
+        "The crossing bell rings, though no train comes. It does that."
       ]
     },
     "trainplatform": {
@@ -1577,6 +1601,9 @@
       "speaker": "P a n d a",
       "greeting": [
         "I just love looking out at the world through a train window ^_^"
+      ],
+      "linger": [
+        "The train rocks gently. The river shines below, then the bridge ends."
       ]
     },
     "electronicstore": {
@@ -1624,7 +1651,10 @@
             "\"There. It picks up every station in the city now. Try it.\""
           ]
         }
-      }
+      },
+      "linger": [
+        "Every TV on the wall switches to the same weather report at once."
+      ]
     },
     "weaponshop": {
       "speaker": "P a n d a",
@@ -1657,6 +1687,9 @@
             "\"That? Doesn't work. Take it. Maybe the battery girl at Denchi's can do something.\""
           ]
         }
+      ],
+      "linger": [
+        "Ghandi winds an old clock. It's two hours wrong. He says it's right somewhere."
       ]
     },
     "nightalley": {
@@ -1811,6 +1844,9 @@
           ],
           "once": true
         }
+      ],
+      "linger": [
+        "Sabrina hums along to the music, wrong words, total confidence."
       ]
     },
     "shizukastreet": {
@@ -1874,7 +1910,10 @@
             "A door marked STAFF ONLY. It's locked. Or it's pretending to be."
           ]
         }
-      }
+      },
+      "linger": [
+        "Something on a high shelf ticks. You decide not to find out what."
+      ]
     },
     "livehouse": {
       "speaker": "P a n d a",
@@ -1929,6 +1968,9 @@
             "Namba Bears. There's a new poster by the door: Andy, live, facing the audience. Thursdays."
           ]
         }
+      ],
+      "linger": [
+        "Feedback squeals. The band pretend it was on purpose. The crowd agrees."
       ]
     },
     "smallbathhouse": {
@@ -1956,7 +1998,10 @@
             "(When you get out, everything feels a little slower. In a good way.)"
           ]
         }
-      }
+      },
+      "linger": [
+        "A drop of water falls from the ceiling and lands exactly on your head."
+      ]
     },
     "bathhouseentry": {
       "speaker": "Brownie",
@@ -1996,6 +2041,9 @@
       ],
       "greeting_regular": [
         "\"Back again? Your usual locker's free. I keep it free.\""
+      ],
+      "linger": [
+        "Brownie stacks towels into a perfect tower. Then one more. It holds."
       ]
     },
     "frontdesk": {
@@ -2083,6 +2131,9 @@
             "\"Someone always leaves a thermos of tea up there. I've never found out who.\""
           ]
         }
+      ],
+      "linger": [
+        "The lift dings. Nobody gets out. 37 nods at it anyway."
       ]
     },
     "penthouse": {
@@ -2241,7 +2292,10 @@
             "The streetlight flickers once, warm, and steadies."
           ]
         }
-      }
+      },
+      "linger": [
+        "The streetlight buzzes, and for a second the light looks warmer."
+      ]
     },
     "towerbar": {
       "speaker": "T o n y",
@@ -2372,6 +2426,9 @@
           ],
           "once": true
         }
+      ],
+      "linger": [
+        "Tony slides a glass down the bar to someone. It stops exactly at their hand."
       ]
     },
     "lines": {
@@ -2697,6 +2754,9 @@
           ],
           "once": true
         }
+      ],
+      "linger": [
+        "Water drips somewhere. A radio plays very quietly behind a wall."
       ]
     },
     "oldhouse": {
@@ -2707,6 +2767,9 @@
       ],
       "greeting_rain": [
         "The rain's loud on the old roof tiles. The lights are still on inside."
+      ],
+      "linger": [
+        "The garden rustles. A frog announces itself. The house creaks back."
       ]
     },
     "catroom": {
@@ -2829,6 +2892,9 @@
             "The timetable has a doodle of a fish in the corner. It's waving."
           ]
         }
+      ],
+      "linger": [
+        "A gull lands on the station sign and reads it, apparently."
       ]
     },
     "surfshop": {
@@ -2868,6 +2934,9 @@
             "(Somewhere pretty would be good. A sunset, maybe.)"
           ]
         }
+      ],
+      "linger": [
+        "A wind chime made of old surfboard fins clacks in the sea breeze."
       ]
     },
     "beach": {
@@ -2959,7 +3028,10 @@
             "Don't stare at it. ...Okay, maybe a little."
           ]
         }
-      }
+      },
+      "linger": [
+        "The sun touches the water. For a second the whole sea is orange."
+      ]
     },
     "harbour": {
       "speaker": "P a n d a",
@@ -3398,6 +3470,9 @@
           "label": "Purikura booth",
           "action": "purikura"
         }
+      ],
+      "linger": [
+        "A claw machine plays its jingle to nobody. The panda's still in there."
       ]
     },
     "rooftop": {
@@ -3791,7 +3866,10 @@
             "The man in the hat / ordered one more, / and the glass / waited with him."
           ]
         ]
-      }
+      },
+      "linger": [
+        "The bookseller turns a page so slowly you hear it."
+      ]
     },
     "aquarium": {
       "speaker": "P a n d a",
@@ -4017,6 +4095,9 @@
       "speaker": "P a n d a",
       "greeting": [
         "It's quiet up here. Just birds, and the light coming down through the trees."
+      ],
+      "linger": [
+        "A butterfly lands on your sleeve, thinks better of it, leaves."
       ]
     },
     "teaparty": {
@@ -4062,6 +4143,9 @@
             "The tea party again. There's a note under the teapot: \"Day off. Help yourself. -T\""
           ]
         }
+      ],
+      "linger": [
+        "A teacup tinks against a saucer in the breeze. Nobody's touched it."
       ]
     },
     "hilltop": {
@@ -4131,6 +4215,9 @@
             "Higanbana are supposed to grow along the way to the other side. This one's very pretty."
           ]
         }
+      ],
+      "linger": [
+        "The wind goes through the lilies in one long red wave."
       ]
     },
     "campsite": {
@@ -4300,6 +4387,9 @@
           ],
           "once": true
         }
+      ],
+      "linger": [
+        "Somewhere in the car park, an engine ticks as it cools."
       ]
     },
     "cardroom": {
@@ -4338,6 +4428,9 @@
       },
       "greeting_tuesday": [
         "\"Tuesday. Rematch night. Sit down, kid, I've been practising.\""
+      ],
+      "linger": [
+        "Ruri shuffles one-handed without looking. Show-off."
       ]
     },
     "gallery": {
