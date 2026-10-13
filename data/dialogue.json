@@ -608,7 +608,23 @@
       },
       "greeting_late": [
         "\"Burning the midnight oil, stranger? So am I. Information never sleeps.\""
-      ]
+      ],
+      "accepts": {
+        "bottle": {
+          "label": "Show Johnny the message in a bottle",
+          "say": [
+            "\"Ah. The bottle.\"",
+            "\"I write a few of those every summer, stranger. Advertising.\""
+          ]
+        },
+        "bottlecap": {
+          "label": "Show Johnny the cat's bottle cap",
+          "say": [
+            "\"A gift from the old house cat? That cat doesn't give anything to anyone.\"",
+            "\"You've got connections, stranger. I'm impressed.\""
+          ]
+        }
+      }
     },
     "casino": {
       "speaker": "P a n d a",
@@ -956,6 +972,14 @@
             "She reads the coaster and snorts.",
             "\"'Still can't pour a straight line.' ...Tell him I'll pour HIM a straight line.\"",
             "(She tucks the coaster in a drawer. It's full of coasters.)"
+          ]
+        },
+        "sticker": {
+          "label": "Show Sabrina your purikura",
+          "take": true,
+          "say": [
+            "\"Ooh! Can I keep it? Look at Panda's bunny ears.\"",
+            "(She sticks it right on the register, next to a dozen others.)"
           ]
         }
       }
@@ -1401,6 +1425,16 @@
             }
           ]
         }
+      },
+      "accepts": {
+        "fox_mask": {
+          "label": "Put on the fox mask",
+          "say": [
+            "(You put on the fox mask.)",
+            "For a moment every lantern at the shrine flickers at once.",
+            "...Then the festival noise comes back. Did anyone else see that?"
+          ]
+        }
       }
     },
     "backpassage": {
@@ -1832,6 +1866,12 @@
             "(He grills it right there with a pinch of salt. Shioyaki. It's perfect.)",
             "\"The cat from the old house would've fought you for that.\""
           ]
+        },
+        "panda": {
+          "label": "Show Taisho the panda plush",
+          "say": [
+            "\"Ha! It looks just like Panda. Same face when the ramen's late.\""
+          ]
         }
       },
       "greeting_late": [
@@ -2051,6 +2091,15 @@
           "name": "Ray",
           "lines": [
             "A ray glides overhead like it's showing off. It is."
+          ]
+        }
+      },
+      "accepts": {
+        "goldfish_bag": {
+          "label": "Show your goldfish the aquarium",
+          "say": [
+            "You hold the bag up to the glass.",
+            "Your goldfish stares at the big fish going past. Aspirational."
           ]
         }
       }
