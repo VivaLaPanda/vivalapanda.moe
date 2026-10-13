@@ -56,8 +56,7 @@ ROUTES = {"pc", "sql", "lake"}
 PBKDF2_ITERS = 200_000
 MAX_BODY = 2048
 MAX_PASSWORD = 80
-REFRESH_AFTER_S = (3, 65)   # re-read the house after an action: once it's done, once blinds have travelled
-                            # (65: rodney caches /api/house for 60s)
+REFRESH_AFTER_S = (65,)      # re-read the house after an action, once rodney's 60s cache has turned over
 # (window seconds, max requests) per bucket
 LIMITS = {"key_ip": (600, 30), "act_key": (600, 20), "act_ip": (600, 30), "act_all": (600, 60)}
 ACT_GAP_S = 3.0             # one key's actions at least this far apart

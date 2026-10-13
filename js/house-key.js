@@ -207,7 +207,7 @@
             if (r.ok) {
                 if (patch && H.patch) H.patch(patch);
                 S.say([s[done]]);
-                if (H.refresh) { setTimeout(H.refresh, 6000); setTimeout(H.refresh, 70000); }   // blinds take a while
+                if (H.refresh) setTimeout(H.refresh, 75000);   // the feed has it by then (blinds included)
             } else if (r.status === 403) { put(KEY, null); drawInventory(); S.say([s.bad_key]); }
             else if (r.status === 429) S.say([s.slow]);
             else if (r.status === 503) S.say([s.off_now]);
