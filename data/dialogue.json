@@ -1437,6 +1437,22 @@
       ],
       "linger": [
         "A window upstairs slides open. Someone shakes out a futon. It slides shut."
+      ],
+      "menu": [
+        {
+          "label": "Read the noticeboard",
+          "cycle": [
+            [
+              "\"LOST: one black cat. Answers to nothing. Returns when hungry.\" (Someone's crossed out LOST.)"
+            ],
+            [
+              "\"Bin day is Thursday. THURSDAY. -Management\""
+            ],
+            [
+              "\"Whoever keeps leaving the roof door open: thank you, the stars are nice. -Flat 4\""
+            ]
+          ]
+        }
       ]
     },
     "nightpark": {
@@ -1489,6 +1505,21 @@
       ],
       "linger": [
         "The fountain changes its rhythm. Nobody else seems to notice."
+      ],
+      "menu": [
+        {
+          "label": "Sit by the fountain",
+          "say": [
+            "(You sit on the fountain's edge. A coin glints at the bottom. Somebody's wish.)"
+          ]
+        },
+        {
+          "label": "Toss a coin in",
+          "pick": [
+            "(Plink.) The fountain gurgles, satisfied.",
+            "(Plink.) It lands next to a button and a single guitar pick."
+          ]
+        }
       ]
     },
     "nightresidential": {
@@ -1622,6 +1653,22 @@
       ],
       "linger": [
         "The train rocks gently. The river shines below, then the bridge ends."
+      ],
+      "menu": [
+        {
+          "label": "Look out the window",
+          "cycle": [
+            [
+              "(Reeds and water, a heron standing on one leg. It doesn't look up.)"
+            ],
+            [
+              "(A little station with no name flashes by. Someone on the bench waves.)"
+            ],
+            [
+              "(Your reflection in the glass, and behind it, the whole bright marsh.)"
+            ]
+          ]
+        }
       ]
     },
     "electronicstore": {
@@ -2797,6 +2844,20 @@
       ],
       "linger": [
         "The garden rustles. A frog announces itself. The house creaks back."
+      ],
+      "menu": [
+        {
+          "label": "Knock",
+          "say": [
+            "(You knock. Nobody answers. The door isn't locked. It never is, here.)"
+          ]
+        },
+        {
+          "label": "Look at the garden",
+          "say": [
+            "(Moss, a stone lantern, a persimmon tree. Someone keeps it very neatly.)"
+          ]
+        }
       ]
     },
     "catroom": {
@@ -4148,6 +4209,15 @@
       ],
       "linger": [
         "A butterfly lands on your sleeve, thinks better of it, leaves."
+      ],
+      "menu": [
+        {
+          "label": "Listen to the birds",
+          "pick": [
+            "(A bird sings three notes, waits, sings them again. Another answers.)",
+            "(A woodpecker, far off, keeping time.)"
+          ]
+        }
       ]
     },
     "teaparty": {
