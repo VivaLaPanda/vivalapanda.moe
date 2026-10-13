@@ -1393,6 +1393,13 @@
     };
 
     PLAY.backpassage = function () {
+        var h = new Date().getHours();
+        if ((h >= 2 && h < 4) || /[?&]late\b/.test(location.search)) {   // Bar 25: a door that's only there 2-4am
+            document.addEventListener("scenestart", function () {
+                hiddenWay([500, 300, 90, 140], "?loc=bar25", "A door you haven't seen before");
+                setTimeout(function () { if (!S.stage.querySelector(".play-overlay")) S.say(arr(P().late_door)); }, 2600);
+            });
+        }
         var drifter = obj("drifter");
         drifter.lines = function () { hear("secondedition"); return arr(P().drifter); };
         document.addEventListener("scenestart", function () {

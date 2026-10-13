@@ -325,6 +325,15 @@ var LOCATIONS = {
                  { src: "../img/explore/layers/karaoke-spots-b.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-b" }],
         objects: [{ id: "tv", rect: [100, 60, 210, 230] }, { id: "table", rect: [250, 330, 260, 140] }]
     },
+    // only reachable 2-4am, through a door in the back passage (js/explore-play.js)
+    "bar25": {
+        title: "Bar 25", image: "../img/explore/places/bar.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/eve-burst-error-room-marina.mp3",
+        links: [
+            { to: "?loc=backpassage", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "bartender", rect: [181, 17, 216, 415] }, { id: "lady", rect: [430, 133, 216, 382] }]
+    },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",

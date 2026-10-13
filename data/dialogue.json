@@ -2282,6 +2282,9 @@
         "cat_runs": "There it goes again. It's leading us somewhere.",
         "drifter": [
           "He mumbles in his sleep: \"...ask Errata for the second edition...\""
+        ],
+        "late_door": [
+          "...Was that door always there? There's a light on behind it."
         ]
       }
     },
@@ -4029,6 +4032,64 @@
           ]
         }
       ]
+    },
+    "bar25": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A tiny bar with no sign. It's very quiet in here. Even the city sounds far away."
+      ],
+      "objects": {
+        "bartender": {
+          "name": "Bartender",
+          "click": [
+            "He's polishing a glass that's already clean."
+          ],
+          "choices": [
+            {
+              "label": "Ask what this place is",
+              "say": [
+                "\"Bar 25. We're open from two until four.\"",
+                "\"Or until you don't need us anymore. Whichever comes first.\""
+              ]
+            },
+            {
+              "label": "Order something",
+              "say": [
+                "(He pours you something amber without asking what you want. It's exactly right.)"
+              ]
+            },
+            {
+              "label": "Just sit"
+            }
+          ]
+        },
+        "lady": {
+          "name": "The lady in red",
+          "click": [
+            "The lady in red from the tower bar, resting her head on her arms."
+          ],
+          "choices": [
+            {
+              "label": "Say hello",
+              "unless": "hat_given",
+              "say": [
+                "\"The tower's too loud after midnight. I come here to hear myself think.\""
+              ]
+            },
+            {
+              "label": "Say hello",
+              "need": "hat_given",
+              "say": [
+                "\"Did you hear? The man in the hat finally left. Good for him.\"",
+                "\"Twelve years. Some people wait a long time to go home.\""
+              ]
+            },
+            {
+              "label": "Leave her be"
+            }
+          ]
+        }
+      }
     }
   },
   "house_key": {

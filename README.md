@@ -86,6 +86,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                │               └─ Houses ─┬─ the girl under the streetlight ─ Acacia Apartments
                     │                │                          │      ─┬─ the Roof (stars, fireworks, the ending)
                     │                │                          │       └⇢ (the cat) Back Passage ─ Old House ─ its room
+                    │                │                          │                     (⇢ 2-4am only: Bar 25)
                     │                │                          ├─ Coin Laundry
                     │                │                          └─ Andy's House
                     │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ train.html
