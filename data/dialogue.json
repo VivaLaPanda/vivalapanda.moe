@@ -1059,6 +1059,9 @@
       ],
       "greeting_return": [
         "\"Back again, stranger? Information's still for sale.\""
+      ],
+      "greeting_regular": [
+        "\"You again, stranger. At this point I should be charging you rent.\""
       ]
     },
     "casino": {
@@ -1752,6 +1755,9 @@
             "\"Welcome back! Tell Taisho his ramen was... adequate. Very adequate.\""
           ]
         }
+      ],
+      "greeting_regular": [
+        "\"Back again? Your usual locker's free. I keep it free.\""
       ]
     },
     "frontdesk": {
@@ -2852,6 +2858,9 @@
       ],
       "greeting_winter": [
         "\"In you come, out of the snow! Ramen weather, this.\""
+      ],
+      "greeting_regular": [
+        "\"Ah, my regular! Sit, sit. The usual's already on.\""
       ]
     },
     "gamecentre": {
@@ -3125,7 +3134,10 @@
             }
           ]
         }
-      }
+      },
+      "greeting_regular": [
+        "\"Oh, hi again! I put the good onigiri aside for you. Don't tell the manager.\""
+      ]
     },
     "bookshop": {
       "speaker": "B o o k s e l l e r",
@@ -3342,7 +3354,10 @@
             "Anonymous replies: \"go to bed\""
           ]
         }
-      }
+      },
+      "greeting_regular": [
+        "Booth seven. Our booth, now. The chair's still warm from last time."
+      ]
     },
     "forestpath": {
       "speaker": "P a n d a",
@@ -3766,7 +3781,10 @@
             "(The whole bar gets a piece. The salarymen stop arguing to applaud.)"
           ]
         }
-      }
+      },
+      "greeting_regular": [
+        "\"MY FAVOURITE CUSTOMER! Your seat's been waiting! Nobody else is allowed in it!\""
+      ]
     },
     "nightcafe": {
       "speaker": "P a n d a",

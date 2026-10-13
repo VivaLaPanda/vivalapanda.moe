@@ -1763,6 +1763,7 @@
         if (d.greeting_newyear && now.getMonth() === 0 && now.getDate() <= 3) return d.greeting_newyear;
         if (d.greeting_winter && winter()) return d.greeting_winter;
         if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
+        if (d.greeting_regular && visits >= 5 && Math.random() < .7) return d.greeting_regular;   // a regular now
         if (d.greeting_return && visits > 1 && Math.random() < .6) {   // you've been here before
             return [d.greeting_return[Math.floor(Math.random() * d.greeting_return.length)]];
         }
