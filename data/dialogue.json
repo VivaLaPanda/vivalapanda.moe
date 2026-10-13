@@ -5158,6 +5158,14 @@
               "\"Six seconds. Six seconds. Six seconds. Forty years, and it's never once been seven.\""
             ]
           ]
+        },
+        {
+          "label": "Read the newest log entry",
+          "need": "ghost_free",
+          "say": [
+            "\"The red charm's gone from the water by the pier. Someone finally reached it.\"",
+            "\"Six seconds. Six seconds. The light feels lighter, tonight.\""
+          ]
         }
       ],
       "linger": [
