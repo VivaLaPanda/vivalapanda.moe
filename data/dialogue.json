@@ -672,6 +672,45 @@
       "speaker": "S a b r i n a",
       "greeting": [
         "\"Wow anon, you finally made it\""
+      ],
+      "menu": [
+        {
+          "label": "Order a drink",
+          "say": [
+            "\"What'll it be, anon?\""
+          ],
+          "menu": [
+            {
+              "label": "Something pink",
+              "serve": "special",
+              "say": [
+                "\"One Rabu Rabu Special. Grenadine, soda, and good vibes.\""
+              ]
+            },
+            {
+              "label": "Whatever you're having",
+              "serve": "melon",
+              "say": [
+                "\"Melon soda. I'm on shift, anon.\""
+              ]
+            },
+            {
+              "label": "Just water",
+              "serve": "water",
+              "say": [
+                "\"Hydration arc. Respect.\""
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Chat",
+          "pick": [
+            "\"The music's too loud to hear anything, so just nod a lot.\"",
+            "\"Regulars get a stamp card. You're not a regular. Yet.\"",
+            "\"Don't tell anyone, but I can't actually make cocktails.\""
+          ]
+        }
       ]
     },
     "shizukastreet": {
@@ -747,7 +786,46 @@
             "\"Hey cutie, haven't seen you here before. Come share a drink with me\""
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Order a drink",
+          "say": [
+            "\"What'll it be, friend?\""
+          ],
+          "menu": [
+            {
+              "label": "Whisky, neat",
+              "serve": "whisky",
+              "say": [
+                "\"Good choice. Don't tell the boss I poured the good stuff.\""
+              ]
+            },
+            {
+              "label": "The house special",
+              "serve": "red",
+              "say": [
+                "\"A Tokugawa Sunset. Nobody knows what's in it. Including me.\""
+              ]
+            },
+            {
+              "label": "A glass of milk",
+              "serve": "milk",
+              "say": [
+                "\"...Sure thing, friend. No judgment here.\"",
+                "(The whole bar goes quiet for a second.)"
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Ask about the regulars",
+          "pick": [
+            "\"The fella in the hat? Been here since the tower opened. Never seen him leave.\"",
+            "\"The lady in red tips great. Don't ask her what she does for a living.\""
+          ]
+        }
+      ]
     },
     "lines": {
       "empty": [

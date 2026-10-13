@@ -88,8 +88,8 @@
         carrying(hunt()).forEach(function (id) {
             button(id + ".png", itemName(id), function () { S.say([fill(t.items[id].look, { word: ITEMS[id] })]); });
         });
-        if (key()) button("key.png", "Panda's spare key", function () { S.say([t.slot_key]); });
-        else button("key-empty.png", "An empty key slot", function () { S.say([t.slot_empty]); });
+        if (key()) button("key.png", "Panda's spare key", function () { S.say(arr(t.slot_key)); });
+        else button("key-empty.png", "An empty key slot", function () { S.say(arr(t.slot_empty)); });
     }
 
     // ---------- the hunt (Explore) ----------
@@ -104,7 +104,7 @@
         } else if (collected(h) < ORDER.length) {
             S.say([fill(t.short, { left: ORDER.length - collected(h) })].concat(arr(t.names)), again);
         } else {
-            S.say([t.done], again);
+            S.say(arr(t.done), again);
         }
     }
 
@@ -123,7 +123,7 @@
         return ORDER.filter(function (id) { return t.items[id].place === place && !h.items[id]; })[0] || null;
     }
 
-    R.afterGreeting = function () {
+    (R.afterGreeting = R.afterGreeting || []).push(function () {
         var t = T();
         if (!t) return null;
         if (place === "agency") return key() ? null : [{ label: t.johnny.choice, act: johnny }];
@@ -135,7 +135,7 @@
             return true;
         }
         return [{ label: t.favour_choice, act: function () { give(id); } }];
-    };
+    });
 
     // the Hidden Glade's pond: the sword's lake. Drop in the four favours, and a hand brings up the key
     function pondChoices() {
@@ -160,14 +160,14 @@
             post("key", { route: "lake", words: ORDER.map(function (x) { return ITEMS[x]; }) }).then(function (r) {
                 if (r.key) {
                     S.say(arr(t.pond.rises), function () {
-                        S.offer([{ label: t.pond.take, act: function () { gotKey(r.key); S.say([t.pickup]); } }]);
+                        S.offer([{ label: t.pond.take, act: function () { gotKey(r.key); S.say(arr(t.pickup)); } }]);
                     });
                     return;
                 }
                 h.dropped = {};          // the favours come back: try again later (or the words changed)
                 saveHunt(h);
                 drawInventory();
-                S.say([r.status === 401 ? t.pond.refused : t.pond.offline]);
+                S.say(arr(r.status === 401 ? t.pond.refused : t.pond.offline));
             });
         });
     }
@@ -176,16 +176,16 @@
 
     S.actions.pc_login = function () {
         var t = T().pc;
-        if (key()) { S.say([t.already]); return; }
+        if (key()) { S.say(arr(t.already)); return; }
         (function prompt(before) {
             S.ask([(before ? before + "\n" : "") + t.prompt], function (password) {
                 if (!password) return;
                 post("key", { route: "pc", password: password }).then(function (r) {
-                    if (r.key) { gotKey(r.key); S.say([t.welcome, T().pickup]); }
+                    if (r.key) { gotKey(r.key); S.say(arr(t.welcome).concat(arr(T().pickup))); }
                     else if (r.sql) prompt(r.sql);
                     else if (r.status === 401) prompt(t.denied);
-                    else if (r.status === 429) S.say([T().switch.slow]);
-                    else S.say([t.offline]);
+                    else if (r.status === 429) S.say(arr(T().switch.slow));
+                    else S.say(arr(t.offline));
                 });
             });
         })(null);
@@ -206,12 +206,12 @@
         post("act", { device: device, on: on }, { "X-House-Key": key() }).then(function (r) {
             if (r.ok) {
                 if (patch && H.patch) H.patch(patch);
-                S.say([s[done]]);
+                S.say(arr(s[done]));
                 if (H.refresh) setTimeout(H.refresh, 75000);   // the feed has it by then (blinds included)
-            } else if (r.status === 403) { put(KEY, null); drawInventory(); S.say([s.bad_key]); }
-            else if (r.status === 429) S.say([s.slow]);
-            else if (r.status === 503) S.say([s.off_now]);
-            else S.say([s.failed]);
+            } else if (r.status === 403) { put(KEY, null); drawInventory(); S.say(arr(s.bad_key)); }
+            else if (r.status === 429) S.say(arr(s.slow));
+            else if (r.status === 503) S.say(arr(s.off_now));
+            else S.say(arr(s.failed));
         });
     }
 
@@ -252,8 +252,8 @@
     R.objects.forEach(function (o) {
         if (place === "living_room") switches(o);
         if (place === "forestglade" && o.id === "pond") {
-            o.lines = function () { return [T() ? T().pond.still : "..."]; };
-            o.click = function () { return [T().pond.waiting]; };
+            o.lines = function () { return T() ? arr(T().pond.still) : ["..."]; };
+            o.click = function () { return arr(T().pond.waiting); };
             o.choices = pondChoices;
         }
     });

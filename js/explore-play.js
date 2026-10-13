@@ -1,7 +1,8 @@
 // What there is to do in Explore besides walking: games and things that move or react. Each place's play is a
 // function under PLAY, keyed by its location id (js/explore-locations.js), run before the scene starts; it hangs
 // choices and actions on the place's objects. Its lines are in dialogue.json, under the place's "play".
-// Plain menus (a stall, a bar's drinks) need no code: their choices in dialogue.json say or pick lines themselves.
+// Plain menus need no code: an object's choices in dialogue.json say or pick lines themselves, and a place's
+// "menu" (a bar's drinks) is offered after its greeting.
 (function () {
     "use strict";
 
@@ -11,6 +12,7 @@
     function P() { return (R.said && R.said.play) || {}; }
     function obj(id) { return R.objects.filter(function (o) { return o.id === id; })[0]; }
     function fill(s, v) { return String(s).replace(/\{(\w+)\}/g, function (m, k) { return v[k] != null ? v[k] : m; }); }
+    function arr(x) { return x == null ? [] : Array.isArray(x) ? x : [x]; }
     function rand(a, b) { return a + Math.random() * (b - a); }
     function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
     function put(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private */ } }
@@ -180,7 +182,7 @@
             for (var s = 0; s < 14; s++) px("#c0782c", x + r * .7 + s * .7, y + r * .7 + s * .7, 2, 1);
         }
 
-        S.say([p.how], function () {
+        S.say(arr(p.how), function () {
             show();
             S.offer([{ label: p.stop, act: end }]);
             raf = requestAnimationFrame(step);
@@ -273,7 +275,7 @@
                     clearTimeout(duck);
                     stop();
                     box.remove();
-                    S.say([P().cat_bolts]);
+                    S.say(arr(P().cat_bolts));
                     scamper(sprite("runA"), APT_WALL[0] - 4, 760, APT_WALL[1] + 1, 29, 18, 1100, function () {
                         put(CAT_PATH, "1");
                         hiddenWay(APT_PATH, "?loc=backpassage", "After the cat");
@@ -292,7 +294,7 @@
             cat.addEventListener("click", function (e) {
                 e.stopPropagation();
                 cat.remove();
-                S.say([P().cat_runs]);
+                S.say(arr(P().cat_runs));
                 scamper(sprite("runA", "play-cat-far"), r[0], r[0] - 60, r[1], 19, 12, 900);
             });
         });
@@ -303,11 +305,51 @@
         cat.choices = function () {
             var p = P();
             return [{ label: p.pet_label, act: function () {
-                S.say([p.pets[pets % p.pets.length]], function () { S.offer(cat.choices()); });
+                S.say(arr(p.pets[pets % p.pets.length]), function () { S.offer(cat.choices()); });
                 pets++;
             } }, { label: p.leave_label }];
         };
     };
+
+    // ---------- a place's menu (dialogue.json "menu": a bar's drinks, a chat) ----------
+
+    // offered after the greeting, and again after each answer. A choice with "serve" puts that drink in front of
+    // you: the place's SERVE spot, drawn in its own inks (img/explore/layers/<prefix><drink>.png)
+    var SERVE = {
+        cutiebar: { prefix: "rabu-", rect: [179, 258, 26, 50] },
+        towerbar: { prefix: "tower-", rect: [459, 214, 17, 17] }
+    };
+    var served = null;
+
+    function serve(drink) {
+        var spot = SERVE[place];
+        if (!spot) return;
+        if (!served) {
+            served = document.createElement("img");
+            served.className = "scene-layer scene-pixel";
+            served.alt = "";
+            S.placeNative(served, spot.rect[0], spot.rect[1], spot.rect[2], spot.rect[3]);
+            S.stage.appendChild(served);
+        }
+        served.src = "/img/explore/layers/" + spot.prefix + drink + ".png";
+    }
+
+    function menuOf(list) {
+        return list.map(function (c) {
+            if (c.menu) return { label: c.label, say: c.say, menu: menuOf(c.menu) };
+            if (!c.say && !c.pick) return c;
+            return { label: c.label, act: function () {
+                if (c.serve) serve(c.serve);
+                S.say(c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : c.say, function () {
+                    S.offer(menuOf(R.said.menu));
+                });
+            } };
+        });
+    }
+
+    (R.afterGreeting = R.afterGreeting || []).push(function () {
+        return R.said && R.said.menu ? menuOf(R.said.menu) : null;
+    });
 
     if (PLAY[place]) PLAY[place]();
 })();

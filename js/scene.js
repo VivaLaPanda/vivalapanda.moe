@@ -13,10 +13,11 @@
 //                 art's object-fit; pixel: crisp scaling; anim: a scene.css animation, scene-anim-<name>)
 //   an object's   go (a link), sprite ({ src, x, y, w, h }: a visible button), view (a name in R.views: clicking
 //                 swaps to that picture and speaker and back again), choices (may be a function; null: just lines)
-//   R.afterGreeting  a function giving choices to offer once the greeting's typed (or none; true: it said something)
+//   R.afterGreeting  functions (scripts push theirs) giving choices to offer once the greeting's typed (or none;
+//                 true: it took the box over itself)
 // Other scripts (js/house-key.js) drive the box through window.SCENE: say, offer, ask, actions (a choice's
 // "action" names one), lines; a choice may also carry act (a function). In dialogue.json a choice can just talk:
-// say (its boxes) or pick (one of them, at random).
+// say (its boxes), pick (one of them, at random), or menu (more choices, after its say).
 (function () {
     "use strict";
 
@@ -322,9 +323,10 @@
                     if (c.copy) copy(c.copy);
                     else if (c.object) open(c.object);
                     else if (c.act) c.act();
+                    else if (c.action && SCENE.actions[c.action]) SCENE.actions[c.action](c);
+                    else if (c.menu) say(c.say || [R.lines.lookPrompt], function () { offer(c.menu); });
                     else if (c.say) say(c.say);
                     else if (c.pick) say([c.pick[Math.floor(Math.random() * c.pick.length)]]);
-                    else if (c.action && SCENE.actions[c.action]) SCENE.actions[c.action]();
                     else say([R.lines.backToRoom]);
                 });
             }
@@ -614,10 +616,16 @@
         if (R.illegible) lookBtn.hidden = true;
         buildScene();
         if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, placeNative: placeNative });
-        say(lines(R.greeting), R.afterGreeting ? function () {
-            var c = R.afterGreeting();
-            if (c === true) return;                  // it took the box over itself
-            if (c && c.length) offer(c); else toIdle();
+        // what to offer once the greeting's typed: every script's choices together (one returning true took the box)
+        var hooks = R.afterGreeting || [];
+        say(lines(R.greeting), hooks.length ? function () {
+            var all = [];
+            for (var i = 0; i < hooks.length; i++) {
+                var c = hooks[i]();
+                if (c === true) return;
+                all = all.concat(c || []);
+            }
+            if (all.length) offer(all); else toIdle();
         } : null, true);
         document.dispatchEvent(new Event("scenestart"));
         resetIdle();
