@@ -401,7 +401,7 @@
     function hover(o) {
         shapes[o.id].classList.add("active");
         // a greeting box that's finished typing gives way to the first thing you point at
-        if (inGreeting && !typing) toIdle();
+        if (inGreeting && !typing && state !== "choosing") toIdle();   // never a menu that's up
         // the line stays up after the pointer leaves (WCAG 1.4.13), until something else replaces it
         if (state === "idle" && o.hover != null) show(lines(o.hover), true);
     }

@@ -1131,7 +1131,7 @@
         };
     };
 
-    // ---------- a place's menu (dialogue.json "menu": a bar's drinks, a chat) ----------
+    // ---------- a place's menu (dialogue.json "menu": a bar's drinks, a chat, an errand) ----------
 
     // offered after the greeting, and again after each answer. A choice with "serve" puts that drink in front of
     // you: the place's SERVE spot, drawn in its own inks (img/explore/layers/<prefix><drink>.png); one with "song"
@@ -1173,7 +1173,9 @@
     }
 
     function menuOf(list) {
-        return list.filter(function (c) { return !c.need || heard(c.need); }).map(function (c) {
+        return list.filter(function (c) {
+            return (!c.need || heard(c.need)) && (!c.unless || !heard(c.unless));
+        }).map(function (c) {
             if (c.menu) return { label: c.label, say: c.say, menu: menuOf(c.menu) };
             if (c.cycle) return { label: c.label, act: function () {   // the next of its lines each time, remembered
                 var key = "pandaCycle_" + place + "_" + c.label, i = +(get(key) || 0);
@@ -1184,6 +1186,8 @@
             return { label: c.label, act: function () {
                 if (c.serve) serve(c.serve);
                 if (c.song) song(c.song);
+                if (c.pocket && !has(c.pocket)) pocket(c.pocket);   // an errand: something to carry
+                hear(c.hear);
                 var lines = c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : c.say;
                 if (c.serve && P().stamps) lines = lines.concat(stamp());
                 S.say(lines, function () {

@@ -719,8 +719,29 @@
               "*Andy gives you a thumbs up without turning around.*"
             ]
           ]
+        },
+        {
+          "label": "Ask Andy what he's working on",
+          "need": "andy_turned",
+          "pick": [
+            "*Andy half turns.* \"Breakcore remix of the Pandopolis station chime. It slaps.\"",
+            "*Without turning:* \"Playing Namba Bears on Thursday. Tell Sakura she's on the guest list.\""
+          ]
         }
-      ]
+      ],
+      "accepts": {
+        "fuse": {
+          "label": "Hand Andy the fuse",
+          "take": true,
+          "hear": "andy_turned",
+          "say": [
+            "*Andy turns around. Actually, fully around.*",
+            "\"No way, the fuse! Sakura sent you? Legend.\"",
+            "*He pops it in. The breakcore comes back twice as loud.*",
+            "*Two thumbs up. Then he turns back around.*"
+          ]
+        }
+      }
     },
     "nightapartments": {
       "speaker": "Ｐａｎｄａ",
@@ -802,6 +823,16 @@
             "\"These headphones? So good you'll stop hearing your own thoughts. Great for studying.\"",
             "\"Honestly? The batteries. Nobody ever has enough batteries.\""
           ]
+        },
+        {
+          "label": "Anything need doing?",
+          "unless": "fuse_given",
+          "say": [
+            "\"Ooh, perfect timing. You know Andy? Residential district, never turns around?\"",
+            "\"His amp blew a fuse again. Here's a spare. If you're going that way...\""
+          ],
+          "pocket": "fuse",
+          "hear": "fuse_given"
         }
       ]
     },
@@ -868,6 +899,24 @@
             "\"Regulars get a stamp card. You're not a regular. Yet.\"",
             "\"Don't tell anyone, but I can't actually make cocktails.\""
           ]
+        },
+        {
+          "label": "Anything I can do?",
+          "unless": "note_given",
+          "say": [
+            "\"Actually, yeah. You going up Tokugawa Tower any time?\"",
+            "\"Give this to Tony at the bar. Don't read it. ...Okay, you can read it, it just says he's old.\""
+          ],
+          "pocket": "note",
+          "hear": "note_given"
+        },
+        {
+          "label": "Ask about Tony",
+          "need": "tony_answered",
+          "pick": [
+            "\"Tony taught me everything. Then I opened my own place, so now he pretends I don't exist.\"",
+            "\"He sends a coaster back every time. Twelve years. I have a whole drawer.\""
+          ]
         }
       ],
       "play": {
@@ -877,6 +926,18 @@
           "regular": [
             "(She stamps the last square and slides the card back.)",
             "\"Five! Congrats, anon. You're a regular now. Don't let it go to your head.\""
+          ]
+        }
+      },
+      "accepts": {
+        "coaster": {
+          "label": "Give Sabrina Tony's coaster",
+          "take": true,
+          "hear": "tony_answered",
+          "say": [
+            "She reads the coaster and snorts.",
+            "\"'Still can't pour a straight line.' ...Tell him I'll pour HIM a straight line.\"",
+            "(She tucks the coaster in a drawer. It's full of coasters.)"
           ]
         }
       }
@@ -1136,8 +1197,29 @@
             "\"The fella in the hat? Been here since the tower opened. Never seen him leave.\"",
             "\"The lady in red tips great. Don't ask her what she does for a living.\""
           ]
+        },
+        {
+          "label": "Ask about Sabrina",
+          "need": "note_delivered",
+          "pick": [
+            "\"Best student I ever had. Worst listener. Don't tell her I said the first part.\"",
+            "\"She runs a good bar. Too much grenadine, but a good bar.\""
+          ]
         }
-      ]
+      ],
+      "accepts": {
+        "note": {
+          "label": "Give Tony Sabrina's note",
+          "take": true,
+          "pocket": "coaster",
+          "hear": "note_delivered",
+          "say": [
+            "Tony unfolds the note and laughs so loud the man in the hat looks up.",
+            "\"Old! She calls ME old. I taught that kid to hold a shaker.\"",
+            "(He scribbles on a coaster and slides it over.) \"Take that back down to her, would you?\""
+          ]
+        }
+      }
     },
     "lines": {
       "empty": [
@@ -2083,6 +2165,24 @@
       "name": "bottle cap",
       "icon": "bottlecap",
       "look": "A bottle cap the cat gave you. The highest honour a cat can give."
+    },
+    "note": {
+      "name": "Sabrina's note",
+      "icon": "note",
+      "look": [
+        "A folded note for Tony at the tower bar. It just says \"you're old\".",
+        "...Plus a doodle of a tiny cocktail glass."
+      ]
+    },
+    "coaster": {
+      "name": "Tony's coaster",
+      "icon": "coaster",
+      "look": "A coaster with Tony's reply on the back: \"Still can't pour a straight line.\""
+    },
+    "fuse": {
+      "name": "amp fuse",
+      "icon": "fuse",
+      "look": "A spare amp fuse from Sakura, for Andy. Do not lose this. Andy needs his breakcore."
     }
   }
 }
