@@ -1881,6 +1881,7 @@
         if (d.greeting_winter && winter()) return d.greeting_winter;
         if (d.greeting_spring && spring()) return d.greeting_spring;
         if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
+        if (d.rare && visits > 1 && Math.random() < .08) return [d.rare[Math.floor(Math.random() * d.rare.length)]];   // once in a while
         if (d.greeting_regular && visits >= 5 && Math.random() < .7) return d.greeting_regular;   // a regular now
         if (d.greeting_return && visits > 1 && Math.random() < .6) {   // you've been here before
             return [d.greeting_return[Math.floor(Math.random() * d.greeting_return.length)]];

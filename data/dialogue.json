@@ -603,6 +603,9 @@
       ],
       "linger": [
         "A taxi idles at the corner, waiting for nobody in particular."
+      ],
+      "rare": [
+        "A marching band goes down Main Street! Tubas and everything. Nobody knows where they're going."
       ]
     },
     "agency": {
@@ -1097,6 +1100,9 @@
       ],
       "greeting_regular": [
         "\"You again, stranger. At this point I should be charging you rent.\""
+      ],
+      "rare": [
+        "\"Shh. Somebody's tailing you, stranger. ...Kidding. Or am I. Sit down.\""
       ]
     },
     "casino": {
@@ -1335,6 +1341,9 @@
       ],
       "linger": [
         "The lanterns in the trees sway a little. Drums, very faintly."
+      ],
+      "rare": [
+        "Every lantern in the trees goes out at once. Then back on, one by one. Wow."
       ]
     },
     "nightplaza": {
@@ -1379,6 +1388,9 @@
       ],
       "linger": [
         "Someone hands you a tissue packet without breaking stride. You have nine now."
+      ],
+      "rare": [
+        "Somebody's proposing in the middle of the boulevard! The whole street cheers."
       ]
     },
     "stationcrossing": {
@@ -2327,6 +2339,9 @@
       ],
       "linger": [
         "A kid walks past with a goldfish bag held up like a trophy."
+      ],
+      "rare": [
+        "Someone's won the goldfish stall's grand prize: a goldfish the size of a cat. Chaos."
       ]
     },
     "shrine": {
@@ -2682,6 +2697,9 @@
       ],
       "linger": [
         "A wave comes up further than the others and just touches your shoes."
+      ],
+      "rare": [
+        "Way out past the waves, something huge surfaces and blows. A whale! Then it's gone."
       ]
     },
     "sunset": {
@@ -2782,6 +2800,9 @@
       },
       "linger": [
         "A boat's rope creaks against the pier. Somewhere, a gull complains."
+      ],
+      "rare": [
+        "A huge cruise ship slides past the harbour mouth, lit up like a city of its own."
       ]
     },
     "riverboat": {
@@ -3182,6 +3203,9 @@
       ],
       "linger": [
         "The city hums below. Somewhere a window goes dark, then another lights up."
+      ],
+      "rare": [
+        "A meteor shower! One, two, five, too many to count. Make a wish? Make all of them."
       ]
     },
     "konbini": {
@@ -3352,6 +3376,9 @@
       ],
       "linger": [
         "The door chime goes. Nobody's there. It does that sometimes."
+      ],
+      "rare": [
+        "\"Irasshaimase!\" (The cashier is wearing a full dinosaur costume. Nobody explains why.)"
       ]
     },
     "bookshop": {
@@ -3642,6 +3669,9 @@
       ],
       "linger": [
         "Someone three booths over sighs at a loading screen. Same."
+      ],
+      "rare": [
+        "The power flickers off. Every screen goes black. Then on. Somebody groans about their save."
       ]
     },
     "forestpath": {
