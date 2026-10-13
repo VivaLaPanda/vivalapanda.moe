@@ -1566,7 +1566,8 @@
           "need": "andy_turned",
           "greeting": [
             "\"You got the fuse to Andy? He actually said thank you. In person. I'm shook.\""
-          ]
+          ],
+          "once": true
         }
       ],
       "accepts": {
@@ -1764,7 +1765,8 @@
           "need": "tony_answered",
           "greeting": [
             "\"Oh, it's my favourite courier. What'll it be, anon?\""
-          ]
+          ],
+          "once": true
         }
       ]
     },
@@ -1937,7 +1939,8 @@
           "need": "brownie_fed",
           "greeting": [
             "\"Welcome back! Tell Taisho his ramen was... adequate. Very adequate.\""
-          ]
+          ],
+          "once": true
         }
       ],
       "greeting_regular": [
@@ -2276,13 +2279,15 @@
           "need": "ghost_free",
           "greeting": [
             "The stool at the end of the bar is empty. For the first time in twelve years, Tony says."
-          ]
+          ],
+          "once": true
         },
         {
           "need": "tony_answered",
           "greeting": [
             "\"Back again, friend? She send another insult? ...Pull up a stool.\""
-          ]
+          ],
+          "once": true
         }
       ]
     },
@@ -2569,7 +2574,8 @@
           "need": "drifter_fed",
           "greeting": [
             "The man from before is sitting up now. He nods at you. One crumb of onigiri left."
-          ]
+          ],
+          "once": true
         }
       ]
     },
@@ -3159,7 +3165,8 @@
           "need": "brownie_fed",
           "greeting": [
             "\"Brownie ate it all, didn't she? She always says she's not hungry. Irasshai!\""
-          ]
+          ],
+          "once": true
         }
       ],
       "greeting_winter": [
@@ -3407,13 +3414,15 @@
           "need": "sock_taken",
           "greeting": [
             "\"Irasshaimase! ...You're out late a lot, huh? Same.\""
-          ]
+          ],
+          "once": true
         },
         {
           "need": "ghost_free",
           "greeting": [
             "\"Irasshaimase! ...Funny. The man in the hat didn't come in for his melon bread.\""
-          ]
+          ],
+          "once": true
         }
       ],
       "play": {
@@ -4069,7 +4078,8 @@
           "need": "hat_given",
           "greeting": [
             "The dark blue car's still parked here. The engine's cold now, for the first time."
-          ]
+          ],
+          "once": true
         }
       ]
     },
@@ -4833,7 +4843,8 @@
           "need": "cat_fed",
           "greeting": [
             "A cat cafe! ...Wait, that black cat by the counter. It's ours. It visits, apparently."
-          ]
+          ],
+          "once": true
         }
       ],
       "objects": {
