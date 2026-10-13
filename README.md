@@ -67,6 +67,8 @@ meant to be poked at.
 - Plain menus are data: a choice can `say`, `pick` one line at random, open a `menu`, `serve` a drink, change the
   `song`, `go` somewhere, or need something you've heard (`need`).
 - New art for a place goes in `img/explore/layers/`, drawn on the picture's own pixel grid in its own inks.
+- It rains on the outdoor night streets about one hour in three (the same hour everywhere); add `&rain` to a URL
+  to see it.
 
 The map (→ an exit; ⇢ a hidden or unlocked way; ↺ joins somewhere else on the map):
 ```

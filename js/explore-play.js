@@ -701,6 +701,36 @@
         });
     }
 
+    // rain on the city's outdoor night streets: about one hour in three, the same hour everywhere
+    var RAINY = ["mainstreet", "partystreet", "nightalley", "shizukastreet", "nightplaza", "nightresidential",
+                 "nightresidential2", "nightapartments", "nightresidential_girl", "backpassage", "oldhouse", "ramen"];
+    function raining() {
+        var hour = Math.floor(Date.now() / 3600000), x = Math.sin(hour * 12.9898) * 43758.5453;
+        return x - Math.floor(x) < .33;
+    }
+    function rain() {
+        var drops = [], splashes = [];
+        for (var i = 0; i < 120; i++) drops.push({ x: rand(0, 200), y: rand(-132, 132), v: rand(140, 190) });
+        ambient(function (ctx, dt) {
+            ctx.fillStyle = "#bbccff";
+            drops.forEach(function (d) {
+                d.y += d.v * dt;
+                d.x -= d.v * .25 * dt;
+                if (d.y > 132) {
+                    if (Math.random() < .5) splashes.push({ x: d.x, y: rand(110, 131), age: 0 });
+                    d.y = rand(-20, 0);
+                    d.x = rand(0, 215);
+                }
+                for (var k = 0; k < 5; k++) ctx.fillRect(Math.round(d.x + k * .25), Math.round(d.y - k), 1, 1);   // a streak
+            });
+            splashes = splashes.filter(function (sp) { return (sp.age += dt) < .15; });
+            splashes.forEach(function (sp) {
+                ctx.fillRect(Math.round(sp.x - 1), Math.round(sp.y), 1, 1);
+                ctx.fillRect(Math.round(sp.x + 1), Math.round(sp.y), 1, 1);
+            });
+        });
+    }
+
     var AMBIENT = {
         trainplatform: function () { headlights([130, 46], 30); },
         forestedge: function () { fireflies([0, 25, 152, 66], 18, "#ffffff", "#99cc66"); },
@@ -711,6 +741,7 @@
         }
     };
     if (AMBIENT[place]) AMBIENT[place]();
+    if (RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) rain();   // ?rain to see it
 
     // ---------- Johnny's rumours: one at a time, in order, each pointing somewhere ----------
 
