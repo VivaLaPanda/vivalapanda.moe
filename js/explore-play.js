@@ -1430,6 +1430,23 @@
         });
     }
 
+    // ---------- Panda's notebook: what you've done and what you said you'd do (pockets.notebook in dialogue.json) ----------
+
+    if (!has("notebook")) setTimeout(function () { pocket("notebook"); }, 0);   // everyone gets one on their first walk
+    window.POCKET_LOOK.notebook = function (it) {
+        function ok(e) {
+            return (e.flags || []).every(heard) && !(e.not || []).some(heard) &&
+                   (e.rally || []).every(function (k) { return rally()[k]; }) &&
+                   !(e.no_rally || []).some(function (k) { return rally()[k]; });
+        }
+        var todo = it.todo.filter(ok).map(function (e) { return e.text; });
+        var done = it.done.filter(ok).map(function (e) { return e.text; });
+        var out = [];
+        if (todo.length) out.push(it.todo_head + " " + todo.join(" "));
+        if (done.length) out.push(it.done_head + " " + done.join(" "));
+        return out.length ? out : arr(it.empty);
+    };
+
     // the city notices when you're here: a place can greet you differently in the rain (greeting_rain) or in the
     // small hours by your own clock (greeting_late, midnight to five)
     R.greeting = function () {

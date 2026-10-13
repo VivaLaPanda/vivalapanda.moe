@@ -2640,6 +2640,100 @@
       "take_label": "Take a photo",
       "taken": "(Click! The film winds on. {left} shots left.)",
       "album": "Your photos so far: {n}. (Click them to put them away.)"
+    },
+    "notebook": {
+      "name": "Panda's notebook",
+      "icon": "notebook",
+      "look": "Panda's notebook. Mostly doodles.",
+      "empty": "Panda's notebook. Nothing in it yet but doodles. Go explore!",
+      "todo_head": "To do:",
+      "done_head": "Done:",
+      "todo": [
+        {
+          "flags": [
+            "note_given"
+          ],
+          "not": [
+            "note_delivered"
+          ],
+          "text": "Take Sabrina's note to Tony."
+        },
+        {
+          "flags": [
+            "note_delivered"
+          ],
+          "not": [
+            "tony_answered"
+          ],
+          "text": "Bring Tony's coaster to Sabrina."
+        },
+        {
+          "flags": [
+            "fuse_given"
+          ],
+          "not": [
+            "andy_turned"
+          ],
+          "text": "Get Sakura's fuse to Andy."
+        },
+        {
+          "flags": [
+            "secondedition"
+          ],
+          "no_rally": [
+            "zengarden"
+          ],
+          "text": "Ask Errata for the second edition."
+        },
+        {
+          "flags": [
+            "catroom_seen"
+          ],
+          "not": [
+            "catfriend"
+          ],
+          "text": "Make friends with the cat."
+        }
+      ],
+      "done": [
+        {
+          "flags": [
+            "catfriend"
+          ],
+          "text": "Befriended the cat."
+        },
+        {
+          "flags": [
+            "taisho_met",
+            "catroom_seen"
+          ],
+          "text": "Met Taisho."
+        },
+        {
+          "flags": [
+            "tony_answered"
+          ],
+          "text": "Sabrina and Tony are talking."
+        },
+        {
+          "flags": [
+            "andy_turned"
+          ],
+          "text": "Andy turned around!"
+        },
+        {
+          "flags": [
+            "regular"
+          ],
+          "text": "Rabu Rabu regular."
+        },
+        {
+          "rally": [
+            "zengarden"
+          ],
+          "text": "Found the garden."
+        }
+      ]
     }
   }
 }
