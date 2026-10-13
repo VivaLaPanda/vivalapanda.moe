@@ -59,9 +59,35 @@ blinds, the thermostat, the TV, music on the speakers, the kotatsu's plug. Plain
   output here, and bump the room's `house.v` (and the scene `?v=`) in its data file.
 
 **Explore** uses the same engine. `js/explore-locations.js` lists every place: its art, music, exits (rects in
-the 740×528 picture) and views. Its adapter at the bottom turns the current place (`?loc=` or the page's
-`data-scene`) into the scene. Explore's lines are in `data/dialogue.json` under `explore.<place>`. Explore has no LOOK
-button, and its exits aren't outlined.
+the 740×528 picture), objects, views and layers (pictures over the art, e.g. lanterns, glints). Its adapter at the
+bottom turns the current place (`?loc=` or the page's `data-scene`) into the scene. Explore's lines are in
+`data/dialogue.json` under `explore.<place>`. Explore has no LOOK button, and its exits aren't outlined: the map is
+meant to be poked at.
+- What there is to do (games, menus, animals, ambient motion) is `js/explore-play.js`, keyed by place.
+- Plain menus are data: a choice can `say`, `pick` one line at random, open a `menu`, `serve` a drink, change the
+  `song`, `go` somewhere, or need something you've heard (`need`).
+- New art for a place goes in `img/explore/layers/`, drawn on the picture's own pixel grid in its own inks.
+
+The map (→ an exit; ⇢ a hidden or unlocked way; ↺ joins somewhere else on the map):
+```
+Home ─ Main Street ─┬─ Casino (pans; roulette)
+                    ├─ Tokugawa Tower lobby ─┬─ Penthouse
+                    │                         └─ Tower Bar (drinks)
+                    ├─ Picrew Plaza ─┬─ Pumpo Park (lanterns) ─ Summer Festival (goldfish) ─ Shrine (fortunes) ─ ↺ Forest Edge
+                    │                ├─ Residential ─ Houses ─┬─ the girl ─ Acacia Apartments ⇢ (the cat) Back Passage
+                    │                │                        │      ─ Old House ─┬─ its room (the cat; pet it)
+                    │                │                        │                   └─ ↺ Shrine
+                    │                │                        └─ Andy's House
+                    │                └─ Forest Edge (fireflies) ─ Hidden Glade (pond: the house key) ─ train.html
+                    └─ Isogashii Blvd ─┬─ Club Polka (dance) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
+                                       ├─ Crossing ─ Platform 1 ─ On the train ─┬─ train.html
+                                       │                                        └─ Otojima Station ─ Half Pipe ─ Beach
+                                       │                                           ─ Sunset ─ Harbour ─┬─ ↺ Otojima Station
+                                       │                                                               └─ Riverboat ─ ↺ Glade
+                                       └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
+                                                 │              ├─ Namba Bears (song requests) ─ Bathhouse ─ inner bath
+                                                 ├─ Ghandi's ─ Rabu Rabu (drinks)
+```
 
 **The house key.** Visitors who find Panda's spare key can switch the living room's lamps, blinds and AC on and off
 (nothing else). `js/house-key.js` runs on every scene page: the key slot and the hunt's items by the dialog box's ▼,
