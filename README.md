@@ -96,7 +96,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                        ├─ Agency (Johnny: the hunt, rumours, people) ─ Denchi's (symphoslots)
                                        ├─ Crossing (─ Izakaya Gonta) ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                                          └─ Otojima
-                                       │       ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
+                                       │       (back: the Last Train, lights going by) ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
                                        │                                                                    └─ Lake (a ferry) ─ Riverboat
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
                                                  │              ├─ Net Cafe Noa (Panda's old bookmarks; Dollars BBS)

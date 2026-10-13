@@ -397,8 +397,20 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
         links: [
             { to: "?loc=surfshop", rect: [0, 373, 740, 155] },
-            { to: "?loc=trainplatform", rect: [268, 261, 269, 78] }
+            { to: "?loc=nighttrain", rect: [268, 261, 269, 78] }   // the train home
         ]
+    },
+    // the last train home: drawn for the city (FAL, quantized); its windows are cut out, and the town's lights
+    // scroll past underneath (night-train-lights.png, twice the picture's width, tiles)
+    "nighttrain": {
+        title: "The Last Train", image: "../img/explore/places/night_train_windows.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/train-music/tenniscoats-tantan-therapy.mp3",
+        under: { src: "../img/explore/layers/night-train-lights.png", rect: [-24, 0, 1574, 528], anim: "lights" },
+        links: [
+            { to: "?loc=trainplatform", rect: [588, 200, 64, 115] },   // the door at the end: off at Platform 1
+            { to: "?loc=otojima", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "seat", rect: [0, 330, 420, 140] }]
     },
     "surfshop": {
         title: "Half Pipe", image: "../img/explore/places/day_beach_shop.png", pos: "center",
@@ -637,7 +649,7 @@ var LOCATIONS = {
         scene: {
             src: L.image, width: 740, height: 528, fit: "cover", pos: L.pos,
             layers: (L.under ? [{ src: L.under.src, x: L.under.rect[0], y: L.under.rect[1], w: L.under.rect[2],
-                                  h: L.under.rect[3], under: true }] : []).concat((L.layers || []).map(function (l) {
+                                  h: L.under.rect[3], under: true, pixel: true, anim: L.under.anim }] : []).concat((L.layers || []).map(function (l) {
                 return { src: l.src, x: l.rect[0], y: l.rect[1], w: l.rect[2], h: l.rect[3], pixel: l.pixel, anim: l.anim };
             }))
         },

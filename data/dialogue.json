@@ -3462,6 +3462,43 @@
           ]
         }
       }
+    },
+    "nighttrain": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The last train back to the city. Nobody else on board.",
+        "The town lights go by, one after another."
+      ],
+      "objects": {
+        "seat": {
+          "name": "Seat",
+          "click": [
+            "The seats are warm from the heater underneath."
+          ],
+          "choices": [
+            {
+              "label": "Sit by the window",
+              "cycle": [
+                [
+                  "(You watch the lights go by. A level crossing dings, and is gone.)"
+                ],
+                [
+                  "(Your reflection floats over the dark fields. It looks sleepy.)"
+                ],
+                [
+                  "(A lit window: someone cooking a late dinner. Then trees.)"
+                ],
+                [
+                  "(You almost fall asleep. The train sways you awake.)"
+                ]
+              ]
+            },
+            {
+              "label": "Stay standing"
+            }
+          ]
+        }
+      }
     }
   },
   "house_key": {
