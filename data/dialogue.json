@@ -3945,7 +3945,8 @@
           ],
           "text": "Got a working radio."
         }
-      ]
+      ],
+      "visited": "Places in Pandopolis I've been: {n} of {total}."
     },
     "takeout": {
       "name": "takeout ramen",

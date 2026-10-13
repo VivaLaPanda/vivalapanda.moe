@@ -1670,9 +1670,13 @@
         var todo = it.todo.filter(ok).map(function (e) { return e.text; });
         var done = it.done.filter(ok).map(function (e) { return e.text; });
         var out = [];
+        if (window.LOCATIONS && it.visited) {       // how much of the city you've walked
+            var all = Object.keys(LOCATIONS), been = all.filter(function (k) { return get("pandaVisits_" + k); }).length;
+            out.push(fill(it.visited, { n: Math.max(been, 1), total: all.length }));
+        }
         if (todo.length) out.push(it.todo_head + " " + todo.join(" "));
         if (done.length) out.push(it.done_head + " " + done.join(" "));
-        return out.length ? out : arr(it.empty);
+        return out.length > 1 || todo.length || done.length ? out : arr(it.empty).concat(out);
     };
 
     // the pocket radio (Sakura fixed Ghandi's old one): tune it and the music changes, wherever you are
