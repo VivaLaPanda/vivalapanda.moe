@@ -92,7 +92,13 @@
         inv.textContent = "";
         pockets().forEach(function (id) {       // prizes from Explore's game centre (js/explore-play.js)
             var it = (R.dialogueAll.pockets || {})[id];
-            if (it) button((it.icon || "plush-" + id) + ".png", it.name, function () { S.say(arr(it.look)); });
+            if (!it) return;
+            var look = window.POCKET_LOOK && window.POCKET_LOOK[id];   // a pocket whose words change (Explore's stamp card)
+            button((it.icon || "plush-" + id) + ".png", it.name, function () {
+                S.say(look ? look(it) : arr(it.look));
+                if (look) drawInventory();
+            });
+            if (id === "rally" && get("pandaRallyNew") === "1") inv.lastChild.classList.add("hk-new");
         });
         carrying(hunt()).forEach(function (id) {
             button(id + ".png", itemName(id), function () { S.say([fill(t.items[id].look, { word: ITEMS[id] })]); });

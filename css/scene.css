@@ -474,3 +474,7 @@
     image-rendering: pixelated;
     pointer-events: none;
 }
+
+/* a pocket with something new in it (the stamp card after a new stamp) */
+#hk-inventory .hk-new img { animation: hk-pulse 1s steps(2) infinite; }
+@keyframes hk-pulse { 50% { filter: drop-shadow(0 0 3px #ffee88) brightness(1.3); } }

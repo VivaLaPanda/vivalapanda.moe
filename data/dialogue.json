@@ -1778,6 +1778,26 @@
         "A message in a bottle. It says:",
         "\"If you're reading this, the train goes further than you think.\""
       ]
+    },
+    "rally": {
+      "name": "stamp rally card",
+      "icon": "rally",
+      "look": "A stamp rally card. The stamps are out there somewhere in Pandopolis.",
+      "card": "Stamp rally: {n} of {total}.",
+      "places": {
+        "festival": "Festival",
+        "oldhouse": "Old House",
+        "zengarden": "Hidden Garden",
+        "rooftop": "The Roof",
+        "otojima": "Otojima",
+        "gamecentre": "Game Centre",
+        "ramen": "Ramen Stall",
+        "casino": "Casino"
+      },
+      "complete": [
+        "Every stamp! Pandopolis is officially explored.",
+        "Panda would be proud. Panda IS proud."
+      ]
     }
   }
 }

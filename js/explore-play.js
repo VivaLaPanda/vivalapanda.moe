@@ -1017,5 +1017,26 @@
         });
     }
 
+    // ---------- the stamp rally: a card in your pockets, a stamp for each special place you find ----------
+
+    var RALLY = ["festival", "oldhouse", "zengarden", "rooftop", "otojima", "gamecentre", "ramen", "casino"];
+    function rally() { try { return JSON.parse(get("pandaRally")) || {}; } catch (e) { return {}; } }
+    if (RALLY.indexOf(place) >= 0 && !rally()[place]) {
+        var got = rally();
+        got[place] = 1;
+        put("pandaRally", JSON.stringify(got));
+        put("pandaRallyNew", "1");   // the card pulses in your pockets until you look at it
+        if (Object.keys(got).length === 1) pocket("rally");
+        else document.dispatchEvent(new Event("pockets"));
+    }
+    // what the card says (js/house-key.js asks this when it's clicked)
+    window.POCKET_LOOK = window.POCKET_LOOK || {};
+    window.POCKET_LOOK.rally = function (it) {
+        var got = rally(), n = RALLY.filter(function (k) { return got[k]; }).length;
+        put("pandaRallyNew", "");
+        var names = RALLY.map(function (k) { return got[k] ? it.places[k] : "???"; }).join(", ");
+        return [fill(it.card, { n: n, total: RALLY.length }), names].concat(n === RALLY.length ? arr(it.complete) : []);
+    };
+
     if (PLAY[place]) PLAY[place]();
 })();

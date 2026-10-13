@@ -67,6 +67,8 @@ meant to be poked at.
 - Plain menus are data: a choice can `say`, `pick` one line at random, open a `menu`, `serve` a drink, change the
   `song`, `go` somewhere, or need something you've heard (`need`).
 - New art for a place goes in `img/explore/layers/`, drawn on the picture's own pixel grid in its own inks.
+- Pockets: prizes and finds (the claw machine, the festival, the harbour, a stamp rally card for eight special
+  places) sit by the dialog box's ▼; names and lines in `data/dialogue.json` under `pockets`.
 - It rains on the outdoor night streets about one hour in three (the same hour everywhere); add `&rain` to a URL
   to see it.
 
