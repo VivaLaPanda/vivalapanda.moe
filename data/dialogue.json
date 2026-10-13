@@ -3962,7 +3962,8 @@
         "The door chime goes. Nobody's there. It does that sometimes."
       ],
       "rare": [
-        "\"Irasshaimase!\" (The cashier is wearing a full dinosaur costume. Nobody explains why.)"
+        "\"Irasshaimase!\" (The cashier is wearing a full dinosaur costume. Nobody explains why.)",
+        "\"Irasshaimase!\" (The morning shift's arriving. The night cashier waves goodbye to you.)"
       ]
     },
     "bookshop": {
@@ -5196,6 +5197,9 @@
       ],
       "linger": [
         "Flash. Six seconds. Flash. You've started counting along without meaning to."
+      ],
+      "rare": [
+        "The sky's going pale over the sea. The lamp keeps turning anyway, out of habit."
       ]
     },
     "bar25": {
