@@ -69,6 +69,11 @@ meant to be poked at.
 - New art for a place goes in `img/explore/layers/`, drawn on the picture's own pixel grid in its own inks.
 - Pockets: prizes and finds (the claw machine, the festival, the harbour, a camera, Panda's notebook of errands, a stamp rally card for eight special
   places) sit by the dialog box's ▼; names and lines in `data/dialogue.json` under `pockets`.
+- The city remembers you (all in this browser): places say something different on a return visit
+  (`greeting_return`), after five visits (`greeting_regular`), and once in a while something rare happens on
+  arrival (`rare`); stay still somewhere quiet and something small happens (`linger`); characters greet you
+  differently after you've helped them (`greeting_after`); letters from them arrive in the living room
+  (`letters` in `data/dialogue.json`); the Pandopolis Times at the konbini reports it.
 - A night bus (Main Street, the residential street) goes somewhere at random, often somewhere you haven't been.
 - It rains on the outdoor night streets about one hour in three (the same hour everywhere); add `&rain` to a URL
   to see it.
