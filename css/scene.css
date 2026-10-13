@@ -429,13 +429,17 @@
 .scene-anim-breathe { animation: scene-breathe 3.6s steps(1) infinite; }
 @keyframes scene-breathe { 0% { opacity: 0; } 40% { opacity: 1; } 75% { opacity: 0; } }
 
+/* the lake's ferry, crossing slowly and coming back */
+.scene-anim-ferry { animation: scene-ferry 70s steps(140) infinite alternate; }
+@keyframes scene-ferry { from { transform: translateX(-10%); } to { transform: translateX(280%); } }
+
 /* two layers of glints on water, in turn */
 .scene-anim-twinkle-a { animation: scene-twinkle 1.4s steps(1) infinite; }
 .scene-anim-twinkle-b { animation: scene-twinkle 1.4s steps(1) -.7s infinite; }
 @keyframes scene-twinkle { 0% { opacity: 1; } 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
     .scene-anim-flicker, .scene-anim-twinkle-a, .scene-anim-twinkle-b, .scene-anim-buzz,
-    .scene-anim-signal, .scene-anim-breathe { animation: none; }
+    .scene-anim-signal, .scene-anim-breathe, .scene-anim-ferry { animation: none; }
     .scene-anim-train { animation: none; transform: translateX(0); }
 }
 

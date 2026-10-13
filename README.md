@@ -97,7 +97,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                        ├─ Crossing (─ Izakaya Gonta) ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                                          └─ Otojima
                                        │       ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
-                                       │                                                                    └─ Riverboat
+                                       │                                                                    └─ Lake (a ferry) ─ Riverboat
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
                                                  │              ├─ Net Cafe Noa (Panda's old bookmarks; Dollars BBS)
                                                  │              ├─ Namba Bears (song requests)

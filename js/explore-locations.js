@@ -425,7 +425,7 @@ var LOCATIONS = {
         title: "Otojima Harbour", image: "../img/explore/pathways/night_coast.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
         links: [
-            { to: "?loc=riverboat", rect: [573, 179, 167, 55] },
+            { to: "?loc=lake", rect: [573, 179, 167, 55] },   // the little boat upriver
             { to: "?loc=aquarium", rect: [0, 138, 142, 69] },   // the lit building along the shore
             { to: "?loc=otojima", rect: [492, 345, 248, 183] }
         ]
@@ -439,6 +439,18 @@ var LOCATIONS = {
             { to: "?loc=harbour", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "bench", rect: [306, 408, 125, 72] }, { id: "ray", rect: [558, 45, 152, 143] }]
+    },
+    // a stop on the riverboat line: the lake under the mountain, a ferry crossing it (cut out of the picture, the
+    // lake behind it filled from the same rows further along)
+    "lake": {
+        title: "Lake Otojima", image: "../img/explore/places/day_park_coast_noboat.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
+        layers: [{ src: "../img/explore/layers/ferry.png", rect: [40, 188, 157, 49], pixel: true, anim: "ferry" }],
+        links: [
+            { to: "?loc=riverboat", rect: [0, 230, 500, 120] },   // on, upriver
+            { to: "?loc=harbour", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "flowers", rect: [200, 400, 300, 78] }, { id: "tree", rect: [580, 0, 160, 420] }]
     },
     "riverboat": {
         title: "Up the River", image: "../img/explore/pathways/riverboat.png", pos: "center",

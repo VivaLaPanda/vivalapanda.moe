@@ -3167,6 +3167,34 @@
           ]
         }
       }
+    },
+    "lake": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The boat stops at a lake under the mountain. A ferry's crossing, very slowly."
+      ],
+      "objects": {
+        "flowers": {
+          "name": "Wildflowers",
+          "lines": [
+            "Little pink flowers all along the fence. Somebody planted these. Or nobody did."
+          ]
+        },
+        "tree": {
+          "name": "A big tree",
+          "lines": [
+            "A huge old tree, leaning out over the water like it's thinking about swimming."
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Watch the ferry",
+          "say": [
+            "(It takes the ferry a long time to get anywhere. Nobody on it seems to mind.)"
+          ]
+        }
+      ]
     }
   },
   "house_key": {
