@@ -168,7 +168,61 @@ var LOCATIONS = {
         title: "On the train", image: "../img/explore/places/day_wetlands_bridge.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doradora-emotion-dor02.mp3",
         links: [
-            { to: "../train.html", rect: [299, 316, 441, 54] }
+            { to: "../train.html", rect: [299, 316, 441, 54] },
+            { to: "?loc=otojima", rect: [0, 349, 102, 87] }
+        ]
+    },
+    // the train's last stop: a day by the sea, a sunset, the harbour, and a boat back upriver to the glade
+    "otojima": {
+        title: "Otojima Station", image: "../img/explore/pathways/day_train_station.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
+        links: [
+            { to: "?loc=surfshop", rect: [0, 373, 740, 155] },
+            { to: "?loc=trainplatform", rect: [268, 261, 269, 78] }
+        ]
+    },
+    "surfshop": {
+        title: "Half Pipe", image: "../img/explore/places/day_beach_shop.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
+        links: [
+            { to: "?loc=beach", rect: [655, 180, 85, 348] }
+        ],
+        objects: [{ id: "shop", rect: [98, 196, 425, 249] }]
+    },
+    "beach": {
+        title: "Otojima Beach", image: "../img/explore/pathways/day_beach.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/caught-a-star-in-your-eye.mp3",
+        links: [
+            { to: "?loc=sunset", rect: [470, 262, 270, 158] }
+        ],
+        layers: [{ src: "../img/explore/layers/beach-glints-a.png", rect: [0, 0, 740, 528], pixel: true, anim: "twinkle-a" },
+                 { src: "../img/explore/layers/beach-glints-b.png", rect: [0, 0, 740, 528], pixel: true, anim: "twinkle-b" }],
+        objects: [{ id: "drink", rect: [20, 326, 64, 98] }, { id: "chair", rect: [220, 330, 120, 198] },
+                  { id: "sea", rect: [0, 240, 470, 100] }]
+    },
+    "sunset": {
+        title: "The Shore at Sunset", image: "../img/explore/places/sunset.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/college-electric-youth-real-hero.mp3",
+        links: [
+            { to: "?loc=harbour", rect: [0, 446, 284, 82] }
+        ],
+        layers: [{ src: "../img/explore/layers/sunset-glints-a.png", rect: [-59, 0, 857, 528], pixel: true, anim: "twinkle-a" },
+                 { src: "../img/explore/layers/sunset-glints-b.png", rect: [-59, 0, 857, 528], pixel: true, anim: "twinkle-b" }],
+        objects: [{ id: "sun", rect: [627, 257, 113, 103] }]
+    },
+    "harbour": {
+        title: "Otojima Harbour", image: "../img/explore/pathways/night_coast.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
+        links: [
+            { to: "?loc=riverboat", rect: [573, 179, 167, 55] },
+            { to: "?loc=otojima", rect: [492, 345, 248, 183] }
+        ]
+    },
+    "riverboat": {
+        title: "Up the River", image: "../img/explore/pathways/riverboat.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
+        links: [
+            { to: "?loc=forestglade", rect: [208, 271, 116, 96] }
         ]
     },
     "electronicstore": {

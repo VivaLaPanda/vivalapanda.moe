@@ -941,6 +941,103 @@
           "SWAT. Yep. It was a trap."
         ]
       }
+    },
+    "otojima": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Otojima! Last stop. Smell that? Sea air."
+      ]
+    },
+    "surfshop": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A surf shop that also sells snowboards. Covering all the bases."
+      ],
+      "objects": {
+        "shop": {
+          "name": "Half Pipe",
+          "click": [
+            "Boards, wax, and a whole wall of keychains."
+          ],
+          "choices": [
+            {
+              "label": "Buy a souvenir",
+              "pick": [
+                "A keychain shaped like a tiny surfboard. Essential.",
+                "A shell necklace. Very authentic. Made in Ohio.",
+                "A postcard of this exact shop. Very meta."
+              ]
+            },
+            {
+              "label": "Just looking"
+            }
+          ]
+        }
+      }
+    },
+    "beach": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The beach! Somebody left a drink on the table..."
+      ],
+      "objects": {
+        "drink": {
+          "name": "A drink",
+          "click": [
+            "It has a tiny umbrella in it."
+          ],
+          "choices": [
+            {
+              "label": "Take a sip",
+              "say": [
+                "...Coconut. Whoever ordered this has great taste."
+              ]
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        },
+        "chair": {
+          "name": "Beach chair",
+          "lines": [
+            "The most important piece of furniture ever invented."
+          ]
+        },
+        "sea": {
+          "name": "The sea",
+          "lines": [
+            "The water's warm. Mostly."
+          ]
+        }
+      }
+    },
+    "sunset": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "We stayed out until the sun went down. Worth it."
+      ],
+      "objects": {
+        "sun": {
+          "name": "The sun",
+          "lines": [
+            "Don't stare at it. ...Okay, maybe a little."
+          ]
+        }
+      }
+    },
+    "harbour": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The harbour at night. There's a little boat that goes upriver."
+      ]
+    },
+    "riverboat": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Wait, it's daytime again?",
+        "...I've stopped asking questions about this city."
+      ]
     }
   },
   "house_key": {
