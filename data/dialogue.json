@@ -791,6 +791,44 @@
       "speaker": "P a n d a",
       "greeting": [
         "Namba is the place to be for fun obscure music shows"
+      ],
+      "menu": [
+        {
+          "label": "Request a song",
+          "say": [
+            "You shout a request over the noise."
+          ],
+          "menu": [
+            {
+              "label": "Something nostalgic",
+              "song": "/audio/HAUNTER-SLAUGHTER-NOSTALGIA.mp3",
+              "say": [
+                "They know this one! The whole room starts swaying."
+              ]
+            },
+            {
+              "label": "Something dizzy",
+              "song": "/audio/ayarcana-vertigo.mp3",
+              "say": [
+                "The floor's spinning. Or maybe that's just the song."
+              ]
+            },
+            {
+              "label": "Something upbeat",
+              "song": "/audio/cosmic-psycho-school.mp3",
+              "say": [
+                "The drummer grins. Finally, something fast."
+              ]
+            },
+            {
+              "label": "Whatever they were playing",
+              "song": "/audio/mesuneko-hishoshitsu-staff-roll.mp3",
+              "say": [
+                "Back to the set list."
+              ]
+            }
+          ]
+        }
       ]
     },
     "smallbathhouse": {

@@ -512,7 +512,8 @@
     // ---------- a place's menu (dialogue.json "menu": a bar's drinks, a chat) ----------
 
     // offered after the greeting, and again after each answer. A choice with "serve" puts that drink in front of
-    // you: the place's SERVE spot, drawn in its own inks (img/explore/layers/<prefix><drink>.png)
+    // you: the place's SERVE spot, drawn in its own inks (img/explore/layers/<prefix><drink>.png); one with "song"
+    // changes the music
     var SERVE = {
         cutiebar: { prefix: "rabu-", rect: [179, 258, 26, 50] },
         towerbar: { prefix: "tower-", rect: [459, 214, 17, 17] }
@@ -532,12 +533,21 @@
         served.src = "/img/explore/layers/" + spot.prefix + drink + ".png";
     }
 
+    // a request: the place's music swaps to another track (still muted if the visitor muted it)
+    function song(src) {
+        var m = document.getElementById("music");
+        if (!m) return;
+        m.src = src;
+        if (!m.muted) m.play().catch(function () {});
+    }
+
     function menuOf(list) {
         return list.map(function (c) {
             if (c.menu) return { label: c.label, say: c.say, menu: menuOf(c.menu) };
             if (!c.say && !c.pick) return c;
             return { label: c.label, act: function () {
                 if (c.serve) serve(c.serve);
+                if (c.song) song(c.song);
                 S.say(c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : c.say, function () {
                     S.offer(menuOf(R.said.menu));
                 });
