@@ -700,6 +700,14 @@
                 "\"The man in the hat.\" (Johnny goes quiet for a moment.)",
                 "\"Some questions even I don't sell answers to, stranger.\""
               ]
+            },
+            {
+              "label": "Johnny",
+              "say": [
+                "\"Me? I'm a broker. I sell what I know.\"",
+                "\"...Before that I was a detective. The kind who never found the cat.\"",
+                "\"Don't tell anyone. That one's not for sale, either.\""
+              ]
             }
           ]
         }
@@ -1167,7 +1175,18 @@
             "(Your worries dissolve. Most of them.)"
           ]
         }
-      ]
+      ],
+      "accepts": {
+        "soak_token": {
+          "label": "Use Brownie's free-soak token",
+          "take": true,
+          "say": [
+            "(You hand over the token and sink into the hot water.)",
+            "(A long time passes. Or a short one. It's hard to say.)",
+            "(When you get out, everything feels a little slower. In a good way.)"
+          ]
+        }
+      }
     },
     "bathhouseentry": {
       "speaker": "Brownie",
@@ -1183,7 +1202,19 @@
             "\"Some nights a black cat sneaks in to sleep by the boiler. I let it.\""
           ]
         }
-      ]
+      ],
+      "accepts": {
+        "takeout": {
+          "label": "Give Brownie Taisho's ramen",
+          "take": true,
+          "pocket": "soak_token",
+          "hear": "brownie_fed",
+          "say": [
+            "\"Oh, I'm not hungry.\" (Her stomach growls.) \"...Fine. Tell Taisho thank you.\"",
+            "\"Here. A free soak, on the house. Take your time in there.\""
+          ]
+        }
+      }
     },
     "frontdesk": {
       "speaker": "3 7",
@@ -1970,6 +2001,16 @@
           ]
         },
         {
+          "label": "Anything I can do?",
+          "unless": "takeout_given",
+          "say": [
+            "\"You know Brownie, at the bathhouse? She forgets to eat during the evening rush.\"",
+            "\"Take her this. Shoyu, extra egg. She'll pretend she isn't hungry.\""
+          ],
+          "pocket": "takeout",
+          "hear": "takeout_given"
+        },
+        {
           "label": "Find Panda's recipe book",
           "say": [
             "\"The book? Round the corner. Tell 'em Taisho sent you.\""
@@ -2693,6 +2734,15 @@
             "catfriend"
           ],
           "text": "Make friends with the cat."
+        },
+        {
+          "flags": [
+            "takeout_given"
+          ],
+          "not": [
+            "brownie_fed"
+          ],
+          "text": "Take Taisho's ramen to Brownie."
         }
       ],
       "done": [
@@ -2732,8 +2782,24 @@
             "zengarden"
           ],
           "text": "Found the garden."
+        },
+        {
+          "flags": [
+            "brownie_fed"
+          ],
+          "text": "Brownie ate."
         }
       ]
+    },
+    "takeout": {
+      "name": "takeout ramen",
+      "icon": "takeout",
+      "look": "Taisho's shoyu ramen for Brownie, extra egg. Still hot. Don't eat it."
+    },
+    "soak_token": {
+      "name": "free-soak token",
+      "icon": "soak-token",
+      "look": "A wooden token from Brownie: one free soak in the inner bath."
     }
   }
 }
