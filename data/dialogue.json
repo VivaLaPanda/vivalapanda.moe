@@ -775,6 +775,14 @@
           ],
           "menu": [
             {
+              "label": "The usual",
+              "need": "regular",
+              "serve": "special",
+              "say": [
+                "\"The usual, coming up. On the house, regular.\""
+              ]
+            },
+            {
               "label": "Something pink",
               "serve": "special",
               "say": [
@@ -805,7 +813,17 @@
             "\"Don't tell anyone, but I can't actually make cocktails.\""
           ]
         }
-      ]
+      ],
+      "play": {
+        "stamps": {
+          "full": 5,
+          "stamped": "(Sabrina stamps your card. {n} of {full}.)",
+          "regular": [
+            "(She stamps the last square and slides the card back.)",
+            "\"Five! Congrats, anon. You're a regular now. Don't let it go to your head.\""
+          ]
+        }
+      }
     },
     "shizukastreet": {
       "speaker": "P a n d a",
@@ -887,6 +905,16 @@
       "speaker": "P a n d a",
       "greeting": [
         "Let's take a break and relax a while"
+      ],
+      "menu": [
+        {
+          "label": "Have a soak",
+          "say": [
+            "(You sink into the hot water up to your chin.)",
+            "...",
+            "(Your worries dissolve. Most of them.)"
+          ]
+        }
       ]
     },
     "bathhouseentry": {
@@ -905,6 +933,17 @@
       "speaker": "Ｐａｎｄａ",
       "greeting": [
         "Looking out over the skyline always puts me in a contemplative mood..."
+      ],
+      "menu": [
+        {
+          "label": "Sit and watch the city",
+          "pick": [
+            "Way off past the park, little red lights. The festival's still going.",
+            "The last train's lights crawl out over the bridge, toward the sea.",
+            "Somewhere down there, a black cat is judging somebody.",
+            "Isogashii Boulevard never actually goes dark. Not once."
+          ]
+        }
       ]
     },
     "nightresidential_girl": {

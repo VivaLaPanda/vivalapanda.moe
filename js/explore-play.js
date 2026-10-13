@@ -670,6 +670,14 @@
         if (!m.muted) m.play().catch(function () {});
     }
 
+    // Rabu Rabu's stamp card: a stamp a drink; the fifth makes you a regular ("the usual" opens: need "regular")
+    function stamp() {
+        var p = P().stamps, n = +(get("pandaStamps") || 0) + 1;
+        put("pandaStamps", n);
+        if (n === p.full) { hear("regular"); return arr(p.regular); }
+        return n < p.full ? [fill(p.stamped, { n: n, full: p.full })] : [];
+    }
+
     function menuOf(list) {
         return list.filter(function (c) { return !c.need || heard(c.need); }).map(function (c) {
             if (c.menu) return { label: c.label, say: c.say, menu: menuOf(c.menu) };
@@ -677,7 +685,9 @@
             return { label: c.label, act: function () {
                 if (c.serve) serve(c.serve);
                 if (c.song) song(c.song);
-                S.say(c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : c.say, function () {
+                var lines = c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : c.say;
+                if (c.serve && P().stamps) lines = lines.concat(stamp());
+                S.say(lines, function () {
                     if (c.go) location.href = c.go;   // shown through somewhere
                     else S.offer(menuOf(R.said.menu));
                 });
