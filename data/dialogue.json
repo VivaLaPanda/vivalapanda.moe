@@ -558,8 +558,44 @@
     "casino": {
       "speaker": "P a n d a",
       "greeting": [
-        "Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."
-      ]
+        "The casino! It goes further back than you'd think."
+      ],
+      "objects": {
+        "roulette": {
+          "name": "Roulette"
+        },
+        "bar": {
+          "name": "The bar",
+          "lines": [
+            "The bar's unattended. Help yourself? ...Better not."
+          ]
+        },
+        "poster": {
+          "name": "Poster",
+          "lines": [
+            "A signed poster. Whoever she is, she's a big deal around here."
+          ]
+        }
+      },
+      "play": {
+        "roulette": {
+          "intro": "Roulette! You've got {chips} chips.",
+          "bets": {
+            "red": "Bet 10 on red",
+            "black": "Bet 10 on black",
+            "seven": "Bet 10 on lucky 7"
+          },
+          "leave": "Walk away",
+          "no_more_bets": "\"No more bets!\"",
+          "red": "red",
+          "black": "black",
+          "green": "green",
+          "result": "{n}, {color}! {outcome} You've got {chips} chips.",
+          "win": "You win {won}!",
+          "lose": "The house takes it.",
+          "broke": "Out of chips. The dealer slides you 50 more, looking a bit sorry for you."
+        }
+      }
     },
     "club": {
       "speaker": "P a n d a",

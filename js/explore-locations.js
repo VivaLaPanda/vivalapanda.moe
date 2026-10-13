@@ -13,6 +13,7 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/possessioner-possessioner.mp3",
         links: [
             { to: "frontdesk.html", rect: [505, 379, 141, 127] },
+            { to: "?loc=casino", rect: [0, 303, 123, 130] },
             { to: "?loc=nightplaza", rect: [409, 399, 85, 77] },
             { to: "?loc=partystreet", rect: [264, 378, 106, 87] }
         ]
@@ -23,7 +24,7 @@ var LOCATIONS = {
         links: []
     },
     "casino": {
-        title: "The Casino", image: "../img/explore/places/casino.png", pos: "center",
+        title: "The Casino", image: "../img/explore/places/casino.png", pos: "left",   // a panorama: explore-play.js pans it
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/sonic-casino-night-zone.mp4",
         links: []
     },

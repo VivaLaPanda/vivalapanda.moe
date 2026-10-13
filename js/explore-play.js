@@ -309,6 +309,90 @@
         f.choices = function () { var p = P().dance; return [{ label: p.play, act: dance }, { label: p.watch }]; };
     };
 
+    // ---------- the casino: a panorama you pan along, and roulette ----------
+
+    // casino.png is a 500x134 strip; cover-fitted it's 3.94x, so the window shows a third of it. Three views
+    // (object-position 0%, 50%, 100%); clicking near an edge slides to the next. Rects are per view, in scene px.
+    var CASINO_S = 528 / 134, CASINO_OX = [0, 615, 1230];
+    var CASINO_SPOTS = [
+        [{ id: "roulette", src: [62, 42, 92, 64] }],
+        [{ id: "bar", src: [180, 20, 140, 114] }],
+        [{ id: "poster", src: [425, 15, 65, 95] }]
+    ];
+    var RED = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+
+    function chips(n) {
+        if (n != null) put("pandaChips", n);
+        var c = get("pandaChips");
+        return c == null ? 100 : +c;
+    }
+
+    function spinBall(done) {   // a ball round the wheel's rim, slowing, dropping into the numbers
+        var ball = document.createElement("div"), start = performance.now(), a0 = rand(0, 6.28);
+        ball.className = "play-ball";
+        S.stage.appendChild(ball);
+        (function step(now) {
+            var t = Math.min(1, (now - start) / 3200), ease = 1 - Math.pow(1 - t, 3);
+            var a = a0 + ease * 26, drop = t > .7 ? (t - .7) / .3 : 0;
+            var rx = 30 - drop * 5, ry = 13 - drop * 3;
+            var sx = 111 + Math.cos(a) * rx, sy = 68 + Math.sin(a) * ry;
+            S.placeNative(ball, sx * CASINO_S - CASINO_OX[0] - 6, sy * CASINO_S - 6, 12, 12);
+            if (t < 1) requestAnimationFrame(step);
+            else setTimeout(function () { ball.remove(); done(); }, 600);
+        })(start);
+    }
+
+    function roulette() {
+        var p = P().roulette;
+        function bet(kind) {
+            return { label: p.bets[kind], act: function () {
+                if (chips() < 10) chips(50);
+                S.say([p.no_more_bets], function () {
+                    spinBall(function () {
+                        var n = Math.floor(Math.random() * 37), color = n === 0 ? p.green : RED.indexOf(n) >= 0 ? p.red : p.black;
+                        var win = kind === "red" ? color === p.red && 10 : kind === "black" ? color === p.black && 10 : n === 7 && 350;
+                        chips(chips() + (win || -10));
+                        var line = fill(p.result, { n: n, color: color, outcome: win ? fill(p.win, { won: win }) : p.lose, chips: chips() });
+                        S.say(chips() < 10 ? [line, p.broke] : [line], function () { S.offer(menu()); });
+                        if (chips() < 10) chips(50);
+                    });
+                });
+            } };
+        }
+        function menu() { return [bet("red"), bet("black"), bet("seven"), { label: p.leave }]; }
+        S.say([fill(p.intro, { chips: chips() })], function () { S.offer(menu()); });
+    }
+
+    PLAY.casino = function () {
+        document.addEventListener("scenestart", function () {
+            var art = document.getElementById("room-art"), view = 0, hits = [];
+            art.style.transition = "object-position .7s ease-in-out";
+            function hit(r, label, fn) {
+                var d = document.createElement("div");
+                d.className = "play-hit";
+                d.setAttribute("role", "button");
+                d.setAttribute("aria-label", label);
+                S.placeNative(d, r[0], r[1], r[2], r[3]);
+                d.addEventListener("click", function (e) { e.stopPropagation(); fn(); });
+                S.stage.appendChild(d);
+                hits.push(d);
+            }
+            function show(v) {
+                view = v;
+                art.style.objectPosition = v * 50 + "% 50%";
+                hits.forEach(function (d) { d.remove(); });
+                hits = [];
+                CASINO_SPOTS[v].forEach(function (o) {
+                    var r = [o.src[0] * CASINO_S - CASINO_OX[v], o.src[1] * CASINO_S, o.src[2] * CASINO_S, o.src[3] * CASINO_S];
+                    hit(r, R.said.objects[o.id].name, o.id === "roulette" ? roulette : function () { S.say(arr(R.said.objects[o.id].lines)); });
+                });
+                if (v > 0) hit([0, 0, 70, 528], "Look left", function () { show(v - 1); });     // the edges win
+                if (v < 2) hit([670, 0, 70, 430], "Look right", function () { show(v + 1); });
+            }
+            show(0);
+        });
+    };
+
     // ---------- the stray cat ----------
 
     // img/explore/layers/cat.png: six 16x10 frames, drawn in the apartments' inks (black, rim, yellow eyes)

@@ -446,3 +446,12 @@
     z-index: 2;
     cursor: pointer;
 }
+
+/* the roulette ball (js/explore-play.js) */
+.play-ball {
+    position: absolute;
+    z-index: 2;
+    background: #fff;
+    box-shadow: inset -3px -3px 0 #aab;
+    pointer-events: none;
+}
