@@ -328,6 +328,12 @@
     };
 
     document.addEventListener("scenestart", drawInventory);
-    document.addEventListener("scenestart", function () { setTimeout(lettersHome, 2600); });   // after the greeting
+    document.addEventListener("scenestart", function () {   // after the greeting's done, never over it
+        (function whenFree() {
+            var arrow = document.getElementById("text-arrow");
+            if (arrow && !arrow.hidden) { setTimeout(whenFree, 800); return; }
+            lettersHome();
+        })();
+    });
     document.addEventListener("pockets", drawInventory);
 })();
