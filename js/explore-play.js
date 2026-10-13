@@ -1187,6 +1187,7 @@
     };
 
     PLAY.ramen = function () { hear("taisho_met"); };
+    if (place === "observatory") hear("observatory_seen");
     PLAY.bar25 = function () { hear("bar25_seen"); };
     if (place === "otojima") hear("visited_otojima");   // a postcard arrives at home (dialogue.json letters)
 

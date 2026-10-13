@@ -2074,6 +2074,14 @@
             "\"Thirty-seven, sir. My mother had thirty-six names picked out. None of them stuck.\"",
             "\"Floor thirty-seven was empty when the tower opened. I took it as a sign.\""
           ]
+        },
+        {
+          "label": "Ask 37 what he does on his nights off",
+          "need": "observatory_seen",
+          "say": [
+            "\"Nights off, sir? I walk up past the forest. There's an old dome on the ridge.\"",
+            "\"Leave the tea warm for the next person. That's the only rule up there.\""
+          ]
         }
       ]
     },
@@ -4698,6 +4706,9 @@
                 ],
                 [
                   "\"The festival fireworks again. Couldn't see anything else. Didn't mind.\""
+                ],
+                [
+                  "\"Forty years of looking up. Still haven't counted them all. -37\""
                 ]
               ]
             },
