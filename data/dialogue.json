@@ -2314,6 +2314,12 @@
           "once": true
         },
         {
+          "need": "ghost_free",
+          "greeting": [
+            "\"Pull up a stool, friend.\" (The one at the end stays empty. Tony still wipes it down.)"
+          ]
+        },
+        {
           "need": "tony_answered",
           "greeting": [
             "\"Back again, friend? She send another insult? ...Pull up a stool.\""
