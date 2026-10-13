@@ -804,5 +804,35 @@
         };
     };
 
+    // the Ferris wheel: up, up, and at the top a round window onto the city's skyline
+    S.actions.ferris = function () {
+        var p = P().ferris;
+        S.say(arr(p.up), function () {
+            var view = document.createElement("div");
+            view.className = "play-telescope";
+            view.style.backgroundImage = "url(/img/explore/places/city_overlook.png)";
+            view.style.backgroundPosition = "center";
+            S.stage.appendChild(view);
+            function down(e) { if (e) e.stopPropagation(); view.remove(); S.say(arr(p.down), function () { S.home(false); }); }
+            view.addEventListener("click", down);
+            S.say(arr(p.top), function () { S.offer([{ label: p.stop, act: down }]); });
+        });
+    };
+
+    // the penthouse telescope: a round view of somewhere else in the city; click to look away
+    PLAY.penthouse = function () {
+        S.actions.telescope = function () {
+            var p = P().telescope, v = p.views[Math.floor(Math.random() * p.views.length)];
+            var lens = document.createElement("div");
+            lens.className = "play-telescope";
+            lens.style.backgroundImage = "url(" + v.src + ")";
+            lens.style.backgroundPosition = v.pos || "center";
+            S.stage.appendChild(lens);
+            function away(e) { if (e) e.stopPropagation(); lens.remove(); S.say(arr(p.away), function () { S.home(false); }); }
+            lens.addEventListener("click", away);
+            S.say(arr(v.say), function () { S.offer([{ label: p.stop, act: away }]); });
+        };
+    };
+
     if (PLAY[place]) PLAY[place]();
 })();

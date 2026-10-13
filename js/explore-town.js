@@ -317,7 +317,7 @@
     // ---------- the stamp rally: a card in your pockets, a stamp for each special place you find ----------
 
     var RALLY = ["festival", "oldhouse", "zengarden", "rooftop", "otojima", "gamecentre", "ramen", "casino"];
-    function rally() { try { return JSON.parse(get("pandaRally")) || {}; } catch (e) { return {}; } }
+    function rally() { return window.PANDA.json("pandaRally", {}); }
     if (RALLY.indexOf(place) >= 0 && !rally()[place]) {
         var got = rally();
         got[place] = 1;
@@ -328,12 +328,11 @@
         else document.dispatchEvent(new Event("pockets"));
     }
     // what the card says (js/house-key.js asks this when it's clicked)
-    window.POCKET_LOOK = window.POCKET_LOOK || {};
-    window.POCKET_LOOK.rally = function (it) {
+    window.PANDA.looks.rally = function (it) {
         var got = rally(), n = RALLY.filter(function (k) { return got[k]; }).length;
         put("pandaRallyNew", "");
         var names = RALLY.map(function (k) { return got[k] ? it.places[k] : "???"; }).join(", ");
-        if (n === RALLY.length && (get("pandaPockets") || "").indexOf("\"pin\"") < 0) setTimeout(function () { pocket("pin"); }, 0);
+        if (n === RALLY.length && !has("pin")) setTimeout(function () { pocket("pin"); }, 0);
         if (n === RALLY.length) hear("rally_complete");   // the roof's ending opens
         return [fill(it.card, { n: n, total: RALLY.length }), names].concat(n === RALLY.length ? arr(it.complete) : []);
     };
@@ -345,7 +344,7 @@
                        "shrine", "harbour", "hilltop", "lilyfield", "campsite", "lighthouse", "lake", "observatory",
                        "nighttrain", "karaoke", "inari", "underbridge", "catcafe", "bar25", "gallery", "pier"];
     var EXPOSURES = 24;
-    function photos() { try { return JSON.parse(get("pandaPhotos")) || []; } catch (e) { return []; } }
+    function photos() { return window.PANDA.json("pandaPhotos", []); }
     function camLines() { return (R.dialogueAll.pockets || {}).camera; }
     function snap(after) {
         var p = camLines(), got = photos();
@@ -383,11 +382,9 @@
         };
         im.src = src;
     }
-    window.POCKET_PRINT = savePrint;
 
     // the album: your photos laid out like prints on a table (click to put them away)
-    window.POCKET_LOOK = window.POCKET_LOOK || {};
-    window.POCKET_LOOK.camera = function (it) {
+    window.PANDA.looks.camera = function (it) {
         var got = photos(), here = PHOTO_SPOTS.indexOf(place) >= 0, choices = [];
         if (here && got.indexOf(place) < 0 && got.length < EXPOSURES) {
             choices.push({ label: it.take_label, act: function () { snap(function () { S.home(false); }); } });
@@ -425,7 +422,7 @@
     // ---------- Panda's notebook: what you've done and what you said you'd do (pockets.notebook in dialogue.json) ----------
 
     if (!has("notebook")) setTimeout(function () { pocket("notebook"); }, 0);   // everyone gets one on their first walk
-    window.POCKET_LOOK.notebook = function (it) {
+    window.PANDA.looks.notebook = function (it) {
         function ok(e) {
             return (e.flags || []).every(heard) && !(e.not || []).some(heard) &&
                    (e.rally || []).every(function (k) { return rally()[k]; }) &&
@@ -470,11 +467,23 @@
     };
 
     // the pocket radio (Sakura fixed Ghandi's old one): tune it and the music changes, wherever you are
-    window.POCKET_LOOK.radio = function (it) {
+    window.PANDA.looks.radio = function (it) {
         var st = it.stations[Math.floor(Math.random() * it.stations.length)];
         song(st.src);
         return [fill(it.tuned, { station: st.name })];
     };
+
+    // up, up, down, down, left, right, left, right, B, A
+    var KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    var konami = 0;
+    document.addEventListener("keydown", function (e) {
+        konami = e.key === KONAMI[konami] ? konami + 1 : e.key === KONAMI[0] ? 1 : 0;
+        if (konami === KONAMI.length) {
+            konami = 0;
+            var all = (R.dialogueAll && R.dialogueAll.explore && R.dialogueAll.explore.lines) || {};
+            if (all.konami) S.say(arr(all.konami));
+        }
+    });
 
     if (PLAY[place]) PLAY[place]();
 })();

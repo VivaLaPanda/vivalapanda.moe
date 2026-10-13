@@ -6,21 +6,14 @@
 (function () {
     "use strict";
 
-    var R = window.ROOM, S = window.SCENE;
+    var R = window.ROOM, S = window.SCENE, D = window.PANDA;
     var place = (R.dialogue || "").replace(/^explore\./, "");
+    var get = D.get, put = D.put, heard = D.heard, hear = D.hear, fill = D.fill, arr = D.arr,
+        has = D.has, pocket = D.pocket, unpocket = D.unpocket;
 
     function P() { return (R.said && R.said.play) || {}; }
     function obj(id) { return R.objects.filter(function (o) { return o.id === id; })[0]; }
-    function fill(s, v) { return String(s).replace(/\{(\w+)\}/g, function (m, k) { return v[k] != null ? v[k] : m; }); }
-    function arr(x) { return x == null ? [] : Array.isArray(x) ? x : [x]; }
     function rand(a, b) { return a + Math.random() * (b - a); }
-    // things you've heard around town (a rumour, a mumble) open choices elsewhere: a choice's "need"
-    function heard(flag) { return get("pandaHeard_" + flag) === "1"; }
-    function hear(flag) {   // one flag or a list of them
-        [].concat(flag || []).forEach(function (f) { put("pandaHeard_" + f, "1"); });
-    }
-    function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-    function put(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private */ } }
 
     // a full-scene canvas over the picture at a quarter of the scene's 740x528, scaled up crisp
     function overlay() {
@@ -40,22 +33,6 @@
     function canvasPoint(cv, e) {
         var r = cv.getBoundingClientRect();
         return [(e.clientX - r.left) * cv.width / r.width, (e.clientY - r.top) * cv.height / r.height];
-    }
-    function pocket(id) {
-        var got = [];
-        try { got = JSON.parse(get("pandaPockets")) || []; } catch (e) { got = []; }
-        got.push(id);
-        put("pandaPockets", JSON.stringify(got));
-        document.dispatchEvent(new Event("pockets"));
-    }
-
-    function pockets() { try { return JSON.parse(get("pandaPockets")) || []; } catch (e) { return []; } }
-    function has(id) { return pockets().indexOf(id) >= 0; }
-    function unpocket(id) {
-        var got = pockets(), i = got.indexOf(id);
-        if (i >= 0) got.splice(i, 1);
-        put("pandaPockets", JSON.stringify(got));
-        document.dispatchEvent(new Event("pockets"));
     }
 
     // giving: a place or an object can accept things from your pockets (dialogue.json "accepts": item id ->
@@ -143,50 +120,36 @@
         return n < p.full ? [fill(p.stamped, { n: n, full: p.full })] : [];
     }
 
-    // an object's choices from dialogue.json, with a menu's extras (song, serve, pocket, hear), back to the object
-    function objMenu(list) {
+    // choices from dialogue.json, with what plain choices can't do: need/unless (flags), serve, song, pocket, hear,
+    // cycle (the next of its lines each time, remembered) and go. after: what follows a choice's lines (a place's
+    // menu comes back; an object's plain lines are left to the scene)
+    function choicesOf(list, after) {
         return list.filter(function (c) {
             return (!c.need || heard(c.need)) && (!c.unless || !heard(c.unless));
         }).map(function (c) {
-            if (!c.song && !c.serve && !c.pocket && !c.hear) return c;
-            return { label: c.label, act: function () {
-                if (c.serve) serve(c.serve);
-                if (c.song) song(c.song);
-                if (c.pocket && !has(c.pocket)) pocket(c.pocket);
-                hear(c.hear);
-                S.say(c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : arr(c.say));
-            } };
-        });
-    }
-
-    function menuOf(list) {
-        return list.filter(function (c) {
-            return (!c.need || heard(c.need)) && (!c.unless || !heard(c.unless));
-        }).map(function (c) {
-            if (c.menu) return { label: c.label, say: c.say, menu: menuOf(c.menu) };
-            if (c.cycle) return { label: c.label, act: function () {   // the next of its lines each time, remembered
+            if (c.menu) return { label: c.label, say: c.say, menu: choicesOf(c.menu, after) };
+            if (c.cycle) return { label: c.label, act: function () {
                 var key = "pandaCycle_" + place + "_" + c.label, i = +(get(key) || 0);
                 put(key, Math.min(i + 1, c.cycle.length - 1));
-                S.say(arr(c.cycle[i]), function () { S.home(false); });
+                S.say(arr(c.cycle[i]), after);
             } };
             if (!c.say && !c.pick) return c;
+            if (!after && !c.serve && !c.song && !c.pocket && !c.hear && !c.go) return c;
             return { label: c.label, act: function () {
                 if (c.serve) serve(c.serve);
                 if (c.song) song(c.song);
                 if (c.pocket && !has(c.pocket)) pocket(c.pocket);   // an errand: something to carry
                 hear(c.hear);
-                var lines = c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : c.say;
+                var lines = c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : arr(c.say);
                 if (c.serve && P().stamps) lines = lines.concat(stamp());
-                S.say(lines, function () {
-                    if (c.go) location.href = c.go;   // shown through somewhere
-                    else S.home(false);
-                });
+                S.say(lines, c.go ? function () { location.href = c.go; } : after);   // go: shown through somewhere
             } };
         });
     }
+    function backHome() { S.home(false); }
 
     (R.afterGreeting = R.afterGreeting || []).push(function () {
-        return R.said && R.said.menu ? menuOf(R.said.menu) : null;
+        return R.said && R.said.menu ? choicesOf(R.said.menu, backHome) : null;
     });
 
     // Halloween week (your clock; ?season=halloween to see it): jack-o'-lanterns out on the streets
@@ -253,7 +216,7 @@
             var own = o.choices;   // a menu made here (a function), or the dialogue's own
             o.choices = function () {
                 var t = (R.said && R.said.objects && R.said.objects[o.id]) || {};
-                var base = typeof own === "function" ? own() : (t.choices ? objMenu(t.choices) : null);
+                var base = typeof own === "function" ? own() : (t.choices ? choicesOf(t.choices) : null);
                 var gives = givesFor(t.accepts);
                 if (!gives.length) return base;
                 return (base || [{ label: (R.lines && R.lines.never_mind) || "Never mind" }]).concat(gives);

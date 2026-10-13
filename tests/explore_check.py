@@ -7,10 +7,12 @@
 - home menus with too many choices
 - the link graph: targets exist, every place has a way out, everything is reachable from Main Street
 - every page's asset stamps are current (scripts/build.py --check)
+- every "action" in dialogue.json has code; warns about "play" lines no code reads
 
 Run: uv run --with playwright tests/explore_check.py [base-url] [place ...]
 (first time: uv run --with playwright playwright install chromium)
 """
+import json
 import re
 import subprocess
 import sys
@@ -79,6 +81,31 @@ def check_graph() -> list[str]:
     gated = {"zengarden", "casinolounge", "backpassage", "oldhouse", "catroom", "bar25", "garage", "gallery"}   # reached by a door that opens in play
     out += [f"graph: {k} not reachable from mainstreet by links" for k in graph if k not in seen and k not in gated]
     return out
+
+
+def check_actions() -> tuple[list[str], list[str]]:
+    """Every "action" a choice names has code (S.actions.<name>); warns about "play" lines no code reads."""
+    dialogue = json.loads((REPO / "data/dialogue.json").read_text())
+    code = "\n".join(p.read_text() for p in (REPO / "js").glob("*.js"))
+    defined = set(re.findall(r"actions\.(\w+) =", code))
+    named: set[str] = set()
+
+    def walk(x: object) -> None:
+        if isinstance(x, dict):
+            if isinstance(x.get("action"), str):
+                named.add(x["action"])
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+
+    walk(dialogue)
+    fails = [f"dialogue: action {a!r} has no code (S.actions.{a})" for a in sorted(named - defined)]
+    unread = [f"explore.{k}.play.{key}" for k, v in dialogue["explore"].items() if isinstance(v, dict)
+              for key in v.get("play") or {} if not re.search(rf"\b{key}\b", code)]
+    unread += [f"explore.lines.{key}" for key in dialogue["explore"].get("lines", {}) if not re.search(rf"\b{key}\b", code)]
+    return fails, [f"no code reads {u}" for u in unread]
 
 
 def check_stamps() -> list[str]:
@@ -258,7 +285,10 @@ def main() -> None:
     args = sys.argv[1:]
     base = args.pop(0).rstrip("/") if args and args[0].startswith("http") else "https://dev.vivalapanda.moe"
     todo = args or places()
-    problems = check_graph() + check_stamps()
+    action_fails, unread = check_actions()
+    problems = check_graph() + check_stamps() + action_fails
+    for w in unread:
+        print(f"warn {w}")
     queue: Queue[str] = Queue()
     for k in todo:
         queue.put(k)

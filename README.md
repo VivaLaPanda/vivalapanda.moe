@@ -68,7 +68,9 @@ meant to be poked at.
   `song`, `go` somewhere, or need something you've heard (`need`).
 - New art for a place goes in `img/explore/layers/`, drawn on the picture's own pixel grid in its own inks.
 - Pockets: prizes and finds (the claw machine, the festival, the harbour, a camera, Panda's notebook of errands, a stamp rally card for eight special
-  places) sit by the dialog box's ▼; names and lines in `data/dialogue.json` under `pockets`.
+  places) sit by the dialog box's ▼; names and lines in `data/dialogue.json` under `pockets`. What the browser
+  remembers (flags, pockets, what a pocket says when clicked) is `js/state.js` (`window.PANDA`), shared by the
+  house key and Explore.
 - The city remembers you (all in this browser): places say something different on a return visit
   (`greeting_return`), after five visits (`greeting_regular`), and once in a while something rare happens on
   arrival (`rare`); stay still somewhere quiet and something small happens (`linger`); characters greet you

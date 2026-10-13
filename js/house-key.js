@@ -22,22 +22,17 @@
 
     // ---------- what this browser holds (works without storage too: nothing sticks) ----------
 
-    function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-    function put(k, v) {
-        try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { /* private */ }
-    }
+    var D = window.PANDA, get = D.get, put = D.put, fill = D.fill, arr = D.arr;
     function key() { return get(KEY); }
     function hunt() {                     // { started, items: { id: true }, dropped: { id: true } }
-        var h;
-        try { h = JSON.parse(get(HUNT)) || {}; } catch (e) { h = {}; }
+        var h = D.json(HUNT, {});
         h.items = h.items || {};
         h.dropped = h.dropped || {};
         return h;
     }
     function saveHunt(h) { put(HUNT, JSON.stringify(h)); }
     function pockets() {                         // one of each prize, in the order won
-        var got = [];
-        try { got = JSON.parse(get("pandaPockets")) || []; } catch (e) { got = []; }
+        var got = D.pockets();
         return got.filter(function (id, i) { return got.indexOf(id) === i; });
     }
     function carrying(h) { return ORDER.filter(function (id) { return h.items[id] && !h.dropped[id]; }); }
@@ -46,8 +41,6 @@
     // ---------- lines ----------
 
     function T() { return R.dialogueAll && R.dialogueAll.house_key; }
-    function fill(s, v) { return String(s).replace(/\{(\w+)\}/g, function (m, k) { return v[k] != null ? v[k] : m; }); }
-    function arr(x) { return x == null ? [] : Array.isArray(x) ? x : [x]; }
     function itemName(id) { return T().items[id].name; }
 
     // ---------- the server ----------
@@ -63,7 +56,7 @@
 
     function gotKey(token) {
         put(KEY, token);
-        put("pandaHeard_house_key", "1");   // Explore's places can notice (dialogue.json greeting_after)
+        D.hear("house_key");   // Explore's places can notice (dialogue.json greeting_after)
         drawInventory();
     }
 
@@ -90,7 +83,7 @@
             if (!it) return;
             out.push({ icon: (it.icon || "plush-" + id) + ".png", name: it.name,
                        look: function () {   // a pocket whose words change (the stamp card), looked up when clicked
-                           var look = window.POCKET_LOOK && window.POCKET_LOOK[id], said = look ? look(it) : arr(it.look);
+                           var look = D.looks[id], said = look ? look(it) : arr(it.look);
                            if (said && said.lines) S.say(said.lines, function () { S.offer(said.choices); });   // a pocket you can use
                            else S.say(said);
                            if (look) drawInventory();
@@ -304,24 +297,19 @@
     function lettersHome() {
         var all = R.dialogueAll && R.dialogueAll.letters;
         if (!all || place !== "living_room") return;
-        var got;
-        try { got = JSON.parse(get("pandaLetters")) || []; } catch (e) { got = []; }
+        var got = D.json("pandaLetters", []);
         var fresh = Object.keys(all).filter(function (k) {
-            return k.charAt(0) !== "_" && got.indexOf(k) < 0 && get("pandaHeard_" + all[k].need) === "1";
+            return k.charAt(0) !== "_" && got.indexOf(k) < 0 && D.heard(all[k].need);
         });
         if (!fresh.length) return;
         put("pandaLetters", JSON.stringify(got.concat(fresh)));
-        var pk;
-        try { pk = JSON.parse(get("pandaPockets")) || []; } catch (e) { pk = []; }
-        if (pk.indexOf("letters") < 0) put("pandaPockets", JSON.stringify(pk.concat("letters")));
+        if (!D.has("letters")) D.pocket("letters");
         put("pandaLettersNew", "1");
         drawInventory();
         S.say(arr(fill(R.dialogueAll.pockets.letters.arrived, { n: fresh.length })));
     }
-    window.POCKET_LOOK = window.POCKET_LOOK || {};
-    window.POCKET_LOOK.letters = function (it) {
-        var all = R.dialogueAll.letters, got;
-        try { got = JSON.parse(get("pandaLetters")) || []; } catch (e) { got = []; }
+    D.looks.letters = function (it) {
+        var all = R.dialogueAll.letters, got = D.json("pandaLetters", []);
         put("pandaLettersNew", "");
         var out = [];
         got.forEach(function (k) { if (all[k]) out = out.concat(arr(all[k].text)); });
