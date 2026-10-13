@@ -193,5 +193,121 @@
         g.choices = function () { var p = P().goldfish; return [{ label: p.play, act: goldfish }, { label: p.watch }]; };
     };
 
+    // ---------- the stray cat ----------
+
+    // img/explore/layers/cat.png: six 16x10 frames, drawn in the apartments' inks (black, rim, yellow eyes)
+    var CAT = { peek: 0, blink: 1, runA: 2, runB: 3, sit: 4, sleep: 5 };
+    var CAT_PATH = "pandaCatPath";   // set once you've chased it: the way it went stays open
+
+    function sprite(frame, cls) {
+        var d = document.createElement("div");
+        d.className = "play-cat" + (cls ? " " + cls : "");
+        d.style.backgroundPosition = CAT[frame] * 20 + "% 0";
+        return d;
+    }
+    function frame(d, f) { d.style.backgroundPosition = CAT[f] * 20 + "% 0"; }
+    function rect(r) { return [[r[0], r[1]], [r[0] + r[2], r[1]], [r[0] + r[2], r[1] + r[3]], [r[0], r[1] + r[3]]]; }
+
+    // scamper from x0 to x1 (scene px) at height y, then vanish
+    function scamper(d, x0, x1, y, w, h, ms, done) {
+        var start = performance.now();
+        S.stage.appendChild(d);
+        (function step(now) {
+            var t = Math.min(1, (now - start) / ms);
+            frame(d, Math.floor((now - start) / 90) % 2 ? "runB" : "runA");
+            d.style.transform = x1 < x0 ? "scaleX(-1)" : "";
+            S.placeNative(d, x0 + (x1 - x0) * t, y, w, h);
+            if (t < 1) requestAnimationFrame(step);
+            else { d.remove(); if (done) done(); }
+        })(start);
+    }
+
+    // after ms without a click or a key, run fn (again each time it's re-armed)
+    function whenIdle(ms, fn) {
+        var t = null;
+        function arm() { clearTimeout(t); t = setTimeout(fn, ms); }
+        ["pointerdown", "keydown"].forEach(function (ev) { document.addEventListener(ev, arm, { passive: true }); });
+        arm();
+        return function () { clearTimeout(t); t = null; ["pointerdown", "keydown"].forEach(function (ev) { document.removeEventListener(ev, arm); }); };
+    }
+
+    // a way on that isn't drawn as one: an invisible spot, added after the scene's built
+    function hiddenWay(r, to, label) {
+        var d = document.createElement("a");
+        d.className = "play-hit";
+        d.href = to;
+        d.setAttribute("aria-label", label);
+        d.addEventListener("click", function (e) { e.stopPropagation(); });
+        S.placeNative(d, r[0], r[1], r[2], r[3]);
+        S.stage.appendChild(d);
+    }
+
+    var APT_WALL = [570, 437, 29, 18], APT_PATH = [664, 300, 76, 135];
+
+    PLAY.nightapartments = function () {
+        if (get(CAT_PATH)) {   // found before: the gap the cat ran through is a way on
+            R.knickKnacks.push({ id: "catpath", rank: 50, go: "?loc=backpassage", polygon: rect(APT_PATH), name: "After the cat" });
+            return;
+        }
+        document.addEventListener("scenestart", function () {
+            var stop = null, peeking = false;
+            function peek() {
+                if (peeking) return;
+                peeking = true;
+                var box = document.createElement("div"), cat = sprite("peek"), blink, duck;
+                box.className = "play-catbox";
+                S.placeNative(box, APT_WALL[0], APT_WALL[1], APT_WALL[2], APT_WALL[3]);
+                cat.style.transform = "translateY(100%)";
+                box.appendChild(cat);
+                S.stage.appendChild(box);
+                requestAnimationFrame(function () { requestAnimationFrame(function () { cat.style.transform = ""; }); });
+                blink = setInterval(function () { frame(cat, "blink"); setTimeout(function () { frame(cat, "peek"); }, 160); }, 2600);
+                duck = setTimeout(function () {     // ignored: it gets bored and ducks back down
+                    cat.style.transform = "translateY(100%)";
+                    clearInterval(blink);
+                    setTimeout(function () { box.remove(); peeking = false; }, 600);
+                }, 15000);
+                cat.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    clearInterval(blink);
+                    clearTimeout(duck);
+                    stop();
+                    box.remove();
+                    S.say([P().cat_bolts]);
+                    scamper(sprite("runA"), APT_WALL[0] - 4, 760, APT_WALL[1] + 1, 29, 18, 1100, function () {
+                        put(CAT_PATH, "1");
+                        hiddenWay(APT_PATH, "?loc=backpassage", "After the cat");
+                    });
+                });
+            }
+            stop = whenIdle(9000, peek);
+        });
+    };
+
+    PLAY.backpassage = function () {
+        document.addEventListener("scenestart", function () {
+            var cat = sprite("sit"), r = [243, 489, 19, 12];
+            S.placeNative(cat, r[0], r[1], r[2], r[3]);
+            S.stage.appendChild(cat);
+            cat.addEventListener("click", function (e) {
+                e.stopPropagation();
+                cat.remove();
+                S.say([P().cat_runs]);
+                scamper(sprite("runA", "play-cat-far"), r[0], r[0] - 60, r[1], 19, 12, 900);
+            });
+        });
+    };
+
+    PLAY.catroom = function () {
+        var pets = 0, cat = obj("cat");   // (asleep on the cushion: a layer in explore-locations.js)
+        cat.choices = function () {
+            var p = P();
+            return [{ label: p.pet_label, act: function () {
+                S.say([p.pets[pets % p.pets.length]], function () { S.offer(cat.choices()); });
+                pets++;
+            } }, { label: p.leave_label }];
+        };
+    };
+
     if (PLAY[place]) PLAY[place]();
 })();

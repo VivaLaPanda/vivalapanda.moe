@@ -62,6 +62,32 @@ var LOCATIONS = {
             { to: "?loc=nightapartments", rect: [317, 208, 80, 47] }
         ]
     },
+    // the stray cat's way home: only open once you've chased it (js/explore-play.js)
+    "backpassage": {
+        title: "A Back Passage", image: "../img/explore/pathways/ghetto.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/possessioner-abandoned-district.mp3",
+        links: [
+            { to: "?loc=oldhouse", rect: [202, 410, 142, 107] }
+        ],
+        objects: [{ id: "drifter", rect: [71, 482, 107, 46] }]
+    },
+    "oldhouse": {
+        title: "The Old House", image: "../img/explore/places/night_home_front.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        links: [
+            { to: "?loc=catroom", rect: [336, 255, 141, 113] },
+            { to: "?loc=shrine", rect: [0, 377, 207, 151] }
+        ]
+    },
+    "catroom": {
+        title: "The Old House", image: "../img/explore/places/night_room_traditional.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        links: [],
+        layers: [{ src: "../img/explore/layers/cat-sleeping.png", rect: [431, 469, 50, 29], pixel: true }],
+        objects: [{ id: "cat", rect: [420, 455, 72, 48] }, { id: "tea", rect: [316, 326, 107, 63] },
+                  { id: "tv", rect: [567, 277, 89, 143] }, { id: "daruma", rect: [0, 283, 62, 86] },
+                  { id: "scroll", rect: [110, 89, 81, 242] }, { id: "window", rect: [266, 98, 72, 125] }]
+    },
     "nightpark": {
         title: "Pumpo Park", image: "../img/explore/pathways/night_park.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",

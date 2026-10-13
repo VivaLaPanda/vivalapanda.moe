@@ -595,7 +595,10 @@
       "speaker": "Ｐａｎｄａ",
       "greeting": [
         "Hey you don't think these people will mind us wandering into their houses right?"
-      ]
+      ],
+      "play": {
+        "cat_bolts": "A cat! Hey, wait up!"
+      }
     },
     "nightpark": {
       "speaker": "Ｐａｎｄａ",
@@ -859,6 +862,84 @@
             }
           ]
         }
+      }
+    },
+    "backpassage": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "It squeezed down here. Is this even a street?"
+      ],
+      "objects": {
+        "drifter": {
+          "name": "Someone sleeping",
+          "lines": [
+            "He's asleep. Or very good at pretending."
+          ]
+        }
+      },
+      "play": {
+        "cat_runs": "There it goes again. It's leading us somewhere."
+      }
+    },
+    "oldhouse": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "An old wooden house with the lights on.",
+        "The cat just walked right in like it owns the place."
+      ]
+    },
+    "catroom": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Nobody home but the cat. And somebody's tea is still warm..."
+      ],
+      "objects": {
+        "cat": {
+          "name": "The cat",
+          "click": [
+            "Curled up on the cushion like nothing happened."
+          ]
+        },
+        "tea": {
+          "name": "Tea",
+          "lines": [
+            "A teapot and two cups. One's still warm. Someone just stepped out."
+          ]
+        },
+        "tv": {
+          "name": "TV",
+          "lines": [
+            "The TV's warm too. Somebody was watching the late movie."
+          ]
+        },
+        "daruma": {
+          "name": "Daruma",
+          "lines": [
+            "A little red daruma, keeping watch."
+          ]
+        },
+        "scroll": {
+          "name": "Scroll",
+          "lines": [
+            "A calligraphy scroll. Very confident brushwork."
+          ]
+        },
+        "window": {
+          "name": "Window",
+          "lines": [
+            "The garden's out there, all dark. Something rustles."
+          ]
+        }
+      },
+      "play": {
+        "pet_label": "Pet it",
+        "leave_label": "Let it sleep",
+        "pets": [
+          "Purrrr.",
+          "It stretches one paw out. Purrrrrr.",
+          "It rolls onto its back. This is a trap, isn't it.",
+          "SWAT. Yep. It was a trap."
+        ]
       }
     }
   },

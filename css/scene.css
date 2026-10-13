@@ -414,3 +414,29 @@
     cursor: crosshair;
     touch-action: none;
 }
+
+/* the stray cat (js/explore-play.js) */
+.play-cat {
+    position: absolute;
+    z-index: 2;
+    background: url(/img/explore/layers/cat.png) 0 0 / 600% 100% no-repeat;
+    image-rendering: pixelated;
+    cursor: pointer;
+}
+
+.play-catbox {
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.play-catbox .play-cat {
+    inset: 0;
+    transition: transform .5s steps(4);
+}
+
+.play-hit {
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+}
