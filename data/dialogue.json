@@ -1454,11 +1454,53 @@
       "objects": {
         "girl": {
           "name": "The person on the street",
-          "lines": [
+          "click": [
             "\"Uhh, that person is definitely a ghost. Let's not talk to them.\""
+          ],
+          "choices": [
+            {
+              "label": "Talk to her anyway",
+              "unless": "ghost_asked",
+              "hear": "ghost_asked",
+              "say": [
+                "She doesn't look up. \"I dropped my charm. Off the pier, years ago. I keep looking.\"",
+                "\"I can't go anywhere without it.\""
+              ]
+            },
+            {
+              "label": "Talk to her anyway",
+              "need": "ghost_asked",
+              "unless": "ghost_free",
+              "say": [
+                "\"Still looking. It was red. A little shrine charm.\" She watches the street."
+              ]
+            },
+            {
+              "label": "Leave her be"
+            }
+          ],
+          "accepts": {
+            "omamori": {
+              "label": "Give her the charm",
+              "take": true,
+              "hear": "ghost_free",
+              "say": [
+                "She takes it in both hands. For the first time, she looks right at you.",
+                "\"...Thank you.\"",
+                "When you look again, the street is empty. The streetlight hums."
+              ]
+            }
+          }
+        }
+      },
+      "greeting_after": [
+        {
+          "need": "ghost_free",
+          "greeting": [
+            "The street's empty tonight. Someone's left a single flower by the wall."
           ]
         }
-      }
+      ]
     },
     "towerbar": {
       "speaker": "T o n y",
@@ -2005,6 +2047,17 @@
               "weight": 5,
               "say": [
                 "A fish that looks exactly like Johnny Uppercut. You don't tell him."
+              ]
+            },
+            {
+              "weight": 6,
+              "need": "ghost_asked",
+              "keep": "omamori",
+              "say": [
+                "Something red, tangled in the line... a little shrine charm. Old, but it's not even wet."
+              ],
+              "release": [
+                "Seaweed. Just seaweed."
               ]
             }
           ]
@@ -3325,6 +3378,15 @@
             "socks_reunited"
           ],
           "text": "Find the rooftop sock's partner."
+        },
+        {
+          "flags": [
+            "ghost_asked"
+          ],
+          "not": [
+            "ghost_free"
+          ],
+          "text": "Find the girl's charm. Off the pier?"
         }
       ],
       "done": [
@@ -3382,6 +3444,12 @@
             "hat_tipped"
           ],
           "text": "The man in the hat tipped his hat."
+        },
+        {
+          "flags": [
+            "ghost_free"
+          ],
+          "text": "Gave the girl back her charm."
         }
       ]
     },
@@ -3404,6 +3472,11 @@
       "name": "Ruri's ace",
       "icon": "ace",
       "look": "An ace of spades from Ruri. 'You'll need it,' she said. For what?"
+    },
+    "omamori": {
+      "name": "a red charm",
+      "icon": "omamori",
+      "look": "A small red shrine charm from the harbour. It feels like it belongs to someone."
     }
   }
 }

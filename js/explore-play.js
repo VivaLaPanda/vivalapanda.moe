@@ -593,8 +593,9 @@
             var now = performance.now();
             if (state === "wait") { finish([p.too_soon]); return; }
             if (state !== "bite") return;
-            var roll = Math.random() * p.catches.reduce(function (n, c) { return n + c.weight; }, 0), got = p.catches[0];
-            for (var i = 0; i < p.catches.length; i++) { roll -= p.catches[i].weight; if (roll <= 0) { got = p.catches[i]; break; } }
+            var pool = p.catches.filter(function (c) { return !c.need || heard(c.need); });
+            var roll = Math.random() * pool.reduce(function (n, c) { return n + c.weight; }, 0), got = pool[0];
+            for (var i = 0; i < pool.length; i++) { roll -= pool[i].weight; if (roll <= 0) { got = pool[i]; break; } }
             if (got.keep && has(got.keep)) { finish(arr(got.release || got.say)); return; }   // one's enough
             finish(arr(got.say), got.pocket || got.keep);
         }
@@ -1084,6 +1085,19 @@
 
     PLAY.ramen = function () { hear("taisho_met"); };
 
+    // the girl on the residential street, once she has her charm back: gone (
+    // the picture is the same street with her painted out: night_residential_empty.png)
+    PLAY.nightresidential_girl = function () {
+        if (!heard("ghost_free")) return;
+        R.objects = R.objects.filter(function (o) { return o.id !== "girl"; });
+        document.addEventListener("scenestart", function () {
+            var art = document.getElementById("room-art");
+            art.src = "/img/explore/pathways/night_residential_empty.png";
+            var poly = document.querySelector("#room-hotspots .room-hotspot[data-id='girl']");
+            if (poly) poly.remove();
+        });
+    };
+
     // Izakaya Gonta, under the tracks: every so often a train goes over and the whole place shakes
     PLAY.izakaya = function () {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -1358,7 +1372,9 @@
 
     // an object's choices from dialogue.json, with a menu's extras (song, serve, pocket, hear), back to the object
     function objMenu(list) {
-        return list.map(function (c) {
+        return list.filter(function (c) {
+            return (!c.need || heard(c.need)) && (!c.unless || !heard(c.unless));
+        }).map(function (c) {
             if (!c.song && !c.serve && !c.pocket && !c.hear) return c;
             return { label: c.label, act: function () {
                 if (c.serve) serve(c.serve);
