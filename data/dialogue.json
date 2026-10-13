@@ -699,7 +699,7 @@
           },
           {
             "say": [
-              "\"A girl stands under a streetlight by the houses. Don't walk past. Ask what she lost.\""
+              "\"Folk say a girl waits under a streetlight by the houses. If she's there, ask what she lost.\""
             ]
           },
           {
@@ -1147,6 +1147,15 @@
               "say": [
                 "\"Hm. She's been on that corner as long as I've been in this office.\"",
                 "\"Some say she's waiting for someone. I say she's looking for something.\""
+              ],
+              "unless": "ghost_free"
+            },
+            {
+              "label": "The girl by the houses",
+              "need": "ghost_free",
+              "say": [
+                "\"Gone home, I hear. After all these years.\" (Johnny looks out of the window.)",
+                "\"Good. That's good.\""
               ]
             },
             {
