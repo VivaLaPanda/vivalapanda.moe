@@ -61,7 +61,9 @@ the 740×528 picture), objects, views and layers (pictures over the art, e.g. la
 bottom turns the current place (`?loc=` or the page's `data-scene`) into the scene. Explore's lines are in
 `data/dialogue.json` under `explore.<place>`. Explore has no LOOK button, and its exits aren't outlined: the map is
 meant to be poked at.
-- What there is to do (games, menus, animals, ambient motion) is `js/explore-play.js`, keyed by place.
+- What there is to do is in four scripts: `js/explore-core.js` (shared state, menus, greetings), then
+  `explore-games.js`, `explore-town.js` (the cat, the camera, the rally, the threads) and `explore-ambient.js`
+  (particles, weather, sound). Each feature script keeps its own `PLAY[place]`.
 - Plain menus are data: a choice can `say`, `pick` one line at random, open a `menu`, `serve` a drink, change the
   `song`, `go` somewhere, or need something you've heard (`need`).
 - New art for a place goes in `img/explore/layers/`, drawn on the picture's own pixel grid in its own inks.

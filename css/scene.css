@@ -454,7 +454,7 @@
     .scene-anim-train { animation: none; transform: translateX(0); }
 }
 
-/* a minigame over the picture (js/explore-play.js) */
+/* a minigame over the picture (js/explore-games.js) */
 .play-overlay {
     position: absolute;
     inset: 0;
@@ -471,7 +471,7 @@
     touch-action: none;
 }
 
-/* the stray cat (js/explore-play.js) */
+/* the stray cat (js/explore-town.js) */
 .play-cat {
     position: absolute;
     z-index: 2;
@@ -497,7 +497,7 @@
     cursor: pointer;
 }
 
-/* the roulette ball (js/explore-play.js) */
+/* the roulette ball (js/explore-games.js) */
 .play-ball {
     position: absolute;
     z-index: 2;
@@ -506,7 +506,7 @@
     pointer-events: none;
 }
 
-/* ambient life over a scene: fireflies, steam (js/explore-play.js) */
+/* ambient life over a scene: fireflies, steam (js/explore-ambient.js) */
 .play-ambient {
     position: absolute;
     inset: 0;

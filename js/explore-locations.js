@@ -5,7 +5,7 @@
 // (the right sidebar), music, frame ("light" for the light window frame; dark otherwise), links (exits: to, and rect
 // [x, y, w, h] in the 740x528 scene window; sprite: a visible button there), objects (things to click that aren't
 // exits: id, rect, and view to switch to one of views), under (a picture under the main one: src, rect), layers (pictures over it: src, rect, pixel, anim).
-// What there is to do in a place (games, menus, animals) is js/explore-play.js.
+// What there is to do in a place (games, menus, animals) is js/explore-core.js and the feature scripts it names.
 // The map is meant to be illegible: exits are plain click areas, no outlines, no LOOK (R.illegible).
 var LOCATIONS = {
     "mainstreet": {
@@ -30,11 +30,11 @@ var LOCATIONS = {
         ]
     },
     "casino": {
-        title: "The Casino", image: "../img/explore/places/casino.png", pos: "left",   // a panorama: explore-play.js pans it
+        title: "The Casino", image: "../img/explore/places/casino.png", pos: "left",   // a panorama: explore-games.js pans it
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/sonic-casino-night-zone.mp4",
         links: []
     },
-    // up the back stairs from the casino's far corridor (explore-play.js puts the door in the panorama)
+    // up the back stairs from the casino's far corridor (js/explore-games.js puts the door in the panorama)
     "casinolounge": {
         title: "The High Rollers' Lounge", image: "../img/explore/places/fancy_lounge.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/sonic-casino-night-zone.mp4",
@@ -89,7 +89,7 @@ var LOCATIONS = {
         ],
         objects: [{ id: "view", rect: [0, 120, 440, 200] }, { id: "kids", rect: [470, 330, 170, 110] }]
     },
-    // drawn for the city (FAL, quantized to its own inks); the telescope shows tonight's real moon (js/explore-play.js)
+    // drawn for the city (FAL, quantized to its own inks); the telescope shows tonight's real moon (js/explore-games.js)
     "observatory": {
         title: "The Hill Observatory", image: "../img/explore/places/observatory.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
@@ -155,7 +155,7 @@ var LOCATIONS = {
             { to: "?loc=nightresidential_girl", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
-    // the stray cat's way home: only open once you've chased it (js/explore-play.js)
+    // the stray cat's way home: only open once you've chased it (js/explore-town.js)
     "backpassage": {
         title: "A Back Passage", image: "../img/explore/pathways/ghetto.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/possessioner-abandoned-district.mp3",
@@ -186,7 +186,7 @@ var LOCATIONS = {
                   { id: "tv", rect: [567, 277, 89, 143] }, { id: "daruma", rect: [0, 283, 62, 86] },
                   { id: "scroll", rect: [110, 89, 81, 242] }]
     },
-    // behind Erratic Errata, for those who ask for the second edition (js/explore-play.js)
+    // behind Erratic Errata, for those who ask for the second edition (js/explore-town.js)
     "zengarden": {
         title: "A Hidden Garden", image: "../img/explore/pathways/zengarden.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
@@ -196,7 +196,7 @@ var LOCATIONS = {
         objects: [{ id: "teahouse", rect: [476, 122, 156, 165] }, { id: "bridge", rect: [137, 243, 122, 78] },
                   { id: "pond", rect: [415, 295, 325, 190] }]
     },
-    // drawn for the city (FAL, quantized to Acacia Apartments' inks); shooting stars in js/explore-play.js
+    // drawn for the city (FAL, quantized to Acacia Apartments' inks); shooting stars in js/explore-ambient.js
     "rooftop": {
         title: "Acacia Apartments, the Roof", image: "../img/explore/places/rooftop.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
@@ -273,7 +273,7 @@ var LOCATIONS = {
             { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }
         ]
     },
-    // drawn for the city (FAL, quantized to its own inks); the tumbling laundry in js/explore-play.js
+    // drawn for the city (FAL, quantized to its own inks); the tumbling laundry in js/explore-ambient.js
     "laundromat": {
         title: "Coin Laundry", image: "../img/explore/places/laundromat.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
@@ -295,7 +295,7 @@ var LOCATIONS = {
         ],
         objects: [{ id: "bluecar", rect: [430, 300, 230, 228] }, { id: "redcar", rect: [170, 280, 260, 140] }]
     },
-    // behind the door marked PRIVATE at the back of Club Polka: Ruri's table (high-low in js/explore-play.js)
+    // behind the door marked PRIVATE at the back of Club Polka: Ruri's table (high-low in js/explore-games.js)
     "cardroom": {
         title: "A Back Room", image: "../img/explore/places/day_tavernlady.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/kavinsky-nightcall.mp3",
@@ -315,7 +315,7 @@ var LOCATIONS = {
                   { id: "ufo", rect: [625, 260, 66, 94] }, { id: "big", rect: [31, 0, 160, 349] },
                   { id: "visitors", rect: [500, 340, 110, 110] }]
     },
-    // under the tracks by Isogashii Crossing (trains rumble overhead: js/explore-play.js)
+    // under the tracks by Isogashii Crossing (trains rumble overhead: js/explore-games.js)
     "izakaya": {
         title: "Izakaya Gonta", image: "../img/explore/places/day_izakaya.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/ippatsu-jang-see-you-later.mp3",
@@ -344,7 +344,7 @@ var LOCATIONS = {
                  { src: "../img/explore/layers/karaoke-spots-b.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-b" }],
         objects: [{ id: "tv", rect: [100, 60, 210, 230] }, { id: "table", rect: [250, 330, 260, 140] }]
     },
-    // only reachable 2-4am, through a door in the back passage (js/explore-play.js)
+    // only reachable 2-4am, through a door in the back passage (js/explore-town.js)
     "bar25": {
         title: "Bar 25", image: "../img/explore/places/bar.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/eve-burst-error-room-marina.mp3",
@@ -353,7 +353,7 @@ var LOCATIONS = {
         ],
         objects: [{ id: "bartender", rect: [181, 17, 216, 415] }, { id: "lady", rect: [430, 133, 216, 382] }]
     },
-    // downstream of the shrine: petals float by (js/explore-play.js); so, sometimes, do wishes
+    // downstream of the shrine: petals float by (js/explore-ambient.js); so, sometimes, do wishes
     "underbridge": {
         title: "Under the Bridge", image: "../img/explore/places/dark_bridge.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
@@ -501,7 +501,7 @@ var LOCATIONS = {
             { to: "?loc=otojima", rect: [492, 345, 248, 183] }
         ]
     },
-    // drawn for the city (FAL, quantized to its own 16 blues); jellyfish in js/explore-play.js
+    // drawn for the city (FAL, quantized to its own 16 blues); jellyfish in js/explore-ambient.js
     "aquarium": {
         title: "Otojima Aquarium", image: "../img/explore/places/aquarium.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
@@ -626,7 +626,7 @@ var LOCATIONS = {
         links: [
             { to: "?loc=shizukastreet", rect: [0, 478, 640, 50] }
         ],
-        objects: [{ id: "backdoor", rect: [418, 180, 66, 160] }]   // the staff door (js/explore-play.js)
+        objects: [{ id: "backdoor", rect: [418, 180, 66, 160] }]   // the staff door (js/explore-town.js)
     },
     "livehouse": {
         title: "Namba Bears", image: "../img/explore/places/night_weird_bar.png", pos: "center",

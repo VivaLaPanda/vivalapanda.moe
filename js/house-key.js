@@ -85,7 +85,7 @@
     // everything you're carrying: [icon, name, look, new?]; few enough show as icons, more go in a bag (a list)
     function carried() {
         var t = T(), out = [];
-        pockets().forEach(function (id) {       // finds and prizes from Explore (js/explore-play.js)
+        pockets().forEach(function (id) {       // finds and prizes from Explore (js/explore-*.js)
             var it = (R.dialogueAll.pockets || {})[id];
             if (!it) return;
             out.push({ icon: (it.icon || "plush-" + id) + ".png", name: it.name,

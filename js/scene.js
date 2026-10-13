@@ -13,6 +13,7 @@
 //                 art's object-fit; pixel: crisp scaling; anim: a scene.css animation, scene-anim-<name>)
 //   an object's   go (a link), sprite ({ src, x, y, w, h }: a visible button), view (a name in R.views: clicking
 //                 swaps to that picture and speaker and back again), choices (may be a function; null: just lines)
+//   R.beforeStart  functions run once every page script has loaded, just before the lines are applied
 //   R.afterGreeting  functions (scripts push theirs) giving choices to offer once the greeting's typed (or none;
 //                 true: it took the box over itself)
 // Other scripts (js/house-key.js) drive the box through window.SCENE: say, offer, ask, actions (a choice's
@@ -695,8 +696,12 @@
             console.warn("dialogue unavailable:", err);
             return null;
         }),
-        R.ready || null
+        R.ready || null,
+        new Promise(function (ok) {   // every page script has run, so all their hooks are in
+            if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ok); else ok();
+        })
     ]).then(function (got) {
+        (R.beforeStart || []).forEach(function (f) { f(); });
         applyDialogue(got[0]);
         start();
     });

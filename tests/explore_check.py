@@ -1,7 +1,7 @@
 """General checks for every Explore place, on a desktop and a phone viewport.
 
 - page errors and console errors/warnings
-- every text page and menu fits its box and the screen (walks each menu choice one level down)
+- every text page and menu fits its box and the screen (walks each menu choice and each object one level down)
 - every click zone (hotspot or play-hit) is mostly reachable (not under another zone or an overlay) and
   no zone covers so much of the picture that it hides what else is there
 - home menus with too many choices
@@ -219,9 +219,27 @@ def check_place(browser: Browser, base: str, place: str) -> Result:
                     if click_choice(pg, sub, base, place):
                         settle(pg, f"{label} > {sub}", res, vp)
                     break
+        check_objects(pg, base, place, res, vp)
         pg.context.close()
         res.problems += [f"{vp}: {e}" for e in dict.fromkeys(errs)]
     return res
+
+
+def check_objects(pg: Page, base: str, place: str, res: Result, vp: str) -> None:
+    """Click each thing in the picture that isn't a way out, read what it says, and take its first choice (a game)."""
+    pg.goto(url(base, place), wait_until="domcontentloaded")
+    settle(pg, "greeting", Result(place), vp)
+    ids = pg.eval_on_selector_all(".room-hotspot", "es => es.map(e => e.dataset.id).filter(i => !/^exit/.test(i))")
+    for oid in ids:
+        pg.goto(url(base, place), wait_until="domcontentloaded")
+        settle(pg, "greeting", Result(place), vp)
+        try:
+            pg.locator(f".room-hotspot[data-id='{oid}']").dispatch_event("click")
+        except Exception:
+            continue
+        got = settle(pg, f"object {oid}", res, vp)
+        if got and click_choice(pg, got[0], base, place):
+            settle(pg, f"object {oid} > {got[0]}", res, vp)
 
 
 def worker(base: str, todo: "Queue[str]", out: list[Result]) -> None:
