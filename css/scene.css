@@ -411,12 +411,20 @@
     61% { opacity: 0; } 70% { opacity: 1; }
 }
 
+/* a crossing's walk signal: red most of the time, then walk, blinking before it turns back */
+.scene-anim-signal { animation: scene-signal 12s steps(1) infinite; }
+@keyframes scene-signal {
+    0% { opacity: 0; } 58% { opacity: 1; } 88% { opacity: 0; } 90% { opacity: 1; } 92% { opacity: 0; }
+    94% { opacity: 1; } 96% { opacity: 0; } 98% { opacity: 1; } 100% { opacity: 0; }
+}
+
 /* two layers of glints on water, in turn */
 .scene-anim-twinkle-a { animation: scene-twinkle 1.4s steps(1) infinite; }
 .scene-anim-twinkle-b { animation: scene-twinkle 1.4s steps(1) -.7s infinite; }
 @keyframes scene-twinkle { 0% { opacity: 1; } 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
-    .scene-anim-flicker, .scene-anim-twinkle-a, .scene-anim-twinkle-b, .scene-anim-buzz { animation: none; }
+    .scene-anim-flicker, .scene-anim-twinkle-a, .scene-anim-twinkle-b, .scene-anim-buzz,
+    .scene-anim-signal { animation: none; }
 }
 
 /* a minigame over the picture (js/explore-play.js) */

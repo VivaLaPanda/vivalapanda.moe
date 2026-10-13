@@ -201,7 +201,10 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-settle.mp3",
         links: [
             { to: "?loc=trainplatform", rect: [524, 276, 216, 174] }
-        ]
+        ],
+        // the walk signal changes now and then
+        layers: [{ src: "../img/explore/layers/signal-red-off.png", rect: [-105, 0, 845, 528], pixel: true, anim: "signal" },
+                 { src: "../img/explore/layers/signal-walk-on.png", rect: [-105, 0, 845, 528], pixel: true, anim: "signal" }]
     },
     "trainplatform": {
         title: "Platform 1", image: "../img/explore/places/train_platform.png", pos: "center",
