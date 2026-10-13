@@ -76,39 +76,46 @@ The map (each place's main exits; ⇢ a way that has to be found or unlocked). E
 where one is drawn, and the bottom edge of the picture (behind you) back to the street you came from.
 ```
 Home ─ Main Street ─┬─ Casino (pans; roulette)
-                    ├─ Tokugawa Tower lobby (a lift) ─┬─ Penthouse (watch the city; telescope)
-                    │                                  ├─ B1 car park (a warm car), 3F gallery
-                    │                         └─ Tower Bar (drinks)
+                    ├─ Tokugawa Tower lobby (a lift) ─┬─ B1 car park · 3F gallery · 12F metr.org
+                    │                                  ├─ Penthouse (watch the city; telescope; fireworks)
+                    │                                  └─ Tower Bar (drinks; the man in the hat)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
-                    │                ├─ A Late Cafe (a couple in the window)
-                    │                ├─ Pumpo Park (lanterns) ─ Summer Festival (goldfish, ring toss) ─ Shrine
+                    │                ├─ A Late Cafe
+                    │                ├─ Pumpo Park (lanterns; a rave flyer) ─ Summer Festival (goldfish, ring toss) ─ Shrine
                     │                ├─ Residential ─┬─ Konbini
-                    │                │               └─ Houses ─┬─ the girl ─ Acacia Apartments ─┬─ the Roof (stars)
-                    │                │                          │                                 └⇢ (the cat) Back Passage
-                    │                │                          │                                      ─ Old House ─ its room
-                    │                │                          ├─ Coin Laundry (drawn)
+                    │                │               └─ Houses ─┬─ the girl under the streetlight ─ Acacia Apartments
+                    │                │                          │      ─┬─ the Roof (stars, fireworks, the ending)
+                    │                │                          │       └⇢ (the cat) Back Passage ─ Old House ─ its room
+                    │                │                          ├─ Coin Laundry
                     │                │                          └─ Andy's House
                     │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ train.html
-                    │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop ─ Lily Field
-                    │                                                 ─ Campfire ─ ↺ Hidden Glade
+                    │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop
+                    │                                                 ─ Lily Field ─ Campfire ─ ↺ Hidden Glade
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
-                                       ├─ Club Polka (dance; Ruri's back room: high-low) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
-                                       ├─ Crossing (─ Izakaya Gonta, under the tracks) ─ Platform 1 ─ On the train ─┬─ train.html
-                                       │                                        └─ Otojima Station ─ Half Pipe ─ Beach
-                                       │                                           ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
-                                       │                                                                         └─ Riverboat
+                                       ├─ Club Polka (dance) ─ Ruri's back room (high-low)
+                                       ├─ Agency (Johnny: the hunt, rumours, people) ─ Denchi's (symphoslots)
+                                       ├─ Crossing (─ Izakaya Gonta) ─ Platform 1 ─ On the train ─┬─ train.html
+                                       │                                                          └─ Otojima
+                                       │       ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
+                                       │                                                                    └─ Riverboat
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
-                                                 │              ├─ Net Cafe Noa (Panda's old bookmarks)
+                                                 │              ├─ Net Cafe Noa (Panda's old bookmarks; Dollars BBS)
                                                  │              ├─ Namba Bears (song requests)
-                                                 │              └─ Bathhouse ─ inner bath (soak)
+                                                 │              └─ Bathhouse ─ inner bath
                                                  ├─ Ghandi's ─ Rabu Rabu (drinks, stamp card)
-                                                 └─ Ramen stall (Taisho) ─┬─ recipes
-                                                                          └─ Karaoke Box (drawn)
+                                                 └─ Ramen stall (Taisho; venki.com) ─┬─ recipes
+                                                                                     └─ Karaoke Box
 ```
 Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's window ↔ Hidden Garden ↔ Errata; Ramen
-stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima Station; Aquarium → Beach;
-Riverboat → Hidden Glade. Drawn for the city (FAL, quantized to a neighbour's inks): the ramen stall, the game
-centre, the roof, the aquarium, the empty bridge the train crosses.
+stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima; Aquarium → Beach;
+Riverboat → Hidden Glade; Campfire → Hidden Glade.
+
+Threads that cross the city (flags in localStorage `pandaHeard_*`; Panda's notebook in your pockets tracks them):
+Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a fuse; then they're at the late cafe); Taisho → Brownie
+(takeout; a free soak); the cat (chase it, pet it, feed it a mackerel from the pier, it roams town); the girl
+under the streetlight (her charm, off the pier); the man in the hat (the bar, the konbini at 3am, the car park,
+Ruri's ace); the stamp rally (eight places, a pin, the rooftop ending). Places also greet you differently in the
+rain, in the small hours, on Thursdays, at Halloween (`?season=halloween`), and after things you've done.
 
 **The house key.** Visitors who find Panda's spare key can switch the living room's lamps, blinds and AC on and off
 (nothing else). `js/house-key.js` runs on every scene page: the key slot and the hunt's items by the dialog box's ▼,
