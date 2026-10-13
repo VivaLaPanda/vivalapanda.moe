@@ -629,6 +629,11 @@
           },
           {
             "say": [
+              "\"A girl stands under a streetlight by the houses. Don't walk past. Ask what she lost.\""
+            ]
+          },
+          {
+            "say": [
               "\"That's all I have tonight, stranger. Come back when the city's had time to talk.\""
             ]
           }
@@ -731,6 +736,13 @@
               "say": [
                 "\"The man in the hat.\" (Johnny goes quiet for a moment.)",
                 "\"Some questions even I don't sell answers to, stranger.\""
+              ]
+            },
+            {
+              "label": "The girl by the houses",
+              "say": [
+                "\"Hm. She's been on that corner as long as I've been in this office.\"",
+                "\"Some say she's waiting for someone. I say she's looking for something.\""
               ]
             },
             {
