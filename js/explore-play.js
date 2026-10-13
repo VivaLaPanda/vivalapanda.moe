@@ -1598,7 +1598,8 @@
     // ---------- the disposable camera (from Half Pipe): photos at scenic spots, an album in your pockets ----------
 
     var PHOTO_SPOTS = ["sunset", "rooftop", "penthouse", "festival", "forestglade", "beach", "aquarium", "zengarden",
-                       "shrine", "harbour", "hilltop", "lilyfield", "campsite"];
+                       "shrine", "harbour", "hilltop", "lilyfield", "campsite", "lighthouse", "lake", "observatory",
+                       "nighttrain", "karaoke"];
     var EXPOSURES = 24;
     function photos() { try { return JSON.parse(get("pandaPhotos")) || []; } catch (e) { return []; } }
     if (PHOTO_SPOTS.indexOf(place) >= 0) {
