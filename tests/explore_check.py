@@ -6,11 +6,13 @@
   no zone covers so much of the picture that it hides what else is there
 - home menus with too many choices
 - the link graph: targets exist, every place has a way out, everything is reachable from Main Street
+- every page's asset stamps are current (scripts/build.py --check)
 
 Run: uv run --with playwright tests/explore_check.py [base-url] [place ...]
 (first time: uv run --with playwright playwright install chromium)
 """
 import re
+import subprocess
 import sys
 from queue import Empty, Queue
 from threading import Thread
@@ -81,6 +83,11 @@ def check_graph() -> list[str]:
     gated = {"zengarden", "casinolounge", "backpassage", "oldhouse", "catroom", "bar25", "garage", "gallery"}   # reached by a door that opens in play
     out += [f"graph: {k} not reachable from mainstreet by links" for k in graph if k not in seen and k not in gated]
     return out
+
+
+def check_stamps() -> list[str]:
+    run = subprocess.run([sys.executable, str(REPO / "scripts/build.py"), "--check"], capture_output=True, text=True)
+    return [] if run.returncode == 0 else [run.stderr.strip() or run.stdout.strip()]
 
 
 # ---------- in the browser ----------
@@ -237,7 +244,7 @@ def main() -> None:
     args = sys.argv[1:]
     base = args.pop(0).rstrip("/") if args and args[0].startswith("http") else "https://dev.vivalapanda.moe"
     todo = args or places()
-    problems = check_graph()
+    problems = check_graph() + check_stamps()
     queue: Queue[str] = Queue()
     for k in todo:
         queue.put(k)

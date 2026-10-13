@@ -16,13 +16,11 @@ harness are in that repo's `filter/` folder.
 
 # Developing
 
-Pages are compiled from `templates/` with [microtemplate](https://github.com/VivaLaPanda/microtemplate). To rebuild
-on every change while serving the site locally:
-
-```
-cd templates && ../microtemplate --watch --out ../ --path .
-python3 -m http.server 8765        # from the repo root, in another terminal
-```
+Pages are compiled from `templates/` with [microtemplate](https://github.com/VivaLaPanda/microtemplate) by
+`python3 scripts/build.py`, which also stamps each local script and stylesheet a page loads with a hash of its
+contents (`?v=...`), so there are no version numbers to bump. Templates load plain `/js/x.js`. While editing,
+`cd templates && ../microtemplate --watch --out ../ --path .` rebuilds on every change (without stamps; run
+`scripts/build.py` before committing), and `python3 -m http.server 8765` from the repo root serves the site.
 
 The blog reads `blog/posts.json`, generated from the Substack feed (and its pinned posts) by
 `python3 scripts/substack_feed.py`. It's gitignored. On the server, a systemd timer refreshes it hourly
@@ -184,8 +182,8 @@ fails on page errors, text that overflows its box, click zones that are covered 
 targets that don't exist; it warns about home menus with more than five choices. Run it before pushing:
 `uv run --with playwright tests/explore_check.py [base-url] [place ...]`.
 
-**Cache-busting.** Scripts and styles are versioned by hand in the templates (`?version=N`). When you change a JS or
-CSS file, bump its number in every template that loads it, then rebuild.
+**Cache-busting.** `scripts/build.py` stamps assets by content hash; `scripts/build.py --check` fails if a page's
+stamps are stale (the Explore check runs it).
 
 **Fonts.** The pc-98 font is split so pages load fast:
 - `fonts/pc-9800-core.woff2` (and the bold one) holds the glyphs the site uses, 12KB. It's made by
