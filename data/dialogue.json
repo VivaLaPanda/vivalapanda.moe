@@ -2450,6 +2450,13 @@
               "say": [
                 "(Chocolate taiyaki. Very modern. The fish looks proud of itself.)"
               ]
+            },
+            {
+              "label": "One to take away",
+              "pocket": "taiyaki",
+              "say": [
+                "(They wrap one in paper for you. Still warm. For someone, maybe.)"
+              ]
             }
           ]
         },
@@ -2581,6 +2588,13 @@
                 "You set the onigiri down next to him. One eye opens.",
                 "\"...Thanks, kid. Here's one for free: the man in the hat? He's waiting for somebody.\"",
                 "\"Same somebody, twelve years. Don't ask me who.\" (He's asleep again.)"
+              ]
+            },
+            "taiyaki": {
+              "label": "Leave him the taiyaki",
+              "take": true,
+              "say": [
+                "He sniffs, opens one eye, and smiles without waking up. The taiyaki's gone by the time you look back."
               ]
             }
           }
@@ -4758,6 +4772,13 @@
                 "He looks at the hat for a long moment, then sets a second glass on the bar, next to yours.",
                 "\"For old times.\""
               ]
+            },
+            "taiyaki": {
+              "label": "Offer the bartender the taiyaki",
+              "take": true,
+              "say": [
+                "\"From the festival?\" He eats it in two bites, tail first. \"...The tail's the best part. Don't argue.\""
+              ]
             }
           }
         },
@@ -5047,6 +5068,12 @@
           "label": "Bounce the water yo-yo",
           "say": [
             "Six heads follow the yo-yo up and down. The kitten falls off the shelf. It's fine."
+          ]
+        },
+        "taiyaki": {
+          "label": "Offer the cats the taiyaki",
+          "say": [
+            "Six cats sniff it. Six cats are deeply disappointed it is not a real fish."
           ]
         }
       }
@@ -5625,6 +5652,11 @@
         "You bounce the water yo-yo. Boing. Boing.",
         "...Boing."
       ]
+    },
+    "taiyaki": {
+      "name": "taiyaki",
+      "icon": "taiyaki",
+      "look": "A taiyaki from the festival, wrapped in paper. Still a little warm."
     }
   },
   "letters": {
