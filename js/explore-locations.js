@@ -251,6 +251,16 @@ var LOCATIONS = {
                   { id: "vending", rect: [682, 149, 58, 208] }, { id: "chairs", rect: [549, 330, 130, 145] },
                   { id: "sock", rect: [258, 462, 62, 40] }]
     },
+    // under Tokugawa Tower (the lobby's lift goes down here)
+    "garage": {
+        title: "Tokugawa Tower, B1", image: "../img/explore/places/garage.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/possessioner-abandoned-district.mp3",
+        links: [
+            { to: "frontdesk.html", rect: [410, 210, 60, 85] },   // the lift, under the green sign
+            { to: "frontdesk.html", rect: [0, 478, 420, 50] }
+        ],
+        objects: [{ id: "bluecar", rect: [430, 300, 230, 228] }, { id: "redcar", rect: [170, 280, 260, 140] }]
+    },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",

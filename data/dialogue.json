@@ -1245,6 +1245,39 @@
               "label": "Maybe another time"
             }
           ]
+        },
+        {
+          "label": "Take the lift",
+          "say": [
+            "\"Which floor, sir?\""
+          ],
+          "menu": [
+            {
+              "label": "B1, parking",
+              "say": [
+                "(The lift hums down. And down.)"
+              ],
+              "go": "explore.html?loc=garage"
+            },
+            {
+              "label": "1F, the bar",
+              "say": [
+                "\"Right this way, sir.\""
+              ],
+              "go": "towerbar.html"
+            },
+            {
+              "label": "12F, METR",
+              "href": "https://metr.org"
+            },
+            {
+              "label": "40F, the penthouse",
+              "say": [
+                "\"Guests only, sir. ...I'll pretend I didn't see you.\""
+              ],
+              "go": "penthouse.html"
+            }
+          ]
         }
       ]
     },
@@ -2586,6 +2619,27 @@
               ]
             }
           }
+        }
+      }
+    },
+    "garage": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The tower's car park. It's very quiet down here. Too quiet?"
+      ],
+      "objects": {
+        "bluecar": {
+          "name": "A dark blue car",
+          "lines": [
+            "A dark blue car. The engine's still warm.",
+            "On the seat, a hat-shaped dent. On the dashboard, a melon bread wrapper."
+          ]
+        },
+        "redcar": {
+          "name": "A maroon car",
+          "lines": [
+            "A maroon sports car. There's a parking ticket on it dated 1997."
+          ]
         }
       }
     }

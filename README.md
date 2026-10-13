@@ -76,7 +76,8 @@ The map (each place's main exits; ⇢ a way that has to be found or unlocked). E
 where one is drawn, and the bottom edge of the picture (behind you) back to the street you came from.
 ```
 Home ─ Main Street ─┬─ Casino (pans; roulette)
-                    ├─ Tokugawa Tower lobby ─┬─ Penthouse (watch the city; telescope)
+                    ├─ Tokugawa Tower lobby (a lift) ─┬─ Penthouse (watch the city; telescope)
+                    │                                  ├─ B1 car park (a warm car)
                     │                         └─ Tower Bar (drinks)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
                     │                ├─ Pumpo Park (lanterns) ─ Summer Festival (goldfish, ring toss) ─ Shrine
