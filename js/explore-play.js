@@ -778,7 +778,31 @@
         };
     };
 
+    // a beacon's beam sweeping round from a light (canvas px), seen side-on: it reaches out left, shrinks as it
+    // turns toward you (a flash), reaches out right, then goes round the back
+    function beacon(o) {
+        ambient(function (ctx, dt, t) {
+            var a = t * .8, reach = Math.cos(a), front = Math.sin(a);
+            if (front < -.6) return;                                 // round the back
+            if (front > .92) {                                       // facing us
+                ctx.fillStyle = "#ffffff";
+                for (var r = 1; r < 4; r++) for (var k = 0; k < 8; k++) ctx.fillRect(Math.round(o[0] + Math.cos(k) * r), Math.round(o[1] + Math.sin(k) * r), 1, 1);
+            }
+            var len = 30 + 110 * Math.abs(reach), dir = reach < 0 ? -1 : 1;
+            for (var d = 2; d < len; d++) {                           // a widening cone, dithered thinner with distance
+                var half = 1 + d * .1, x = Math.round(o[0] + dir * d);
+                for (var w = -half; w <= half; w++) {
+                    var y = Math.round(o[1] - d * .16 + w);   // up over the dark sky
+                    if ((x + y) % 2 || (d > 70 && (x * 3 + y) % 3 === 0)) continue;
+                    ctx.fillStyle = d < 10 ? "#ffffff" : "#ffff00";
+                    ctx.fillRect(x, y, 1, 1);
+                }
+            }
+        });
+    }
+
     var AMBIENT = {
+        harbour: function () { beacon([37, 43]); },
         trainplatform: function () { headlights([130, 46], 30); },
         forestedge: function () { fireflies([0, 25, 152, 66], 18, "#ffffff", "#99cc66"); },
         smallbathhouse: function () { steam([0, 64, 185, 28], ["#ffffff", "#bdceff"]); },
