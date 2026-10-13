@@ -1088,7 +1088,7 @@
               "label": "Tony",
               "say": [
                 "\"Tony's poured at the tower since before it had forty floors.",
-                "The man in the hat is his oldest regular. Never seen him leave.\"",
+                "His regulars are older than half the buildings in this city.\"",
                 "\"That one's on the house.\""
               ]
             },
@@ -2358,7 +2358,7 @@
         {
           "label": "Ask about the regulars",
           "pick": [
-            "\"The fella in the hat? Been here since the tower opened. Never seen him leave.\"",
+            "\"The stool at the end? Twelve years, one regular. Some people are waiting for something.\"",
             "\"The lady in red tips great. Don't ask her what she does for a living.\""
           ]
         },
@@ -2389,7 +2389,7 @@
           "pocket": "coaster",
           "hear": "note_delivered",
           "say": [
-            "Tony unfolds the note and laughs so loud the man in the hat looks up.",
+            "Tony unfolds the note and laughs so loud the whole bar looks up.",
             "\"Old! She calls ME old. I taught that kid to hold a shaker.\"",
             "(He scribbles on a coaster and slides it over.) \"Take that back down to her, would you?\""
           ]
@@ -3667,7 +3667,7 @@
           "label": "Ask about the night shift",
           "pick": [
             "\"Night shift's quiet. Except for a black cat that comes in to sit by the heater.\"",
-            "\"A man in a hat buys one melon bread every night at three. Never says a word.\"",
+            "\"The manager says a man in a hat bought one melon bread every night at three. For years.\"",
             "\"Somebody from the tower bar comes in for milk. Asked me not to tell anyone. Oops.\""
           ]
         },
@@ -4448,7 +4448,7 @@
           "pick": [
             "\"I used to deal at the casino. Then I started winning. Now I deal here.\"",
             "\"Johnny and I go way back. He owes me. Everyone in this town owes me.\"",
-            "\"The man in the hat plays here Tuesdays. Never takes the hat off. Never loses.\""
+            "\"The man in the hat sat in once. Never took the hat off. Won every hand. Then left.\""
           ]
         }
       ],
