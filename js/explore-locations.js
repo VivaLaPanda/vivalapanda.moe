@@ -15,7 +15,8 @@ var LOCATIONS = {
             { to: "frontdesk.html", rect: [505, 379, 141, 127] },
             { to: "?loc=casino", rect: [0, 303, 123, 130] },
             { to: "?loc=nightplaza", rect: [409, 399, 85, 77] },
-            { to: "?loc=partystreet", rect: [264, 378, 106, 87] }
+            { to: "?loc=partystreet", rect: [264, 378, 106, 87] },
+            { to: "/living-room.html", rect: [0, 478, 640, 50] }   // behind you
         ],
         // a neon sign by the canopy (the casino's door), its N on the blink
         layers: [{ src: "../img/explore/layers/casino-sign.png", rect: [-115, 0, 969, 528], pixel: true },
@@ -24,7 +25,9 @@ var LOCATIONS = {
     "agency": {
         title: "The Agency", image: "../img/explore/places/agency.gif", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kavinsky-nightcall.mp3",
-        links: []
+        links: [
+            { to: "?loc=partystreet", rect: [0, 478, 640, 50] }
+        ]
     },
     "casino": {
         title: "The Casino", image: "../img/explore/places/casino.png", pos: "left",   // a panorama: explore-play.js pans it
@@ -34,14 +37,17 @@ var LOCATIONS = {
     "club": {
         title: "Club Polka", image: "../img/explore/places/club.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/control-your-music.mp3",
-        links: [],
+        links: [
+            { to: "?loc=partystreet", rect: [0, 478, 640, 50] }
+        ],
         objects: [{ id: "floor", rect: [166, 217, 415, 170] }]
     },
     "forestedge": {
         title: "The Edge of the Forest", image: "../img/explore/pathways/forest.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/death-bringer-forest.mp3",
         links: [
-            { to: "?loc=forestglade", rect: [174, 189, 416, 297] }
+            { to: "?loc=forestglade", rect: [174, 189, 416, 297] },
+            { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "forestglade": {
@@ -59,14 +65,16 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/andypls-kurisu-muffled.mp3",
         links: [
             { to: "https://www.beepbox.co", rect: [-3, 188, 230, 207] },
-            { to: "https://youtu.be/edgcGDWhMNM", rect: [437, 28, 230, 437] }
+            { to: "https://youtu.be/edgcGDWhMNM", rect: [437, 28, 230, 437] },
+            { to: "?loc=nightresidential2", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "nightapartments": {
         title: "Acacia Apartments", image: "../img/explore/pathways/night_apartments.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
         links: [
-            { to: "?loc=rooftop", rect: [427, 330, 98, 152] }   // up the outside stairs
+            { to: "?loc=rooftop", rect: [427, 330, 98, 152] },   // up the outside stairs
+            { to: "nightresidential_girl.html", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     // the stray cat's way home: only open once you've chased it (js/explore-play.js)
@@ -74,7 +82,8 @@ var LOCATIONS = {
         title: "A Back Passage", image: "../img/explore/pathways/ghetto.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/possessioner-abandoned-district.mp3",
         links: [
-            { to: "?loc=oldhouse", rect: [202, 410, 142, 107] }
+            { to: "?loc=oldhouse", rect: [202, 410, 142, 107] },
+            { to: "?loc=nightapartments", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "drifter", rect: [71, 482, 107, 46] }]
     },
@@ -83,23 +92,30 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
         links: [
             { to: "?loc=catroom", rect: [336, 255, 141, 113] },
-            { to: "?loc=shrine", rect: [0, 377, 207, 151] }
+            { to: "?loc=shrine", rect: [0, 377, 207, 151] },
+            { to: "?loc=backpassage", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "catroom": {
         title: "The Old House", image: "../img/explore/places/night_room_traditional.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
-        links: [],
+        links: [
+            { to: "?loc=oldhouse", rect: [0, 0, 60, 280] },
+            { to: "?loc=zengarden", rect: [266, 98, 72, 125] }
+        ],
         layers: [{ src: "../img/explore/layers/cat-sleeping.png", rect: [431, 469, 50, 29], pixel: true }],
         objects: [{ id: "cat", rect: [420, 455, 72, 48] }, { id: "tea", rect: [316, 326, 107, 63] },
                   { id: "tv", rect: [567, 277, 89, 143] }, { id: "daruma", rect: [0, 283, 62, 86] },
-                  { id: "scroll", rect: [110, 89, 81, 242] }, { id: "window", rect: [266, 98, 72, 125] }]
+                  { id: "scroll", rect: [110, 89, 81, 242] }]
     },
     // behind Erratic Errata, for those who ask for the second edition (js/explore-play.js)
     "zengarden": {
         title: "A Hidden Garden", image: "../img/explore/pathways/zengarden.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
-        links: [],
+        links: [
+            { to: "?loc=weirdstore", rect: [0, 330, 200, 148] },
+            { to: "?loc=catroom", rect: [137, 243, 122, 78] }
+        ],
         objects: [{ id: "teahouse", rect: [476, 122, 156, 165] }, { id: "bridge", rect: [137, 243, 122, 78] },
                   { id: "pond", rect: [415, 295, 325, 190] }]
     },
@@ -107,7 +123,9 @@ var LOCATIONS = {
     "rooftop": {
         title: "Acacia Apartments, the Roof", image: "../img/explore/places/rooftop.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
-        links: [],
+        links: [
+            { to: "?loc=nightapartments", rect: [0, 330, 100, 148] }
+        ],
         objects: [{ id: "sky", rect: [0, 0, 740, 230] }, { id: "laundry", rect: [209, 249, 216, 133] },
                   { id: "tank", rect: [458, 249, 100, 149] }, { id: "chair", rect: [541, 398, 116, 116] }]
     },
@@ -115,7 +133,8 @@ var LOCATIONS = {
         title: "Pumpo Park", image: "../img/explore/pathways/night_park.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
         links: [
-            { to: "?loc=festival", rect: [483, 377, 257, 151] }
+            { to: "?loc=festival", rect: [483, 377, 257, 151] },
+            { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }   // behind you
         ],
         // far back in the trees, the festival's lanterns
         layers: [{ src: "../img/explore/layers/park-lanterns.png", rect: [-83, 0, 905, 528], pixel: true, anim: "flicker" }]
@@ -124,7 +143,8 @@ var LOCATIONS = {
         title: "The Summer Festival", image: "../img/explore/pathways/night_festival.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/dance_in_the_memories.mp3",
         links: [
-            { to: "?loc=shrine", rect: [0, 275, 187, 253] }
+            { to: "?loc=shrine", rect: [0, 275, 187, 253] },
+            { to: "?loc=nightpark", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "goldfish", rect: [183, 407, 169, 73] }, { id: "wataame", rect: [352, 202, 183, 321] },
                   { id: "yakisoba", rect: [608, 202, 132, 321] }]
@@ -133,7 +153,8 @@ var LOCATIONS = {
         title: "Pumpo Shrine", image: "../img/explore/places/night_temple_festival.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/dance_in_the_memories.mp3",
         links: [
-            { to: "?loc=forestedge", rect: [543, 101, 126, 201] }
+            { to: "?loc=forestedge", rect: [543, 101, 126, 201] },
+            { to: "?loc=festival", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "offering", rect: [266, 201, 218, 184] }]
     },
@@ -152,7 +173,10 @@ var LOCATIONS = {
     "bookshop": {
         title: "The Night Bookshop", image: "../img/explore/pathways/night_minilibrary.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
-        links: []
+        links: [
+            { to: "?loc=nightplaza", rect: [0, 380, 150, 98] },
+            { to: "?loc=nightresidential", rect: [600, 380, 140, 70] }
+        ]
     },
     "nightresidential": {
         title: "Residential District", image: "../img/explore/pathways/night_residential.png", pos: "center",
@@ -165,14 +189,17 @@ var LOCATIONS = {
     "konbini": {
         title: "The Konbini", image: "../img/explore/places/conbini.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
-        links: []
+        links: [
+            { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }
+        ]
     },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
         links: [
             { to: "nightresidential_girl.html", rect: [317, 208, 80, 47] },
-            { to: "?loc=musicianbedroom", rect: [47, 78, 130, 287] }
+            { to: "?loc=musicianbedroom", rect: [47, 78, 130, 287] },
+            { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "partystreet": {
@@ -192,7 +219,10 @@ var LOCATIONS = {
     "gamecentre": {
         title: "Taito Game Centre", image: "../img/explore/places/game_centre.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/animahjong-x-10.mp3",
-        links: [],
+        links: [
+            { to: "?loc=partystreet", rect: [0, 478, 640, 50] },
+            { to: "?loc=club", rect: [610, 140, 90, 200] }
+        ],
         objects: [{ id: "claw", rect: [250, 100, 230, 400] }, { id: "cabinets", rect: [0, 150, 220, 300] },
                   { id: "cabinets2", rect: [520, 150, 220, 300] }]
     },
@@ -200,7 +230,8 @@ var LOCATIONS = {
         title: "Isogashii Crossing", image: "../img/explore/pathways/day_trainstation_crossing.png", pos: "center right",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-settle.mp3",
         links: [
-            { to: "?loc=trainplatform", rect: [524, 276, 216, 174] }
+            { to: "?loc=trainplatform", rect: [524, 276, 216, 174] },
+            { to: "?loc=partystreet", rect: [0, 478, 640, 50] }   // behind you
         ],
         // the walk signal changes now and then
         layers: [{ src: "../img/explore/layers/signal-red-off.png", rect: [-105, 0, 845, 528], pixel: true, anim: "signal" },
@@ -210,7 +241,8 @@ var LOCATIONS = {
         title: "Platform 1", image: "../img/explore/places/train_platform.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-begin.mp3",
         links: [
-            { to: "?loc=trainwetlands", rect: [481, 96, 151, 354] }
+            { to: "?loc=trainwetlands", rect: [481, 96, 151, 354] },
+            { to: "?loc=stationcrossing", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "trainwetlands": {
@@ -238,7 +270,8 @@ var LOCATIONS = {
         title: "Half Pipe", image: "../img/explore/places/day_beach_shop.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
         links: [
-            { to: "?loc=beach", rect: [655, 180, 85, 348] }
+            { to: "?loc=beach", rect: [655, 180, 85, 348] },
+            { to: "?loc=otojima", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "shop", rect: [98, 196, 425, 249] }]
     },
@@ -246,7 +279,8 @@ var LOCATIONS = {
         title: "Otojima Beach", image: "../img/explore/pathways/day_beach.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/caught-a-star-in-your-eye.mp3",
         links: [
-            { to: "?loc=sunset", rect: [470, 262, 270, 158] }
+            { to: "?loc=sunset", rect: [470, 262, 270, 158] },
+            { to: "?loc=surfshop", rect: [0, 478, 640, 50] }   // behind you
         ],
         layers: [{ src: "../img/explore/layers/beach-glints-a.png", rect: [0, 0, 740, 528], pixel: true, anim: "twinkle-a" },
                  { src: "../img/explore/layers/beach-glints-b.png", rect: [0, 0, 740, 528], pixel: true, anim: "twinkle-b" }],
@@ -257,7 +291,8 @@ var LOCATIONS = {
         title: "The Shore at Sunset", image: "../img/explore/places/sunset.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/college-electric-youth-real-hero.mp3",
         links: [
-            { to: "?loc=harbour", rect: [0, 446, 284, 82] }
+            { to: "?loc=harbour", rect: [0, 446, 284, 82] },
+            { to: "?loc=beach", rect: [0, 478, 640, 50] }   // behind you
         ],
         layers: [{ src: "../img/explore/layers/sunset-glints-a.png", rect: [-59, 0, 857, 528], pixel: true, anim: "twinkle-a" },
                  { src: "../img/explore/layers/sunset-glints-b.png", rect: [-59, 0, 857, 528], pixel: true, anim: "twinkle-b" }],
@@ -276,7 +311,10 @@ var LOCATIONS = {
     "aquarium": {
         title: "Otojima Aquarium", image: "../img/explore/places/aquarium.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
-        links: [],
+        links: [
+            { to: "?loc=beach", rect: [500, 180, 100, 150] },
+            { to: "?loc=harbour", rect: [0, 478, 640, 50] }
+        ],
         objects: [{ id: "bench", rect: [306, 408, 125, 72] }, { id: "ray", rect: [558, 45, 152, 143] }]
     },
     "riverboat": {
@@ -290,13 +328,16 @@ var LOCATIONS = {
         title: "Denchi's Delights", image: "../img/explore/places/electronics_store.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/ippatsu-jang-see-you-later.mp3",
         links: [
-            { to: "../sympho-slots/index.html", rect: [183, 204, 237, 287] }
+            { to: "../sympho-slots/index.html", rect: [183, 204, 237, 287] },
+            { to: "?loc=partystreet", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "weaponshop": {
         title: "Ghandi's Surplus Suprises", image: "../img/explore/places/weaponshop.gif", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-hacking.mp3",
-        links: []
+        links: [
+            { to: "?loc=nightalley", rect: [0, 478, 640, 50] }
+        ]
     },
     "nightalley": {
         title: "The Alley", image: "../img/explore/pathways/night_busy_alley.png", pos: "center right",
@@ -312,13 +353,18 @@ var LOCATIONS = {
     "ramen": {
         title: "A Ramen Stall", image: "../img/explore/places/ramen_yatai.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-settle.mp3",
-        links: [],
+        links: [
+            { to: "?loc=nightalley", rect: [0, 300, 90, 178] },
+            { to: "?loc=cutiebar", rect: [680, 230, 60, 190] }
+        ],
         objects: [{ id: "lantern", rect: [184, 125, 75, 133] }, { id: "stools", rect: [275, 374, 315, 116] }]
     },
     "cutiebar": {
         title: "Rabu Rabu", image: "../img/explore/places/bar_with_cutie.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-sweetheart.mp3",
-        links: []
+        links: [
+            { to: "?loc=nightalley", rect: [0, 478, 640, 50] }
+        ]
     },
     "shizukastreet": {
         title: "Shizuka Street", image: "../img/explore/pathways/night_city_street.png", pos: "center left",
@@ -332,23 +378,31 @@ var LOCATIONS = {
     "weirdstore": {
         title: "Erratic Errata", image: "../img/explore/places/shop_misc_interior.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
-        links: []
+        links: [
+            { to: "?loc=shizukastreet", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "backdoor", rect: [418, 180, 66, 160] }]   // the staff door (js/explore-play.js)
     },
     "livehouse": {
         title: "Namba Bears", image: "../img/explore/places/night_weird_bar.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/mesuneko-hishoshitsu-staff-roll.mp3",
-        links: []
+        links: [
+            { to: "?loc=shizukastreet", rect: [0, 478, 640, 50] }
+        ]
     },
     "smallbathhouse": {
         title: "Brownie's Bathhouse", image: "../img/explore/places/bathhouse_small.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-room-marina.mp3",
-        links: []
+        links: [
+            { to: "?loc=bathhouseentry", rect: [620, 100, 120, 100] }
+        ]
     },
     "bathhouseentry": {
         title: "Brownie's Bathhouse", image: "../img/explore/portraits/bath.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-room-marina.mp3",
         links: [
-            { to: "?loc=smallbathhouse", rect: [58, 428, 597, 100] }
+            { to: "?loc=smallbathhouse", rect: [58, 428, 597, 100] },
+            { to: "?loc=shizukastreet", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "frontdesk": {
@@ -356,27 +410,33 @@ var LOCATIONS = {
         frame: "light", music: "/audio/possessioner-abandoned-district.mp3",
         links: [
             { to: "penthouse.html", rect: [146, 7, 113, 23], sprite: "/img/explore/overlays/penthouse-button.png" },
-            { to: "towerbar.html", rect: [170, 98, 70, 26], sprite: "/img/explore/overlays/bar-button.png" }
+            { to: "towerbar.html", rect: [170, 98, 70, 26], sprite: "/img/explore/overlays/bar-button.png" },
+            { to: "explore.html", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "penthouse": {
         title: "Tokugawa Tower Penthouse", image: "/img/explore/places/city_overlook_transparent.png", pos: "center",
         holo: "/img/holo/HolosurpriseBGTransparent.png", frame: "light", music: "/audio/possessioner-city-a.mp3",
-        links: [],
+        links: [
+            { to: "frontdesk.html", rect: [0, 478, 640, 50] }
+        ],
         under: {"src": "/img/explore/settings/skyling-normal-flicker.gif", "rect": [-1, -332, 780, 780]}
     },
     "nightresidential_girl": {
         title: "Residential District", image: "/img/explore/pathways/night_residential_girl.png", pos: "center",
         music: "/audio/iskaku-horror-1.mp3",
         links: [
-            { to: "explore.html?loc=nightapartments", rect: [17, 278, 80, 157] }
+            { to: "explore.html?loc=nightapartments", rect: [17, 278, 80, 157] },
+            { to: "explore.html?loc=nightresidential2", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "girl", rect: [377, 328, 80, 187] }]
     },
     "towerbar": {
         title: "Tokugawa Tower Bar", image: "/img/explore/places/bar_crowded.png", pos: "left",
         frame: "light", music: "/audio/cosmic-psycho-bar.mp3",
-        links: [],
+        links: [
+            { to: "frontdesk.html", rect: [0, 478, 640, 50] }
+        ],
         objects: [{ id: "regular", rect: [485, 59, 141, 357], view: "barshoujo" }],
         views: {"barshoujo": {"src": "/img/explore/portraits/bar_lady.png", "pos": "center"}}
     }

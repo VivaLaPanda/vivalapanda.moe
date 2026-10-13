@@ -911,7 +911,15 @@
           ],
           "go": "?loc=zengarden"
         }
-      ]
+      ],
+      "objects": {
+        "backdoor": {
+          "name": "Staff door",
+          "lines": [
+            "A door marked STAFF ONLY. It's locked. Or it's pretending to be."
+          ]
+        }
+      }
     },
     "livehouse": {
       "speaker": "P a n d a",

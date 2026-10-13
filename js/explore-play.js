@@ -670,6 +670,7 @@
                     var r = [o.src[0] * CASINO_S - CASINO_OX[v], o.src[1] * CASINO_S, o.src[2] * CASINO_S, o.src[3] * CASINO_S];
                     hit(r, R.said.objects[o.id].name, o.id === "roulette" ? roulette : function () { S.say(arr(R.said.objects[o.id].lines)); });
                 });
+                hit([70, 478, 570, 50], "Back out to Main Street", function () { location.href = "?loc=mainstreet"; });
                 if (v > 0) hit([0, 0, 70, 528], "Look left", function () { show(v - 1); });     // the edges win
                 if (v < 2) hit([670, 0, 70, 430], "Look right", function () { show(v + 1); });
             }
@@ -941,6 +942,13 @@
             }
             return [{ label: p.rumour_label, act: tell }];
         });
+    };
+
+    // ---------- Erratic Errata's staff door: the garden, once you know to ask ----------
+
+    PLAY.weirdstore = function () {
+        var door = obj("backdoor");
+        if (heard("secondedition")) door.go = "?loc=zengarden";
     };
 
     // ---------- the zen garden behind Erratic Errata ----------
