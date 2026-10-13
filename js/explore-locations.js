@@ -16,7 +16,10 @@ var LOCATIONS = {
             { to: "?loc=casino", rect: [0, 303, 123, 130] },
             { to: "?loc=nightplaza", rect: [409, 399, 85, 77] },
             { to: "?loc=partystreet", rect: [264, 378, 106, 87] }
-        ]
+        ],
+        // a neon sign by the canopy (the casino's door), its N on the blink
+        layers: [{ src: "../img/explore/layers/casino-sign.png", rect: [-115, 0, 969, 528], pixel: true },
+                 { src: "../img/explore/layers/casino-sign-n.png", rect: [-115, 0, 969, 528], pixel: true, anim: "buzz" }]
     },
     "agency": {
         title: "The Agency", image: "../img/explore/places/agency.gif", pos: "center",
