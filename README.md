@@ -113,7 +113,7 @@ Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's wi
 stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima; Aquarium → Beach;
 Riverboat → Hidden Glade; Campfire → Hidden Glade. Drawn for the city (FAL from a neighbouring picture, quantized to 16
 inks): the ramen stall, game centre, roof, aquarium, net cafe, coin laundry, karaoke box, the empty bridge the
-train crosses, the observatory, the last train, the lighthouse, and the residential street without the girl.
+train crosses, the observatory, the last train, the lighthouse, the fox gates, and the residential street without the girl.
 
 Threads that cross the city (flags in localStorage `pandaHeard_*`; Panda's notebook in your pockets tracks them):
 Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a fuse; then they're at the late cafe); Taisho → Brownie
