@@ -1141,8 +1141,27 @@
             "Two! You're a natural.",
             "{n} goldfish! The stall owner looks nervous."
           ]
+        },
+        "ringtoss": {
+          "how": "Ring toss! Three rings. Click (or Space) when the marker's over a bottle.",
+          "status": "Rings: {rings}   Ringers: {ringers}",
+          "ringer": "Ringer!",
+          "miss": "Clang.",
+          "stop": "Done",
+          "won": [
+            "Two ringers! The stall keeper hands over a fox mask.",
+            "(It's a little too small. You wear it anyway.)"
+          ],
+          "close": "One ringer! So close. The stall keeper gives you a sympathetic nod.",
+          "none": "Not one. The rings have a mind of their own."
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Ring toss",
+          "action": "ringtoss"
+        }
+      ]
     },
     "shrine": {
       "speaker": "P a n d a",
@@ -1883,6 +1902,11 @@
       "name": "purikura sticker",
       "icon": "sticker",
       "look": "A purikura sticker from the game centre. Sparkles were added. Many sparkles."
+    },
+    "fox_mask": {
+      "name": "fox mask",
+      "icon": "fox-mask",
+      "look": "A fox mask from the festival's ring toss. Very mysterious. Slightly too small."
     }
   }
 }

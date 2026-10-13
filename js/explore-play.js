@@ -193,7 +193,73 @@
         });
     }
 
+    // ---------- the festival: ring toss ----------
+
+    // a marker sweeps along a row of pegs; click (or Space) to throw; a ring that lands within a hair of a peg
+    // rings it. Three rings, two ringers for the prize (a fox mask, to your pockets)
+    function ringToss() {
+        var p = P().ringtoss, o = overlay(), cv = o.cv, ctx = o.ctx, W = cv.width, H = cv.height;
+        var PEGS = [36, 64, 92, 120, 148], ROW = 66, rings = 3, ringers = 0, landed = [], flying = null, over = false, raf;
+        var t0 = performance.now(), speed = 1.1;
+        function marker(now) { return 24 + (Math.sin((now - t0) / 1000 * speed * 2) * .5 + .5) * 136; }
+        function px(c, x, y, w, h) { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), w || 1, h || 1); }
+        function ring(x, y, col) {
+            for (var a = 0; a < 6.28; a += .25) px(col, x + Math.cos(a) * 6, y + Math.sin(a) * 2);
+        }
+        function show(extra) { S.status(fill(p.status, { rings: rings, ringers: ringers }) + (extra ? "   " + extra : "")); }
+        function end() {
+            if (over) return;
+            over = true;
+            cancelAnimationFrame(raf);
+            document.removeEventListener("keydown", key, true);
+            o.box.remove();
+            if (ringers >= 2) pocket("fox_mask");
+            S.say(arr(ringers >= 2 ? p.won : ringers === 1 ? p.close : p.none), function () { S.offer(menuOf(R.said.menu)); });
+        }
+        function toss() {
+            if (flying || rings <= 0 || over) return;
+            rings--;
+            flying = { x: marker(performance.now()), t: 0 };
+            show();
+        }
+        function key(e) { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); toss(); } }
+        document.addEventListener("keydown", key, true);
+        cv.addEventListener("pointerdown", toss);
+        (function step(now) {
+            px("#7a3a1e", 0, 0, W, H);                                     // the stall's back boards
+            for (var x = 0; x < W; x += 12) px("#5a2a14", x, 0, 1, 92);
+            px("#c06a3a", 0, 88, W, 6); px("#e8a070", 0, 88, W, 1);          // the counter's edge
+            px("#3a1a0a", 0, 94, W, H - 94);
+            PEGS.forEach(function (x, i) {                                  // bottles on a shelf
+                px("#2a6a3a", x - 3, ROW - 14, 7, 16); px("#4aaa5a", x - 2, ROW - 13, 1, 12);
+                px("#2a6a3a", x - 1, ROW - 20, 3, 6); px("#ffcc33", x - 1, ROW - 21, 3, 1);
+            });
+            px("#a05a2e", 10, ROW + 2, W - 20, 3);
+            landed.forEach(function (l) { ring(l.x, l.y, l.hit ? "#ffee55" : "#aa8833"); });
+            if (!flying && rings > 0) {                                     // the aim marker
+                var m = marker(now);
+                px("#ff3333", m - 2, 8, 5, 1); px("#ff3333", m - 1, 9, 3, 1); px("#ff3333", m, 10, 1, 1);
+            }
+            if (flying) {
+                flying.t += 1 / 40;
+                var k = flying.t, y = H - 10 - (H - 10 - (ROW - 18)) * k, arc = Math.sin(k * Math.PI) * 30;
+                ring(W / 2 + (flying.x - W / 2) * k, y - arc, "#ffee55");
+                if (k >= 1) {
+                    var peg = PEGS.filter(function (x) { return Math.abs(x - flying.x) < 3.5; })[0];
+                    if (peg != null) { ringers++; landed.push({ x: peg, y: ROW - 6, hit: true }); show(p.ringer); }
+                    else { landed.push({ x: flying.x, y: ROW + 4, hit: false }); show(p.miss); }
+                    flying = null;
+                    speed += .35;
+                    if (rings <= 0) setTimeout(end, 800);
+                }
+            }
+            if (!over) raf = requestAnimationFrame(step);
+        })(performance.now());
+        S.say(arr(p.how), function () { show(); S.offer([{ label: p.stop, act: end }]); });
+    }
+
     PLAY.festival = function () {
+        S.actions.ringtoss = ringToss;
         var g = obj("goldfish");
         g.click = function () { return [P().goldfish.intro]; };
         g.choices = function () { var p = P().goldfish; return [{ label: p.play, act: goldfish }, { label: p.watch }]; };
