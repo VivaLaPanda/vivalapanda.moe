@@ -1853,7 +1853,7 @@
     // the night bus: no route posted; it takes you somewhere in the city (often somewhere you haven't been)
     var BUS_STOPS = ["festival", "shrine", "rooftop", "ramen", "netcafe", "catcafe", "laundromat", "konbini", "bookshop",
                      "nightcafe", "izakaya", "otojima", "harbour", "lighthouse", "lake", "hilltop", "observatory", "inari",
-                     "gamecentre", "karaoke", "casino", "underbridge", "zengarden", "forestedge", "nightpark"];
+                     "gamecentre", "karaoke", "casino", "underbridge", "zengarden", "forestedge", "nightpark", "pier"];
     S.actions.nightbus = function () {
         var p = P().bus || ((R.dialogueAll.explore || {}).lines || {}).bus;
         var fresh = BUS_STOPS.filter(function (k) { return k !== place && !get("pandaVisits_" + k); });
