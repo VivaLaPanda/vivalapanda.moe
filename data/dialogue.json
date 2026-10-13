@@ -3247,7 +3247,23 @@
             "Your goldfish stares at the big fish going past. Aspirational."
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Press your hand to the glass",
+          "cycle": [
+            [
+              "(The glass is cold. A little fish swims up to your hand and stays.)"
+            ],
+            [
+              "(The ray glides over, close enough to see its smile. Rays always look like they're smiling.)"
+            ],
+            [
+              "(A jellyfish drifts past your fingers, slow as breathing.)"
+            ]
+          ]
+        }
+      ]
     },
     "netcafe": {
       "speaker": "P a n d a",
@@ -4089,8 +4105,34 @@
             },
             {
               "label": "Order something",
+              "menu": [
+                {
+                  "label": "A Lighthouse",
+                  "say": [
+                    "(Something clear and cold, with a single cherry that catches the light every few seconds.)"
+                  ]
+                },
+                {
+                  "label": "The Last Train",
+                  "say": [
+                    "(Dark, warm, a little sweet. You feel like you could sleep for a week.)"
+                  ]
+                },
+                {
+                  "label": "Three in the Morning",
+                  "say": [
+                    "(It's just coffee. \"Everyone needs one at some point,\" he says.)"
+                  ]
+                },
+                {
+                  "label": "Something for the road",
+                  "say": [
+                    "(He pours you a glass of water and slides it over. \"Go home safe.\")"
+                  ]
+                }
+              ],
               "say": [
-                "(He pours you something amber without asking what you want. It's exactly right.)"
+                "\"Everything's named after somewhere in the city. Pick a place.\""
               ]
             },
             {
