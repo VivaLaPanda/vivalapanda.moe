@@ -3233,6 +3233,22 @@
             },
             {
               "text": "NET CAFE REPORTS \"ghost post\" on old forum. Staff unbothered."
+            },
+            {
+              "text": "KOI POND UNDER NEW MANAGEMENT. Small orange fish in charge, say sources.",
+              "need": "goldfish_freed"
+            },
+            {
+              "text": "RABU RABU REGISTER DISPLAYS SEASHELL. Owner \"not sentimental\".",
+              "need": "sabrina_shell"
+            },
+            {
+              "text": "WHITE FOX SIGHTED AT HILL GATES. Shrine says: \"of course.\"",
+              "need": "fox_seen"
+            },
+            {
+              "text": "MYSTERY POET UNMASKED? Bookshop declines to comment.",
+              "need": "poet_found"
             }
           ]
         }
@@ -4900,6 +4916,36 @@
             "radio_fixed"
           ],
           "text": "Got a working radio."
+        },
+        {
+          "flags": [
+            "sabrina_shell"
+          ],
+          "text": "Brought Sabrina the sea."
+        },
+        {
+          "flags": [
+            "goldfish_freed"
+          ],
+          "text": "Set my goldfish free."
+        },
+        {
+          "flags": [
+            "poet_found"
+          ],
+          "text": "Met the poet under the bridge."
+        },
+        {
+          "flags": [
+            "fox_seen"
+          ],
+          "text": "Saw the white fox."
+        },
+        {
+          "flags": [
+            "ruri_beaten"
+          ],
+          "text": "Beat Ruri at high-low."
         }
       ],
       "visited": "Places in Pandopolis I've been: {n} of {total}."
