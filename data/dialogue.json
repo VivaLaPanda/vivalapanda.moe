@@ -645,6 +645,11 @@
           },
           {
             "say": [
+              "\"Some doors in this town keep odd hours. The back passage, between two and four.\""
+            ]
+          },
+          {
+            "say": [
               "\"That's all I have tonight, stranger. Come back when the city's had time to talk.\""
             ]
           }
@@ -914,6 +919,18 @@
               ],
               "say": [
                 "\"Eight stamps, eight places worth finding. Fill the card, then go up on a roof.\""
+              ]
+            },
+            {
+              "keys": [
+                "door",
+                "doors",
+                "late",
+                "bar 25",
+                "25"
+              ],
+              "say": [
+                "\"Some doors in this city only open between two and four. Try the back passage. Late.\""
               ]
             }
           ]
