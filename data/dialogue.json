@@ -1299,7 +1299,69 @@
       "speaker": "P a n d a",
       "greeting": [
         "The harbour at night. There's a little boat that goes upriver."
-      ]
+      ],
+      "menu": [
+        {
+          "label": "Fish off the pier",
+          "action": "fish"
+        }
+      ],
+      "play": {
+        "fishing": {
+          "cast": "(You cast off the end of the pier. Now you wait.)",
+          "waiting": "...",
+          "bite": "!!",
+          "stop": "Reel in",
+          "reel_in": "(You reel in. Nothing but seaweed.)",
+          "too_soon": "Too soon! Whatever it was, it's gone.",
+          "got_away": "Too slow! It got away.",
+          "catches": [
+            {
+              "weight": 30,
+              "say": [
+                "A mackerel! Shiny. You let it go."
+              ]
+            },
+            {
+              "weight": 18,
+              "say": [
+                "A tiny crab. It pinches the line and lets go. Rude."
+              ]
+            },
+            {
+              "weight": 15,
+              "say": [
+                "An old boot. Classic."
+              ]
+            },
+            {
+              "weight": 14,
+              "say": [
+                "A squid! It squirts ink at you and plops back in."
+              ]
+            },
+            {
+              "weight": 10,
+              "say": [
+                "An octopus. It waves. You wave back."
+              ]
+            },
+            {
+              "weight": 8,
+              "say": [
+                "A message in a bottle!"
+              ],
+              "pocket": "bottle"
+            },
+            {
+              "weight": 5,
+              "say": [
+                "A fish that looks exactly like Johnny Uppercut. You don't tell him."
+              ]
+            }
+          ]
+        }
+      }
     },
     "riverboat": {
       "speaker": "P a n d a",
@@ -1587,7 +1649,7 @@
     }
   },
   "pockets": {
-    "_readme": "Prizes from Explore's claw machine, shown in the pockets by the dialog box (js/house-key.js).",
+    "_readme": "Things you've picked up in Explore (the claw machine, the festival, the harbour), shown in the pockets by the dialog box (js/house-key.js). icon: img/house-key/<icon>.png (default plush-<id>).",
     "cat": {
       "name": "grey cat plush",
       "look": "A grey cat plush. It looks unimpressed. Accurate."
@@ -1607,6 +1669,19 @@
     "panda": {
       "name": "panda plush",
       "look": "THE panda plush. It's the best thing in this whole city."
+    },
+    "goldfish_bag": {
+      "name": "goldfish in a bag",
+      "icon": "goldfish-bag",
+      "look": "Your goldfish from the festival, in its little bag. It looks happy. Probably."
+    },
+    "bottle": {
+      "name": "message in a bottle",
+      "icon": "bottle",
+      "look": [
+        "A message in a bottle. It says:",
+        "\"If you're reading this, the train goes further than you think.\""
+      ]
     }
   }
 }

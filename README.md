@@ -83,8 +83,8 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                        ├─ Club Polka (dance) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
                                        ├─ Crossing ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                        └─ Otojima Station ─ Half Pipe ─ Beach
-                                       │                                           ─ Sunset ─ Harbour ─┬─ ↺ Otojima Station
-                                       │                                                               └─ Riverboat ─ ↺ Glade
+                                       │                                           ─ Sunset ─ Harbour (fishing) ─┬─ ↺ Otojima Station
+                                       │                                                                         └─ Riverboat ─ ↺ Glade
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
                                                  │              ├─ Namba Bears (song requests) ─ Bathhouse ─ inner bath
                                                  ├─ Ghandi's ─ Rabu Rabu (drinks)

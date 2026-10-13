@@ -97,6 +97,7 @@
             o.box.remove();
             var best = +(get("pandaGoldfish") || 0);
             if (caught > best) put("pandaGoldfish", caught);
+            if (caught) pocket("goldfish_bag");
             S.say([fill(p.result[Math.min(caught, p.result.length - 1)], { n: caught })]);
         }
 
@@ -463,6 +464,53 @@
         m.click = function () { return arr(P().claw.intro); };
         m.choices = function () { var p = P().claw; return [{ label: p.play, act: claw }, { label: p.watch }]; };
     };
+
+    // ---------- the harbour: fishing off the pier ----------
+
+    // cast, wait for the float to go under, then click (or Space) within a moment; too soon and it's gone
+    var FLOAT = [31, 66];   // on the water, canvas px
+
+    function fish() {
+        var p = P().fishing, o = overlay(), cv = o.cv, ctx = o.ctx, raf, over = false;
+        var bite = performance.now() + rand(2500, 8000), window_ms = 750, state = "wait";
+        o.box.style.background = "transparent";
+        function px(c, x, y, w, h) { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), w || 1, h || 1); }
+        function finish(lines, item) {
+            if (over) return;
+            over = true;
+            cancelAnimationFrame(raf);
+            document.removeEventListener("keydown", key, true);
+            o.box.remove();
+            if (item) pocket(item);
+            S.say(lines, function () { S.offer(menuOf(R.said.menu)); });
+        }
+        function reel() {
+            var now = performance.now();
+            if (state === "wait") { finish([p.too_soon]); return; }
+            if (state !== "bite") return;
+            var roll = Math.random() * p.catches.reduce(function (n, c) { return n + c.weight; }, 0), got = p.catches[0];
+            for (var i = 0; i < p.catches.length; i++) { roll -= p.catches[i].weight; if (roll <= 0) { got = p.catches[i]; break; } }
+            finish(arr(got.say), got.pocket);
+        }
+        function key(e) { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); reel(); } }
+        document.addEventListener("keydown", key, true);
+        cv.addEventListener("pointerdown", reel);
+        (function step(now) {
+            ctx.clearRect(0, 0, 185, 132);
+            if (state === "wait" && now >= bite) { state = "bite"; S.status(p.bite); }
+            if (state === "bite" && now > bite + window_ms) { finish([p.got_away]); return; }
+            var bob = state === "bite" ? 2 : Math.round(Math.sin(now / 400));
+            for (var t = 0; t < 1; t += .015) {                           // the line, from you at the rail out to the float
+                px("#cfd8ff", 160 - (160 - FLOAT[0]) * t, 132 - (132 - FLOAT[1]) * (1 - (1 - t) * (1 - t)), 1, 1);
+            }
+            if (state !== "bite") { px("#ff3333", FLOAT[0] - 1, FLOAT[1] - 2 + bob, 3, 2); px("#ffffff", FLOAT[0] - 1, FLOAT[1] + bob, 3, 1); }
+            else for (var r = 3; r < 7; r += 2) for (var a = 0; a < 6.28; a += .5) px("#cfd8ff", FLOAT[0] + Math.cos(a) * r, FLOAT[1] + Math.sin(a) * r * .5, 1, 1);
+            if (!over) raf = requestAnimationFrame(step);
+        })(performance.now());
+        S.say([p.cast], function () { S.status(p.waiting); S.offer([{ label: p.stop, act: function () { finish([p.reel_in]); } }]); });
+    }
+
+    PLAY.harbour = function () { S.actions.fish = fish; };
 
     // ---------- the casino: a panorama you pan along, and roulette ----------
 

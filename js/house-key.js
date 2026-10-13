@@ -92,7 +92,7 @@
         inv.textContent = "";
         pockets().forEach(function (id) {       // prizes from Explore's game centre (js/explore-play.js)
             var it = (R.dialogueAll.pockets || {})[id];
-            if (it) button("plush-" + id + ".png", it.name, function () { S.say(arr(it.look)); });
+            if (it) button((it.icon || "plush-" + id) + ".png", it.name, function () { S.say(arr(it.look)); });
         });
         carrying(hunt()).forEach(function (id) {
             button(id + ".png", itemName(id), function () { S.say([fill(t.items[id].look, { word: ITEMS[id] })]); });
