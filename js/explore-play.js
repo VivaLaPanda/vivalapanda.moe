@@ -1064,6 +1064,25 @@
     }
     if (RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) soundBed("rain");
     if (place === "campsite") soundBed("crickets");
+    // Platform 1's arrival chime: four soft notes, once, on your first touch (made in the browser)
+    if (place === "trainplatform") {
+        ["pointerdown", "keydown"].forEach(function (ev) {
+            document.addEventListener(ev, function chime() {
+                ["pointerdown", "keydown"].forEach(function (e2) { document.removeEventListener(e2, chime); });
+                var muted = false;
+                try { muted = localStorage.getItem("muted") === "true"; } catch (e) { /* blocked */ }
+                var AC = window.AudioContext || window.webkitAudioContext;
+                if (muted || !AC) return;
+                var ac = new AC();
+                [659, 523, 587, 392].forEach(function (f, i) {       // E C D G, the classic station chime
+                    var o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime + i * .45;
+                    o.type = "sine"; o.frequency.value = f;
+                    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.06, t + .02); g.gain.exponentialRampToValueAtTime(.001, t + 1.2);
+                    o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + 1.3);
+                });
+            });
+        });
+    }
     if (["beach", "harbour", "lighthouse", "sunset"].indexOf(place) >= 0) soundBed("waves");
 
     // December (or ?season=winter): snow on the outdoor places, drifting, never in a hurry
