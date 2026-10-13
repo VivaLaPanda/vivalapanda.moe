@@ -189,7 +189,7 @@ var LOCATIONS = {
     // behind Erratic Errata, for those who ask for the second edition (js/explore-town.js)
     "zengarden": {
         title: "A Hidden Garden", image: "../img/explore/pathways/zengarden.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/yube-yonda-koto.mp3",
         links: [
             { to: "?loc=weirdstore", rect: [0, 330, 200, 148] }
         ],
@@ -229,7 +229,7 @@ var LOCATIONS = {
     },
     "shrine": {
         title: "Pumpo Shrine", image: "../img/explore/places/night_temple_festival.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/train-music/sufjan-stevens-seven-swans.mp3",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/aegean-sea-temple-of-the-moon.mp3",
         links: [
             { to: "?loc=forestedge", rect: [543, 101, 126, 201] },
             { to: "?loc=underbridge", rect: [0, 250, 80, 160] },   // steps down to the river
@@ -335,7 +335,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized to its own inks); through the purple door by the ramen stall
     "karaoke": {
         title: "Karaoke Box", image: "../img/explore/places/karaoke.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-sweetheart.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/mml-bits-peko-random-brain.mp3",
         links: [
             { to: "?loc=ramen", rect: [0, 478, 640, 50] }
         ],
@@ -347,7 +347,7 @@ var LOCATIONS = {
     // only reachable 2-4am, through a door in the back passage (js/explore-town.js)
     "bar25": {
         title: "Bar 25", image: "../img/explore/places/bar.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/eve-burst-error-room-marina.mp3",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/eve-burst-error-bar.mp3",
         links: [
             { to: "?loc=backpassage", rect: [0, 478, 640, 50] }
         ],
@@ -398,7 +398,7 @@ var LOCATIONS = {
     // drawn for the city like the ramen stall (FAL, quantized to Isogashii Boulevard's inks)
     "gamecentre": {
         title: "Taito Game Centre", image: "../img/explore/places/game_centre.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/ippatsu-jang-see-you-later.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/desert-dragoon-center-of-wonders.mp3",
         links: [
             { to: "?loc=partystreet", rect: [0, 478, 640, 50] }
         ],
@@ -481,7 +481,7 @@ var LOCATIONS = {
     },
     "sunset": {
         title: "The Shore at Sunset", image: "../img/explore/places/sunset.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/star-ship-rendezvous-sunset-for-the-sunrise.mp3",
         links: [
             { to: "?loc=harbour", rect: [0, 446, 284, 82] },
             { to: "?loc=beach", rect: [0, 478, 640, 50] }   // behind you
@@ -504,7 +504,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized to its own 16 blues); jellyfish in js/explore-ambient.js
     "aquarium": {
         title: "Otojima Aquarium", image: "../img/explore/places/aquarium.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doradora-emotion-dor02.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/aegean-sea-bgm13.mp3",
         links: [
             { to: "?loc=harbour", rect: [0, 478, 640, 50] }
         ],
@@ -539,7 +539,7 @@ var LOCATIONS = {
     // drawing, in two alternating sets)
     "pier": {
         title: "Otojima Pier", image: "../img/explore/places/pier.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/animahjong-x-10.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/merry-go-round-hustle-and-bustle.mp3",
         layers: [{ src: "../img/explore/layers/pier-bulbs-a.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-a" },
                  { src: "../img/explore/layers/pier-bulbs-b.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-b" }],
         links: [
@@ -583,7 +583,7 @@ var LOCATIONS = {
     // drawn for the city: FAL from the Alley's and the festival's pictures, quantized to the Alley's 16 inks
     "ramen": {
         title: "A Ramen Stall", image: "../img/explore/places/ramen_yatai.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kanako-office.mp3",
         links: [
             { to: "?loc=karaoke", rect: [100, 170, 65, 140] },   // the purple-lit door in the alley wall
             { to: "?loc=nightalley", rect: [0, 300, 90, 178] },
