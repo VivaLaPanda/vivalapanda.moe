@@ -4236,6 +4236,22 @@
               ]
             },
             {
+              "label": "Ask about the man in the hat",
+              "unless": "hat_given",
+              "say": [
+                "\"Him. He used to come in here with a girl, years ago. She'd talk his ear off.\"",
+                "\"Then one night she didn't come. After that, neither did he. He drinks at the tower now.\""
+              ]
+            },
+            {
+              "label": "Ask about the man in the hat",
+              "need": "hat_given",
+              "say": [
+                "\"He came in last night. First time in twelve years. No hat.\"",
+                "\"He sat right there and smiled at nothing. I didn't charge him.\""
+              ]
+            },
+            {
               "label": "Just sit"
             }
           ]
