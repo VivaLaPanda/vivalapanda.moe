@@ -72,30 +72,36 @@ meant to be poked at.
 - It rains on the outdoor night streets about one hour in three (the same hour everywhere); add `&rain` to a URL
   to see it.
 
-The map (→ an exit; ⇢ a hidden or unlocked way; ↺ joins somewhere else on the map):
+The map (each place's main exits; ⇢ a way that has to be found or unlocked). Every place has a way out: a door
+where one is drawn, and the bottom edge of the picture (behind you) back to the street you came from.
 ```
 Home ─ Main Street ─┬─ Casino (pans; roulette)
-                    ├─ Tokugawa Tower lobby ─┬─ Penthouse
+                    ├─ Tokugawa Tower lobby ─┬─ Penthouse (watch the city; telescope)
                     │                         └─ Tower Bar (drinks)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
-                    │                ├─ Pumpo Park (lanterns) ─ Summer Festival (goldfish, ring toss) ─ Shrine (fortunes) ─ ↺ Forest Edge
-                    │                ├─ Residential (─ Konbini) ─ Houses ─┬─ the girl ─ Acacia Apartments ─┬─ the Roof (shooting stars; drawn)
-                    │                │                        │                                 └⇢ (the cat) Back Passage
-                    │                │                        │      ─ Old House ─┬─ its room (the cat; pet it)
-                    │                │                        │                   └─ ↺ Shrine
-                    │                │                        └─ Andy's House
+                    │                ├─ Pumpo Park (lanterns) ─ Summer Festival (goldfish, ring toss) ─ Shrine
+                    │                ├─ Residential ─┬─ Konbini
+                    │                │               └─ Houses ─┬─ the girl ─ Acacia Apartments ─┬─ the Roof (stars)
+                    │                │                          │                                 └⇢ (the cat) Back Passage
+                    │                │                          │                                      ─ Old House ─ its room
+                    │                │                          └─ Andy's House
                     │                └─ Forest Edge (fireflies) ─ Hidden Glade (pond: the house key) ─ train.html
-                    └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine: prizes to your pockets; drawn)
+                    └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
                                        ├─ Club Polka (dance) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
                                        ├─ Crossing ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                        └─ Otojima Station ─ Half Pipe ─ Beach
-                                       │                                           ─ Sunset ─ Harbour (fishing) ─┬─ ↺ Otojima Station
-                                       │                                                                         └─ Riverboat ─ ↺ Glade
+                                       │                                           ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
+                                       │                                                                         └─ Riverboat
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
-                                                 │              ├─ Namba Bears (song requests) ─ Bathhouse ─ inner bath
-                                                 ├─ Ghandi's ─ Rabu Rabu (drinks)
-                                                 └─ Ramen stall (Taisho; drawn for the city) ─ recipes
+                                                 │              ├─ Namba Bears (song requests)
+                                                 │              └─ Bathhouse ─ inner bath (soak)
+                                                 ├─ Ghandi's ─ Rabu Rabu (drinks, stamp card)
+                                                 └─ Ramen stall (Taisho) ─ recipes
 ```
+Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's window ↔ Hidden Garden ↔ Errata; Ramen
+stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima Station; Aquarium → Beach;
+Riverboat → Hidden Glade. Drawn for the city (FAL, quantized to a neighbour's inks): the ramen stall, the game
+centre, the roof, the aquarium, the empty bridge the train crosses.
 
 **The house key.** Visitors who find Panda's spare key can switch the living room's lamps, blinds and AC on and off
 (nothing else). `js/house-key.js` runs on every scene page: the key slot and the hunt's items by the dialog box's ▼,
