@@ -5540,7 +5540,11 @@
       "take_label": "Take a photo",
       "taken": "(Click! The film winds on. {left} shots left.)",
       "album": "Your photos so far: {n}. (Click them to put them away.)",
-      "show_label": "Show someone your photos"
+      "show_label": "Show someone your photos",
+      "print_label": "Get a print to keep",
+      "printed": [
+        "(A little print slides out, still warm. It's on your device now: a souvenir of Pandopolis.)"
+      ]
     },
     "notebook": {
       "name": "Panda's notebook",

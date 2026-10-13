@@ -1777,7 +1777,15 @@
     if (PHOTO_SPOTS.indexOf(place) >= 0) {
         (R.afterGreeting = R.afterGreeting || []).push(function () {
             var p = (R.dialogueAll.pockets || {}).camera;
-            if (!p || !has("camera") || photos().indexOf(place) >= 0) return null;
+            if (!p || !has("camera")) return null;
+            var choices = [];
+            if (photos().indexOf(place) >= 0 && p.print_label) {   // you've photographed it: get a print to keep
+                choices.push({ label: p.print_label, act: function () {
+                    savePrint(LOCATIONS[place].image, LOCATIONS[place].title);
+                    S.say(arr(p.printed), function () { S.home(false); });
+                } });
+            }
+            if (photos().indexOf(place) >= 0) return choices;
             return [{ label: p.take_label, act: function () {
                 var got = photos();
                 got.push(place);
@@ -1791,6 +1799,23 @@
             } }];
         });
     }
+    // a print to keep: the place's picture, framed like a photo, saved as a PNG on your device
+    function savePrint(src, title) {
+        var im = new Image();
+        im.onload = function () {
+            var w = im.naturalWidth * 2, h = im.naturalHeight * 2, pad = 24, cv = document.createElement("canvas");
+            cv.width = w + pad * 2; cv.height = h + pad * 4;
+            var ctx = cv.getContext("2d");
+            ctx.fillStyle = "#f4efe4"; ctx.fillRect(0, 0, cv.width, cv.height);
+            ctx.imageSmoothingEnabled = false; ctx.drawImage(im, pad, pad, w, h);
+            ctx.fillStyle = "#3a3048"; ctx.font = "20px monospace"; ctx.fillText(title + " · Pandopolis", pad, h + pad * 2.6);
+            var a = document.createElement("a");
+            a.download = "pandopolis-" + place + ".png"; a.href = cv.toDataURL("image/png"); a.click();
+        };
+        im.src = src;
+    }
+    window.POCKET_PRINT = savePrint;
+
     // the album: your photos laid out like prints on a table (click to put them away)
     window.POCKET_LOOK = window.POCKET_LOOK || {};
     window.POCKET_LOOK.camera = function (it) {
