@@ -98,7 +98,9 @@
                 S.say(look ? look(it) : arr(it.look));
                 if (look) drawInventory();
             });
-            if (id === "rally" && get("pandaRallyNew") === "1") inv.lastChild.classList.add("hk-new");
+            if ((id === "rally" && get("pandaRallyNew") === "1") || (id === "letters" && get("pandaLettersNew") === "1")) {
+                inv.lastChild.classList.add("hk-new");
+            }
         });
         carrying(hunt()).forEach(function (id) {
             button(id + ".png", itemName(id), function () { S.say([fill(t.items[id].look, { word: ITEMS[id] })]); });
@@ -272,6 +274,36 @@
             o.choices = pondChoices;
         }
     });
+    // ---------- letters: people you've helped in Explore write to you; they arrive when you come home ----------
+
+    function lettersHome() {
+        var all = R.dialogueAll && R.dialogueAll.letters;
+        if (!all || place !== "living_room") return;
+        var got;
+        try { got = JSON.parse(get("pandaLetters")) || []; } catch (e) { got = []; }
+        var fresh = Object.keys(all).filter(function (k) {
+            return k.charAt(0) !== "_" && got.indexOf(k) < 0 && get("pandaHeard_" + all[k].need) === "1";
+        });
+        if (!fresh.length) return;
+        put("pandaLetters", JSON.stringify(got.concat(fresh)));
+        var pk;
+        try { pk = JSON.parse(get("pandaPockets")) || []; } catch (e) { pk = []; }
+        if (pk.indexOf("letters") < 0) put("pandaPockets", JSON.stringify(pk.concat("letters")));
+        put("pandaLettersNew", "1");
+        drawInventory();
+        S.say(arr(fill(R.dialogueAll.pockets.letters.arrived, { n: fresh.length })));
+    }
+    window.POCKET_LOOK = window.POCKET_LOOK || {};
+    window.POCKET_LOOK.letters = function (it) {
+        var all = R.dialogueAll.letters, got;
+        try { got = JSON.parse(get("pandaLetters")) || []; } catch (e) { got = []; }
+        put("pandaLettersNew", "");
+        var out = [];
+        got.forEach(function (k) { if (all[k]) out = out.concat(arr(all[k].text)); });
+        return out.length ? out : arr(it.look);
+    };
+
     document.addEventListener("scenestart", drawInventory);
+    document.addEventListener("scenestart", function () { setTimeout(lettersHome, 2600); });   // after the greeting
     document.addEventListener("pockets", drawInventory);
 })();

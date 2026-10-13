@@ -3614,6 +3614,51 @@
       "name": "a red charm",
       "icon": "omamori",
       "look": "A small red shrine charm from the harbour. It feels like it belongs to someone."
+    },
+    "letters": {
+      "name": "letters",
+      "icon": "letter",
+      "look": "No letters yet.",
+      "arrived": "Oh! There's mail for you. ({n} new, in your pockets.)"
+    }
+  },
+  "letters": {
+    "_readme": "Letters that arrive in the living room after you've helped someone in Explore (need: the flag). js/house-key.js.",
+    "sabrina": {
+      "need": "tony_answered",
+      "text": [
+        "A postcard from Rabu Rabu: \"Thanks for playing courier, anon. Tony says hi. (He didn't.)\""
+      ]
+    },
+    "andy": {
+      "need": "andy_turned",
+      "text": [
+        "A guitar pick taped to a note: \"thx for the fuse. Namba Bears, thursday. -andy\""
+      ]
+    },
+    "brownie": {
+      "need": "brownie_fed",
+      "text": [
+        "A bathhouse ticket and a note: \"Taisho's ramen was excellent. Don't tell him. -B\""
+      ]
+    },
+    "girl": {
+      "need": "ghost_free",
+      "text": [
+        "An envelope with nothing in it but a pressed red flower. No name. You know who it's from."
+      ]
+    },
+    "cat": {
+      "need": "cat_fed",
+      "text": [
+        "Not a letter. A single grey feather, left on the doormat. The cat says thank you."
+      ]
+    },
+    "johnny": {
+      "need": "hat_tipped",
+      "text": [
+        "A note in very neat handwriting: \"He tipped his hat? In twelve years... Who ARE you? -J\""
+      ]
     }
   }
 }
