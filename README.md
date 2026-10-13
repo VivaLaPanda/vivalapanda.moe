@@ -117,7 +117,8 @@ Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a fuse; then they're a
 (takeout; a free soak); the cat (chase it, pet it, feed it a mackerel from the pier, it roams town); the girl
 under the streetlight (her charm, off the pier); the man in the hat (the bar, the konbini at 3am, the car park,
 Ruri's ace); the stamp rally (eight places, a pin, the rooftop ending). Places also greet you differently in the
-rain, in the small hours, on Thursdays, at Halloween (`?season=halloween`), and after things you've done.
+rain, in the small hours, on Thursdays, at Halloween (`?season=halloween`), in December snow (`?season=winter`), at New
+Year, and after things you've done.
 
 **The house key.** Visitors who find Panda's spare key can switch the living room's lamps, blinds and AC on and off
 (nothing else). `js/house-key.js` runs on every scene page: the key slot and the hunt's items by the dialog box's ▼,

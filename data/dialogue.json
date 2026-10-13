@@ -571,6 +571,9 @@
       ],
       "greeting_halloween": [
         "Somebody's put jack-o'-lanterns out on Main Street. Happy Halloween, Pandopolis."
+      ],
+      "greeting_winter": [
+        "Snow on Main Street! Everything's gone quiet and soft."
       ]
     },
     "agency": {
@@ -1812,6 +1815,9 @@
       ],
       "greeting_halloween": [
         "A Halloween festival night! Half the kids here are dressed as goldfish."
+      ],
+      "greeting_winter": [
+        "A winter festival! Amazake, hand warmers, and the goldfish tank's got a little heater."
       ]
     },
     "shrine": {
@@ -1879,7 +1885,13 @@
           ],
           "still": "Your ema's still on the rack, between a hundred others: \"{wish}\""
         }
-      }
+      },
+      "greeting_newyear": [
+        "Hatsumode! The whole city's lined up for the year's first visit. Happy New Year."
+      ],
+      "greeting_winter": [
+        "Snow on the shrine roof. The lanterns look even warmer."
+      ]
     },
     "backpassage": {
       "speaker": "P a n d a",
@@ -2417,6 +2429,9 @@
             "\"Brownie ate it all, didn't she? She always says she's not hungry. Irasshai!\""
           ]
         }
+      ],
+      "greeting_winter": [
+        "\"In you come, out of the snow! Ramen weather, this.\""
       ]
     },
     "gamecentre": {
@@ -2554,6 +2569,9 @@
             "Thanks for visiting Pandopolis. Come back any time. The city will keep the lights on."
           ]
         }
+      ],
+      "greeting_winter": [
+        "Snow on the roof, and on the folding chair. Somebody brushed off half of it."
       ]
     },
     "konbini": {

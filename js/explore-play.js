@@ -1050,6 +1050,24 @@
     if (RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) soundBed("rain");
     if (place === "campsite") soundBed("crickets");
 
+    // December (or ?season=winter): snow on the outdoor places, drifting, never in a hurry
+    function winter() {
+        return /[?&]season=winter\b/.test(location.search) || new Date().getMonth() === 11 || (new Date().getMonth() === 0 && new Date().getDate() <= 7);
+    }
+    var SNOWY = RAINY.concat(["nightpark", "festival", "shrine", "forestedge", "rooftop", "nightplaza", "hilltop", "campsite"]);
+    if (SNOWY.indexOf(place) >= 0 && winter()) {
+        var flakes = [];
+        for (var fi = 0; fi < 70; fi++) flakes.push({ x: rand(0, 185), y: rand(0, 132), v: rand(5, 11), ph: rand(0, 6) });
+        ambient(function (ctx, dt, t) {
+            ctx.fillStyle = "#ffffff";
+            flakes.forEach(function (f) {
+                f.y += f.v * dt;
+                if (f.y > 132) { f.y = -2; f.x = rand(0, 185); }
+                ctx.fillRect(Math.round(f.x + Math.sin(t * .8 + f.ph) * 2), Math.round(f.y), 1, 1);
+            });
+        });
+    }
+
     var AMBIENT = {
         laundromat: function () { tumble([8, 96], 5); },
         campsite: function () { embers([92, 72]); },
@@ -1661,6 +1679,8 @@
         var after = (d.greeting_after || []).filter(function (g) { return heard(g.need); })[0];
         if (after) return after.greeting;   // because of something you did (Andy, at the cafe with Sakura)
         if (d.greeting_halloween && halloween()) return d.greeting_halloween;
+        if (d.greeting_newyear && now.getMonth() === 0 && now.getDate() <= 3) return d.greeting_newyear;
+        if (d.greeting_winter && winter()) return d.greeting_winter;
         if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
         if (d.greeting_rain && RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) return d.greeting_rain;
         if (d.greeting_late && h < 5) return d.greeting_late;
