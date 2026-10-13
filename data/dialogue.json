@@ -2700,7 +2700,17 @@
             }
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Wait to see who comes back",
+          "say": [
+            "(You wait. The tea goes cold.)",
+            "(A rabbit hops out of the bushes, looks at you, looks at the table, and leaves.)",
+            "...Well. That answers that."
+          ]
+        }
+      ]
     },
     "hilltop": {
       "speaker": "P a n d a",
@@ -2720,7 +2730,29 @@
             "Some kids are chasing a red ball down the hill. One of them waves."
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Sit under the tree for a while",
+          "cycle": [
+            [
+              "(You sit with your back against the tree. The wind moves the grass in long waves.)"
+            ],
+            [
+              "(A train crosses the valley far below, small as a toy. You can just hear it.)"
+            ],
+            [
+              "(The kids' red ball bounces past. One of them chases it, waving sorry.)"
+            ],
+            [
+              "(You watch the shadow of a cloud slide all the way across the valley.)"
+            ],
+            [
+              "(You don't think about anything for a while. It's nice.)"
+            ]
+          ]
+        }
+      ]
     },
     "lilyfield": {
       "speaker": "P a n d a",
@@ -2735,7 +2767,16 @@
             "Higanbana. They come up all at once, like someone flipped a switch."
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Walk through the lilies",
+          "say": [
+            "(You walk the narrow path between them. They come up to your knees.)",
+            "Higanbana are supposed to grow along the way to the other side. This one's very pretty."
+          ]
+        }
+      ]
     },
     "campsite": {
       "speaker": "P a n d a",
