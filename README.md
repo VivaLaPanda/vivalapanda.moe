@@ -120,7 +120,7 @@ Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a fuse; then they're a
 (takeout; a free soak); the cat (chase it, pet it, feed it a mackerel from the pier, it roams town); the girl
 under the streetlight (her charm, off the pier); the man in the hat (the bar, the konbini at 3am, the car park,
 Ruri's ace, the back passage; he was waiting for the girl, and leaves when she goes home); the stamp rally (eight places, a pin, the rooftop ending). Places also greet you differently in the
-rain, in the small hours, on Thursdays, at Halloween (`?season=halloween`), in December snow (`?season=winter`), at New
+rain, in the small hours, on Thursdays, at Halloween (`?season=halloween`), in December snow (`?season=winter`), in cherry blossom season (`?season=spring`), at New
 Year, and after things you've done.
 
 **The house key.** Visitors who find Panda's spare key can switch the living room's lamps, blinds and AC on and off

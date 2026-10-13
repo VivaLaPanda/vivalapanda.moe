@@ -580,6 +580,9 @@
         "Pandopolis again! It's like it never sleeps. Because it doesn't.",
         "Main Street. The neon's buzzing. Somewhere, a cat is judging someone.",
         "Hey, you came back! The city missed you. Probably."
+      ],
+      "greeting_spring": [
+        "Petals blowing down Main Street from somewhere. Spring found the city."
       ]
     },
     "agency": {
@@ -1296,7 +1299,10 @@
             }
           ]
         }
-      }
+      },
+      "greeting_spring": [
+        "Cherry blossoms in Pumpo Park! Everyone's out on blue tarps, under the lanterns."
+      ]
     },
     "nightplaza": {
       "speaker": "Ｐａｎｄａ",
@@ -2304,6 +2310,9 @@
       ],
       "greeting_winter": [
         "Snow on the shrine roof. The lanterns look even warmer."
+      ],
+      "greeting_spring": [
+        "Petals all over the shrine steps. The bell rope's got one stuck to it."
       ]
     },
     "backpassage": {

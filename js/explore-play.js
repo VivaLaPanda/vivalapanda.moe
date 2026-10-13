@@ -1068,6 +1068,22 @@
         return /[?&]season=winter\b/.test(location.search) || new Date().getMonth() === 11 || (new Date().getMonth() === 0 && new Date().getDate() <= 7);
     }
     var SNOWY = RAINY.concat(["nightpark", "festival", "shrine", "forestedge", "rooftop", "nightplaza", "hilltop", "campsite"]);
+    function spring() {   // cherry blossom season (or ?season=spring)
+        var d = new Date(), m = d.getMonth(), day = d.getDate();
+        return /[?&]season=spring\b/.test(location.search) || (m === 2 && day >= 25) || (m === 3 && day <= 15);
+    }
+    if (SNOWY.indexOf(place) >= 0 && spring()) {
+        var blossoms = [];
+        for (var bi = 0; bi < 40; bi++) blossoms.push({ x: rand(0, 185), y: rand(0, 132), v: rand(6, 12), ph: rand(0, 6) });
+        ambient(function (ctx, dt, t) {
+            blossoms.forEach(function (f, i) {
+                f.y += f.v * dt; f.x += Math.sin(t * 1.3 + f.ph) * 6 * dt - 2 * dt;
+                if (f.y > 132 || f.x < -2) { f.y = -2; f.x = rand(0, 200); }
+                ctx.fillStyle = i % 3 ? "#ffb7c9" : "#ffe0e8";
+                ctx.fillRect(Math.round(f.x), Math.round(f.y), (Math.floor(t * 3 + i) % 2) + 1, 1);   // a petal, turning
+            });
+        });
+    }
     if (SNOWY.indexOf(place) >= 0 && winter()) {
         var flakes = [];
         for (var fi = 0; fi < 70; fi++) flakes.push({ x: rand(0, 185), y: rand(0, 132), v: rand(5, 11), ph: rand(0, 6) });
@@ -1819,6 +1835,7 @@
         if (d.greeting_halloween && halloween()) return d.greeting_halloween;
         if (d.greeting_newyear && now.getMonth() === 0 && now.getDate() <= 3) return d.greeting_newyear;
         if (d.greeting_winter && winter()) return d.greeting_winter;
+        if (d.greeting_spring && spring()) return d.greeting_spring;
         if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
         if (d.greeting_regular && visits >= 5 && Math.random() < .7) return d.greeting_regular;   // a regular now
         if (d.greeting_return && visits > 1 && Math.random() < .6) {   // you've been here before
