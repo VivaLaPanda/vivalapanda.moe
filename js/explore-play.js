@@ -1946,8 +1946,11 @@
             var lines = R.said && R.said.linger;
             if (!lines) return;
             var stop = whenIdle(40000, function () {
+                // only at rest: not mid-conversation (a ▼ waiting), not in a game or a view
+                var arrow = document.getElementById("text-arrow");
+                if ((arrow && !arrow.hidden) || S.stage.querySelector(".play-overlay, .play-telescope, .play-album")) return;
                 stop();
-                if (!S.stage.querySelector(".play-overlay, .play-telescope, .play-album")) S.say([lines[Math.floor(Math.random() * lines.length)]]);
+                S.say([lines[Math.floor(Math.random() * lines.length)]]);
             });
         });
     }
