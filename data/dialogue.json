@@ -651,6 +651,13 @@
             "\"A gift from the old house cat? That cat doesn't give anything to anyone.\"",
             "\"You've got connections, stranger. I'm impressed.\""
           ]
+        },
+        "camera": {
+          "label": "Show Johnny your photos",
+          "say": [
+            "\"Photographs. Evidence. I like you, stranger.\"",
+            "\"...That one of the garden. Where did you take that? Never mind. I know.\""
+          ]
         }
       },
       "menu": [
@@ -1142,6 +1149,13 @@
             "\"Ooh! Can I keep it? Look at Panda's bunny ears.\"",
             "(She sticks it right on the register, next to a dozen others.)"
           ]
+        },
+        "camera": {
+          "label": "Show Sabrina your photos",
+          "say": [
+            "\"Ooh, the sunset at Otojima! I haven't been to the sea in years.\"",
+            "\"Next time take me. ...Kidding. Unless?\""
+          ]
         }
       },
       "greeting_after": [
@@ -1529,6 +1543,12 @@
           "say": [
             "The man in the hat looks at the ace for a long moment.",
             "Then, very slowly, he tips his hat to you. He doesn't say a word."
+          ]
+        },
+        "camera": {
+          "label": "Show Tony your photos",
+          "say": [
+            "\"The view from the penthouse. Never been up. Forty years behind this bar.\""
           ]
         }
       },
@@ -2175,6 +2195,12 @@
           "label": "Show Taisho the panda plush",
           "say": [
             "\"Ha! It looks just like Panda. Same face when the ramen's late.\""
+          ]
+        },
+        "camera": {
+          "label": "Show Taisho your photos",
+          "say": [
+            "\"The roof of the apartments? I can see my house from there. Well. The cat's house.\""
           ]
         }
       },
@@ -3226,7 +3252,8 @@
       "look": "A disposable camera from Half Pipe. Find somewhere pretty and take a photo.",
       "take_label": "Take a photo",
       "taken": "(Click! The film winds on. {left} shots left.)",
-      "album": "Your photos so far: {n}. (Click them to put them away.)"
+      "album": "Your photos so far: {n}. (Click them to put them away.)",
+      "show_label": "Show someone your photos"
     },
     "notebook": {
       "name": "Panda's notebook",
