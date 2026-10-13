@@ -2281,6 +2281,42 @@
         {
           "label": "Ring toss",
           "action": "ringtoss"
+        },
+        {
+          "label": "Buy taiyaki",
+          "say": [
+            "\"Which filling?\""
+          ],
+          "menu": [
+            {
+              "label": "Red bean",
+              "say": [
+                "(Crispy outside, sweet red bean all the way to the tail. The tail is the best part.)"
+              ]
+            },
+            {
+              "label": "Custard",
+              "say": [
+                "(Warm custard. You burn your tongue. Worth it.)"
+              ]
+            },
+            {
+              "label": "Chocolate",
+              "say": [
+                "(Chocolate taiyaki. Very modern. The fish looks proud of itself.)"
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Try yo-yo fishing",
+          "unless": "yoyo_got",
+          "pocket": "yoyo",
+          "hear": "yoyo_got",
+          "say": [
+            "(You fish for a water balloon with a paper hook. It holds! Just.)",
+            "You've got a water yo-yo. It goes boing."
+          ]
         }
       ],
       "greeting_halloween": [
@@ -2453,6 +2489,13 @@
               "say": [
                 "The cat's eyes go very, very wide.",
                 "...No. Absolutely not. The goldfish stays in its bag."
+              ]
+            },
+            "yoyo": {
+              "label": "Bounce the yo-yo for the cat",
+              "say": [
+                "The cat watches the yo-yo go up and down, up and down, without moving its head.",
+                "Then it swats it once, decisively, and goes back to sleep."
               ]
             }
           }
@@ -5122,6 +5165,14 @@
       "name": "seashell",
       "icon": "shell",
       "look": "A little pink shell from Otojima's beach. Somebody in the city misses the sea."
+    },
+    "yoyo": {
+      "name": "water yo-yo",
+      "icon": "yoyo",
+      "look": [
+        "You bounce the water yo-yo. Boing. Boing.",
+        "...Boing."
+      ]
     }
   },
   "letters": {
