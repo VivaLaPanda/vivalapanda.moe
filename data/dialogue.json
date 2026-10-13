@@ -683,6 +683,29 @@
       "speaker": "A n d y",
       "greeting": [
         "*You hear muffled breakcore, but Andy doesn't turn around*"
+      ],
+      "menu": [
+        {
+          "label": "Tap Andy on the shoulder",
+          "cycle": [
+            [
+              "*Andy doesn't turn around.*"
+            ],
+            [
+              "*Still nothing. The breakcore gets louder.*"
+            ],
+            [
+              "*Andy pulls out one earbud.* \"...Yeah?\""
+            ],
+            [
+              "\"Oh, hey. You're Panda's friend? Cool. Cool cool cool.\"",
+              "*He puts the earbud back in.*"
+            ],
+            [
+              "*Andy gives you a thumbs up without turning around.*"
+            ]
+          ]
+        }
       ]
     },
     "nightapartments": {
@@ -747,6 +770,16 @@
       "speaker": "S a k u r a",
       "greeting": [
         "\"Go ahead, go for a spin!\""
+      ],
+      "menu": [
+        {
+          "label": "Ask for a recommendation",
+          "pick": [
+            "\"This keyboard has a button that just plays a drum roll. Nobody knows why.\"",
+            "\"These headphones? So good you'll stop hearing your own thoughts. Great for studying.\"",
+            "\"Honestly? The batteries. Nobody ever has enough batteries.\""
+          ]
+        }
       ]
     },
     "weaponshop": {
@@ -927,6 +960,16 @@
       "speaker": "3 7",
       "greeting": [
         "\"Welcome to the Tokugawa tower sir, how may I assist?\""
+      ],
+      "menu": [
+        {
+          "label": "Ask about the tower",
+          "pick": [
+            "\"Forty floors, sir. The bar is down here. The penthouse is for guests only.\"",
+            "\"The elevator plays the same song every day. Guests have filed complaints. Lovingly.\"",
+            "\"The penthouse is booked until further notice, sir. By a cat, oddly.\""
+          ]
+        }
       ]
     },
     "penthouse": {
@@ -1548,8 +1591,22 @@
             "panda": "panda"
           },
           "done": "Out of tries. The claw machine wins this round."
+        },
+        "purikura": {
+          "pose": [
+            "You squeeze into the photo booth. Three, two, one... peace sign!"
+          ],
+          "printed": [
+            "(A sheet of stickers slides out. You look great. Panda's doing bunny ears.)"
+          ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Purikura booth",
+          "action": "purikura"
+        }
+      ]
     },
     "rooftop": {
       "speaker": "P a n d a",
@@ -1798,6 +1855,11 @@
         "Every stamp! Pandopolis is officially explored.",
         "Panda would be proud. Panda IS proud."
       ]
+    },
+    "sticker": {
+      "name": "purikura sticker",
+      "icon": "sticker",
+      "look": "A purikura sticker from the game centre. Sparkles were added. Many sparkles."
     }
   }
 }

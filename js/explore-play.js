@@ -459,7 +459,19 @@
         });
     }
 
+    function purikura() {   // a photo booth: a flash, and a sticker in your pockets
+        var p = P().purikura, flash = document.createElement("div");
+        S.say(arr(p.pose), function () {
+            flash.className = "play-flash";
+            S.stage.appendChild(flash);
+            setTimeout(function () { flash.remove(); }, 450);
+            pocket("sticker");
+            S.say(arr(p.printed), function () { S.offer(menuOf(R.said.menu)); });
+        });
+    }
+
     PLAY.gamecentre = function () {
+        S.actions.purikura = purikura;
         var m = obj("claw");
         m.click = function () { return arr(P().claw.intro); };
         m.choices = function () { var p = P().claw; return [{ label: p.play, act: claw }, { label: p.watch }]; };
@@ -978,6 +990,11 @@
     function menuOf(list) {
         return list.filter(function (c) { return !c.need || heard(c.need); }).map(function (c) {
             if (c.menu) return { label: c.label, say: c.say, menu: menuOf(c.menu) };
+            if (c.cycle) return { label: c.label, act: function () {   // the next of its lines each time, remembered
+                var key = "pandaCycle_" + place + "_" + c.label, i = +(get(key) || 0);
+                put(key, Math.min(i + 1, c.cycle.length - 1));
+                S.say(arr(c.cycle[i]), function () { S.offer(menuOf(R.said.menu)); });
+            } };
             if (!c.say && !c.pick) return c;
             return { label: c.label, act: function () {
                 if (c.serve) serve(c.serve);

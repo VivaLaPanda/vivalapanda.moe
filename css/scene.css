@@ -478,3 +478,14 @@
 /* a pocket with something new in it (the stamp card after a new stamp) */
 #hk-inventory .hk-new img { animation: hk-pulse 1s steps(2) infinite; }
 @keyframes hk-pulse { 50% { filter: drop-shadow(0 0 3px #ffee88) brightness(1.3); } }
+
+/* a camera flash (the game centre's photo booth) */
+.play-flash {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: #fff;
+    animation: play-flash .45s steps(3) forwards;
+    pointer-events: none;
+}
+@keyframes play-flash { to { opacity: 0; } }
