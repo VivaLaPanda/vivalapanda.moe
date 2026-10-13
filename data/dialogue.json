@@ -3244,6 +3244,14 @@
           ]
         },
         {
+          "label": "Ask about the tea in the hills",
+          "need": "taisho_met",
+          "say": [
+            "\"Ah, you found my day-off table? Up the forest path. I take the tea up there Sundays.\"",
+            "\"Leave the pot warm for the next one. That's the only rule.\""
+          ]
+        },
+        {
           "label": "Anything I can do?",
           "unless": "takeout_given",
           "say": [
@@ -4026,6 +4034,15 @@
             "(You wait. The tea goes cold.)",
             "(A rabbit hops out of the bushes, looks at you, looks at the table, and leaves.)",
             "...Well. That answers that."
+          ]
+        }
+      ],
+      "greeting_after": [
+        {
+          "need": "taisho_met",
+          "once": true,
+          "greeting": [
+            "The tea party again. There's a note under the teapot: \"Day off. Help yourself. -T\""
           ]
         }
       ]
