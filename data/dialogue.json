@@ -4246,6 +4246,29 @@
               "(The stars here are brighter than anywhere in the city.)"
             ]
           ]
+        },
+        {
+          "label": "Read the keeper's logbook",
+          "cycle": [
+            [
+              "\"Clear night. The riverboat late again. Captain blames the ferry. The ferry blames no one.\""
+            ],
+            [
+              "\"Fireworks over the city at eleven. The festival must be on. Wish I could hear it.\""
+            ],
+            [
+              "\"Someone fishing off the pier at 2am. Caught a boot. Kept fishing. Respect.\""
+            ],
+            [
+              "\"The aquarium's lights stayed on all night again. I think the jellyfish like it.\""
+            ],
+            [
+              "\"A red charm in the water by the pier, years ago now. I never could reach it.\""
+            ],
+            [
+              "\"Six seconds. Six seconds. Six seconds. Forty years, and it's never once been seven.\""
+            ]
+          ]
         }
       ]
     },
