@@ -147,8 +147,14 @@ var LOCATIONS = {
         title: "Residential District", image: "../img/explore/pathways/night_residential.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
         links: [
-            { to: "?loc=nightresidential2", rect: [264, 398, 246, 47] }
+            { to: "?loc=nightresidential2", rect: [264, 398, 246, 47] },
+            { to: "?loc=konbini", rect: [168, 184, 113, 223] }   // the shop glowing on the left
         ]
+    },
+    "konbini": {
+        title: "The Konbini", image: "../img/explore/places/conbini.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
+        links: []
     },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",

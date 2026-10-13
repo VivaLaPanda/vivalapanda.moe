@@ -1592,6 +1592,55 @@
           "The universe owes you, now. Spend them wisely."
         ]
       }
+    },
+    "konbini": {
+      "speaker": "C a s h i e r",
+      "greeting": [
+        "\"Irasshaimase! Welcome!\""
+      ],
+      "menu": [
+        {
+          "label": "Buy an onigiri",
+          "say": [
+            "\"Which filling?\""
+          ],
+          "menu": [
+            {
+              "label": "Salmon",
+              "say": [
+                "\"Salmon! A solid choice.\""
+              ]
+            },
+            {
+              "label": "Tuna mayo",
+              "say": [
+                "\"Tuna mayo. The people's champion.\""
+              ]
+            },
+            {
+              "label": "Umeboshi",
+              "say": [
+                "\"Pickled plum? Brave. It's very sour.\""
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Get some oden",
+          "say": [
+            "\"Daikon, egg, and... konnyaku? Coming right up.\"",
+            "(It's the warmest thing in the whole city right now.)"
+          ]
+        },
+        {
+          "label": "Ask about the night shift",
+          "pick": [
+            "\"Night shift's quiet. Except for a black cat that comes in to sit by the heater.\"",
+            "\"A man in a hat buys one melon bread every night at three. Never says a word.\"",
+            "\"Somebody from the tower bar comes in for milk. Asked me not to tell anyone. Oops.\""
+          ]
+        }
+      ]
     }
   },
   "house_key": {
