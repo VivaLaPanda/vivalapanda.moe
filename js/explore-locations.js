@@ -159,8 +159,17 @@ var LOCATIONS = {
             { to: "?loc=nightalley", rect: [423, 290, 85, 103] },
             { to: "?loc=stationcrossing", rect: [223, 290, 85, 103] },
             { to: "?loc=electronicstore", rect: [39, 285, 85, 179] },
-            { to: "/recipes.html", rect: [155, 285, 85, 179] }
+            { to: "/recipes.html", rect: [155, 285, 85, 179] },
+            { to: "?loc=gamecentre", rect: [0, 147, 102, 64] }
         ]
+    },
+    // drawn for the city like the ramen stall (FAL, quantized to Isogashii Boulevard's inks)
+    "gamecentre": {
+        title: "Taito Game Centre", image: "../img/explore/places/game_centre.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/animahjong-x-10.mp3",
+        links: [],
+        objects: [{ id: "claw", rect: [250, 100, 230, 400] }, { id: "cabinets", rect: [0, 150, 220, 300] },
+                  { id: "cabinets2", rect: [520, 150, 220, 300] }]
     },
     "stationcrossing": {
         title: "Isogashii Crossing", image: "../img/explore/pathways/day_trainstation_crossing.png", pos: "center right",

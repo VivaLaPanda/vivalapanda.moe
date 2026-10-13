@@ -79,7 +79,8 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                │                        │                   └─ ↺ Shrine
                     │                │                        └─ Andy's House
                     │                └─ Forest Edge (fireflies) ─ Hidden Glade (pond: the house key) ─ train.html
-                    └─ Isogashii Blvd ─┬─ Club Polka (dance) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
+                    └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine: prizes to your pockets; drawn)
+                                       ├─ Club Polka (dance) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
                                        ├─ Crossing ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                        └─ Otojima Station ─ Half Pipe ─ Beach
                                        │                                           ─ Sunset ─ Harbour ─┬─ ↺ Otojima Station

@@ -1436,6 +1436,53 @@
           "go": "/recipes.html"
         }
       ]
+    },
+    "gamecentre": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A game centre! Oh no. Oh no, look at the claw machine."
+      ],
+      "objects": {
+        "claw": {
+          "name": "Claw machine"
+        },
+        "cabinets": {
+          "name": "Arcade cabinets",
+          "lines": [
+            "Someone's high score here is 999,999. I refuse to believe it."
+          ]
+        },
+        "cabinets2": {
+          "name": "Arcade cabinets",
+          "lines": [
+            "A fighting game, mid-demo. The characters are just standing there, waiting for us."
+          ]
+        }
+      },
+      "play": {
+        "claw": {
+          "intro": [
+            "There's a panda in there. Look at it. It needs us."
+          ],
+          "play": "Play (3 tries)",
+          "watch": "Not now",
+          "stop": "Walk away",
+          "how": "Move the claw with the pointer (or arrow keys). Click (or Space) to drop it.",
+          "status": "Tries left: {tries}",
+          "missed": "Missed!",
+          "slipped": "It slipped!",
+          "won": "Got a {name}!",
+          "panda": "THE PANDA!!",
+          "names": {
+            "cat": "grey cat",
+            "tabby": "tabby cat",
+            "duck": "duck",
+            "goldfish": "goldfish",
+            "panda": "panda"
+          },
+          "done": "Out of tries. The claw machine wins this round."
+        }
+      }
     }
   },
   "house_key": {
@@ -1537,6 +1584,29 @@
       "off_now": "The house isn't taking requests right now.",
       "failed": "Hm, the house didn't answer. Try again in a bit?",
       "bad_key": "Huh, the key doesn't fit anymore."
+    }
+  },
+  "pockets": {
+    "_readme": "Prizes from Explore's claw machine, shown in the pockets by the dialog box (js/house-key.js).",
+    "cat": {
+      "name": "grey cat plush",
+      "look": "A grey cat plush. It looks unimpressed. Accurate."
+    },
+    "tabby": {
+      "name": "tabby cat plush",
+      "look": "An orange tabby plush. Slightly squashed from the claw."
+    },
+    "duck": {
+      "name": "duck plush",
+      "look": "A duck plush. Squeeze it and nothing happens. Still great."
+    },
+    "goldfish": {
+      "name": "goldfish plush",
+      "look": "A goldfish plush. Much easier to win than the real ones."
+    },
+    "panda": {
+      "name": "panda plush",
+      "look": "THE panda plush. It's the best thing in this whole city."
     }
   }
 }

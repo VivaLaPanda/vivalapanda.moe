@@ -312,6 +312,158 @@
         f.choices = function () { var p = P().dance; return [{ label: p.play, act: dance }, { label: p.watch }]; };
     };
 
+    // ---------- the game centre: the claw machine ----------
+
+    // prizes go in your pockets (localStorage pandaPockets; js/house-key.js shows them by the dialog box's ▼)
+    var PLUSHES = ["cat", "tabby", "duck", "goldfish", "panda"];
+    var plushImg = {};
+    PLUSHES.forEach(function (n) { var im = new Image(); im.src = "/img/explore/layers/plush-" + n + ".png"; plushImg[n] = im; });
+
+    function pocket(id) {
+        var got = [];
+        try { got = JSON.parse(get("pandaPockets")) || []; } catch (e) { got = []; }
+        got.push(id);
+        put("pandaPockets", JSON.stringify(got));
+        document.dispatchEvent(new Event("pockets"));
+    }
+
+    function claw() {
+        var p = P().claw, o = overlay(), cv = o.cv, ctx = o.ctx, W = cv.width, H = cv.height;
+        var CHUTE = 18, TOP = 14, FLOOR = 118, tries = 3, over = false, raf, last = performance.now();
+        var c = { x: CHUTE, tx: CHUTE, y: TOP, state: "aim", hold: null, open: 1 };   // aim|down|grab|up|home|drop
+        var pile = [];
+        for (var i = 0; i < 14; i++) {   // a heap of plushes on the floor (one panda, somewhere awkward)
+            var kind = i === 0 ? "panda" : PLUSHES[Math.floor(Math.random() * 4)];
+            pile.push({ kind: kind, x: rand(42, 168), y: FLOOR - 10 - rand(0, 14) });
+        }
+        pile.sort(function (a, b) { return a.y - b.y; });
+
+        function show(extra) { S.status(fill(p.status, { tries: tries }) + (extra ? "   " + extra : "")); }
+
+        function drop() {
+            if (c.state !== "aim" || tries <= 0) return;
+            tries--;
+            c.state = "down";
+            show();
+        }
+
+        function settle(line) {   // back to aiming, or the end
+            c.state = "aim";
+            c.hold = null;
+            if (tries <= 0) setTimeout(function () { end(line); }, 900);
+            else show(line);
+        }
+
+        function end(line) {
+            if (over) return;
+            over = true;
+            cancelAnimationFrame(raf);
+            document.removeEventListener("keydown", key, true);
+            o.box.remove();
+            S.say(arr(line || p.done));
+        }
+
+        function key(e) {
+            if (e.key === "ArrowLeft") c.tx = Math.max(CHUTE, c.tx - 6);
+            else if (e.key === "ArrowRight") c.tx = Math.min(W - 14, c.tx + 6);
+            else if (e.key === " " || e.key === "Enter") drop();
+            else return;
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        document.addEventListener("keydown", key, true);
+        cv.addEventListener("pointermove", function (e) { if (c.state === "aim") c.tx = Math.max(CHUTE, Math.min(W - 14, canvasPoint(cv, e)[0])); });
+        cv.addEventListener("pointerdown", function (e) { c.tx = Math.max(CHUTE, Math.min(W - 14, canvasPoint(cv, e)[0])); });
+        cv.addEventListener("pointerup", drop);
+
+        function topAt(x) {   // the highest plush under x
+            var hit = null;
+            pile.forEach(function (q) { if (Math.abs(q.x + 6 - x) < 6 && (!hit || q.y < hit.y)) hit = q; });
+            return hit;
+        }
+
+        function step(now) {
+            var dt = Math.min(.05, (now - last) / 1000);
+            last = now;
+            if (c.state === "aim") c.x += (c.tx - c.x) * Math.min(1, dt * 6);
+            else if (c.state === "down") {
+                var under = topAt(c.x), stop = under ? under.y - 4 : FLOOR - 6;
+                c.y += 40 * dt;
+                if (c.y >= stop) {
+                    c.y = stop;
+                    c.state = "grab";
+                    c.open = 1;
+                }
+            } else if (c.state === "grab") {
+                c.open -= dt * 2.5;
+                if (c.open <= 0) {
+                    c.open = 0;
+                    var q = topAt(c.x), centred = q && Math.abs(q.x + 6 - c.x) < 5;
+                    if (q && centred && Math.random() < (q.kind === "panda" ? .4 : .75)) {
+                        c.hold = q;
+                        pile.splice(pile.indexOf(q), 1);
+                    }
+                    c.state = "up";
+                }
+            } else if (c.state === "up") {
+                c.y -= 30 * dt;
+                if (c.hold && c.y < 60 && Math.random() < dt * .5) {   // it slips...
+                    c.hold.y = FLOOR - 10;
+                    pile.push(c.hold);
+                    c.hold = null;
+                    show(p.slipped);
+                }
+                if (c.y <= TOP) { c.y = TOP; c.state = c.hold ? "home" : "aim"; if (!c.hold) settle(p.missed); }
+            } else if (c.state === "home") {
+                c.x -= 30 * dt;
+                if (c.x <= CHUTE) {
+                    c.x = CHUTE;
+                    var won = c.hold.kind;
+                    pocket(won);
+                    c.open = 1;
+                    settle(won === "panda" ? p.panda : fill(p.won, { name: p.names[won] }));
+                }
+            }
+            if (c.state === "aim" || c.state === "home") c.open = c.state === "aim" ? 1 : 0;
+            draw();
+            if (!over) raf = requestAnimationFrame(step);
+        }
+
+        function px(col, x, y, w, h) { ctx.fillStyle = col; ctx.fillRect(Math.round(x), Math.round(y), w || 1, h || 1); }
+
+        function draw() {
+            px("#1a1a55", 0, 0, W, H);                                    // the cabinet's back
+            for (var yy = 0; yy < H; yy += 2) for (var xx = (yy / 2) % 2; xx < W; xx += 4) px("#22227a", xx, yy);
+            px("#ffdd88", 0, 0, W, 6); px("#ffffff", 0, 2, W, 1);         // the light strip
+            px("#333355", 0, 9, W, 2);                                    // the rail
+            px("#000000", 4, FLOOR - 26, CHUTE + 6, H);                   // the chute
+            px("#8899cc", CHUTE + 10, FLOOR - 28, 2, H);
+            px("#555588", 0, FLOOR, W, H - FLOOR);                        // the floor
+            pile.forEach(function (q) { ctx.drawImage(plushImg[q.kind], Math.round(q.x), Math.round(q.y)); });
+            px("#aab0c8", c.x - .5, 10, 1, c.y - 10);                     // the cable
+            px("#d0d4e8", c.x - 4, c.y, 9, 3); px("#ffffff", c.x - 3, c.y, 4, 1);   // the claw's head
+            var spread = 2 + c.open * 3;                                  // and its fingers
+            for (var f = 0; f < 6; f++) {
+                px("#d0d4e8", c.x - spread - f * .3, c.y + 3 + f, 1, 1);
+                px("#d0d4e8", c.x + spread + f * .3, c.y + 3 + f, 1, 1);
+            }
+            if (c.hold) ctx.drawImage(plushImg[c.hold.kind], Math.round(c.x - 6), Math.round(c.y + 5));
+            px("rgba(255,255,255,.18)", 150, 0, 6, H); px("rgba(255,255,255,.12)", 160, 0, 2, H);   // the glass
+        }
+
+        S.say([p.how], function () {
+            show();
+            S.offer([{ label: p.stop, act: function () { end(); } }]);
+            raf = requestAnimationFrame(step);
+        });
+    }
+
+    PLAY.gamecentre = function () {
+        var m = obj("claw");
+        m.click = function () { return arr(P().claw.intro); };
+        m.choices = function () { var p = P().claw; return [{ label: p.play, act: claw }, { label: p.watch }]; };
+    };
+
     // ---------- the casino: a panorama you pan along, and roulette ----------
 
     // casino.png is a 500x134 strip; cover-fitted it's 3.94x, so the window shows a third of it. Three views

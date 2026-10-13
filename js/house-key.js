@@ -35,6 +35,11 @@
         return h;
     }
     function saveHunt(h) { put(HUNT, JSON.stringify(h)); }
+    function pockets() {                         // one of each prize, in the order won
+        var got = [];
+        try { got = JSON.parse(get("pandaPockets")) || []; } catch (e) { got = []; }
+        return got.filter(function (id, i) { return got.indexOf(id) === i; });
+    }
     function carrying(h) { return ORDER.filter(function (id) { return h.items[id] && !h.dropped[id]; }); }
     function collected(h) { return ORDER.filter(function (id) { return h.items[id]; }).length; }
 
@@ -85,6 +90,10 @@
             box.appendChild(inv);
         }
         inv.textContent = "";
+        pockets().forEach(function (id) {       // prizes from Explore's game centre (js/explore-play.js)
+            var it = (R.dialogueAll.pockets || {})[id];
+            if (it) button("plush-" + id + ".png", it.name, function () { S.say(arr(it.look)); });
+        });
         carrying(hunt()).forEach(function (id) {
             button(id + ".png", itemName(id), function () { S.say([fill(t.items[id].look, { word: ITEMS[id] })]); });
         });
@@ -258,4 +267,5 @@
         }
     });
     document.addEventListener("scenestart", drawInventory);
+    document.addEventListener("pockets", drawInventory);
 })();
