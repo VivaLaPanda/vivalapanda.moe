@@ -92,6 +92,14 @@ var LOCATIONS = {
                   { id: "tv", rect: [567, 277, 89, 143] }, { id: "daruma", rect: [0, 283, 62, 86] },
                   { id: "scroll", rect: [110, 89, 81, 242] }, { id: "window", rect: [266, 98, 72, 125] }]
     },
+    // behind Erratic Errata, for those who ask for the second edition (js/explore-play.js)
+    "zengarden": {
+        title: "A Hidden Garden", image: "../img/explore/pathways/zengarden.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        links: [],
+        objects: [{ id: "teahouse", rect: [476, 122, 156, 165] }, { id: "bridge", rect: [137, 243, 122, 78] },
+                  { id: "pond", rect: [415, 295, 325, 190] }]
+    },
     "nightpark": {
         title: "Pumpo Park", image: "../img/explore/pathways/night_park.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",

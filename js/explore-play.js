@@ -14,6 +14,9 @@
     function fill(s, v) { return String(s).replace(/\{(\w+)\}/g, function (m, k) { return v[k] != null ? v[k] : m; }); }
     function arr(x) { return x == null ? [] : Array.isArray(x) ? x : [x]; }
     function rand(a, b) { return a + Math.random() * (b - a); }
+    // things you've heard around town (a rumour, a mumble) open choices elsewhere: a choice's "need"
+    function heard(flag) { return get("pandaHeard_" + flag) === "1"; }
+    function hear(flag) { if (flag) put("pandaHeard_" + flag, "1"); }
     function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
     function put(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private */ } }
 
@@ -474,6 +477,43 @@
     };
     if (AMBIENT[place]) AMBIENT[place]();
 
+    // ---------- Johnny's rumours: one at a time, in order, each pointing somewhere ----------
+
+    PLAY.agency = function () {
+        (R.afterGreeting = R.afterGreeting || []).push(function () {
+            var p = P();
+            if (!p.rumours) return null;
+            function tell() {
+                var i = +(get("pandaRumour") || 0) % p.rumours.length, r = p.rumours[i];
+                put("pandaRumour", i + 1);
+                hear(r.hear);
+                S.say(arr(r.say), function () { S.offer([{ label: p.rumour_label, act: tell }]); });
+            }
+            return [{ label: p.rumour_label, act: tell }];
+        });
+    };
+
+    // ---------- the zen garden behind Erratic Errata ----------
+
+    PLAY.zengarden = function () {
+        S.actions.sit = function () {
+            var p = P(), m = document.getElementById("music"), was = m && !m.paused;
+            if (was) m.pause();
+            S.say([p.sit], function () {
+                var done = false;
+                function up() {
+                    if (done) return;
+                    done = true;
+                    document.removeEventListener("pointerdown", up, true);
+                    if (was) m.play().catch(function () {});
+                    S.say([p.stand], function () { S.offer(menuOf(R.said.menu)); });
+                }
+                setTimeout(up, 20000);
+                setTimeout(function () { document.addEventListener("pointerdown", up, true); }, 400);
+            });
+        };
+    };
+
     // ---------- the stray cat ----------
 
     // img/explore/layers/cat.png: six 16x10 frames, drawn in the apartments' inks (black, rim, yellow eyes)
@@ -566,6 +606,8 @@
     };
 
     PLAY.backpassage = function () {
+        var drifter = obj("drifter");
+        drifter.lines = function () { hear("secondedition"); return arr(P().drifter); };
         document.addEventListener("scenestart", function () {
             var cat = sprite("sit"), r = [243, 489, 19, 12];
             S.placeNative(cat, r[0], r[1], r[2], r[3]);
@@ -623,14 +665,15 @@
     }
 
     function menuOf(list) {
-        return list.map(function (c) {
+        return list.filter(function (c) { return !c.need || heard(c.need); }).map(function (c) {
             if (c.menu) return { label: c.label, say: c.say, menu: menuOf(c.menu) };
             if (!c.say && !c.pick) return c;
             return { label: c.label, act: function () {
                 if (c.serve) serve(c.serve);
                 if (c.song) song(c.song);
                 S.say(c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : c.say, function () {
-                    S.offer(menuOf(R.said.menu));
+                    if (c.go) location.href = c.go;   // shown through somewhere
+                    else S.offer(menuOf(R.said.menu));
                 });
             } };
         });

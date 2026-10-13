@@ -553,7 +553,39 @@
       "greeting": [
         "\"Welcome stranger, to my humble office. I'm this town's information broker.",
         "What are you looking to find out?\""
-      ]
+      ],
+      "play": {
+        "rumour_label": "Any rumours?",
+        "rumours": [
+          {
+            "say": [
+              "\"Lanterns in Pumpo Park after dark, they say. Go and see for yourself.\""
+            ]
+          },
+          {
+            "say": [
+              "\"A black cat runs the streets round Acacia Apartments. Shy. Linger, and it'll come to you.\""
+            ]
+          },
+          {
+            "say": [
+              "\"The train out of Platform 1 doesn't stop at the city limits. Ride it to the end.\""
+            ]
+          },
+          {
+            "say": [
+              "\"Erratic Errata keeps a second edition under the counter.",
+              "Only for those who know to ask.\""
+            ],
+            "hear": "secondedition"
+          },
+          {
+            "say": [
+              "\"That's all I have tonight, stranger. Come back when the city's had time to talk.\""
+            ]
+          }
+        ]
+      }
     },
     "casino": {
       "speaker": "P a n d a",
@@ -785,6 +817,26 @@
       "speaker": "P a n d a",
       "greeting": [
         "This place is definitely a front for *something*"
+      ],
+      "menu": [
+        {
+          "label": "Browse",
+          "pick": [
+            "A jar labeled \"misc.\" It's full of smaller jars.",
+            "A VHS tape called \"Do Not Watch.\" The case says \"Watch.\"",
+            "A skull keychain. It's smiling, which is worse.",
+            "A t-shirt that says \"I survived\" and nothing else."
+          ]
+        },
+        {
+          "label": "Ask for the second edition",
+          "need": "secondedition",
+          "say": [
+            "The clerk looks up, then looks around.",
+            "\"...Through the back. Wipe your feet.\""
+          ],
+          "go": "?loc=zengarden"
+        }
       ]
     },
     "livehouse": {
@@ -1049,14 +1101,14 @@
       ],
       "objects": {
         "drifter": {
-          "name": "Someone sleeping",
-          "lines": [
-            "He's asleep. Or very good at pretending."
-          ]
+          "name": "Someone sleeping"
         }
       },
       "play": {
-        "cat_runs": "There it goes again. It's leading us somewhere."
+        "cat_runs": "There it goes again. It's leading us somewhere.",
+        "drifter": [
+          "He mumbles in his sleep: \"...ask Errata for the second edition...\""
+        ]
       }
     },
     "oldhouse": {
@@ -1216,6 +1268,66 @@
         "Wait, it's daytime again?",
         "...I've stopped asking questions about this city."
       ]
+    },
+    "zengarden": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "...A garden? THIS is what it was a front for?",
+        "Honestly? Fair enough."
+      ],
+      "objects": {
+        "teahouse": {
+          "name": "Teahouse",
+          "click": [
+            "There's a kettle on in the teahouse."
+          ],
+          "choices": [
+            {
+              "label": "Have a cup",
+              "say": [
+                "(You sit on the step and sip. It's bitter, then sweet.)"
+              ]
+            },
+            {
+              "label": "Maybe later"
+            }
+          ]
+        },
+        "bridge": {
+          "name": "Bridge",
+          "lines": [
+            "An old stone bridge. Someone's worn a dip into the middle of it."
+          ]
+        },
+        "pond": {
+          "name": "Koi pond",
+          "click": [
+            "Koi! The orange ones are definitely judging us."
+          ],
+          "choices": [
+            {
+              "label": "Feed them",
+              "pick": [
+                "They swarm. The big white one wins, as usual.",
+                "One of them blows a bubble at you. Thanks?"
+              ]
+            },
+            {
+              "label": "Just watch"
+            }
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Sit for a while",
+          "action": "sit"
+        }
+      ],
+      "play": {
+        "sit": "(You sit by the water. Nobody says anything for a while.)",
+        "stand": "...Okay. That was nice."
+      }
     }
   },
   "house_key": {
