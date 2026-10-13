@@ -973,7 +973,23 @@
         });
     }
 
+    // a campfire's embers: sparks rising, wobbling, winking out
+    function embers(at) {
+        var sparks = [];
+        ambient(function (ctx, dt) {
+            if (Math.random() < dt * 14) sparks.push({ x: at[0] + rand(-4, 4), y: at[1], life: rand(1, 2.2), age: 0, wob: rand(0, 6) });
+            sparks = sparks.filter(function (sp) { return (sp.age += dt) < sp.life; });
+            sparks.forEach(function (sp) {
+                sp.y -= 9 * dt;
+                var x = Math.round(sp.x + Math.sin(sp.age * 4 + sp.wob) * 1.5);
+                ctx.fillStyle = sp.age < sp.life * .5 ? "#ffdd66" : "#ff7733";
+                if (sp.age < sp.life * .85 || Math.floor(sp.age * 20) % 2) ctx.fillRect(x, Math.round(sp.y), 1, 1);
+            });
+        });
+    }
+
     var AMBIENT = {
+        campsite: function () { embers([92, 72]); },
         rooftop: function () { fireworks([20, 30, 150, 30], ["#ffddbb", "#aaccff", "#eebb11"], 7); },
         penthouse: function () { fireworks([30, 15, 120, 25], ["#ff6688", "#ffdd55", "#88ddff"], 9); },
         aquarium: function () { jellyfish(7, [8, 6, 170, 70]); },
@@ -1344,7 +1360,7 @@
     // ---------- the disposable camera (from Half Pipe): photos at scenic spots, an album in your pockets ----------
 
     var PHOTO_SPOTS = ["sunset", "rooftop", "penthouse", "festival", "forestglade", "beach", "aquarium", "zengarden",
-                       "shrine", "harbour"];
+                       "shrine", "harbour", "hilltop", "lilyfield", "campsite"];
     var EXPOSURES = 24;
     function photos() { try { return JSON.parse(get("pandaPhotos")) || []; } catch (e) { return []; } }
     if (PHOTO_SPOTS.indexOf(place) >= 0) {

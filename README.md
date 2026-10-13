@@ -85,7 +85,9 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                │                          │                                 └⇢ (the cat) Back Passage
                     │                │                          │                                      ─ Old House ─ its room
                     │                │                          └─ Andy's House
-                    │                └─ Forest Edge (fireflies) ─ Hidden Glade (pond: the house key) ─ train.html
+                    │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ train.html
+                    │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop ─ Lily Field
+                    │                                                 ─ Campfire ─ ↺ Hidden Glade
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
                                        ├─ Club Polka (dance) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
                                        ├─ Crossing ─ Platform 1 ─ On the train ─┬─ train.html

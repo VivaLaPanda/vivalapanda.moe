@@ -2280,6 +2280,111 @@
       "greeting_late": [
         "Net Cafe Noa at an actual three in the morning. It feels right."
       ]
+    },
+    "forestpath": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "It's quiet up here. Just birds, and the light coming down through the trees."
+      ]
+    },
+    "teaparty": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A table set for tea, in the middle of the woods. Nobody around."
+      ],
+      "objects": {
+        "table": {
+          "name": "Tea table",
+          "click": [
+            "Four chairs, one teapot. The tea's still warm. Again."
+          ],
+          "choices": [
+            {
+              "label": "Pour a cup",
+              "say": [
+                "(You pour a cup and sit for a minute. A bird lands on the next chair.)",
+                "...It doesn't want any. Fair."
+              ]
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        }
+      }
+    },
+    "hilltop": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The whole valley! You can see all the way to the mountain."
+      ],
+      "objects": {
+        "view": {
+          "name": "The view",
+          "lines": [
+            "Fields, a little road, a mountain. The city feels very far away."
+          ]
+        },
+        "kids": {
+          "name": "Kids",
+          "lines": [
+            "Some kids are chasing a red ball down the hill. One of them waves."
+          ]
+        }
+      }
+    },
+    "lilyfield": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A whole field of red spider lilies.",
+        "They only bloom for a week or two. We got lucky."
+      ],
+      "objects": {
+        "lilies": {
+          "name": "Spider lilies",
+          "lines": [
+            "Higanbana. They come up all at once, like someone flipped a switch."
+          ]
+        }
+      }
+    },
+    "campsite": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "It got dark while we walked. Someone's got a campfire going."
+      ],
+      "objects": {
+        "fire": {
+          "name": "Campfire",
+          "lines": [
+            "Warm. The sparks go up and up and don't come back."
+          ]
+        },
+        "campers": {
+          "name": "Two travellers",
+          "click": [
+            "Two travellers. One's asleep. One's poking the fire with a stick."
+          ],
+          "choices": [
+            {
+              "label": "Sit by the fire",
+              "say": [
+                "(You sit. The fire pops. Nobody says anything, and that's fine.)"
+              ]
+            },
+            {
+              "label": "Ask where they're headed",
+              "pick": [
+                "\"Wherever the path goes,\" she says. \"It always comes out somewhere.\"",
+                "\"Down to the glade, then the city. No hurry.\""
+              ]
+            },
+            {
+              "label": "Leave them be"
+            }
+          ]
+        }
+      }
     }
   },
   "house_key": {

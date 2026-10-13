@@ -47,8 +47,54 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/death-bringer-forest.mp3",
         links: [
             { to: "?loc=forestglade", rect: [174, 189, 416, 297] },
+            { to: "?loc=forestpath", rect: [590, 380, 150, 95] },   // the dirt path, uphill
             { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }   // behind you
         ]
+    },
+    // the hills: a quiet trail from the forest's edge, round to a campfire and back down to the glade
+    "forestpath": {
+        title: "A Sunlit Path", image: "../img/explore/places/day_forest.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        links: [
+            { to: "?loc=teaparty", rect: [270, 150, 200, 250] },
+            { to: "?loc=forestedge", rect: [0, 478, 640, 50] }
+        ]
+    },
+    "teaparty": {
+        title: "A Clearing", image: "../img/explore/places/day_forest_teaparty.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        links: [
+            { to: "?loc=hilltop", rect: [580, 0, 160, 220] },
+            { to: "?loc=forestpath", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "table", rect: [230, 230, 290, 150] }]
+    },
+    "hilltop": {
+        title: "The Hilltop", image: "../img/explore/pathways/day_hilltop.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
+        links: [
+            { to: "?loc=lilyfield", rect: [0, 380, 260, 95] },
+            { to: "?loc=teaparty", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "view", rect: [0, 120, 440, 200] }, { id: "kids", rect: [470, 330, 170, 110] }]
+    },
+    "lilyfield": {
+        title: "The Lily Field", image: "../img/explore/pathways/flower_plain.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
+        links: [
+            { to: "?loc=campsite", rect: [250, 200, 300, 110] },
+            { to: "?loc=hilltop", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "lilies", rect: [0, 380, 740, 98] }]
+    },
+    "campsite": {
+        title: "A Campfire", image: "../img/explore/places/night_forest_campsite.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/death-bringer-forest.mp3",
+        links: [
+            { to: "?loc=forestglade", rect: [600, 0, 140, 200] },
+            { to: "?loc=lilyfield", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "fire", rect: [300, 220, 130, 140] }, { id: "campers", rect: [430, 150, 180, 260] }]
     },
     "forestglade": {
         title: "The Hidden Glade", image: "../img/explore/places/forestglade.png", pos: "left",
