@@ -2959,6 +2959,10 @@
             "\"A man in a hat buys one melon bread every night at three. Never says a word.\"",
             "\"Somebody from the tower bar comes in for milk. Asked me not to tell anyone. Oops.\""
           ]
+        },
+        {
+          "label": "Read the Pandopolis Times",
+          "action": "newspaper"
         }
       ],
       "greeting_late": [
@@ -2978,7 +2982,66 @@
             "\"Irasshaimase! ...Funny. The man in the hat didn't come in for his melon bread.\""
           ]
         }
-      ]
+      ],
+      "play": {
+        "times": {
+          "intro": [
+            "(You flip through the Pandopolis Times at the magazine rack.)"
+          ],
+          "headlines": [
+            {
+              "text": "CITY: Isogashii Boulevard voted \"most likely to be awake\" for the 40th year."
+            },
+            {
+              "text": "WEATHER: Rain, probably. Then not. Then rain."
+            },
+            {
+              "text": "LOCAL: Shizuka Street pachinko parlour denies being \"too loud\". Loudly."
+            },
+            {
+              "text": "SPORTS: Salarymen at Izakaya Gonta still arguing about last week's game."
+            },
+            {
+              "text": "ARTS: Tokugawa Gallery's dot painting \"Commute\" baffles critics, delights commuters."
+            },
+            {
+              "text": "LOCAL CAT ADOPTS VISITOR. \"It was the mackerel,\" sources say.",
+              "need": "cat_fed"
+            },
+            {
+              "text": "ANDY TURNS AROUND. Musician seen facing his audience for first time.",
+              "need": "andy_turned"
+            },
+            {
+              "text": "MAN IN HAT LEAVES BAR. Twelve-year tab settled in full.",
+              "need": "hat_given"
+            },
+            {
+              "text": "BARTENDERS RECONCILE? Tower Bar and Rabu Rabu \"definitely not friends,\" both insist.",
+              "need": "tony_answered"
+            },
+            {
+              "text": "BATHHOUSE OWNER EATS DINNER. Neighbours relieved.",
+              "need": "brownie_fed"
+            },
+            {
+              "text": "LONE SOCKS REUNITED AT COIN LAUNDRY. \"A miracle,\" says dryer.",
+              "need": "socks_reunited"
+            },
+            {
+              "text": "STREETLIGHT ON THE RESIDENTIAL STREET \"less lonely somehow,\" say residents.",
+              "need": "ghost_free"
+            },
+            {
+              "text": "VISITOR'S PHOTOGRAPHS ON SHOW at the Tokugawa Gallery. Four people attend.",
+              "need": "photographer"
+            },
+            {
+              "text": "NET CAFE REPORTS \"ghost post\" on old forum. Staff unbothered."
+            }
+          ]
+        }
+      }
     },
     "bookshop": {
       "speaker": "B o o k s e l l e r",

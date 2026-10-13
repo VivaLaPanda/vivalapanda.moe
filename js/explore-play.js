@@ -1702,6 +1702,15 @@
         S.say(arr(P().exhibition), function () { S.home(false); });
     };
 
+    // the Pandopolis Times (the konbini): its headlines are whatever you've been up to, and the city's own news
+    S.actions.newspaper = function () {
+        var p = P().times;
+        var news = p.headlines.filter(function (h) { return !h.need || heard(h.need); });
+        var mine = news.filter(function (h) { return h.need; }), city = news.filter(function (h) { return !h.need; });
+        var pick = mine.slice(-2).concat(city.sort(function () { return Math.random() - .5; }).slice(0, 3 - Math.min(2, mine.length)));
+        S.say(arr(p.intro).concat(pick.map(function (h) { return h.text; })), function () { S.home(false); });
+    };
+
     // the pocket radio (Sakura fixed Ghandi's old one): tune it and the music changes, wherever you are
     window.POCKET_LOOK.radio = function (it) {
         var st = it.stations[Math.floor(Math.random() * it.stations.length)];
