@@ -434,7 +434,7 @@
         var c = { x: CHUTE, tx: CHUTE, y: TOP, state: "aim", hold: null, open: 1 };   // aim|down|grab|up|home|drop
         var pile = [];
         for (var i = 0; i < 14; i++) {   // a heap of plushes on the floor (one panda, somewhere awkward)
-            var kind = i === 0 ? "panda" : PLUSHES[Math.floor(Math.random() * 4)];
+            var kind = i === 0 && !has("panda") ? "panda" : PLUSHES[Math.floor(Math.random() * 4)];   // one panda, until it's yours
             pile.push({ kind: kind, x: rand(42, 168), y: FLOOR - 10 - rand(0, 14) });
         }
         pile.sort(function (a, b) { return a.y - b.y; });
@@ -521,6 +521,7 @@
                     c.x = CHUTE;
                     var won = c.hold.kind;
                     pocket(won);
+                    if (won === "panda") hear("panda_won");
                     c.open = 1;
                     settle(won === "panda" ? p.panda : fill(p.won, { name: p.names[won] }));
                 }
@@ -573,7 +574,7 @@
     PLAY.gamecentre = function () {
         S.actions.purikura = purikura;
         var m = obj("claw");
-        m.click = function () { return arr(P().claw.intro); };
+        m.click = function () { var c = P().claw; return arr(has("panda") && c.intro_after ? c.intro_after : c.intro); };
         m.choices = function () { var p = P().claw; return [{ label: p.play, act: claw }, { label: p.watch }]; };
     };
 

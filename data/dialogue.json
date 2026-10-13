@@ -3472,7 +3472,10 @@
             "goldfish": "goldfish",
             "panda": "panda"
           },
-          "done": "Out of tries. The claw machine wins this round."
+          "done": "Out of tries. The claw machine wins this round.",
+          "intro_after": [
+            "No panda in there now. Just cats, ducks and goldfish. Still cute."
+          ]
         },
         "purikura": {
           "pose": [
@@ -3491,6 +3494,14 @@
       ],
       "linger": [
         "A claw machine plays its jingle to nobody. The panda's still in there."
+      ],
+      "greeting_after": [
+        {
+          "need": "panda_won",
+          "greeting": [
+            "The claw machine looks a little emptier without its panda. You're welcome, panda."
+          ]
+        }
       ]
     },
     "rooftop": {
