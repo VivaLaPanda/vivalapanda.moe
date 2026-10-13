@@ -1745,7 +1745,7 @@
 
     var PHOTO_SPOTS = ["sunset", "rooftop", "penthouse", "festival", "forestglade", "beach", "aquarium", "zengarden",
                        "shrine", "harbour", "hilltop", "lilyfield", "campsite", "lighthouse", "lake", "observatory",
-                       "nighttrain", "karaoke", "inari", "underbridge", "catcafe", "bar25", "gallery"];
+                       "nighttrain", "karaoke", "inari", "underbridge", "catcafe", "bar25", "gallery", "pier"];
     var EXPOSURES = 24;
     function photos() { try { return JSON.parse(get("pandaPhotos")) || []; } catch (e) { return []; } }
     if (PHOTO_SPOTS.indexOf(place) >= 0) {
@@ -1861,6 +1861,21 @@
         var to = pool[Math.floor(Math.random() * pool.length)];
         S.say(arr(p.ride).concat([fill(p.arrive, { place: (window.LOCATIONS && LOCATIONS[to] ? LOCATIONS[to].title : to) })]), function () {
             location.href = "?loc=" + to;
+        });
+    };
+
+    // the Ferris wheel: up, up, and at the top a round window onto the city's skyline
+    S.actions.ferris = function () {
+        var p = P().ferris;
+        S.say(arr(p.up), function () {
+            var view = document.createElement("div");
+            view.className = "play-telescope";
+            view.style.backgroundImage = "url(/img/explore/places/city_overlook.png)";
+            view.style.backgroundPosition = "center";
+            S.stage.appendChild(view);
+            function down(e) { if (e) e.stopPropagation(); view.remove(); S.say(arr(p.down), function () { S.home(false); }); }
+            view.addEventListener("click", down);
+            S.say(arr(p.top), function () { S.offer([{ label: p.stop, act: down }]); });
         });
     };
 

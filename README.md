@@ -105,7 +105,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                        ├─ Agency (Johnny: the hunt, rumours, people) ─ Denchi's (symphoslots)
                                        ├─ Crossing (─ Izakaya Gonta) ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                                          └─ Otojima (back: the Last Train)
-                                       │      ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Lighthouse
+                                       │      ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Lighthouse · Pier (Ferris wheel)
                                        │                                                                   ├─ Aquarium
                                        │                                                                   └─ Lake ─ Riverboat
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
@@ -120,7 +120,7 @@ Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's wi
 stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima; Aquarium → Beach;
 Riverboat → Hidden Glade; Campfire → Hidden Glade. Drawn for the city (FAL from a neighbouring picture, quantized to 16
 inks): the ramen stall, game centre, roof, aquarium, net cafe, coin laundry, karaoke box, the empty bridge the
-train crosses, the observatory, the last train, the lighthouse, the fox gates, the cat cafe, and the residential street without the girl.
+train crosses, the observatory, the last train, the lighthouse, the fox gates, the cat cafe, the pier, and the residential street without the girl.
 
 Threads that cross the city (flags in localStorage `pandaHeard_*`; Panda's notebook in your pockets tracks them;
 letters arrive in the living room after some of them): Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a

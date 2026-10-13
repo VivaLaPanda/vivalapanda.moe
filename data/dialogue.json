@@ -1003,6 +1003,17 @@
               "say": [
                 "\"Neko no Ma, by the konbini. Six cats. Bring fish and you'll never pay for coffee again.\""
               ]
+            },
+            {
+              "keys": [
+                "ferris",
+                "wheel",
+                "pier",
+                "carousel"
+              ],
+              "say": [
+                "\"Otojima pier. The rides run all night with nobody on them. Honour system.\""
+              ]
             }
           ]
         }
@@ -4923,6 +4934,67 @@
           "say": [
             "Six heads follow the yo-yo up and down. The kitten falls off the shelf. It's fine."
           ]
+        }
+      }
+    },
+    "pier": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "An old amusement pier, all lit up. The rides are still turning, even with nobody here."
+      ],
+      "objects": {
+        "wheel": {
+          "name": "Ferris wheel",
+          "click": [
+            "The Ferris wheel turns so slowly you could step right into a gondola."
+          ],
+          "choices": [
+            {
+              "label": "Ride it",
+              "action": "ferris"
+            },
+            {
+              "label": "Not tonight"
+            }
+          ]
+        },
+        "carousel": {
+          "name": "Carousel",
+          "click": [
+            "A little carousel, horses going up and down to a tinny waltz."
+          ],
+          "choices": [
+            {
+              "label": "Ride a horse",
+              "pick": [
+                "(You pick the white horse. Round and round. You're grinning. You can't stop.)",
+                "(You pick the one with the chipped ear. It seems grateful.)"
+              ]
+            },
+            {
+              "label": "Just watch"
+            }
+          ]
+        },
+        "booth": {
+          "name": "Ticket booth",
+          "lines": [
+            "The ticket booth is lit, but nobody's in it. A sign says \"Honour system\"."
+          ]
+        }
+      },
+      "play": {
+        "ferris": {
+          "up": [
+            "(You step into a gondola. It creaks. Up you go, slowly, over the dark water.)"
+          ],
+          "top": [
+            "At the top, the whole city's spread across the bay. The tower, the festival lights, all of it."
+          ],
+          "down": [
+            "(Round and down again. The boardwalk comes back up to meet you.)"
+          ],
+          "stop": "Come back down"
         }
       }
     }

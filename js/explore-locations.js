@@ -493,6 +493,7 @@ var LOCATIONS = {
             { to: "?loc=lake", rect: [573, 179, 167, 55] },   // the little boat upriver
             { to: "?loc=aquarium", rect: [0, 138, 142, 69] },   // the lit building along the shore
             { to: "?loc=lighthouse", rect: [143, 110, 60, 90] },   // the beacon, up the steps
+            { to: "?loc=pier", rect: [250, 150, 200, 60] },   // the lights along the shore
             { to: "?loc=otojima", rect: [492, 345, 248, 183] }
         ]
     },
@@ -530,6 +531,19 @@ var LOCATIONS = {
         ],
         objects: [{ id: "lamp", rect: [0, 33, 150, 266] }, { id: "town", rect: [430, 190, 310, 90] },
                   { id: "sea", rect: [200, 300, 540, 178] }]
+    },
+    // drawn for the city (FAL, quantized); the wheel's bulbs chase (pier-bulbs-a/b: bulb pixels from the full-colour
+    // drawing, in two alternating sets)
+    "pier": {
+        title: "Otojima Pier", image: "../img/explore/places/pier.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/caught-a-star-in-your-eye.mp3",
+        layers: [{ src: "../img/explore/layers/pier-bulbs-a.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-a" },
+                 { src: "../img/explore/layers/pier-bulbs-b.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-b" }],
+        links: [
+            { to: "?loc=harbour", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "wheel", rect: [474, 0, 266, 415] }, { id: "carousel", rect: [0, 199, 210, 216] },
+                  { id: "booth", rect: [383, 307, 91, 141] }]
     },
     "riverboat": {
         title: "Up the River", image: "../img/explore/pathways/riverboat.png", pos: "center",
