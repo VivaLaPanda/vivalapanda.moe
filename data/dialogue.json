@@ -1964,7 +1964,7 @@
           "menu": [
             {
               "label": "Something nostalgic",
-              "song": "/audio/HAUNTER-SLAUGHTER-NOSTALGIA.mp3",
+              "song": "/audio/train-music/tenniscoats-papas-ear.mp3",
               "say": [
                 "They know this one! The whole room starts swaying."
               ]
@@ -1978,7 +1978,7 @@
             },
             {
               "label": "Something upbeat",
-              "song": "/audio/cosmic-psycho-school.mp3",
+              "song": "/audio/possessioner-city-a.mp3",
               "say": [
                 "The drummer grins. Finally, something fast."
               ]

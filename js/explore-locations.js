@@ -189,7 +189,7 @@ var LOCATIONS = {
     // behind Erratic Errata, for those who ask for the second edition (js/explore-town.js)
     "zengarden": {
         title: "A Hidden Garden", image: "../img/explore/pathways/zengarden.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/train-music/sufjan-stevens-seven-swans.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
         links: [
             { to: "?loc=weirdstore", rect: [0, 330, 200, 148] }
         ],
@@ -229,7 +229,7 @@ var LOCATIONS = {
     },
     "shrine": {
         title: "Pumpo Shrine", image: "../img/explore/places/night_temple_festival.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/cosmic-psycho-begin.mp3",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/train-music/sufjan-stevens-seven-swans.mp3",
         links: [
             { to: "?loc=forestedge", rect: [543, 101, 126, 201] },
             { to: "?loc=underbridge", rect: [0, 250, 80, 160] },   // steps down to the river
