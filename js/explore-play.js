@@ -1850,6 +1850,20 @@
         S.say(arr(p.intro).concat(pick.map(function (h) { return h.text; })), function () { S.home(false); });
     };
 
+    // the night bus: no route posted; it takes you somewhere in the city (often somewhere you haven't been)
+    var BUS_STOPS = ["festival", "shrine", "rooftop", "ramen", "netcafe", "catcafe", "laundromat", "konbini", "bookshop",
+                     "nightcafe", "izakaya", "otojima", "harbour", "lighthouse", "lake", "hilltop", "observatory", "inari",
+                     "gamecentre", "karaoke", "casino", "underbridge", "zengarden", "forestedge", "nightpark"];
+    S.actions.nightbus = function () {
+        var p = P().bus || ((R.dialogueAll.explore || {}).lines || {}).bus;
+        var fresh = BUS_STOPS.filter(function (k) { return k !== place && !get("pandaVisits_" + k); });
+        var pool = fresh.length && Math.random() < .7 ? fresh : BUS_STOPS.filter(function (k) { return k !== place; });
+        var to = pool[Math.floor(Math.random() * pool.length)];
+        S.say(arr(p.ride).concat([fill(p.arrive, { place: (window.LOCATIONS && LOCATIONS[to] ? LOCATIONS[to].title : to) })]), function () {
+            location.href = "?loc=" + to;
+        });
+    };
+
     // the pocket radio (Sakura fixed Ghandi's old one): tune it and the music changes, wherever you are
     window.POCKET_LOOK.radio = function (it) {
         var st = it.stations[Math.floor(Math.random() * it.stations.length)];

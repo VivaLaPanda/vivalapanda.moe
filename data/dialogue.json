@@ -610,6 +610,10 @@
               "label": "Maybe later"
             }
           ]
+        },
+        {
+          "label": "Wait for the night bus",
+          "action": "nightbus"
         }
       ],
       "linger": [
@@ -1389,6 +1393,12 @@
       "speaker": "Ｐａｎｄａ",
       "greeting": [
         "Hey you don't think these people will mind us wandering into their houses right?"
+      ],
+      "menu": [
+        {
+          "label": "Wait for the night bus",
+          "action": "nightbus"
+        }
       ]
     },
     "nightresidential2": {
@@ -2240,7 +2250,14 @@
         "...Did you just type the Konami code?",
         "Fine. Thirty extra lives. Don't spend them all in one place."
       ],
-      "never_mind": "Never mind"
+      "never_mind": "Never mind",
+      "bus": {
+        "ride": [
+          "(A bus pulls up. No number, no destination on the front. The doors hiss open. You get on.)",
+          "(The driver doesn't look round. The city slides past the windows. Then the bus stops.)"
+        ],
+        "arrive": "(\"{place}.\" The doors open.)"
+      }
     },
     "festival": {
       "speaker": "P a n d a",
