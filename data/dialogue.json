@@ -2221,6 +2221,21 @@
           "say": [
             "(You unpeg the sock. It's been up here a while. It looks lonely.)"
           ]
+        },
+        {
+          "label": "Watch the fireworks with everyone",
+          "need": "rally_complete",
+          "say": [
+            "You've found every corner of Pandopolis. So, one by one, the town comes up to the roof.",
+            "Taisho brings a pot of broth and too many bowls. \"Eat, eat. It's a long night.\"",
+            "Sabrina and Tony share the railing. \"Still can't pour,\" he says. She laughs anyway.",
+            "Andy turns all the way around to watch the sky. Sakura looks very smug about it.",
+            "Brownie hands out towels, for some reason. Ruri is already winning at cards with 37.",
+            "Johnny watches from the stairs. \"Information's free tonight, stranger.\"",
+            "The cat sits on the water tank like it owns the building. It probably does.",
+            "Up over the skyline, the festival's last fireworks go off, one after another.",
+            "Thanks for visiting Pandopolis. Come back any time. The city will keep the lights on."
+          ]
         }
       ]
     },

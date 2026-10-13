@@ -1371,6 +1371,7 @@
         put("pandaRally", JSON.stringify(got));
         put("pandaRallyNew", "1");   // the card pulses in your pockets until you look at it
         if (Object.keys(got).length === 1) pocket("rally");
+        if (RALLY.every(function (k) { return got[k]; })) hear("rally_complete");
         else document.dispatchEvent(new Event("pockets"));
     }
     // what the card says (js/house-key.js asks this when it's clicked)
@@ -1380,6 +1381,7 @@
         put("pandaRallyNew", "");
         var names = RALLY.map(function (k) { return got[k] ? it.places[k] : "???"; }).join(", ");
         if (n === RALLY.length && (get("pandaPockets") || "").indexOf("\"pin\"") < 0) setTimeout(function () { pocket("pin"); }, 0);
+        if (n === RALLY.length) hear("rally_complete");   // the roof's ending opens
         return [fill(it.card, { n: n, total: RALLY.length }), names].concat(n === RALLY.length ? arr(it.complete) : []);
     };
 
