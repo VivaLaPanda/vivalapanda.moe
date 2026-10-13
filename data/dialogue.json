@@ -1900,7 +1900,19 @@
       ],
       "objects": {
         "drifter": {
-          "name": "Someone sleeping"
+          "name": "Someone sleeping",
+          "accepts": {
+            "onigiri": {
+              "label": "Leave him the onigiri",
+              "take": true,
+              "hear": "drifter_fed",
+              "say": [
+                "You set the onigiri down next to him. One eye opens.",
+                "\"...Thanks, kid. Here's one for free: the man in the hat? He's waiting for somebody.\"",
+                "\"Same somebody, twelve years. Don't ask me who.\" (He's asleep again.)"
+              ]
+            }
+          }
         }
       },
       "play": {
@@ -2589,20 +2601,23 @@
             {
               "label": "Salmon",
               "say": [
-                "\"Salmon! A solid choice.\""
-              ]
+                "\"Salmon! A solid choice.\" (You tuck it in your pocket for later.)"
+              ],
+              "pocket": "onigiri"
             },
             {
               "label": "Tuna mayo",
               "say": [
                 "\"Tuna mayo. The people's champion.\""
-              ]
+              ],
+              "pocket": "onigiri"
             },
             {
               "label": "Umeboshi",
               "say": [
                 "\"Pickled plum? Brave. It's very sour.\""
-              ]
+              ],
+              "pocket": "onigiri"
             }
           ]
         },
@@ -3763,6 +3778,12 @@
             "ghost_free"
           ],
           "text": "Gave the girl back her charm."
+        },
+        {
+          "flags": [
+            "drifter_fed"
+          ],
+          "text": "Fed the man in the back passage."
         }
       ]
     },
@@ -3796,6 +3817,11 @@
       "icon": "letter",
       "look": "No letters yet.",
       "arrived": "Oh! There's mail for you. ({n} new, in your pockets.)"
+    },
+    "onigiri": {
+      "name": "onigiri",
+      "icon": "onigiri",
+      "look": "An onigiri from the konbini. You were saving it for someone. Or for later."
     }
   },
   "letters": {
