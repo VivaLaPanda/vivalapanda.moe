@@ -150,7 +150,8 @@ var LOCATIONS = {
             { to: "?loc=oldhouse", rect: [0, 0, 60, 280] },
             { to: "?loc=zengarden", rect: [266, 98, 72, 125] }
         ],
-        layers: [{ src: "../img/explore/layers/cat-sleeping.png", rect: [431, 469, 50, 29], pixel: true }],
+        layers: [{ src: "../img/explore/layers/cat-sleeping.png", rect: [431, 469, 50, 29], pixel: true },
+                 { src: "../img/explore/layers/cat-sleeping-in.png", rect: [431, 469, 50, 29], pixel: true, anim: "breathe" }],
         objects: [{ id: "cat", rect: [420, 455, 72, 48] }, { id: "tea", rect: [316, 326, 107, 63] },
                   { id: "tv", rect: [567, 277, 89, 143] }, { id: "daruma", rect: [0, 283, 62, 86] },
                   { id: "scroll", rect: [110, 89, 81, 242] }]

@@ -425,13 +425,17 @@
     0% { transform: translateX(100%); } 55% { transform: translateX(-175%); } 100% { transform: translateX(-175%); }
 }
 
+/* a sleeping cat breathing: the breath-in frame over the breath-out one, now and then */
+.scene-anim-breathe { animation: scene-breathe 3.6s steps(1) infinite; }
+@keyframes scene-breathe { 0% { opacity: 0; } 40% { opacity: 1; } 75% { opacity: 0; } }
+
 /* two layers of glints on water, in turn */
 .scene-anim-twinkle-a { animation: scene-twinkle 1.4s steps(1) infinite; }
 .scene-anim-twinkle-b { animation: scene-twinkle 1.4s steps(1) -.7s infinite; }
 @keyframes scene-twinkle { 0% { opacity: 1; } 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
     .scene-anim-flicker, .scene-anim-twinkle-a, .scene-anim-twinkle-b, .scene-anim-buzz,
-    .scene-anim-signal { animation: none; }
+    .scene-anim-signal, .scene-anim-breathe { animation: none; }
     .scene-anim-train { animation: none; transform: translateX(0); }
 }
 
