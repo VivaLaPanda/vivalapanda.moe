@@ -91,7 +91,8 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                │                          └─ Andy's House
                     │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ train.html
                     │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop (─ Observatory)
-                    │                                                 ─ Lily Field ─ Campfire ─ ↺ Hidden Glade
+                    │                                                 ─ Lily Field ─ Campfire ─┬─ ↺ Hidden Glade
+                    │                                                                          └─ Fox Gates ─ ↺ Shrine
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
                                        ├─ Club Polka (dance) ─ Ruri's back room (high-low)
                                        ├─ Agency (Johnny: the hunt, rumours, people) ─ Denchi's (symphoslots)

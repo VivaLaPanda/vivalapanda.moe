@@ -932,6 +932,18 @@
               "say": [
                 "\"Some doors in this city only open between two and four. Try the back passage. Late.\""
               ]
+            },
+            {
+              "keys": [
+                "fox",
+                "foxes",
+                "inari",
+                "gates",
+                "torii"
+              ],
+              "say": [
+                "\"Past the campfire, there are red gates. Wear a fox's face and the foxes might show theirs.\""
+              ]
             }
           ]
         }
@@ -4236,6 +4248,47 @@
           "\"Nobody's sent one tonight. Maybe you should.\""
         ]
       }
+    },
+    "inari": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Red gates, hundreds of them, climbing up the hill into the dark.",
+        "Two stone foxes keep watch at the bottom."
+      ],
+      "objects": {
+        "fox_l": {
+          "name": "Stone fox",
+          "lines": [
+            "A stone fox in a red bib, ears up, listening for something far up the hill."
+          ]
+        },
+        "fox_r": {
+          "name": "Stone fox",
+          "lines": [
+            "The other fox, the same red bib. Its eyes follow you. Probably not."
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Count the gates",
+          "say": [
+            "(You start counting. You lose count somewhere past two hundred.)",
+            "They say nobody's ever counted the same number twice."
+          ]
+        }
+      ],
+      "accepts": {
+        "fox_mask": {
+          "label": "Put on the fox mask",
+          "hear": "fox_seen",
+          "say": [
+            "(You put on the fox mask.)",
+            "...Between the gates, something moves. A real fox, white as paper, sitting on the path.",
+            "It looks at you, then at the mask, then bows its head once. When you blink, it's gone."
+          ]
+        }
+      }
     }
   },
   "house_key": {
@@ -4760,6 +4813,12 @@
       "need": "sabrina_shell",
       "text": [
         "A Rabu Rabu napkin: \"Still listening to the shell. It says hi. -S\""
+      ]
+    },
+    "fox": {
+      "need": "fox_seen",
+      "text": [
+        "No envelope. Just a single white hair on the doormat, and the faint smell of incense."
       ]
     }
   }

@@ -103,10 +103,21 @@ var LOCATIONS = {
         title: "A Campfire", image: "../img/explore/places/night_forest_campsite.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/death-bringer-forest.mp3",
         links: [
+            { to: "?loc=inari", rect: [0, 0, 130, 240] },   // red gates, between the trees
             { to: "?loc=forestglade", rect: [600, 0, 140, 200] },
             { to: "?loc=lilyfield", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "fire", rect: [300, 220, 130, 140] }, { id: "campers", rect: [430, 150, 180, 260] }]
+    },
+    // drawn for the city (FAL, quantized); off the campfire, up through the gates and out at the city shrine
+    "inari": {
+        title: "The Fox Gates", image: "../img/explore/places/inari.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
+        links: [
+            { to: "?loc=shrine", rect: [309, 100, 133, 249] },   // up through the gates
+            { to: "?loc=campsite", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "fox_l", rect: [1, 183, 149, 216] }, { id: "fox_r", rect: [591, 183, 149, 216] }]
     },
     "forestglade": {
         title: "The Hidden Glade", image: "../img/explore/places/forestglade.png", pos: "left",
