@@ -2752,7 +2752,18 @@
             {
               "label": "Just watch"
             }
-          ]
+          ],
+          "accepts": {
+            "goldfish_bag": {
+              "label": "Let your goldfish go in the koi pond",
+              "take": true,
+              "hear": "goldfish_freed",
+              "say": [
+                "You open the bag at the water's edge. Your goldfish hesitates, then darts in.",
+                "Three koi the size of your arm come to look. It stares them down. They leave."
+              ]
+            }
+          }
         }
       },
       "menu": [
@@ -2764,7 +2775,15 @@
       "play": {
         "sit": "(You sit by the water. Nobody says anything for a while.)",
         "stand": "...Okay. That was nice."
-      }
+      },
+      "greeting_after": [
+        {
+          "need": "goldfish_freed",
+          "greeting": [
+            "The garden again. Your goldfish is in the koi pond, small, orange, bossing everyone around."
+          ]
+        }
+      ]
     },
     "ramen": {
       "speaker": "T a i s h o",
@@ -3336,7 +3355,8 @@
           "say": [
             "You hold the bag up to the glass.",
             "Your goldfish stares at the big fish going past. Aspirational."
-          ]
+          ],
+          "unless": "goldfish_freed"
         }
       },
       "menu": [
@@ -5047,6 +5067,12 @@
       "need": "bar25_seen",
       "text": [
         "A matchbook from Bar 25. Inside: \"Open two till four. Or whenever you need us.\""
+      ]
+    },
+    "goldfish": {
+      "need": "goldfish_freed",
+      "text": [
+        "A note in very careful brushwork: \"Your fish has taken over the pond. We approve. -the garden\""
       ]
     }
   }
