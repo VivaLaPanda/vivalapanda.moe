@@ -389,3 +389,28 @@
 #hk-inventory button:focus-visible {
     outline: none;
 }
+
+/* layers drawn on the picture's own pixel grid, and their animations */
+.scene-layer.scene-pixel { image-rendering: pixelated; }
+.scene-anim-flicker { animation: scene-flicker 4.3s steps(1) infinite; }
+@keyframes scene-flicker {
+    0%, 100% { opacity: 1; } 31% { opacity: .82; } 33% { opacity: 1; } 64% { opacity: .9; } 67% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .scene-anim-flicker { animation: none; } }
+
+/* a minigame over the picture (js/explore-play.js) */
+.play-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: #000;
+}
+
+.play-overlay canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    cursor: crosshair;
+    touch-action: none;
+}

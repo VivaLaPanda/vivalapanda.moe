@@ -745,6 +745,121 @@
           ]
         }
       }
+    },
+    "lines": {
+      "empty": [
+        "..."
+      ],
+      "idle": [
+        "..."
+      ],
+      "allSeen": "...",
+      "leaving": "See you around!",
+      "backToRoom": "Okay, maybe later.",
+      "lookPrompt": "Look at:",
+      "copied": "Copied!",
+      "copyFailed": "Hm, that didn't copy."
+    },
+    "festival": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Oh! So that's where the lanterns were coming from."
+      ],
+      "objects": {
+        "goldfish": {
+          "name": "Goldfish scooping"
+        },
+        "wataame": {
+          "name": "Cotton candy stall",
+          "click": [
+            "Wataame! They'll spin it into whatever shape you ask for."
+          ],
+          "choices": [
+            {
+              "label": "Buy one",
+              "pick": [
+                "You got a cat. It's mostly air. Perfect.",
+                "You asked for a cloud. It's very accurate.",
+                "You asked for a dragon. It's... dragon-ish."
+              ]
+            },
+            {
+              "label": "Maybe later"
+            }
+          ]
+        },
+        "yakisoba": {
+          "name": "Yakisoba stall",
+          "click": [
+            "Yakisoba, sizzling away on a big iron plate."
+          ],
+          "choices": [
+            {
+              "label": "Get a plate",
+              "pick": [
+                "Festival yakisoba beats every other yakisoba. I don't make the rules.",
+                "Extra pickled ginger. Good call."
+              ]
+            },
+            {
+              "label": "Maybe later"
+            }
+          ]
+        }
+      },
+      "play": {
+        "goldfish": {
+          "intro": "Goldfish scooping! Three paper scoops, and the paper tears if you're rough with it.",
+          "play": "Have a go",
+          "watch": "Just watch",
+          "stop": "Done",
+          "how": "Click to dip the scoop, let go to lift it out. Gently!",
+          "status": "Scoops {scoops}   Goldfish: {fish}",
+          "result": [
+            "The paper always tears. That's half the fun.",
+            "One goldfish! It gets its own little bag.",
+            "Two! You're a natural.",
+            "{n} goldfish! The stall owner looks nervous."
+          ]
+        }
+      }
+    },
+    "shrine": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A tiny shrine, all lit up for the festival."
+      ],
+      "objects": {
+        "offering": {
+          "name": "The shrine",
+          "click": [
+            "An offering box, a bell rope, and a box of fortunes."
+          ],
+          "choices": [
+            {
+              "label": "Draw a fortune",
+              "pick": [
+                "Great blessing! Whatever you lost will turn up somewhere silly.",
+                "Blessing. A good time to start something small.",
+                "Small blessing. Bring an umbrella.",
+                "Future blessing. Be patient with the slow ones, yourself included.",
+                "Middle blessing. Your next meal will be better than you expect.",
+                "Curse! Tie it to the rack so the bad luck stays here. Quick!"
+              ]
+            },
+            {
+              "label": "Make a wish",
+              "say": [
+                "(You toss in a coin, ring the bell, bow twice and clap twice.)",
+                "Don't tell me what you wished for. Then it won't come true."
+              ]
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        }
+      }
     }
   },
   "house_key": {
@@ -765,7 +880,7 @@
       ],
       "names": [
         "\"Sabrina at Rabu Rabu. Brownie at the bathhouse.",
-        "The attendant on Platform 1. And Andy, if he'll turn around.\""
+        "The attendant on Platform 1. And Andy, if he'll give you the time.\""
       ],
       "short": "\"Still {left} short, stranger. Come back when they've all paid up.\"",
       "done": [

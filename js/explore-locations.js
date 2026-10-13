@@ -4,7 +4,8 @@
 // Per location: title (the page title), image and pos (the picture, cover-fitted, at that object-position), holo
 // (the right sidebar), music, frame ("light" for the light window frame; dark otherwise), links (exits: to, and rect
 // [x, y, w, h] in the 740x528 scene window; sprite: a visible button there), objects (things to click that aren't
-// exits: id, rect, and view to switch to one of views), under (a picture under the main one: src, rect).
+// exits: id, rect, and view to switch to one of views), under (a picture under the main one: src, rect), layers (pictures over it: src, rect, pixel, anim).
+// What there is to do in a place (games, menus, animals) is js/explore-play.js.
 // The map is meant to be illegible: exits are plain click areas, no outlines, no LOOK (R.illegible).
 var LOCATIONS = {
     "mainstreet": {
@@ -64,7 +65,28 @@ var LOCATIONS = {
     "nightpark": {
         title: "Pumpo Park", image: "../img/explore/pathways/night_park.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
-        links: []
+        links: [
+            { to: "?loc=festival", rect: [483, 377, 257, 151] }
+        ],
+        // far back in the trees, the festival's lanterns
+        layers: [{ src: "../img/explore/layers/park-lanterns.png", rect: [-83, 0, 905, 528], pixel: true, anim: "flicker" }]
+    },
+    "festival": {
+        title: "The Summer Festival", image: "../img/explore/pathways/night_festival.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/dance_in_the_memories.mp3",
+        links: [
+            { to: "?loc=shrine", rect: [0, 275, 187, 253] }
+        ],
+        objects: [{ id: "goldfish", rect: [183, 407, 169, 73] }, { id: "wataame", rect: [352, 202, 183, 321] },
+                  { id: "yakisoba", rect: [608, 202, 132, 321] }]
+    },
+    "shrine": {
+        title: "Pumpo Shrine", image: "../img/explore/places/night_temple_festival.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/dance_in_the_memories.mp3",
+        links: [
+            { to: "?loc=forestedge", rect: [543, 101, 126, 201] }
+        ],
+        objects: [{ id: "offering", rect: [266, 201, 218, 184] }]
     },
     "nightplaza": {
         title: "Picrew Plaza", image: "../img/explore/pathways/night_city_plaza.png", pos: "center",
@@ -245,8 +267,10 @@ var LOCATIONS = {
         seenKey: "pandaExploreSeen",
         scene: {
             src: L.image, width: 740, height: 528, fit: "cover", pos: L.pos,
-            layers: L.under ? [{ src: L.under.src, x: L.under.rect[0], y: L.under.rect[1], w: L.under.rect[2],
-                                 h: L.under.rect[3], under: true }] : []
+            layers: (L.under ? [{ src: L.under.src, x: L.under.rect[0], y: L.under.rect[1], w: L.under.rect[2],
+                                  h: L.under.rect[3], under: true }] : []).concat((L.layers || []).map(function (l) {
+                return { src: l.src, x: l.rect[0], y: l.rect[1], w: l.rect[2], h: l.rect[3], pixel: l.pixel, anim: l.anim };
+            }))
         },
         views: L.views,
         objects: objects,

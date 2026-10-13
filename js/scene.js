@@ -9,12 +9,14 @@
 //   R.typeMs      ms per typed character (22)                 R.speaker  the name over the box (from dialogue.json)
 //   R.title       the page's title                             R.frame    "dark" for the dark window frame
 //   R.holo        the right sidebar's picture                  R.back     where BACK goes when you didn't come from the site
-//   R.scene       { src, width, height, fit, pos, layers: [{ src, x, y, w, h, under }] }  (fit/pos: the art's object-fit)
+//   R.scene       { src, width, height, fit, pos, layers: [{ src, x, y, w, h, under, pixel, anim }] }  (fit/pos: the
+//                 art's object-fit; pixel: crisp scaling; anim: a scene.css animation, scene-anim-<name>)
 //   an object's   go (a link), sprite ({ src, x, y, w, h }: a visible button), view (a name in R.views: clicking
 //                 swaps to that picture and speaker and back again), choices (may be a function; null: just lines)
 //   R.afterGreeting  a function giving choices to offer once the greeting's typed (or none; true: it said something)
 // Other scripts (js/house-key.js) drive the box through window.SCENE: say, offer, ask, actions (a choice's
-// "action" names one), lines; a choice may also carry act (a function).
+// "action" names one), lines; a choice may also carry act (a function). In dialogue.json a choice can just talk:
+// say (its boxes) or pick (one of them, at random).
 (function () {
     "use strict";
 
@@ -102,7 +104,8 @@
         // more pictures in the scene (the penthouse's skyline under its window), and visible buttons (the tower's
         // lobby signs): images at native rects, under or over the art
         (s.layers || []).forEach(function (l) {
-            var im = el("img", { src: l.src, alt: "", "class": "scene-layer" });
+            var im = el("img", { src: l.src, alt: "", "class": "scene-layer" + (l.pixel ? " scene-pixel" : "") +
+                                                                 (l.anim ? " scene-anim-" + l.anim : "") });
             placeNative(im, l.x, l.y, l.w, l.h);
             if (l.under) { im.style.zIndex = "-1"; stage.insertBefore(im, art); } else stage.insertBefore(im, svg);
         });
@@ -319,6 +322,8 @@
                     if (c.copy) copy(c.copy);
                     else if (c.object) open(c.object);
                     else if (c.act) c.act();
+                    else if (c.say) say(c.say);
+                    else if (c.pick) say([c.pick[Math.floor(Math.random() * c.pick.length)]]);
                     else if (c.action && SCENE.actions[c.action]) SCENE.actions[c.action]();
                     else say([R.lines.backToRoom]);
                 });
@@ -619,7 +624,11 @@
         if (!reduceMotion && !R.illegible) setInterval(glint, GLINT_MS);
     }
 
-    var SCENE = window.SCENE = { say: say, offer: offer, ask: ask, lines: lines, actions: {} };
+    // status: a line shown at once, without changing what the box is doing (a minigame's score)
+    function status(line) { stopTyping(); text.textContent = line; }
+
+    var SCENE = window.SCENE = { say: say, offer: offer, ask: ask, lines: lines, actions: {}, status: status,
+                                 toIdle: toIdle, stage: stage, placeNative: placeNative };
 
     // a room's own setup (R.ready: the living room loads its scene first) and the lines, then the room
     Promise.all([
