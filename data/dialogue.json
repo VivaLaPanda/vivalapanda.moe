@@ -1362,6 +1362,14 @@
             "\"One express to Otojima a day. Always the one you just missed. Stay behind the line.\"",
             "\"Last train's at midnight. After that, the platform's mine. Stay behind the line.\""
           ]
+        },
+        {
+          "label": "Ask about lost property",
+          "pick": [
+            "\"Umbrellas, mostly. Four hundred and twelve this year. Please stay behind the yellow line.\"",
+            "\"A guitar pick. A cat toy. A single sock. People drop the strangest things.\"",
+            "\"Someone once left a whole bowl of ramen. Still warm. We gave it to the night shift.\""
+          ]
         }
       ]
     },
@@ -1840,6 +1848,13 @@
               ],
               "go": "penthouse.html"
             }
+          ]
+        },
+        {
+          "label": "Ask 37 about his name",
+          "say": [
+            "\"Thirty-seven, sir. My mother had thirty-six names picked out. None of them stuck.\"",
+            "\"Floor thirty-seven was empty when the tower opened. I took it as a sign.\""
           ]
         }
       ]
