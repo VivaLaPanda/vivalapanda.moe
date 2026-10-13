@@ -1541,9 +1541,24 @@
             "\"Ooh, the sunset at Otojima! I haven't been to the sea in years.\"",
             "\"Next time take me. ...Kidding. Unless?\""
           ]
+        },
+        "shell": {
+          "label": "Give Sabrina the seashell",
+          "take": true,
+          "hear": "sabrina_shell",
+          "say": [
+            "\"...From Otojima? You remembered.\" (She holds it up to her ear.)",
+            "\"I can hear it. The sea. Don't tell anyone I got sentimental, anon.\""
+          ]
         }
       },
       "greeting_after": [
+        {
+          "need": "sabrina_shell",
+          "greeting": [
+            "\"Hey, anon.\" (There's a little pink shell by the register now, next to the purikura.)"
+          ]
+        },
         {
           "need": "tony_answered",
           "greeting": [
@@ -2442,7 +2457,32 @@
             "The water's warm. Mostly."
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Look for shells",
+          "unless": "shell_got",
+          "pocket": "shell",
+          "hear": "shell_got",
+          "say": [
+            "(You walk along the tideline. Mostly seaweed. Then: a perfect little pink shell.)"
+          ]
+        },
+        {
+          "label": "Build a sandcastle",
+          "cycle": [
+            [
+              "(You build a sandcastle. A wave takes it. Rude.)"
+            ],
+            [
+              "(Bigger this time. A moat, even. A wave takes it.)"
+            ],
+            [
+              "(You build it further up the beach. It survives. You are victorious.)"
+            ]
+          ]
+        }
+      ]
     },
     "sunset": {
       "speaker": "P a n d a",
@@ -4263,6 +4303,15 @@
             "radio_fixed"
           ],
           "text": "Get Ghandi's old radio fixed."
+        },
+        {
+          "flags": [
+            "shell_got"
+          ],
+          "not": [
+            "sabrina_shell"
+          ],
+          "text": "Someone who misses the sea would love this shell."
         }
       ],
       "done": [
@@ -4425,6 +4474,11 @@
           "src": "/audio/doki-doki-vac09.mp3"
         }
       ]
+    },
+    "shell": {
+      "name": "seashell",
+      "icon": "shell",
+      "look": "A little pink shell from Otojima's beach. Somebody in the city misses the sea."
     }
   },
   "letters": {
@@ -4469,6 +4523,12 @@
       "need": "hat_given",
       "text": [
         "No stamp, no name. Just: \"Thank you for bringing her home. -H\""
+      ]
+    },
+    "sabrina_shell": {
+      "need": "sabrina_shell",
+      "text": [
+        "A Rabu Rabu napkin: \"Still listening to the shell. It says hi. -S\""
       ]
     }
   }
