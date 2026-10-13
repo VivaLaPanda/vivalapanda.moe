@@ -3581,6 +3581,25 @@
             {
               "text": "MYSTERY POET UNMASKED? Bookshop declines to comment.",
               "need": "poet_found"
+            },
+            {
+              "text": "CAT HAS AT LEAST THREE NAMES, INVESTIGATION FINDS. Answers to all, or none.",
+              "need": "cat_named"
+            },
+            {
+              "text": "HAT APPEARS BY RESIDENTIAL WALL. Next to a flower. Residents leave it be.",
+              "need": "hat_left"
+            },
+            {
+              "text": "LOCAL DEALER BEATEN AT HIGH-LOW. \"Luck,\" she says. \"Rematch Tuesday.\"",
+              "need": "ruri_beaten"
+            },
+            {
+              "text": "FIELD RADIO RESTORED, plays \"every station in the city,\" says repairer.",
+              "need": "radio_fixed"
+            },
+            {
+              "text": "TRANSIT: Night bus route \"still a mystery,\" admits city. Passengers \"seem fine\"."
             }
           ]
         }
