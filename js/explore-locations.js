@@ -214,7 +214,11 @@ var LOCATIONS = {
         ]
     },
     "trainwetlands": {
-        title: "On the train", image: "../img/explore/places/day_wetlands_bridge.png", pos: "center",
+        // the bridge without its train (a FAL plate, only where the train was), and the train crossing it, behind the
+        // masts (img/explore/layers/train*.png, cut from the original picture)
+        title: "On the train", image: "../img/explore/places/day_wetlands_bridge_empty.png", pos: "center",
+        layers: [{ src: "../img/explore/layers/train.png", rect: [308, 307, 466, 64], pixel: true, anim: "train" },
+                 { src: "../img/explore/layers/train-pole.png", rect: [-34, 0, 808, 528], pixel: true }],
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doradora-emotion-dor02.mp3",
         links: [
             { to: "../train.html", rect: [299, 316, 441, 54] },

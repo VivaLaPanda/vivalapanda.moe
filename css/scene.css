@@ -14,6 +14,7 @@
     flex: none;
     margin: 0 auto;
     isolation: isolate;     /* its own stacking context: a layer under the art stays inside the stage */
+    overflow: hidden;       /* layers that run past the picture (the train coming on) stay inside it */
 }
 
 /* the art is a nearest-neighbour 4x copy scaled down smoothly ("sharp bilinear"): at the window's
@@ -418,6 +419,12 @@
     94% { opacity: 1; } 96% { opacity: 0; } 98% { opacity: 1; } 100% { opacity: 0; }
 }
 
+/* the train crossing the bridge: in from the right, off to the left, a pause, again */
+.scene-anim-train { animation: scene-train 24s linear infinite; }
+@keyframes scene-train {
+    0% { transform: translateX(100%); } 55% { transform: translateX(-175%); } 100% { transform: translateX(-175%); }
+}
+
 /* two layers of glints on water, in turn */
 .scene-anim-twinkle-a { animation: scene-twinkle 1.4s steps(1) infinite; }
 .scene-anim-twinkle-b { animation: scene-twinkle 1.4s steps(1) -.7s infinite; }
@@ -425,6 +432,7 @@
 @media (prefers-reduced-motion: reduce) {
     .scene-anim-flicker, .scene-anim-twinkle-a, .scene-anim-twinkle-b, .scene-anim-buzz,
     .scene-anim-signal { animation: none; }
+    .scene-anim-train { animation: none; transform: translateX(0); }
 }
 
 /* a minigame over the picture (js/explore-play.js) */
