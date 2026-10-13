@@ -1160,7 +1160,8 @@
       "konami": [
         "...Did you just type the Konami code?",
         "Fine. Thirty extra lives. Don't spend them all in one place."
-      ]
+      ],
+      "never_mind": "Never mind"
     },
     "festival": {
       "speaker": "P a n d a",
@@ -1317,7 +1318,27 @@
           "name": "The cat",
           "click": [
             "Curled up on the cushion like nothing happened."
-          ]
+          ],
+          "accepts": {
+            "mackerel": {
+              "label": "Give it the mackerel",
+              "take": true,
+              "pocket": "bottlecap",
+              "hear": "catfriend",
+              "say": [
+                "The cat is awake before you've even unwrapped it.",
+                "(Crunch. Crunch. Crunch.)",
+                "It leaves something at your feet: a bottle cap. A gift!"
+              ]
+            },
+            "goldfish_bag": {
+              "label": "Show it the goldfish",
+              "say": [
+                "The cat's eyes go very, very wide.",
+                "...No. Absolutely not. The goldfish stays in its bag."
+              ]
+            }
+          }
         },
         "tea": {
           "name": "Tea",
@@ -1478,7 +1499,11 @@
             {
               "weight": 30,
               "say": [
-                "A mackerel! Shiny. You let it go."
+                "A mackerel! A good fat one. You wrap it up. Somebody might want it."
+              ],
+              "keep": "mackerel",
+              "release": [
+                "Another mackerel. You've already got one, so this one goes back."
               ]
             },
             {
@@ -1656,7 +1681,18 @@
           ],
           "go": "/recipes.html"
         }
-      ]
+      ],
+      "accepts": {
+        "mackerel": {
+          "label": "Give Taisho the mackerel",
+          "take": true,
+          "say": [
+            "\"Ho! Fresh off the pier?\"",
+            "(He grills it right there with a pinch of salt. Shioyaki. It's perfect.)",
+            "\"The cat from the old house would've fought you for that.\""
+          ]
+        }
+      }
     },
     "gamecentre": {
       "speaker": "P a n d a",
@@ -2037,6 +2073,16 @@
       "name": "Pandopolis pin",
       "icon": "pin",
       "look": "A gold Pandopolis pin, for finding every stamp. Wear it with pride."
+    },
+    "mackerel": {
+      "name": "mackerel",
+      "icon": "mackerel",
+      "look": "A fresh mackerel from Otojima's pier, wrapped in newspaper. Somebody would love this."
+    },
+    "bottlecap": {
+      "name": "bottle cap",
+      "icon": "bottlecap",
+      "look": "A bottle cap the cat gave you. The highest honour a cat can give."
     }
   }
 }

@@ -397,6 +397,29 @@
         document.dispatchEvent(new Event("pockets"));
     }
 
+    function pockets() { try { return JSON.parse(get("pandaPockets")) || []; } catch (e) { return []; } }
+    function has(id) { return pockets().indexOf(id) >= 0; }
+    function unpocket(id) {
+        var got = pockets(), i = got.indexOf(id);
+        if (i >= 0) got.splice(i, 1);
+        put("pandaPockets", JSON.stringify(got));
+        document.dispatchEvent(new Event("pockets"));
+    }
+
+    // giving: a place or an object can accept things from your pockets (dialogue.json "accepts": item id ->
+    // { label, say, take (it's theirs now), pocket (they give you something back), hear (a flag) })
+    function givesFor(accepts, after) {
+        return Object.keys(accepts || {}).filter(has).map(function (id) {
+            var a = accepts[id];
+            return { label: a.label, act: function () {
+                if (a.take) unpocket(id);
+                if (a.pocket && !has(a.pocket)) pocket(a.pocket);
+                hear(a.hear);
+                S.say(arr(a.say), after);
+            } };
+        });
+    }
+
     function claw() {
         var p = P().claw, o = overlay(), cv = o.cv, ctx = o.ctx, W = cv.width, H = cv.height;
         var CHUTE = 18, TOP = 14, FLOOR = 118, tries = 3, over = false, raf, last = performance.now();
@@ -571,7 +594,8 @@
             if (state !== "bite") return;
             var roll = Math.random() * p.catches.reduce(function (n, c) { return n + c.weight; }, 0), got = p.catches[0];
             for (var i = 0; i < p.catches.length; i++) { roll -= p.catches[i].weight; if (roll <= 0) { got = p.catches[i]; break; } }
-            finish(arr(got.say), got.pocket);
+            if (got.keep && has(got.keep)) { finish(arr(got.release || got.say)); return; }   // one's enough
+            finish(arr(got.say), got.pocket || got.keep);
         }
         function key(e) { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); reel(); } }
         document.addEventListener("keydown", key, true);
@@ -1188,6 +1212,15 @@
             S.stage.appendChild(cat);
             cat.addEventListener("click", function (e) {
                 e.stopPropagation();
+                var feed = ((R.dialogueAll.explore || {}).catroom || {}).objects;
+                var a = feed && feed.cat && feed.cat.accepts && feed.cat.accepts.mackerel;
+                if (a && has("mackerel")) {   // it smells the fish
+                    unpocket("mackerel");
+                    if (a.pocket && !has(a.pocket)) pocket(a.pocket);
+                    hear(a.hear);
+                    S.say(arr(a.say));
+                    return;
+                }
                 cat.remove();
                 S.say([visits[Math.floor(Math.random() * visits.length)]]);
                 scamper(sprite("runA"), r[0], r[0] + 260, r[1] + r[3] * .2, r[2], r[3] * .9, 1100);
@@ -1258,4 +1291,19 @@
     });
 
     if (PLAY[place]) PLAY[place]();
+
+    // what a place and its objects accept: a "Give..." choice for each thing you're carrying that they'd take
+    (R.afterGreeting = R.afterGreeting || []).push(function () {
+        return givesFor(R.said && R.said.accepts, function () { S.offer(R.said.menu ? menuOf(R.said.menu) : []); });
+    });
+    R.objects.concat(R.knickKnacks || []).forEach(function (o) {
+        var own = o.choices;   // a menu made here (a function), or the dialogue's own
+        o.choices = function () {
+            var t = (R.said && R.said.objects && R.said.objects[o.id]) || {};
+            var base = typeof own === "function" ? own() : (t.choices || null);
+            var gives = givesFor(t.accepts);
+            if (!gives.length) return base;
+            return (base || [{ label: (R.lines && R.lines.never_mind) || "Never mind" }]).concat(gives);
+        };
+    });
 })();
