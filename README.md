@@ -89,15 +89,16 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                │                          ├─ Coin Laundry
                     │                │                          └─ Andy's House
                     │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ train.html
-                    │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop
-                    │                                                 (─ Observatory: tonight's real moon) ─ Lily Field ─ Campfire ─ ↺ Hidden Glade
+                    │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop (─ Observatory)
+                    │                                                 ─ Lily Field ─ Campfire ─ ↺ Hidden Glade
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
                                        ├─ Club Polka (dance) ─ Ruri's back room (high-low)
                                        ├─ Agency (Johnny: the hunt, rumours, people) ─ Denchi's (symphoslots)
                                        ├─ Crossing (─ Izakaya Gonta) ─ Platform 1 ─ On the train ─┬─ train.html
-                                       │                                                          └─ Otojima
-                                       │       (back: the Last Train, lights going by) ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing; the Lighthouse) ─┬─ Aquarium
-                                       │                                                                    └─ Lake (a ferry) ─ Riverboat
+                                       │                                                          └─ Otojima (back: the Last Train)
+                                       │      ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Lighthouse
+                                       │                                                                   ├─ Aquarium
+                                       │                                                                   └─ Lake ─ Riverboat
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
                                                  │              ├─ Net Cafe Noa (Panda's old bookmarks; Dollars BBS)
                                                  │              ├─ Namba Bears (song requests)
@@ -110,7 +111,7 @@ Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's wi
 stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima; Aquarium → Beach;
 Riverboat → Hidden Glade; Campfire → Hidden Glade. Drawn for the city (FAL from a neighbouring picture, quantized to 16
 inks): the ramen stall, game centre, roof, aquarium, net cafe, coin laundry, karaoke box, the empty bridge the
-train crosses, and the residential street without the girl.
+train crosses, the observatory, the last train, the lighthouse, and the residential street without the girl.
 
 Threads that cross the city (flags in localStorage `pandaHeard_*`; Panda's notebook in your pockets tracks them):
 Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a fuse; then they're at the late cafe); Taisho → Brownie
