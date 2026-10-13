@@ -889,7 +889,31 @@
         });
     }
 
+    // jellyfish drifting up in the water outside the aquarium's tunnel, their bells pulsing
+    function jellyfish(n, region) {
+        var jellies = [];
+        for (var i = 0; i < n; i++) jellies.push({ x: rand(region[0], region[0] + region[2]), y: rand(region[1], region[1] + region[3]), ph: rand(0, 6.28), v: rand(1.5, 3) });
+        ambient(function (ctx, dt, t) {
+            jellies.forEach(function (j) {
+                j.y -= j.v * dt;
+                if (j.y < region[1] - 10) { j.y = region[1] + region[3]; j.x = rand(region[0], region[0] + region[2]); }
+                var pulse = Math.sin(t * 2.4 + j.ph), w = 3 + (pulse > 0 ? 1 : 0), x = Math.round(j.x + Math.sin(t * .6 + j.ph) * 3), y = Math.round(j.y);
+                ctx.fillStyle = "#70d0f1";
+                for (var dx = -w; dx <= w; dx++) ctx.fillRect(x + dx, y + 2, 1, 1);                  // the bell's rim
+                for (var dx2 = -w + 1; dx2 <= w - 1; dx2++) ctx.fillRect(x + dx2, y + 1, 1, 1);
+                for (var dx3 = -w + 2; dx3 <= w - 2; dx3++) ctx.fillRect(x + dx3, y, 1, 1);
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(x - 1, y + 1, 1, 1);
+                ctx.fillStyle = "#4b98e0";
+                for (var k = -1; k <= 1; k++) {                                                      // tentacles, waving
+                    for (var l = 0; l < 4; l++) ctx.fillRect(x + k * 2 + Math.round(Math.sin(t * 3 + l + k) * .8), y + 3 + l, 1, 1);
+                }
+            });
+        });
+    }
+
     var AMBIENT = {
+        aquarium: function () { jellyfish(7, [8, 6, 170, 70]); },
         riverboat: function () { river([175, 139], 528 / 273, 63.2, [148, 192, 158]); },
         harbour: function () { beacon([37, 43]); },
         trainplatform: function () { headlights([130, 46], 30); },

@@ -268,8 +268,16 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
         links: [
             { to: "?loc=riverboat", rect: [573, 179, 167, 55] },
+            { to: "?loc=aquarium", rect: [0, 138, 142, 69] },   // the lit building along the shore
             { to: "?loc=otojima", rect: [492, 345, 248, 183] }
         ]
+    },
+    // drawn for the city (FAL, quantized to its own 16 blues); jellyfish in js/explore-play.js
+    "aquarium": {
+        title: "Otojima Aquarium", image: "../img/explore/places/aquarium.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
+        links: [],
+        objects: [{ id: "bench", rect: [306, 408, 125, 72] }, { id: "ray", rect: [558, 45, 152, 143] }]
     },
     "riverboat": {
         title: "Up the River", image: "../img/explore/pathways/riverboat.png", pos: "center",

@@ -1824,6 +1824,39 @@
         "recommend": "\"Panda gave this one five stars: {title}, by {author}. Couldn't stop talking about it.\"",
         "no_books": "\"The shelves are being restocked. Come back later?\""
       }
+    },
+    "aquarium": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "An aquarium, open at night! Look up. Jellyfish."
+      ],
+      "objects": {
+        "bench": {
+          "name": "Bench",
+          "click": [
+            "A bench in the middle of the tunnel. Perfect for staring at fish."
+          ],
+          "choices": [
+            {
+              "label": "Sit and watch",
+              "pick": [
+                "A fish swims right up to the glass and stares back. You lose.",
+                "The jellyfish don't do anything. That's what's great about them.",
+                "Somewhere above you, the sea keeps going for miles."
+              ]
+            },
+            {
+              "label": "Keep walking"
+            }
+          ]
+        },
+        "ray": {
+          "name": "Ray",
+          "lines": [
+            "A ray glides overhead like it's showing off. It is."
+          ]
+        }
+      }
     }
   },
   "house_key": {

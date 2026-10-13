@@ -278,11 +278,32 @@
                     advance = function () { i++; box(); };
                 } else if (after) {
                     after();
+                } else if (!greeting && R.illegible && (R.afterGreeting || []).length) {
+                    // a line that ends a branch: one more click goes back to the place's own menu
+                    arrow.hidden = false;
+                    advance = function () { home(true); };
                 } else {
                     toIdle();
                 }
             });
         })();
+    }
+
+    // the place's default state: its greeting's last line (when coming back to it) and every script's choices
+    // together (R.afterGreeting; one returning true took the box over itself)
+    function home(reshow) {
+        var hooks = R.afterGreeting || [], all = [];
+        if (reshow) {
+            var g = [].concat(lines(R.greeting) || []), last = g[g.length - 1] || "";
+            text.dataset.full = last;
+            show(last, true);
+        }
+        for (var i = 0; i < hooks.length; i++) {
+            var c = hooks[i]();
+            if (c === true) return;
+            all = all.concat(c || []);
+        }
+        if (all.length) offer(all); else toIdle();
     }
 
     function toIdle() {
@@ -616,17 +637,7 @@
         if (R.illegible) lookBtn.hidden = true;
         buildScene();
         if (R.onBuilt) R.onBuilt({ stage: stage, art: art, svg: svg, placeNative: placeNative });
-        // what to offer once the greeting's typed: every script's choices together (one returning true took the box)
-        var hooks = R.afterGreeting || [];
-        say(lines(R.greeting), hooks.length ? function () {
-            var all = [];
-            for (var i = 0; i < hooks.length; i++) {
-                var c = hooks[i]();
-                if (c === true) return;
-                all = all.concat(c || []);
-            }
-            if (all.length) offer(all); else toIdle();
-        } : null, true);
+        say(lines(R.greeting), (R.afterGreeting || []).length ? function () { home(false); } : null, true);
         document.dispatchEvent(new Event("scenestart"));
         resetIdle();
         if (!reduceMotion && !R.illegible) setInterval(glint, GLINT_MS);
