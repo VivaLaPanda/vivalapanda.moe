@@ -1891,6 +1891,14 @@
       ],
       "greeting_thursday": [
         "Andy's on stage tonight! Facing the wall, as usual. The crowd loves it."
+      ],
+      "greeting_after": [
+        {
+          "need": "andy_turned",
+          "greeting": [
+            "Namba Bears. There's a new poster by the door: Andy, live, facing the audience. Thursdays."
+          ]
+        }
       ]
     },
     "smallbathhouse": {
@@ -3542,6 +3550,12 @@
             "\"Irasshaimase! ...Funny. The man in the hat didn't come in for his melon bread.\""
           ],
           "once": true
+        },
+        {
+          "need": "ghost_free",
+          "greeting": [
+            "\"Irasshaimase!\" (There's one melon bread left on the shelf. Nobody comes for it anymore.)"
+          ]
         }
       ],
       "play": {
