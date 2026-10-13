@@ -1411,11 +1411,31 @@
         return [fill(it.album, { n: got.length })];
     };
 
+    // Halloween week (your clock; ?season=halloween to see it): jack-o'-lanterns out on the streets
+    function halloween() {
+        var d = new Date();
+        return /[?&]season=halloween\b/.test(location.search) || (d.getMonth() === 9 && d.getDate() >= 24);
+    }
+    var PUMPKINS = { mainstreet: [[130, 470], [470, 476]], festival: [[200, 488]], shrine: [[250, 500]] };
+    if (PUMPKINS[place] && halloween()) {
+        document.addEventListener("scenestart", function () {
+            PUMPKINS[place].forEach(function (xy) {
+                var im = document.createElement("img");
+                im.src = "/img/explore/layers/pumpkin.png";
+                im.alt = "";
+                im.className = "scene-layer scene-pixel scene-anim-flicker";
+                S.placeNative(im, xy[0], xy[1], 23, 19);
+                S.stage.appendChild(im);
+            });
+        });
+    }
+
     // the city notices when you're here: a place can greet you differently in the rain (greeting_rain) or in the
     // small hours by your own clock (greeting_late, midnight to five)
     R.greeting = function () {
         var d = R.said || {}, now = new Date(), h = now.getHours();
         var day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][now.getDay()];
+        if (d.greeting_halloween && halloween()) return d.greeting_halloween;
         if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
         if (d.greeting_rain && RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) return d.greeting_rain;
         if (d.greeting_late && h < 5) return d.greeting_late;

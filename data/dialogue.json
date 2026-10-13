@@ -566,6 +566,9 @@
       ],
       "greeting_rain": [
         "Rain on Main Street. Everything's reflecting everything else."
+      ],
+      "greeting_halloween": [
+        "Somebody's put jack-o'-lanterns out on Main Street. Happy Halloween, Pandopolis."
       ]
     },
     "agency": {
@@ -1474,6 +1477,9 @@
           "label": "Ring toss",
           "action": "ringtoss"
         }
+      ],
+      "greeting_halloween": [
+        "A Halloween festival night! Half the kids here are dressed as goldfish."
       ]
     },
     "shrine": {
@@ -1521,7 +1527,10 @@
             "...Then the festival noise comes back. Did anyone else see that?"
           ]
         }
-      }
+      },
+      "greeting_halloween": [
+        "A jack-o'-lantern at a shrine. The gods don't seem to mind."
+      ]
     },
     "backpassage": {
       "speaker": "P a n d a",
