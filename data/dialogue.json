@@ -1288,6 +1288,15 @@
       },
       "linger": [
         "The bass drops. Every glass on the bar jumps a millimetre."
+      ],
+      "greeting_after": [
+        {
+          "need": "dance_star",
+          "once": true,
+          "greeting": [
+            "Somebody points at you and whispers. You're the one who nailed the dance floor. Legend."
+          ]
+        }
       ]
     },
     "forestedge": {
@@ -2599,6 +2608,15 @@
       ],
       "rare": [
         "Someone's won the goldfish stall's grand prize: a goldfish the size of a cat. Chaos."
+      ],
+      "greeting_after": [
+        {
+          "need": "goldfish_master",
+          "once": true,
+          "greeting": [
+            "The goldfish stall owner sees you coming and quietly hides the good scoops."
+          ]
+        }
       ]
     },
     "shrine": {
@@ -3782,6 +3800,14 @@
             {
               "text": "IZAKAYA OWNER LOSES AT JAN-KEN-PON. Demands rematch \"at once\". Staff tired.",
               "need": "gonta_beaten"
+            },
+            {
+              "text": "CLUB POLKA DANCE FLOOR \"set on fire\" by mystery dancer. Not literally.",
+              "need": "dance_star"
+            },
+            {
+              "text": "FESTIVAL GOLDFISH STALL RUN DRY. Owner blames \"one very gentle customer\".",
+              "need": "goldfish_master"
             }
           ]
         }

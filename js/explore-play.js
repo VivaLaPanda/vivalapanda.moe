@@ -99,6 +99,7 @@
             o.box.remove();
             var best = +(get("pandaGoldfish") || 0);
             if (caught > best) put("pandaGoldfish", caught);
+            if (caught >= 3) hear("goldfish_master");
             if (caught) pocket("goldfish_bag");
             S.say([fill(p.result[Math.min(caught, p.result.length - 1)], { n: caught })]);
         }
@@ -327,6 +328,7 @@
             document.removeEventListener("keydown", key, true);
             o.box.remove();
             var acc = (score.perfect + score.good * .5) / notes.length;
+            if (acc >= .9) hear("dance_star");
             var line = acc >= .9 ? p.results[0] : acc >= .6 ? p.results[1] : acc >= .3 ? p.results[2] : p.results[3];
             S.say([fill(line, { perfect: score.perfect, n: notes.length })]);
         }
