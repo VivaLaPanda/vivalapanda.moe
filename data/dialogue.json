@@ -4237,6 +4237,9 @@
             "The gallery's put up a new exhibition. There's a crowd. Well, four people."
           ]
         }
+      ],
+      "linger": [
+        "The couple have moved on to the UFO painting. They're whispering about it."
       ]
     },
     "izakaya": {
@@ -4321,6 +4324,9 @@
       },
       "greeting_friday": [
         "\"FRIDAY! Every salaryman in the city is here! Squeeze in, squeeze in!\""
+      ],
+      "linger": [
+        "The 9:40 express goes over. Every glass on the counter sings."
       ]
     },
     "nightcafe": {
@@ -4439,6 +4445,9 @@
             }
           ]
         }
+      ],
+      "linger": [
+        "The machine starts playing its demo song to nobody. It's a power ballad."
       ]
     },
     "lake": {
@@ -4475,6 +4484,9 @@
           ],
           "go": "?loc=hilltop"
         }
+      ],
+      "linger": [
+        "A fish jumps, far out. The rings spread all the way to the shore."
       ]
     },
     "observatory": {
@@ -5077,7 +5089,10 @@
             "Six cats sniff it. Six cats are deeply disappointed it is not a real fish."
           ]
         }
-      }
+      },
+      "linger": [
+        "The kitten falls asleep mid-pounce. The calico pretends she didn't see."
+      ]
     },
     "pier": {
       "speaker": "P a n d a",
@@ -5138,7 +5153,10 @@
           ],
           "stop": "Come back down"
         }
-      }
+      },
+      "linger": [
+        "The carousel's tinny waltz stops, starts again, slightly out of tune."
+      ]
     }
   },
   "house_key": {
