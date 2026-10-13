@@ -617,6 +617,13 @@
         {
           "label": "Wait for the night bus",
           "action": "nightbus"
+        },
+        {
+          "label": "Head home",
+          "say": [
+            "The neon follows you halfway down the street. Then it's just the streetlights, and your door."
+          ],
+          "go": "/living-room.html"
         }
       ],
       "linger": [
