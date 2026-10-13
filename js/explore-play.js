@@ -1703,7 +1703,9 @@
             var hints = (R.said.play || {}).hints;
             if (!hints) return null;
             return [{ label: hints.label, act: function hint() {
-                var got = rally(), left = RALLY.filter(function (k) { return !got[k]; });
+                var got = rally(), left = Object.keys(hints).filter(function (k) {   // anywhere hinted that you haven't been
+                    return k !== "label" && k !== "done" && !got[k] && !get("pandaVisits_" + k);
+                });
                 var line = left.length ? hints[left[Math.floor(Math.random() * left.length)]] : hints.done;
                 S.say(arr(line), function () { S.offer([{ label: hints.label, act: hint }]); });
             } }];
