@@ -1512,7 +1512,7 @@
     // once you've made friends (petted it at the old house), the cat sometimes turns up sitting around town
     var CAT_SPOTS = {
         mainstreet: [210, 485, 35, 22], nightplaza: [318, 462, 31, 19], ramen: [588, 475, 27, 17],
-        shrine: [343, 503, 27, 17], festival: [150, 506, 29, 18]
+        shrine: [343, 503, 27, 17], festival: [150, 506, 29, 18], rooftop: [500, 309, 31, 19], laundromat: [615, 360, 31, 19]
     };
     if (CAT_SPOTS[place] && heard("catfriend") && Math.random() < .4) {
         document.addEventListener("scenestart", function () {
