@@ -937,7 +937,45 @@
         });
     }
 
+    // the festival's fireworks, far off over the skyline: a rocket, a burst of dithered sparks that fall and fade
+    function fireworks(region, inks, every) {
+        var shells = [], next = 3;
+        ambient(function (ctx, dt) {
+            next -= dt;
+            if (next <= 0) {
+                next = rand(every * .5, every * 1.5);
+                shells.push({ x: rand(region[0], region[0] + region[2]), y: region[1] + region[3], top: rand(region[1], region[1] + region[3] * .6),
+                              t: 0, ink: inks[Math.floor(Math.random() * inks.length)], sparks: null });
+            }
+            shells = shells.filter(function (sh) { return sh.t < 3.2; });
+            shells.forEach(function (sh) {
+                sh.t += dt;
+                if (!sh.sparks) {                                         // rising
+                    sh.y -= 30 * dt;
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(Math.round(sh.x), Math.round(sh.y), 1, 1);
+                    if (sh.y <= sh.top) {
+                        sh.sparks = [];
+                        for (var i = 0; i < 18; i++) { var a = i / 18 * 6.28; sh.sparks.push({ a: a, v: rand(7, 10) }); }
+                        sh.burst = sh.t;
+                    }
+                    return;
+                }
+                var k = sh.t - sh.burst;
+                if (k > 1.8) return;
+                sh.sparks.forEach(function (sp, i) {
+                    if (k > 1.1 && (i + Math.floor(k * 10)) % 2) return;     // thinning as they fade
+                    var r = sp.v * Math.min(k, .8) / .8 * 1.6;
+                    ctx.fillStyle = k < .3 ? "#ffffff" : sh.ink;
+                    ctx.fillRect(Math.round(sh.x + Math.cos(sp.a) * r), Math.round(sh.top + Math.sin(sp.a) * r + k * k * 3), 1, 1);
+                });
+            });
+        });
+    }
+
     var AMBIENT = {
+        rooftop: function () { fireworks([20, 30, 150, 30], ["#ffddbb", "#aaccff", "#eebb11"], 7); },
+        penthouse: function () { fireworks([30, 15, 120, 25], ["#ff6688", "#ffdd55", "#88ddff"], 9); },
         aquarium: function () { jellyfish(7, [8, 6, 170, 70]); },
         riverboat: function () { river([175, 139], 528 / 273, 63.2, [148, 192, 158]); },
         harbour: function () { beacon([37, 43]); },
