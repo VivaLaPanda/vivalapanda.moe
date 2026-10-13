@@ -261,7 +261,10 @@
     PLAY.festival = function () {
         S.actions.ringtoss = ringToss;
         var g = obj("goldfish");
-        g.click = function () { return [P().goldfish.intro]; };
+        g.click = function () {
+            var best = +(get("pandaGoldfish") || 0), p = P().goldfish;
+            return [p.intro].concat(best ? [fill(p.best, { n: best })] : []);
+        };
         g.choices = function () { var p = P().goldfish; return [{ label: p.play, act: goldfish }, { label: p.watch }]; };
     };
 
@@ -1158,6 +1161,7 @@
         var got = rally(), n = RALLY.filter(function (k) { return got[k]; }).length;
         put("pandaRallyNew", "");
         var names = RALLY.map(function (k) { return got[k] ? it.places[k] : "???"; }).join(", ");
+        if (n === RALLY.length && (get("pandaPockets") || "").indexOf("\"pin\"") < 0) setTimeout(function () { pocket("pin"); }, 0);
         return [fill(it.card, { n: n, total: RALLY.length }), names].concat(n === RALLY.length ? arr(it.complete) : []);
     };
 

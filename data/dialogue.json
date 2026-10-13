@@ -1140,7 +1140,8 @@
             "One goldfish! It gets its own little bag.",
             "Two! You're a natural.",
             "{n} goldfish! The stall owner looks nervous."
-          ]
+          ],
+          "best": "Your best so far: {n}."
         },
         "ringtoss": {
           "how": "Ring toss! Three rings. Click (or Space) when the marker's over a bottle.",
@@ -1895,7 +1896,7 @@
       },
       "complete": [
         "Every stamp! Pandopolis is officially explored.",
-        "Panda would be proud. Panda IS proud."
+        "Panda would be proud. Panda IS proud. (There's a pin in your pockets.)"
       ]
     },
     "sticker": {
@@ -1907,6 +1908,11 @@
       "name": "fox mask",
       "icon": "fox-mask",
       "look": "A fox mask from the festival's ring toss. Very mysterious. Slightly too small."
+    },
+    "pin": {
+      "name": "Pandopolis pin",
+      "icon": "pin",
+      "look": "A gold Pandopolis pin, for finding every stamp. Wear it with pride."
     }
   }
 }
