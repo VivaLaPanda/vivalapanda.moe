@@ -414,6 +414,7 @@
             return { label: a.label, act: function () {
                 if (a.take) unpocket(id);
                 if (a.pocket && !has(a.pocket)) pocket(a.pocket);
+                if (a.action && S.actions[a.action]) S.actions[a.action]();   // a game effect (the casino's chips)
                 hear(a.hear);
                 S.say(arr(a.say), after);
             } };
@@ -672,6 +673,7 @@
     }
 
     PLAY.casino = function () {
+        S.actions.ruris_ace = function () { chips(chips() * 2); };
         document.addEventListener("scenestart", function () {
             var art = document.getElementById("room-art"), view = 0, hits = [];
             art.style.transition = "object-position .7s ease-in-out";

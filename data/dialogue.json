@@ -753,6 +753,18 @@
           "lose": "The house takes it.",
           "broke": "Out of chips. The dealer slides you 50 more, looking a bit sorry for you."
         }
+      },
+      "accepts": {
+        "ace": {
+          "label": "Show the dealer Ruri's ace",
+          "take": true,
+          "action": "ruris_ace",
+          "hear": "ace_casino",
+          "say": [
+            "The dealer sees the ace and goes a little pale.",
+            "\"Ruri sent you? ...Say no more.\" (Your chips double. Don't ask.)"
+          ]
+        }
       }
     },
     "club": {
@@ -1434,6 +1446,14 @@
             "Tony unfolds the note and laughs so loud the man in the hat looks up.",
             "\"Old! She calls ME old. I taught that kid to hold a shaker.\"",
             "(He scribbles on a coaster and slides it over.) \"Take that back down to her, would you?\""
+          ]
+        },
+        "ace": {
+          "label": "Show the man in the hat Ruri's ace",
+          "hear": "hat_tipped",
+          "say": [
+            "The man in the hat looks at the ace for a long moment.",
+            "Then, very slowly, he tips his hat to you. He doesn't say a word."
           ]
         }
       },
@@ -3070,6 +3090,12 @@
             "socks_reunited"
           ],
           "text": "Reunited two socks."
+        },
+        {
+          "flags": [
+            "hat_tipped"
+          ],
+          "text": "The man in the hat tipped his hat."
         }
       ]
     },
