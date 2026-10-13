@@ -63,7 +63,7 @@ var LOCATIONS = {
         title: "Acacia Apartments", image: "../img/explore/pathways/night_apartments.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
         links: [
-            { to: "?loc=nightapartments", rect: [317, 208, 80, 47] }
+            { to: "?loc=rooftop", rect: [427, 330, 98, 152] }   // up the outside stairs
         ]
     },
     // the stray cat's way home: only open once you've chased it (js/explore-play.js)
@@ -99,6 +99,14 @@ var LOCATIONS = {
         links: [],
         objects: [{ id: "teahouse", rect: [476, 122, 156, 165] }, { id: "bridge", rect: [137, 243, 122, 78] },
                   { id: "pond", rect: [415, 295, 325, 190] }]
+    },
+    // drawn for the city (FAL, quantized to Acacia Apartments' inks); shooting stars in js/explore-play.js
+    "rooftop": {
+        title: "Acacia Apartments, the Roof", image: "../img/explore/places/rooftop.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
+        links: [],
+        objects: [{ id: "sky", rect: [0, 0, 740, 230] }, { id: "laundry", rect: [209, 249, 216, 133] },
+                  { id: "tank", rect: [458, 249, 100, 149] }, { id: "chair", rect: [541, 398, 116, 116] }]
     },
     "nightpark": {
         title: "Pumpo Park", image: "../img/explore/pathways/night_park.png", pos: "center",

@@ -1550,6 +1550,48 @@
           "done": "Out of tries. The claw machine wins this round."
         }
       }
+    },
+    "rooftop": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The roof! You can actually see stars from up here.",
+        "Watch long enough and one might fall."
+      ],
+      "objects": {
+        "sky": {
+          "name": "The sky"
+        },
+        "laundry": {
+          "name": "Laundry",
+          "lines": [
+            "Someone's towels. They'll be crispy by morning."
+          ]
+        },
+        "tank": {
+          "name": "Water tank",
+          "lines": [
+            "The water tank hums to itself."
+          ]
+        },
+        "chair": {
+          "name": "Folding chair",
+          "lines": [
+            "A folding chair pointed right at the sky. Somebody comes up here a lot."
+          ]
+        }
+      },
+      "play": {
+        "no_star": "Just stars, sitting still. Keep watching.",
+        "wishes": [
+          "Quick, make a wish! ...Did you get it in?",
+          "Got it! That one was a big one.",
+          "Wish made. No take-backs."
+        ],
+        "third_wish": [
+          "That's three wishes.",
+          "The universe owes you, now. Spend them wisely."
+        ]
+      }
     }
   },
   "house_key": {

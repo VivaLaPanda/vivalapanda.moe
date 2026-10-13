@@ -731,6 +731,41 @@
         });
     }
 
+    // the rooftop's shooting stars: one now and then; click the sky while it's falling to wish on it
+    var starAt = -1e9;
+    function shootingStars() {
+        var star = null, next = 4;
+        ambient(function (ctx, dt, t) {
+            next -= dt;
+            if (!star && next <= 0) {
+                star = { x: rand(60, 180), y: rand(4, 30), age: 0 };
+                next = rand(6, 14);
+                starAt = performance.now();
+            }
+            if (!star) return;
+            star.age += dt;
+            var k = star.age / .9;
+            if (k >= 1) { star = null; return; }
+            var hx = star.x - k * 55, hy = star.y + k * 22;
+            for (var i = 0; i < 9; i++) {                      // a tail that thins out
+                if (i > 3 && i % 2) continue;
+                ctx.fillStyle = i < 2 ? "#ffffff" : "#aaccff";
+                ctx.fillRect(Math.round(hx + i * 2.5), Math.round(hy - i), 1, 1);
+            }
+        });
+    }
+
+    PLAY.rooftop = function () {
+        shootingStars();
+        obj("sky").lines = function () {
+            var p = P();
+            if (performance.now() - starAt > 1500) return arr(p.no_star);
+            var n = +(get("pandaWishes") || 0) + 1;
+            put("pandaWishes", n);
+            return n === 3 ? arr(p.third_wish) : [p.wishes[Math.floor(Math.random() * p.wishes.length)]];
+        };
+    };
+
     var AMBIENT = {
         trainplatform: function () { headlights([130, 46], 30); },
         forestedge: function () { fireflies([0, 25, 152, 66], 18, "#ffffff", "#99cc66"); },
