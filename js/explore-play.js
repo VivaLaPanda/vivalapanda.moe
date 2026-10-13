@@ -1674,6 +1674,13 @@
         return out.length ? out : arr(it.empty);
     };
 
+    // the pocket radio (Sakura fixed Ghandi's old one): tune it and the music changes, wherever you are
+    window.POCKET_LOOK.radio = function (it) {
+        var st = it.stations[Math.floor(Math.random() * it.stations.length)];
+        song(st.src);
+        return [fill(it.tuned, { station: st.name })];
+    };
+
     // the city notices when you're here: a place can greet you differently in the rain (greeting_rain) or in the
     // small hours by your own clock (greeting_late, midnight to five)
     var greetingNow = null;   // chosen once per visit (it's shown again when a branch ends)

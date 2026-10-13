@@ -1098,7 +1098,19 @@
             "\"You got the fuse to Andy? He actually said thank you. In person. I'm shook.\""
           ]
         }
-      ]
+      ],
+      "accepts": {
+        "radio_broken": {
+          "label": "Ask Sakura to fix the old radio",
+          "take": true,
+          "pocket": "radio",
+          "hear": "radio_fixed",
+          "say": [
+            "\"Ooh, a field radio! These are built like tanks.\" (Five minutes, a screwdriver, a new battery.)",
+            "\"There. It picks up every station in the city now. Try it.\""
+          ]
+        }
+      }
     },
     "weaponshop": {
       "speaker": "P a n d a",
@@ -1120,6 +1132,15 @@
           "label": "Ask Ghandi what's new",
           "say": [
             "\"New? Nothing's new here. That's the point. Everything's had a life already.\""
+          ]
+        },
+        {
+          "label": "Ask about the old radio",
+          "unless": "radio_got",
+          "pocket": "radio_broken",
+          "hear": "radio_got",
+          "say": [
+            "\"That? Doesn't work. Take it. Maybe the battery girl at Denchi's can do something.\""
           ]
         }
       ]
@@ -3788,6 +3809,15 @@
             "ghost_free"
           ],
           "text": "Find the girl's charm. Off the pier?"
+        },
+        {
+          "flags": [
+            "radio_got"
+          ],
+          "not": [
+            "radio_fixed"
+          ],
+          "text": "Get Ghandi's old radio fixed."
         }
       ],
       "done": [
@@ -3863,6 +3893,12 @@
             "hat_given"
           ],
           "text": "The man in the hat stopped waiting."
+        },
+        {
+          "flags": [
+            "radio_fixed"
+          ],
+          "text": "Got a working radio."
         }
       ]
     },
@@ -3906,6 +3942,43 @@
       "name": "the man's hat",
       "icon": "hat",
       "look": "A dark felt hat with a red band, worn soft. It's been waiting a long time too."
+    },
+    "radio_broken": {
+      "name": "a broken radio",
+      "icon": "radio-broken",
+      "look": "An old army-green field radio from Ghandi's. It only hisses. Somebody handy might fix it."
+    },
+    "radio": {
+      "name": "pocket radio",
+      "icon": "radio",
+      "look": "Your radio.",
+      "tuned": "(You turn the dial. Crackle... and then: {station}.)",
+      "stations": [
+        {
+          "name": "Pandopolis FM, late-night city pop",
+          "src": "/audio/college-electric-youth-real-hero.mp3"
+        },
+        {
+          "name": "a station that only plays the station chime, remixed",
+          "src": "/audio/control-your-music.mp3"
+        },
+        {
+          "name": "somebody's breakcore show (Andy?)",
+          "src": "/audio/andypls-kurisu-muffled.mp3"
+        },
+        {
+          "name": "a quiet piano hour",
+          "src": "/audio/cosmic-psycho-neptune.mp3"
+        },
+        {
+          "name": "old game music, all night long",
+          "src": "/audio/possessioner-city-a.mp3"
+        },
+        {
+          "name": "Radio Otojima, waves and slow songs",
+          "src": "/audio/doki-doki-vac09.mp3"
+        }
+      ]
     }
   },
   "letters": {
