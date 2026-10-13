@@ -621,7 +621,7 @@
         "A taxi idles at the corner, waiting for nobody in particular."
       ],
       "rare": [
-        "A marching band goes down Main Street! Tubas and everything. Nobody knows where they're going."
+        "A marching band goes down Main Street! Tubas and all. They turn into an alley and are gone."
       ],
       "greeting_on": {
         "12-25": [
@@ -1528,7 +1528,7 @@
         {
           "label": "Ask for a recommendation",
           "pick": [
-            "\"This keyboard has a button that just plays a drum roll. Nobody knows why.\"",
+            "\"This keyboard has a button that just plays a drum roll. It's my favourite button.\"",
             "\"These headphones? So good you'll stop hearing your own thoughts. Great for studying.\"",
             "\"Honestly? The batteries. Nobody ever has enough batteries.\""
           ]
@@ -1576,7 +1576,7 @@
           "label": "Browse the surplus",
           "pick": [
             "A gas mask someone's turned into a planter. There's a cactus in it. It's thriving.",
-            "A crate of army-green thermoses. Nobody knows which army.",
+            "A crate of army-green thermoses, from an army that may never have existed.",
             "A field radio that only picks up one station. It's playing enka.",
             "A tent, still in the bag, labelled \"for two (small) people\"."
           ]
@@ -2181,7 +2181,7 @@
               "label": "The house special",
               "serve": "red",
               "say": [
-                "\"A Tokugawa Sunset. Nobody knows what's in it. Including me.\""
+                "\"A Tokugawa Sunset. I make it differently every time. That's the recipe.\""
               ]
             },
             {
