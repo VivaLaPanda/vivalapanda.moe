@@ -115,11 +115,15 @@ Riverboat → Hidden Glade; Campfire → Hidden Glade. Drawn for the city (FAL f
 inks): the ramen stall, game centre, roof, aquarium, net cafe, coin laundry, karaoke box, the empty bridge the
 train crosses, the observatory, the last train, the lighthouse, the fox gates, and the residential street without the girl.
 
-Threads that cross the city (flags in localStorage `pandaHeard_*`; Panda's notebook in your pockets tracks them):
-Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a fuse; then they're at the late cafe); Taisho → Brownie
-(takeout; a free soak); the cat (chase it, pet it, feed it a mackerel from the pier, it roams town); the girl
-under the streetlight (her charm, off the pier); the man in the hat (the bar, the konbini at 3am, the car park,
-Ruri's ace, the back passage; he was waiting for the girl, and leaves when she goes home); the stamp rally (eight places, a pin, the rooftop ending). Places also greet you differently in the
+Threads that cross the city (flags in localStorage `pandaHeard_*`; Panda's notebook in your pockets tracks them;
+letters arrive in the living room after some of them): Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a
+fuse; then they're at the late cafe); Taisho → Brownie (takeout; a free soak); Ghandi → Sakura (a broken radio
+becomes a pocket radio); the beach → Sabrina (a seashell); the konbini → the back passage (an onigiri); the cat
+(chase it, pet it, feed it a mackerel from the pier, it roams town); the girl under the streetlight (her charm, off
+the pier) and the man in the hat (he was waiting for her; he leaves when she goes home); the shrine's ema → the
+girl under the bridge (who writes the bookshop's poems); the fox mask → the fox gates; Ruri's ace; the camera →
+the gallery's exhibition; the stamp rally (eight places, a pin, the rooftop ending); the Pandopolis Times reports
+it all. Places also greet you differently in the
 rain, in the small hours, on Thursdays, at Halloween (`?season=halloween`), in December snow (`?season=winter`), in cherry blossom season (`?season=spring`), at New
 Year, and after things you've done.
 
