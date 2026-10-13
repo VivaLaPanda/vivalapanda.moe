@@ -142,7 +142,9 @@ var LOCATIONS = {
             { to: "?loc=nightresidential", rect: [659, 319, 85, 127] },
             { to: "?loc=forestedge", rect: [2, 209, 415, 87] },
             { to: "?loc=bookshop", rect: [415, 204, 130, 87] }   // the little building at the back
-        ]
+        ],
+        layers: [{ src: "../img/explore/layers/plaza-glints-a.png", rect: [-80, 0, 901, 528], pixel: true, anim: "twinkle-a" },
+                 { src: "../img/explore/layers/plaza-glints-b.png", rect: [-80, 0, 901, 528], pixel: true, anim: "twinkle-b" }]
     },
     "bookshop": {
         title: "The Night Bookshop", image: "../img/explore/pathways/night_minilibrary.png", pos: "center",
