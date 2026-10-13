@@ -2537,6 +2537,26 @@
         {
           "label": "Write an ema",
           "action": "ema"
+        },
+        {
+          "label": "Talk to the shrine keeper",
+          "cycle": [
+            [
+              "An old woman sweeps the steps. \"Festivals bring wishes. And litter. Mostly litter.\""
+            ],
+            [
+              "\"The black cat? Kuro. He sleeps under the offering box when it rains. Don't tell the gods.\""
+            ],
+            [
+              "\"My granddaughter sits under the bridge and counts the petals. She thinks I don't know.\""
+            ],
+            [
+              "\"Those foxes up the hill have been watching this city longer than I have. Be polite to them.\""
+            ],
+            [
+              "\"Off you go. And hang an ema, if you haven't. The gods like to read.\""
+            ]
+          ]
         }
       ],
       "play": {
