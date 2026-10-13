@@ -1221,7 +1221,10 @@
             var p = P().forum;
             S.ask(arr(p.prompt), function (msg) {
                 if (!msg.trim()) { S.home(false); return; }
-                S.say([fill(p.posted, { msg: msg.trim().slice(0, 40) }), p.replies[Math.floor(Math.random() * p.replies.length)]], function () { S.home(false); });
+                var words = " " + msg.toLowerCase().replace(/[^a-z0-9 ]+/g, " ") + " ";
+                var special = (p.special || []).filter(function (r) { return r.keys.some(function (k) { return words.indexOf(" " + k + " ") >= 0; }); })[0];
+                var reply = special ? special.reply : p.replies[Math.floor(Math.random() * p.replies.length)];
+                S.say([fill(p.posted, { msg: msg.trim().slice(0, 40) }), reply], function () { S.home(false); });
             });
         };
     };

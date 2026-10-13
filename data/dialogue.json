@@ -3444,6 +3444,45 @@
             "Anonymous replies: \"based\"",
             "Anonymous replies: \"this board will outlive us all\"",
             "Anonymous replies: \"go to bed\""
+          ],
+          "special": [
+            {
+              "keys": [
+                "dollars"
+              ],
+              "reply": "Anonymous replies: \"Welcome to the Dollars. There are no rules. Be kind anyway.\""
+            },
+            {
+              "keys": [
+                "ikebukuro",
+                "celty",
+                "shizuo",
+                "izaya"
+              ],
+              "reply": "Anonymous replies: \"wrong city, friend. but we know what you mean\""
+            },
+            {
+              "keys": [
+                "panda"
+              ],
+              "reply": "Anonymous replies: \"panda? the one who posted here at 16? they turned out alright\""
+            },
+            {
+              "keys": [
+                "hello",
+                "hi",
+                "hey"
+              ],
+              "reply": "Anonymous replies: \"hi! it's 3am, why are we both awake\""
+            },
+            {
+              "keys": [
+                "lonely",
+                "sad",
+                "tired"
+              ],
+              "reply": "Anonymous replies: \"hey. go get some ramen. then sleep. it gets better, promise\""
+            }
           ]
         }
       },
