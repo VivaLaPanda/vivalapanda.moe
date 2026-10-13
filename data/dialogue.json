@@ -1145,7 +1145,7 @@
               "say": [
                 "\"Me? I'm a broker. I sell what I know.\"",
                 "\"...Before that I was a detective. The kind who never found the cat.\"",
-                "\"Don't tell anyone. That one's not for sale, either.\""
+                "\"That one's not for sale, either. Consider it a loan.\""
               ]
             }
           ]
@@ -1667,7 +1667,7 @@
           "pick": [
             "\"The music's too loud to hear anything, so just nod a lot.\"",
             "\"Regulars get a stamp card. You're not a regular. Yet.\"",
-            "\"Don't tell anyone, but I can't actually make cocktails.\""
+            "\"Confession: I can't actually make cocktails. I just shake things.\""
           ]
         },
         {
@@ -2174,7 +2174,7 @@
               "label": "Whisky, neat",
               "serve": "whisky",
               "say": [
-                "\"Good choice. Don't tell the boss I poured the good stuff.\""
+                "\"Good choice. I poured the good stuff. The boss can bill me.\""
               ]
             },
             {
@@ -3474,7 +3474,7 @@
         }
       },
       "greeting_regular": [
-        "\"Oh, hi again! I put the good onigiri aside for you. Don't tell the manager.\""
+        "\"Oh, hi again! I put the good onigiri aside for you. Employee privileges.\""
       ],
       "linger": [
         "The door chime goes. Nobody's there. It does that sometimes."
@@ -5546,7 +5546,7 @@
     "brownie": {
       "need": "brownie_fed",
       "text": [
-        "A bathhouse ticket and a note: \"Taisho's ramen was excellent. Don't tell him. -B\""
+        "A bathhouse ticket and a note: \"Taisho's ramen was excellent. I'll deny saying so. -B\""
       ]
     },
     "girl": {
