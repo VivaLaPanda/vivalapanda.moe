@@ -604,6 +604,31 @@
           },
           {
             "say": [
+              "\"There's a path into the hills from the forest's edge. Somebody's always got the kettle on.\""
+            ]
+          },
+          {
+            "say": [
+              "\"Ruri deals high-low behind Club Polka. Tell her Johnny sent you. Actually, don't.\""
+            ]
+          },
+          {
+            "say": [
+              "\"The tower's lift goes below the lobby. There's a car down there that's always warm.\""
+            ]
+          },
+          {
+            "say": [
+              "\"Gonta's izakaya, under the tracks. Loudest man in the city. Best yakitori, too.\""
+            ]
+          },
+          {
+            "say": [
+              "\"Net Cafe Noa, Shizuka Street. Go at three in the morning. Don't say I didn't warn you.\""
+            ]
+          },
+          {
+            "say": [
               "\"That's all I have tonight, stranger. Come back when the city's had time to talk.\""
             ]
           }
@@ -868,6 +893,14 @@
       },
       "greeting_thursday": [
         "Andy's not home. It's Thursday. He's playing Namba Bears tonight."
+      ],
+      "greeting_after": [
+        {
+          "need": "andy_turned",
+          "greeting": [
+            "*Andy looks over his shoulder.* \"Oh hey. The fuse person.\" *He turns back around.*"
+          ]
+        }
       ]
     },
     "nightapartments": {
@@ -984,6 +1017,14 @@
           ],
           "pocket": "fuse",
           "hear": "fuse_given"
+        }
+      ],
+      "greeting_after": [
+        {
+          "need": "andy_turned",
+          "greeting": [
+            "\"You got the fuse to Andy? He actually said thank you. In person. I'm shook.\""
+          ]
         }
       ]
     },
@@ -1102,7 +1143,15 @@
             "(She sticks it right on the register, next to a dozen others.)"
           ]
         }
-      }
+      },
+      "greeting_after": [
+        {
+          "need": "tony_answered",
+          "greeting": [
+            "\"Oh, it's my favourite courier. What'll it be, anon?\""
+          ]
+        }
+      ]
     },
     "shizukastreet": {
       "speaker": "P a n d a",
@@ -1244,7 +1293,15 @@
             "\"Here. A free soak, on the house. Take your time in there.\""
           ]
         }
-      }
+      },
+      "greeting_after": [
+        {
+          "need": "brownie_fed",
+          "greeting": [
+            "\"Welcome back! Tell Taisho his ramen was... adequate. Very adequate.\""
+          ]
+        }
+      ]
     },
     "frontdesk": {
       "speaker": "3 7",
@@ -1478,6 +1535,14 @@
       "greeting_late": [
         "\"Pull up a stool, friend. Quiet tonight.\"",
         "\"The fella in the hat stepped out a minute ago. First time in twelve years.\""
+      ],
+      "greeting_after": [
+        {
+          "need": "tony_answered",
+          "greeting": [
+            "\"Back again, friend? She send another insult? ...Pull up a stool.\""
+          ]
+        }
       ]
     },
     "lines": {
@@ -2118,6 +2183,14 @@
       ],
       "greeting_rain": [
         "\"Get under the awning! Rain makes the broth taste better, you know.\""
+      ],
+      "greeting_after": [
+        {
+          "need": "brownie_fed",
+          "greeting": [
+            "\"Brownie ate it all, didn't she? She always says she's not hungry. Irasshai!\""
+          ]
+        }
       ]
     },
     "gamecentre": {
@@ -2308,6 +2381,14 @@
       "greeting_late": [
         "\"Irasshai... mase.\" (The cashier stifles a yawn.)",
         "(A man in a hat brushes past on his way out. A melon bread under one arm.)"
+      ],
+      "greeting_after": [
+        {
+          "need": "sock_taken",
+          "greeting": [
+            "\"Irasshaimase! ...You're out late a lot, huh? Same.\""
+          ]
+        }
       ]
     },
     "bookshop": {
