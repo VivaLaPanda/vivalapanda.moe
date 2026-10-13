@@ -80,6 +80,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                                  ├─ B1 car park (a warm car), 3F gallery
                     │                         └─ Tower Bar (drinks)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
+                    │                ├─ A Late Cafe (a couple in the window)
                     │                ├─ Pumpo Park (lanterns) ─ Summer Festival (goldfish, ring toss) ─ Shrine
                     │                ├─ Residential ─┬─ Konbini
                     │                │               └─ Houses ─┬─ the girl ─ Acacia Apartments ─┬─ the Roof (stars)

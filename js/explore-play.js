@@ -1524,6 +1524,8 @@
     R.greeting = function () {
         var d = R.said || {}, now = new Date(), h = now.getHours();
         var day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][now.getDay()];
+        var after = (d.greeting_after || []).filter(function (g) { return heard(g.need); })[0];
+        if (after) return after.greeting;   // because of something you did (Andy, at the cafe with Sakura)
         if (d.greeting_halloween && halloween()) return d.greeting_halloween;
         if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
         if (d.greeting_rain && RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) return d.greeting_rain;

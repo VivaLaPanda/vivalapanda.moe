@@ -213,7 +213,8 @@ var LOCATIONS = {
             { to: "?loc=nightpark", rect: [545, 219, 101, 97] },
             { to: "?loc=nightresidential", rect: [659, 319, 85, 127] },
             { to: "?loc=forestedge", rect: [2, 209, 415, 87] },
-            { to: "?loc=bookshop", rect: [415, 204, 130, 87] }   // the little building at the back
+            { to: "?loc=bookshop", rect: [415, 204, 130, 87] },   // the little building at the back
+            { to: "?loc=nightcafe", rect: [100, 200, 120, 90] }   // a lit window between the trees
         ],
         layers: [{ src: "../img/explore/layers/plaza-glints-a.png", rect: [-80, 0, 901, 528], pixel: true, anim: "twinkle-a" },
                  { src: "../img/explore/layers/plaza-glints-b.png", rect: [-80, 0, 901, 528], pixel: true, anim: "twinkle-b" }]
@@ -291,6 +292,14 @@ var LOCATIONS = {
             { to: "?loc=stationcrossing", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "salarymen", rect: [0, 200, 150, 160] }]
+    },
+    "nightcafe": {
+        title: "A Late Cafe", image: "../img/explore/places/night_cafe.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
+        links: [
+            { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "window", rect: [150, 300, 440, 170] }]
     },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",

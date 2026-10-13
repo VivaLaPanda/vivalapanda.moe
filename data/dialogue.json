@@ -2845,6 +2845,41 @@
           ]
         }
       }
+    },
+    "nightcafe": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A little cafe, still open. Two people in the window, sharing a slice of cake."
+      ],
+      "greeting_after": [
+        {
+          "need": "andy_turned",
+          "greeting": [
+            "A little cafe, still open. In the window... is that Sakura? And Andy?",
+            "He's facing her. Actually facing someone. Good for him."
+          ]
+        }
+      ],
+      "objects": {
+        "window": {
+          "name": "The window",
+          "click": [
+            "Warm light, two coffees, one slice of cake, two forks."
+          ],
+          "choices": [
+            {
+              "label": "Wave",
+              "pick": [
+                "They wave back. One of them has cream on their nose.",
+                "They don't notice. They're laughing at something."
+              ]
+            },
+            {
+              "label": "Leave them to it"
+            }
+          ]
+        }
+      }
     }
   },
   "house_key": {
