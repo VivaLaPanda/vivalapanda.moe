@@ -1005,6 +1005,48 @@
         });
     }
 
+    // a soft noise bed under the music (made, not recorded: no files): rain on the night streets, crickets in the
+    // hills at night. Only after a touch (browsers' sound rules) and never if the visitor muted the site
+    function soundBed(kind) {
+        var started = false;
+        function start() {
+            if (started) return;
+            started = true;
+            var muted = false;
+            try { muted = localStorage.getItem("muted") === "true"; } catch (e) { /* storage blocked */ }
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (muted || !AC) return;
+            var ac = new AC(), out = ac.createGain();
+            out.gain.value = 0;
+            out.connect(ac.destination);
+            out.gain.linearRampToValueAtTime(kind === "rain" ? .05 : .03, ac.currentTime + 3);
+            if (kind === "rain") {                        // brown-ish noise through a bandpass: rain on pavement
+                var len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0), last = 0;
+                for (var i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; }
+                var src = ac.createBufferSource(), bp = ac.createBiquadFilter();
+                src.buffer = buf; src.loop = true; bp.type = "bandpass"; bp.frequency.value = 900; bp.Q.value = .4;
+                src.connect(bp); bp.connect(out); src.start();
+            } else {                                      // crickets: short chirps on a high tone, irregular
+                (function chirp() {
+                    var t = ac.currentTime;
+                    for (var k = 0; k < 3; k++) {
+                        var o = ac.createOscillator(), g = ac.createGain();
+                        o.frequency.value = 4200 + Math.random() * 300; g.gain.value = 0;
+                        g.gain.setValueAtTime(0, t + k * .06); g.gain.linearRampToValueAtTime(.5, t + k * .06 + .01);
+                        g.gain.linearRampToValueAtTime(0, t + k * .06 + .04);
+                        o.connect(g); g.connect(out); o.start(t + k * .06); o.stop(t + k * .06 + .05);
+                    }
+                    setTimeout(chirp, rand(500, 1800));
+                })();
+            }
+            var mute = document.getElementById("mute");   // the site's speaker button mutes this too
+            if (mute) mute.addEventListener("click", function () { out.gain.value = out.gain.value ? 0 : (kind === "rain" ? .05 : .03); });
+        }
+        ["pointerdown", "keydown"].forEach(function (ev) { document.addEventListener(ev, start, { once: true }); });
+    }
+    if (RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) soundBed("rain");
+    if (place === "campsite") soundBed("crickets");
+
     var AMBIENT = {
         laundromat: function () { tumble([8, 96], 5); },
         campsite: function () { embers([92, 72]); },
