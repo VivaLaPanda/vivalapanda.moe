@@ -546,7 +546,21 @@
       "speaker": "P a n d a",
       "greeting": [
         "Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."
-      ]
+      ],
+      "play": {
+        "hints": {
+          "label": "Any ideas where to go?",
+          "festival": "I heard there's something going on in Pumpo Park after dark. Lanterns, maybe?",
+          "oldhouse": "There's a shy black cat round Acacia Apartments. Hang around and it might show you where it lives.",
+          "zengarden": "Erratic Errata is a front for something. Johnny would know what to ask for.",
+          "rooftop": "Acacia Apartments has stairs on the outside. I wonder where they go.",
+          "otojima": "Ever ridden the train from Platform 1 all the way to the end?",
+          "gamecentre": "See the TAITO sign on Isogashii Boulevard? That's not just a sign.",
+          "ramen": "Somewhere off the Alley there's a ramen stall. Follow your nose.",
+          "casino": "See that neon sign by the canopy? Some letters don't light up, but the door's real.",
+          "done": "You've found everything I know about! ...Probably. This city has a way of growing."
+        }
+      }
     },
     "agency": {
       "speaker": "J o h n n y  U p p e r c u t",

@@ -1165,5 +1165,18 @@
         return [fill(it.card, { n: n, total: RALLY.length }), names].concat(n === RALLY.length ? arr(it.complete) : []);
     };
 
+    // Main Street: Panda hints at a stamp you haven't found yet (the map stays unlabelled; this is the nudge)
+    if (place === "mainstreet") {
+        (R.afterGreeting = R.afterGreeting || []).push(function () {
+            var hints = (R.said.play || {}).hints;
+            if (!hints) return null;
+            return [{ label: hints.label, act: function hint() {
+                var got = rally(), left = RALLY.filter(function (k) { return !got[k]; });
+                var line = left.length ? hints[left[Math.floor(Math.random() * left.length)]] : hints.done;
+                S.say(arr(line), function () { S.offer([{ label: hints.label, act: hint }]); });
+            } }];
+        });
+    }
+
     if (PLAY[place]) PLAY[place]();
 })();
