@@ -3520,6 +3520,51 @@
           ]
         }
       }
+    },
+    "lighthouse": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The top of the lighthouse. Just the sea, the stars, and the lamp turning behind us."
+      ],
+      "objects": {
+        "lamp": {
+          "name": "The lamp",
+          "lines": [
+            "The lens is as big as a car. It turns so slowly you can only tell by the flash."
+          ]
+        },
+        "town": {
+          "name": "The town",
+          "lines": [
+            "Otojima's lights, small as a toy town. The aquarium's still lit up."
+          ]
+        },
+        "sea": {
+          "name": "The sea",
+          "lines": [
+            "Out there, past where the light reaches, the sea just keeps going."
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Lean on the rail for a while",
+          "cycle": [
+            [
+              "(The wind smells like salt. The lamp hums.)"
+            ],
+            [
+              "(A fishing boat's lights crawl along the horizon.)"
+            ],
+            [
+              "(You count the seconds between flashes. Six. Always six.)"
+            ],
+            [
+              "(The stars here are brighter than anywhere in the city.)"
+            ]
+          ]
+        }
+      ]
     }
   },
   "house_key": {

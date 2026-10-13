@@ -450,6 +450,7 @@ var LOCATIONS = {
         links: [
             { to: "?loc=lake", rect: [573, 179, 167, 55] },   // the little boat upriver
             { to: "?loc=aquarium", rect: [0, 138, 142, 69] },   // the lit building along the shore
+            { to: "?loc=lighthouse", rect: [143, 110, 60, 90] },   // the beacon, up the steps
             { to: "?loc=otojima", rect: [492, 345, 248, 183] }
         ]
     },
@@ -474,6 +475,19 @@ var LOCATIONS = {
             { to: "?loc=harbour", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "flowers", rect: [200, 400, 300, 78] }, { id: "tree", rect: [580, 0, 160, 420] }]
+    },
+    // drawn for the city (FAL, quantized); the lens's lit glass flashes as it turns past (lighthouse-flash.png)
+    "lighthouse": {
+        title: "The Lighthouse", image: "../img/explore/places/lighthouse.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/train-music/sufjan-stevens-seven-swans.mp3",
+        layers: [{ src: "../img/explore/layers/lighthouse-flash.png", rect: [-24, 0, 787, 528], pixel: true, anim: "flash" },
+                 { src: "../img/explore/layers/lighthouse-glints-a.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-a" },
+                 { src: "../img/explore/layers/lighthouse-glints-b.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-b" }],
+        links: [
+            { to: "?loc=harbour", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "lamp", rect: [0, 33, 150, 266] }, { id: "town", rect: [430, 190, 310, 90] },
+                  { id: "sea", rect: [200, 300, 540, 178] }]
     },
     "riverboat": {
         title: "Up the River", image: "../img/explore/pathways/riverboat.png", pos: "center",

@@ -437,13 +437,18 @@
 .scene-anim-lights { animation: scene-lights 14s linear infinite; }
 @keyframes scene-lights { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* a lighthouse lens turning past: a flash every six seconds */
+.scene-anim-flash { animation: scene-flash 6s steps(1) infinite; }
+@keyframes scene-flash { 0% { opacity: 0; } 85% { opacity: .5; } 88% { opacity: 1; } 92% { opacity: .5; } 95% { opacity: 0; } }
+
 /* two layers of glints on water, in turn */
 .scene-anim-twinkle-a { animation: scene-twinkle 1.4s steps(1) infinite; }
 .scene-anim-twinkle-b { animation: scene-twinkle 1.4s steps(1) -.7s infinite; }
 @keyframes scene-twinkle { 0% { opacity: 1; } 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
     .scene-anim-flicker, .scene-anim-twinkle-a, .scene-anim-twinkle-b, .scene-anim-buzz,
-    .scene-anim-signal, .scene-anim-breathe, .scene-anim-ferry, .scene-anim-lights { animation: none; }
+    .scene-anim-signal, .scene-anim-breathe, .scene-anim-ferry, .scene-anim-lights,
+    .scene-anim-flash { animation: none; }
     .scene-anim-train { animation: none; transform: translateX(0); }
 }
 
