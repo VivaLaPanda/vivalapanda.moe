@@ -269,8 +269,11 @@
         clearChoices();
         arrow.hidden = true;
         advance = null;
+        lines = lines.slice();
         var i = 0;
         (function box() {
+            var pages = fitPages(lines[i]);
+            if (pages.length > 1) lines.splice.apply(lines, [i, 1].concat(pages));
             text.dataset.full = lines[i];
             show(lines[i], false, function () {
                 if (i < lines.length - 1) {
@@ -306,6 +309,22 @@
         if (all.length) offer(all); else toIdle();
     }
 
+    // split a line into pieces that each fit the dialog box (measured, so it works at any width)
+    function fitPages(line) {
+        if (typeof line !== "string") return [line];
+        text.textContent = line;
+        if (!overflowing()) return [line];
+        var words = line.split(" "), out = [], cur = "";
+        words.forEach(function (w) {
+            var next = cur ? cur + " " + w : w;
+            text.textContent = next;
+            if (overflowing() && cur) { out.push(cur); cur = w; } else cur = next;
+        });
+        if (cur) out.push(cur);
+        text.textContent = "";
+        return out;
+    }
+
     function toIdle() {
         inGreeting = false;
         state = "idle";
@@ -325,7 +344,24 @@
 
     // choices: { label, href } opens a link, { label, copy } copies text, { label, object } opens
     // that object (the LOOK list), { label } goes back to the room
-    function offer(choices, grid) {
+    // a menu too tall for the dialog box shows a page at a time, with "More..." to go on (and round again)
+    function overflowing() { return textBox.scrollHeight > textBox.clientHeight + 2; }
+
+    function offer(choices, grid, page) {
+        page = page || 0;
+        renderChoices(choices, grid);
+        if (!overflowing() || choices.length < 3) return;
+        var fit = choices.length;
+        while (fit > 1 && overflowing()) {   // shrink the page (leaving room for "More...") until it fits
+            fit--;
+            renderChoices(choices.slice(0, fit).concat([{ label: "x" }]), grid);
+        }
+        var pages = Math.ceil(choices.length / fit), start = (page % pages) * fit;
+        var more = { label: (R.lines && R.lines.more) || "More...", act: function () { offer(choices, grid, page + 1); } };
+        renderChoices(choices.slice(start, start + fit).concat([more]), grid);
+    }
+
+    function renderChoices(choices, grid) {
         state = "choosing";
         clearChoices();
         choicesEl.classList.toggle("room-choices-grid", !!grid);

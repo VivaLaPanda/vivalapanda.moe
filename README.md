@@ -75,14 +75,17 @@ meant to be poked at.
   differently after you've helped them (`greeting_after`, `once` for just the first time); letters from them arrive in the living room
   (`letters` in `data/dialogue.json`); the Pandopolis Times at the konbini reports it. Some dates change greetings
   (`greeting_on`: the Pumpo rave on 5/2, Tanabata, Christmas, New Year's Eve, Valentine's, the Perseids).
-- A night bus (Main Street, the residential street) goes somewhere at random, often somewhere you haven't been.
+- The camera (Half Pipe) offers a photo by itself at the first three scenic spots, then goes in your bag: click it
+  in your pockets for a photo, a print or the album.
+- The festival's fireworks show over the skyline (the roof, the penthouse) once you've been to the festival.
+- Long lines split into ▼ pages and long menus get a "More..." choice (`js/scene.js`), so text never overflows.
 - It rains on the outdoor night streets about one hour in three (the same hour everywhere); add `&rain` to a URL
   to see it.
 
 The map (each place's main exits; ⇢ a way that has to be found or unlocked). Every place has a way out: a door
 where one is drawn, and the bottom edge of the picture (behind you) back to the street you came from.
 ```
-Home ─ Main Street ─┬─ Casino (pans; roulette)
+Home ─ Main Street ─┬─ Casino (pans; roulette) ─ High Rollers' Lounge (the back corridor)
                     ├─ Tokugawa Tower lobby (a lift) ─┬─ B1 car park · 3F gallery · 12F metr.org
                     │                                  ├─ Penthouse (watch the city; telescope; fireworks)
                     │                                  └─ Tower Bar (drinks; the man in the hat)
@@ -113,12 +116,10 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                                  │              ├─ Namba Bears (song requests)
                                                  │              └─ Bathhouse ─ inner bath
                                                  ├─ Ghandi's ─ Rabu Rabu (drinks, stamp card)
-                                                 └─ Ramen stall (Taisho; venki.com) ─┬─ recipes
-                                                                                     └─ Karaoke Box
+                                                 └─ Ramen stall (Taisho; venki.com) ─ Karaoke Box
 ```
-Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's window ↔ Hidden Garden ↔ Errata; Ramen
-stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima; Aquarium → Beach;
-Riverboat → Hidden Glade; Campfire → Hidden Glade; Lake (ferry) → Hilltop; Fox Gates → Shrine. Drawn for the city (FAL from a neighbouring picture, quantized to 16
+Loops: Shrine → Forest Edge; Old House's garden → Shrine; Ramen stall → Rabu Rabu; Harbour → Otojima; Riverboat →
+Hidden Glade; Campfire → Hidden Glade; Fox Gates → Shrine. Drawn for the city (FAL from a neighbouring picture, quantized to 16
 inks): the ramen stall, game centre, roof, aquarium, net cafe, coin laundry, karaoke box, the empty bridge the
 train crosses, the observatory, the last train, the lighthouse, the fox gates, the cat cafe, the pier, and the residential street without the girl.
 
@@ -177,6 +178,11 @@ real password, or an SQL injection), and the living room's switches. Lines: `dat
 - It serves only git-tracked files and the generated feeds.
 - It always reads `house/state.json` from production, since only the VPS may call the house.
 - Untracked files 404 on dev until you `git add` them.
+
+**Explore check.** `tests/explore_check.py` loads every Explore place on dev at desktop and phone size and
+fails on page errors, text that overflows its box, click zones that are covered or swallow the picture, and link
+targets that don't exist; it warns about home menus with more than five choices. Run it before pushing:
+`uv run --with playwright tests/explore_check.py [base-url] [place ...]`.
 
 **Cache-busting.** Scripts and styles are versioned by hand in the templates (`?version=N`). When you change a JS or
 CSS file, bump its number in every template that loads it, then rebuild.

@@ -551,32 +551,7 @@
       "greeting": [
         "Welcome to Pandopolis, take a look around and seek your fortune in the city of adventure."
       ],
-      "play": {
-        "hints": {
-          "label": "Any ideas where to go?",
-          "festival": "I heard there's something going on in Pumpo Park after dark. Lanterns, maybe?",
-          "oldhouse": "There's a shy black cat round Acacia Apartments. Wait a while and it might show you home.",
-          "zengarden": "Erratic Errata is a front for something. Johnny would know what to ask for.",
-          "rooftop": "Acacia Apartments has stairs on the outside. I wonder where they go.",
-          "otojima": "Ever ridden the train from Platform 1 all the way to the end?",
-          "gamecentre": "See the TAITO sign on Isogashii Boulevard? That's not just a sign.",
-          "ramen": "Somewhere off the Alley there's a ramen stall. Follow your nose.",
-          "casino": "See that neon sign by the canopy? Some letters don't light up, but the door's real.",
-          "observatory": "Past the forest's edge there's a path into the hills. Keep going up. There's a dome.",
-          "lighthouse": "Otojima harbour has a lighthouse you can climb. Count the seconds between flashes.",
-          "laundromat": "There's a coin laundry off the houses street. Weirdly peaceful at night.",
-          "karaoke": "See the purple door by the ramen stall? Karaoke. Somebody left the disco ball on.",
-          "catcafe": "There's a cat cafe on the residential street. Six cats. I have been many times.",
-          "inari": "Up in the hills, past the campfire, there are red gates. Hundreds of them.",
-          "underbridge": "There are steps down from the shrine to the river. Someone sits there at night.",
-          "netcafe": "Net Cafe Noa, on Shizuka Street. My old forum's still bookmarked there.",
-          "izakaya": "Under the tracks by the crossing there's an izakaya. Loudest chef in the city.",
-          "gallery": "Take the tower lift to the third floor. There's a gallery nobody knows about.",
-          "lake": "The riverboat from the harbour stops at a lake under a mountain. Very still.",
-          "pier": "Otojima harbour has an old amusement pier. The Ferris wheel runs all night, empty.",
-          "done": "You've found everything I know about! ...Probably. This city has a way of growing."
-        }
-      },
+      "play": {},
       "greeting_late": [
         "The middle of the night, and Pandopolis is wide awake. So are we, I guess."
       ],
@@ -613,10 +588,6 @@
               "label": "Maybe later"
             }
           ]
-        },
-        {
-          "label": "Wait for the night bus",
-          "action": "nightbus"
         },
         {
           "label": "Head home",
@@ -1223,6 +1194,9 @@
               "Whoever she was then, she still tips great."
             ]
           }
+        },
+        "door": {
+          "name": "The back corridor"
         }
       },
       "play": {
@@ -1528,12 +1502,7 @@
       "greeting": [
         "Hey you don't think these people will mind us wandering into their houses right?"
       ],
-      "menu": [
-        {
-          "label": "Wait for the night bus",
-          "action": "nightbus"
-        }
-      ],
+      "menu": [],
       "linger": [
         "A vending machine hums to itself on the corner. It's the loudest thing here."
       ]
@@ -2131,23 +2100,8 @@
           "pick": [
             "\"Forty floors, sir. The bar is down here. The penthouse is for guests only.\"",
             "\"The elevator plays the same song every day. Guests have filed complaints. Lovingly.\"",
-            "\"The penthouse is booked until further notice, sir. By a cat, oddly.\""
-          ]
-        },
-        {
-          "label": "Read the building directory",
-          "say": [
-            "(The directory: B1 parking. 1F the bar. 40F the penthouse, guests only.)",
-            "\"Floor 12 is METR, sir. They're often up late, measuring what AI systems can do.\""
-          ],
-          "menu": [
-            {
-              "label": "Take the lift to floor 12",
-              "href": "https://metr.org"
-            },
-            {
-              "label": "Maybe another time"
-            }
+            "\"The penthouse is booked until further notice, sir. By a cat, oddly.\"",
+            "\"Thirty-seven, sir. My mother had thirty-six names picked out. None stuck.\""
           ]
         },
         {
@@ -2188,13 +2142,6 @@
               ],
               "go": "penthouse.html"
             }
-          ]
-        },
-        {
-          "label": "Ask 37 about his name",
-          "say": [
-            "\"Thirty-seven, sir. My mother had thirty-six names picked out. None of them stuck.\"",
-            "\"Floor thirty-seven was empty when the tower opened. I took it as a sign.\""
           ]
         },
         {
@@ -2527,14 +2474,7 @@
         "...Did you just type the Konami code?",
         "Fine. Thirty extra lives. Don't spend them all in one place."
       ],
-      "never_mind": "Never mind",
-      "bus": {
-        "ride": [
-          "(A bus pulls up. No number, no destination on the front. The doors hiss open. You get on.)",
-          "(The driver doesn't look round. The city slides past the windows. Then the bus stops.)"
-        ],
-        "arrive": "(\"{place}.\" The doors open.)"
-      }
+      "never_mind": "Never mind"
     },
     "festival": {
       "speaker": "P a n d a",
@@ -3439,16 +3379,9 @@
           ]
         },
         {
-          "label": "Ask about Panda",
-          "pick": [
-            "\"Panda? Comes by after midnight. Writes down everything I say, like it's a recipe.\"",
-            "\"Panda always orders the same thing, then asks how I made it. Every time.\"",
-            "\"Says it all goes in a book. Don't know who'd want to read about my broth.\""
-          ]
-        },
-        {
-          "label": "Ask about the other regular",
+          "label": "Ask about the regulars",
           "say": [
+            "\"Panda? Comes by after midnight. Writes down everything I say, like it's a recipe.\"",
             "\"Panda's husband? Comes in with Panda. Takes notes on everything, same as Panda.\"",
             "\"They sit right there and compare notes over the broth. Venki, his name is.\""
           ],
@@ -3488,13 +3421,6 @@
           ],
           "pocket": "takeout",
           "hear": "takeout_given"
-        },
-        {
-          "label": "Find Panda's recipe book",
-          "say": [
-            "\"The book? Round the corner. Tell 'em Taisho sent you.\""
-          ],
-          "go": "/recipes.html"
         }
       ],
       "accepts": {
@@ -3790,13 +3716,6 @@
               ],
               "pocket": "onigiri"
             }
-          ]
-        },
-        {
-          "label": "Get some oden",
-          "say": [
-            "\"Daikon, egg, and... konnyaku? Coming right up.\"",
-            "(It's the warmest thing in the whole city right now.)"
           ]
         },
         {
@@ -4745,26 +4664,16 @@
           "label": "Order yakitori",
           "pick": [
             "\"Chicken thigh, salt! The best one! Don't argue!\"",
-            "\"Negima! Chicken and leek, the way my grandfather did it!\""
-          ]
-        },
-        {
-          "label": "Order a drink",
-          "say": [
-            "\"One cold one!\" (It arrives before you've finished asking.)"
+            "\"Negima! Chicken and leek, the way my grandfather did it!\"",
+            "\"And one cold one!\" (It arrives before you've finished asking.)"
           ]
         },
         {
           "label": "Ask about the trains",
           "pick": [
             "\"Every train shakes the whole place! Customers say it adds flavour!\"",
-            "\"Seven-fifteen express! Hold your drink!\" (You hold your drink.)"
-          ]
-        },
-        {
-          "label": "Ask Gonta's secret",
-          "say": [
-            "\"My secret?\" (He leans in.) \"Laugh louder than the trains!\" (He does.)"
+            "\"Seven-fifteen express! Hold your drink!\" (You hold your drink.)",
+            "\"My secret? Laugh louder than the trains!\" (He does.)"
           ]
         },
         {
@@ -4969,14 +4878,6 @@
           "say": [
             "(It takes the ferry a long time to get anywhere. Nobody on it seems to mind.)"
           ]
-        },
-        {
-          "label": "Take the ferry across",
-          "say": [
-            "(The ferry takes forever. Nobody aboard minds. The mountain gets bigger.)",
-            "(On the far shore, a path climbs up into the hills.)"
-          ],
-          "go": "?loc=hilltop"
         }
       ],
       "linger": [
@@ -5684,6 +5585,48 @@
       "linger": [
         "The carousel's tinny waltz stops, starts again, slightly out of tune."
       ]
+    },
+    "casinolounge": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The high rollers' lounge. Velvet everywhere, and not a high roller in sight."
+      ],
+      "menu": [
+        {
+          "label": "Count your chips",
+          "action": "cashout"
+        }
+      ],
+      "objects": {
+        "stairs": {
+          "name": "The stairs",
+          "lines": [
+            "A velvet rope across the stairs. Upstairs is for people with a lot more chips."
+          ],
+          "lines_after": {
+            "need": "ace_casino",
+            "lines": [
+              "The rope's still up. Even Ruri's ace doesn't open everything."
+            ]
+          }
+        },
+        "sofa": {
+          "name": "The sofa",
+          "lines": [
+            "A paperback face down on the cushion: Probability for Beginners. Bookmark in chapter one."
+          ]
+        }
+      },
+      "play": {
+        "cashout": {
+          "few": "{chips} chips. The cashier's window says the minimum is 500. Of course it does.",
+          "many": "{chips} chips! The cashier looks up for the first time. \"...Can I get you a drink?\"",
+          "keep": "You keep them. They're nicer to hold than money anyway."
+        }
+      },
+      "linger": [
+        "Downstairs, the roulette ball clatters. Up here it sounds like rain."
+      ]
     }
   },
   "house_key": {
@@ -5910,7 +5853,13 @@
       "print_label": "Get a print to keep",
       "printed": [
         "(A little print slides out, still warm. It's on your device now: a souvenir of Pandopolis.)"
-      ]
+      ],
+      "bagged": [
+        "(That's three. You tuck the camera in your bag. Click it whenever somewhere's worth a shot.)"
+      ],
+      "ready": "The disposable camera. {left} shots left.",
+      "album_label": "Look through your photos",
+      "away_label": "Put it away"
     },
     "notebook": {
       "name": "Panda's notebook",

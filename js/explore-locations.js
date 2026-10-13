@@ -34,6 +34,15 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/sonic-casino-night-zone.mp4",
         links: []
     },
+    // up the back stairs from the casino's far corridor (explore-play.js puts the door in the panorama)
+    "casinolounge": {
+        title: "The High Rollers' Lounge", image: "../img/explore/places/fancy_lounge.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/sonic-casino-night-zone.mp4",
+        links: [
+            { to: "?loc=casino", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "stairs", rect: [624, 110, 116, 340] }, { id: "sofa", rect: [60, 300, 560, 170] }]
+    },
     "club": {
         title: "Club Polka", image: "../img/explore/places/club.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/control-your-music.mp3",
@@ -169,8 +178,7 @@ var LOCATIONS = {
         title: "The Old House", image: "../img/explore/places/night_room_traditional.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
         links: [
-            { to: "?loc=oldhouse", rect: [0, 0, 60, 280] },
-            { to: "?loc=zengarden", rect: [266, 98, 72, 125] }
+            { to: "?loc=oldhouse", rect: [0, 0, 60, 280] }
         ],
         layers: [{ src: "../img/explore/layers/cat-sleeping.png", rect: [431, 469, 50, 29], pixel: true },
                  { src: "../img/explore/layers/cat-sleeping-in.png", rect: [431, 469, 50, 29], pixel: true, anim: "breathe" }],
@@ -183,8 +191,7 @@ var LOCATIONS = {
         title: "A Hidden Garden", image: "../img/explore/pathways/zengarden.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
         links: [
-            { to: "?loc=weirdstore", rect: [0, 330, 200, 148] },
-            { to: "?loc=catroom", rect: [137, 243, 122, 78] }
+            { to: "?loc=weirdstore", rect: [0, 330, 200, 148] }
         ],
         objects: [{ id: "teahouse", rect: [476, 122, 156, 165] }, { id: "bridge", rect: [137, 243, 122, 78] },
                   { id: "pond", rect: [415, 295, 325, 190] }]
@@ -196,7 +203,7 @@ var LOCATIONS = {
         links: [
             { to: "?loc=nightapartments", rect: [0, 330, 100, 148] }
         ],
-        objects: [{ id: "sky", rect: [0, 0, 740, 230] }, { id: "laundry", rect: [209, 249, 216, 133] },
+        objects: [{ id: "sky", rect: [0, 0, 740, 200] }, { id: "laundry", rect: [209, 249, 216, 133] },
                   { id: "tank", rect: [458, 249, 100, 149] }, { id: "chair", rect: [541, 398, 116, 116] }]
     },
     "nightpark": {
@@ -247,8 +254,7 @@ var LOCATIONS = {
         title: "The Night Bookshop", image: "../img/explore/pathways/night_minilibrary.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
         links: [
-            { to: "?loc=nightplaza", rect: [0, 380, 150, 98] },
-            { to: "?loc=nightresidential", rect: [600, 380, 140, 70] }
+            { to: "?loc=nightplaza", rect: [0, 380, 150, 98] }
         ]
     },
     "nightresidential": {
@@ -386,7 +392,6 @@ var LOCATIONS = {
             { to: "?loc=nightalley", rect: [423, 290, 85, 103] },
             { to: "?loc=stationcrossing", rect: [223, 290, 85, 103] },
             { to: "?loc=electronicstore", rect: [39, 285, 85, 179] },
-            { to: "/recipes.html", rect: [155, 285, 85, 179] },
             { to: "?loc=gamecentre", rect: [0, 147, 102, 64] }
         ]
     },
@@ -395,8 +400,7 @@ var LOCATIONS = {
         title: "Taito Game Centre", image: "../img/explore/places/game_centre.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/animahjong-x-10.mp3",
         links: [
-            { to: "?loc=partystreet", rect: [0, 478, 640, 50] },
-            { to: "?loc=club", rect: [610, 140, 90, 200] }
+            { to: "?loc=partystreet", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "claw", rect: [250, 100, 230, 400] }, { id: "cabinets", rect: [0, 150, 220, 300] },
                   { id: "cabinets2", rect: [520, 150, 220, 300] }]
@@ -502,7 +506,6 @@ var LOCATIONS = {
         title: "Otojima Aquarium", image: "../img/explore/places/aquarium.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
         links: [
-            { to: "?loc=beach", rect: [500, 180, 100, 150] },
             { to: "?loc=harbour", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "bench", rect: [306, 408, 125, 72] }, { id: "ray", rect: [558, 45, 152, 143] }]

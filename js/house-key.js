@@ -90,8 +90,9 @@
             if (!it) return;
             out.push({ icon: (it.icon || "plush-" + id) + ".png", name: it.name,
                        look: function () {   // a pocket whose words change (the stamp card), looked up when clicked
-                           var look = window.POCKET_LOOK && window.POCKET_LOOK[id];
-                           S.say(look ? look(it) : arr(it.look));
+                           var look = window.POCKET_LOOK && window.POCKET_LOOK[id], said = look ? look(it) : arr(it.look);
+                           if (said && said.lines) S.say(said.lines, function () { S.offer(said.choices); });   // a pocket you can use
+                           else S.say(said);
                            if (look) drawInventory();
                        },
                        fresh: (id === "rally" && get("pandaRallyNew") === "1") || (id === "letters" && get("pandaLettersNew") === "1") });

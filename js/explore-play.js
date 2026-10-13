@@ -627,6 +627,14 @@
 
     PLAY.harbour = function () { S.actions.fish = fish; };
 
+    // the lounge's cashier: your roulette chips, counted
+    PLAY.casinolounge = function () {
+        S.actions.cashout = function () {
+            var p = P().cashout, n = chips();
+            S.say([fill(n >= 500 ? p.many : p.few, { chips: n }), p.keep], function () { S.home(false); });
+        };
+    };
+
     // ---------- the casino: a panorama you pan along, and roulette ----------
 
     // casino.png is a 500x134 strip; cover-fitted it's 3.94x, so the window shows a third of it. Three views
@@ -634,7 +642,7 @@
     var CASINO_S = 528 / 134, CASINO_OX = [0, 615, 1230];
     var CASINO_SPOTS = [
         [{ id: "roulette", src: [62, 42, 92, 64] }],
-        [{ id: "bar", src: [180, 20, 140, 114] }],
+        [{ id: "door", src: [200, 6, 46, 36], go: "?loc=casinolounge" }, { id: "bar", src: [170, 40, 240, 45] }],
         [{ id: "poster", src: [425, 15, 65, 95] }]
     ];
     var RED = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
@@ -703,14 +711,14 @@
                 hits = [];
                 CASINO_SPOTS[v].forEach(function (o) {
                     var r = [o.src[0] * CASINO_S - CASINO_OX[v], o.src[1] * CASINO_S, o.src[2] * CASINO_S, o.src[3] * CASINO_S];
-                    hit(r, R.said.objects[o.id].name, o.id === "roulette" ? roulette : function () {
+                    hit(r, R.said.objects[o.id].name, o.go ? function () { location.href = o.go; } : o.id === "roulette" ? roulette : function () {
                         var t = R.said.objects[o.id];
                         S.say(arr(t.lines_after && heard(t.lines_after.need) ? t.lines_after.lines : t.lines));   // seen something since
                     });
                 });
-                hit([70, 478, 570, 50], "Back out to Main Street", function () { location.href = "?loc=mainstreet"; });
-                if (v > 0) hit([0, 0, 70, 528], "Look left", function () { show(v - 1); });     // the edges win
-                if (v < 2) hit([670, 0, 70, 430], "Look right", function () { show(v + 1); });
+                hit([90, 478, 560, 50], "Back out to Main Street", function () { location.href = "?loc=mainstreet"; });
+                if (v > 0) hit([0, 0, 90, 528], "Look left", function () { show(v - 1); });     // the edges win
+                if (v < 2) hit([650, 0, 90, 478], "Look right", function () { show(v + 1); });
             }
             show(0);
         });
@@ -1160,7 +1168,8 @@
             steam([120, 61, 16, 3], ["#ffffff", "#ffddcc"], 12);
         }
     };
-    if (AMBIENT[place]) AMBIENT[place]();
+    var SKYLINE = { rooftop: 1, penthouse: 1 };   // the festival's fireworks, once you've been to it
+    if (AMBIENT[place] && (!SKYLINE[place] || get("pandaVisits_festival"))) AMBIENT[place]();
     if (RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) rain();   // ?rain to see it
 
     // ---------- Johnny's rumours: one at a time, in order, each pointing somewhere ----------
@@ -1732,48 +1741,6 @@
         return [fill(it.card, { n: n, total: RALLY.length }), names].concat(n === RALLY.length ? arr(it.complete) : []);
     };
 
-    // Main Street: Panda hints at a stamp you haven't found yet (the map stays unlabelled; this is the nudge)
-    if (place === "mainstreet") {
-        (R.afterGreeting = R.afterGreeting || []).unshift(function () {   // first in the list: the newcomer's best start
-            var hints = (R.said.play || {}).hints;
-            if (!hints) return null;
-            return [{ label: hints.label, act: function hint() {
-                var got = rally(), left = Object.keys(hints).filter(function (k) {   // anywhere hinted that you haven't been
-                    return k !== "label" && k !== "done" && !got[k] && !get("pandaVisits_" + k);
-                });
-                var line = left.length ? hints[left[Math.floor(Math.random() * left.length)]] : hints.done;
-                S.say(arr(line), function () { S.offer([{ label: hints.label, act: hint }]); });
-            } }];
-        });
-    }
-
-    // the penthouse telescope: a round view of somewhere else in the city; click to look away
-    PLAY.penthouse = function () {
-        S.actions.telescope = function () {
-            var p = P().telescope, v = p.views[Math.floor(Math.random() * p.views.length)];
-            var lens = document.createElement("div");
-            lens.className = "play-telescope";
-            lens.style.backgroundImage = "url(" + v.src + ")";
-            lens.style.backgroundPosition = v.pos || "center";
-            S.stage.appendChild(lens);
-            function away(e) { if (e) e.stopPropagation(); lens.remove(); S.say(arr(p.away), function () { S.home(false); }); }
-            lens.addEventListener("click", away);
-            S.say(arr(v.say), function () { S.offer([{ label: p.stop, act: away }]); });
-        };
-    };
-
-    // up, up, down, down, left, right, left, right, B, A
-    var KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
-    var konami = 0;
-    document.addEventListener("keydown", function (e) {
-        konami = e.key === KONAMI[konami] ? konami + 1 : e.key === KONAMI[0] ? 1 : 0;
-        if (konami === KONAMI.length) {
-            konami = 0;
-            var all = (R.dialogueAll && R.dialogueAll.explore && R.dialogueAll.explore.lines) || {};
-            if (all.konami) S.say(arr(all.konami));
-        }
-    });
-
     if (PLAY[place]) PLAY[place]();
 
     // ---------- the disposable camera (from Half Pipe): photos at scenic spots, an album in your pockets ----------
@@ -1783,29 +1750,26 @@
                        "nighttrain", "karaoke", "inari", "underbridge", "catcafe", "bar25", "gallery", "pier"];
     var EXPOSURES = 24;
     function photos() { try { return JSON.parse(get("pandaPhotos")) || []; } catch (e) { return []; } }
+    function camLines() { return (R.dialogueAll.pockets || {}).camera; }
+    function snap(after) {
+        var p = camLines(), got = photos();
+        got.push(place);
+        put("pandaPhotos", JSON.stringify(got));
+        if (got.length >= 3) hear("photographer");   // enough for an exhibition (the gallery)
+        var flash = document.createElement("div");
+        flash.className = "play-flash";
+        S.stage.appendChild(flash);
+        setTimeout(function () { flash.remove(); }, 450);
+        var lines = [fill(p.taken, { left: EXPOSURES - got.length })];
+        if (got.length >= 3 && !heard("camera_bagged")) { hear("camera_bagged"); lines = lines.concat(arr(p.bagged)); }
+        S.say(lines, after);
+    }
+    // the first few scenic spots offer a photo by themselves; after that the camera's in your bag (click it)
     if (PHOTO_SPOTS.indexOf(place) >= 0) {
         (R.afterGreeting = R.afterGreeting || []).push(function () {
-            var p = (R.dialogueAll.pockets || {}).camera;
-            if (!p || !has("camera")) return null;
-            var choices = [];
-            if (photos().indexOf(place) >= 0 && p.print_label) {   // you've photographed it: get a print to keep
-                choices.push({ label: p.print_label, act: function () {
-                    savePrint(LOCATIONS[place].image, LOCATIONS[place].title);
-                    S.say(arr(p.printed), function () { S.home(false); });
-                } });
-            }
-            if (photos().indexOf(place) >= 0) return choices;
-            return [{ label: p.take_label, act: function () {
-                var got = photos();
-                got.push(place);
-                put("pandaPhotos", JSON.stringify(got));
-                if (got.length >= 3) hear("photographer");   // enough for an exhibition (the gallery)
-                var flash = document.createElement("div");
-                flash.className = "play-flash";
-                S.stage.appendChild(flash);
-                setTimeout(function () { flash.remove(); }, 450);
-                S.say([fill(p.taken, { left: EXPOSURES - got.length })], function () { S.home(false); });
-            } }];
+            var p = camLines();
+            if (!p || !has("camera") || heard("camera_bagged") || photos().length >= 3 || photos().indexOf(place) >= 0) return null;
+            return [{ label: p.take_label, act: function () { snap(function () { S.home(false); }); } }];
         });
     }
     // a print to keep: the place's picture, framed like a photo, saved as a PNG on your device
@@ -1828,10 +1792,26 @@
     // the album: your photos laid out like prints on a table (click to put them away)
     window.POCKET_LOOK = window.POCKET_LOOK || {};
     window.POCKET_LOOK.camera = function (it) {
+        var got = photos(), here = PHOTO_SPOTS.indexOf(place) >= 0, choices = [];
+        if (here && got.indexOf(place) < 0 && got.length < EXPOSURES) {
+            choices.push({ label: it.take_label, act: function () { snap(function () { S.home(false); }); } });
+        } else if (here && it.print_label) {
+            choices.push({ label: it.print_label, act: function () {
+                savePrint(LOCATIONS[place].image, LOCATIONS[place].title);
+                S.say(arr(it.printed), function () { S.home(false); });
+            } });
+        }
+        if (choices.length) {
+            choices.push({ label: it.album_label, act: function () { S.say(album(it), function () { S.home(false); }); } });
+            return { lines: [fill(it.ready, { left: EXPOSURES - got.length })], choices: choices.concat([{ label: it.away_label }]) };
+        }
+        return album(it);
+    };
+    function album(it) {
         var got = photos();
         if (!got.length || !window.LOCATIONS) return arr(it.look);
-        var album = document.createElement("div");
-        album.className = "play-album";
+        var table = document.createElement("div");
+        table.className = "play-album";
         got.forEach(function (k, i) {
             var L = LOCATIONS[k], ph = document.createElement("div");
             if (!L) return;
@@ -1839,12 +1819,12 @@
             ph.style.backgroundImage = "url(" + (k === "penthouse" ? "/img/explore/settings/skyling-normal-flicker.gif" : L.image) + ")";
             ph.style.transform = "rotate(" + ((i * 37 % 11) - 5) + "deg)";
             ph.title = L.title;
-            album.appendChild(ph);
+            table.appendChild(ph);
         });
-        album.addEventListener("click", function (e) { e.stopPropagation(); album.remove(); });
-        S.stage.appendChild(album);
+        table.addEventListener("click", function (e) { e.stopPropagation(); table.remove(); });
+        S.stage.appendChild(table);
         return [fill(it.album, { n: got.length })];
-    };
+    }
 
     // Halloween week (your clock; ?season=halloween to see it): jack-o'-lanterns out on the streets
     function halloween() {
@@ -1898,8 +1878,8 @@
     // the gallery's exhibition of your photos: the album, framed as a show
     S.actions.exhibition = function () {
         var cam = (R.dialogueAll.pockets || {}).camera;
-        if (!cam || !window.POCKET_LOOK.camera) return;
-        window.POCKET_LOOK.camera(cam);
+        if (!cam) return;
+        album(cam);
         S.say(arr(P().exhibition), function () { S.home(false); });
     };
 
@@ -1910,35 +1890,6 @@
         var mine = news.filter(function (h) { return h.need; }), city = news.filter(function (h) { return !h.need; });
         var pick = mine.slice(-2).concat(city.sort(function () { return Math.random() - .5; }).slice(0, 3 - Math.min(2, mine.length)));
         S.say(arr(p.intro).concat(pick.map(function (h) { return h.text; })), function () { S.home(false); });
-    };
-
-    // the night bus: no route posted; it takes you somewhere in the city (often somewhere you haven't been)
-    var BUS_STOPS = ["festival", "shrine", "rooftop", "ramen", "netcafe", "catcafe", "laundromat", "konbini", "bookshop",
-                     "nightcafe", "izakaya", "otojima", "harbour", "lighthouse", "lake", "hilltop", "observatory", "inari",
-                     "gamecentre", "karaoke", "casino", "underbridge", "zengarden", "forestedge", "nightpark", "pier"];
-    S.actions.nightbus = function () {
-        var p = P().bus || ((R.dialogueAll.explore || {}).lines || {}).bus;
-        var fresh = BUS_STOPS.filter(function (k) { return k !== place && !get("pandaVisits_" + k); });
-        var pool = fresh.length && Math.random() < .7 ? fresh : BUS_STOPS.filter(function (k) { return k !== place; });
-        var to = pool[Math.floor(Math.random() * pool.length)];
-        S.say(arr(p.ride).concat([fill(p.arrive, { place: (window.LOCATIONS && LOCATIONS[to] ? LOCATIONS[to].title : to) })]), function () {
-            location.href = "?loc=" + to;
-        });
-    };
-
-    // the Ferris wheel: up, up, and at the top a round window onto the city's skyline
-    S.actions.ferris = function () {
-        var p = P().ferris;
-        S.say(arr(p.up), function () {
-            var view = document.createElement("div");
-            view.className = "play-telescope";
-            view.style.backgroundImage = "url(/img/explore/places/city_overlook.png)";
-            view.style.backgroundPosition = "center";
-            S.stage.appendChild(view);
-            function down(e) { if (e) e.stopPropagation(); view.remove(); S.say(arr(p.down), function () { S.home(false); }); }
-            view.addEventListener("click", down);
-            S.say(arr(p.top), function () { S.offer([{ label: p.stop, act: down }]); });
-        });
     };
 
     // the pocket radio (Sakura fixed Ghandi's old one): tune it and the music changes, wherever you are
