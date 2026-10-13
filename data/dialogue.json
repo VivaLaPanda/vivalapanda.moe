@@ -3941,6 +3941,14 @@
             {
               "text": "FESTIVAL GOLDFISH STALL RUN DRY. Owner blames \"one very gentle customer\".",
               "need": "goldfish_master"
+            },
+            {
+              "text": "PERSIMMON MISSING FROM OLD HOUSE TREE. Owner \"suspects a friend\".",
+              "need": "persimmon_got"
+            },
+            {
+              "text": "LIGHTHOUSE FLASHES OLD 'ALL'S WELL' SIGNAL for the first time in years.",
+              "need": "ghost_free"
             }
           ]
         }
