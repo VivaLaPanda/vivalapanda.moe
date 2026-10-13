@@ -1231,6 +1231,7 @@
                 streak++;
                 if (streak >= 3) {
                     if (!has("ace")) pocket("ace");
+                    hear("ruri_beaten");
                     S.say([fill(p.right, { card: CARDS[next] })].concat(arr(p.won)), function () { S.home(false); });
                     return;
                 }

@@ -4909,6 +4909,24 @@
         "A postcard of Otojima beach. On the back, in your own handwriting: \"Wish you were here.\"",
         "You don't remember sending it."
       ]
+    },
+    "ruri": {
+      "need": "ruri_beaten",
+      "text": [
+        "A playing card, the two of hearts. On the back: \"Rematch. Tuesday. Bring luck. -R\""
+      ]
+    },
+    "taisho": {
+      "need": "taisho_met",
+      "text": [
+        "A grease-spotted note: \"If you see the cat, tell it dinner's at nine. It won't listen. -T\""
+      ]
+    },
+    "bar25": {
+      "need": "bar25_seen",
+      "text": [
+        "A matchbook from Bar 25. Inside: \"Open two till four. Or whenever you need us.\""
+      ]
     }
   }
 }
