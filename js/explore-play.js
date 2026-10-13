@@ -1644,9 +1644,11 @@
     // once you've made friends (petted it at the old house), the cat sometimes turns up sitting around town
     var CAT_SPOTS = {
         mainstreet: [210, 485, 35, 22], nightplaza: [318, 462, 31, 19], ramen: [588, 475, 27, 17],
-        shrine: [343, 503, 27, 17], festival: [150, 506, 29, 18], rooftop: [500, 309, 31, 19], laundromat: [615, 360, 31, 19]
+        shrine: [343, 503, 27, 17], festival: [150, 506, 29, 18], rooftop: [500, 309, 31, 19], laundromat: [615, 360, 31, 19],
+        catcafe: [604, 318, 31, 19]
     };
-    if (CAT_SPOTS[place] && heard("catfriend") && Math.random() < .4) {
+    // (at the cat cafe, once you've fed it, it's always there: the greeting says so)
+    if (CAT_SPOTS[place] && heard("catfriend") && (Math.random() < .4 || (place === "catcafe" && heard("cat_fed")))) {
         document.addEventListener("scenestart", function () {
             var r = CAT_SPOTS[place], cat = sprite("sit"), visits = (R.lines && R.lines.cat_visits) || ["Mrrp."];
             S.placeNative(cat, r[0], r[1], r[2], r[3]);
