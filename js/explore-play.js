@@ -1391,6 +1391,7 @@
         }).catch(function () { books = []; });
         S.actions.poem = function () {   // the poem of the night: the same one for everyone today
             var ps = P().poems, day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+            hear("poem_read");
             S.say(arr(P().poem_intro).concat(arr(ps[day % ps.length])), function () { S.home(false); });
         };
         S.actions.recommend = function () {

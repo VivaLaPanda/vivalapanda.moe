@@ -3227,6 +3227,14 @@
             "\"Panda? Keeps a list. I'll show you.\""
           ],
           "go": "/reading/"
+        },
+        {
+          "label": "Ask who writes the poems",
+          "need": "poem_read",
+          "say": [
+            "\"My niece. She sits down by the river and counts the shrine petals.\"",
+            "\"Don't tell her I told you. She'd stop writing them.\""
+          ]
         }
       ],
       "play": {
@@ -4283,6 +4291,16 @@
               "action": "wishes"
             },
             {
+              "label": "Ask if she writes the poems",
+              "need": "poem_read",
+              "hear": "poet_found",
+              "say": [
+                "She goes very still. \"...You read one? The card by the till?\"",
+                "\"My uncle pins them up. I didn't think anybody actually read them.\"",
+                "(She looks pleased, and then hides it.)"
+              ]
+            },
+            {
               "label": "Leave her be"
             }
           ]
@@ -4303,7 +4321,15 @@
           "\"Sometimes a wish floats down from the shrine. You can read them, if you're quick.\"",
           "\"Nobody's sent one tonight. Maybe you should.\""
         ]
-      }
+      },
+      "greeting_after": [
+        {
+          "need": "poet_found",
+          "greeting": [
+            "She's writing something in a little notebook. She covers it when she sees you, smiling."
+          ]
+        }
+      ]
     },
     "inari": {
       "speaker": "P a n d a",
