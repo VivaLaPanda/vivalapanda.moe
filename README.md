@@ -84,6 +84,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                │               └─ Houses ─┬─ the girl ─ Acacia Apartments ─┬─ the Roof (stars)
                     │                │                          │                                 └⇢ (the cat) Back Passage
                     │                │                          │                                      ─ Old House ─ its room
+                    │                │                          ├─ Coin Laundry (drawn)
                     │                │                          └─ Andy's House
                     │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ train.html
                     │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop ─ Lily Field

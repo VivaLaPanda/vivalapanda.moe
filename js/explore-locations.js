@@ -239,12 +239,25 @@ var LOCATIONS = {
             { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }
         ]
     },
+    // drawn for the city (FAL, quantized to its own inks); the tumbling laundry in js/explore-play.js
+    "laundromat": {
+        title: "Coin Laundry", image: "../img/explore/places/laundromat.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        links: [
+            { to: "?loc=nightresidential2", rect: [380, 130, 280, 190] },   // the glass door, out to the street
+            { to: "?loc=nightresidential2", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "machine", rect: [0, 330, 90, 120] }, { id: "machines", rect: [90, 50, 260, 380] },
+                  { id: "vending", rect: [682, 149, 58, 208] }, { id: "chairs", rect: [549, 330, 130, 145] },
+                  { id: "sock", rect: [258, 462, 62, 40] }]
+    },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
         links: [
             { to: "nightresidential_girl.html", rect: [317, 208, 80, 47] },
             { to: "?loc=musicianbedroom", rect: [47, 78, 130, 287] },
+            { to: "?loc=laundromat", rect: [455, 200, 65, 100] },   // the gap in the wall, a light on behind it
             { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }   // behind you
         ]
     },

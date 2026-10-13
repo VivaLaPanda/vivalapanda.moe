@@ -988,7 +988,23 @@
         });
     }
 
+    // laundry tumbling behind a washing machine's round window: a few socks and shirts going round, with a lurch
+    function tumble(c, r) {
+        var bits = [{ a: 0, ink: "#c06a6a" }, { a: 2.1, ink: "#e8e0c8" }, { a: 4.2, ink: "#7a9ac8" }, { a: 1, ink: "#d8c070" }];
+        ambient(function (ctx, dt, t) {
+            var spin = t * 3 + Math.sin(t * 1.3) * .8;
+            bits.forEach(function (b, i) {
+                var a = b.a + spin, rr = r * (.45 + .25 * Math.sin(t * 2 + i));
+                ctx.fillStyle = b.ink;
+                var x = Math.round(c[0] + Math.cos(a) * rr), y = Math.round(c[1] + Math.sin(a) * rr + 1);
+                ctx.fillRect(x, y, 2, 1);
+                ctx.fillRect(x, y + 1, 1, 1);
+            });
+        });
+    }
+
     var AMBIENT = {
+        laundromat: function () { tumble([8, 96], 5); },
         campsite: function () { embers([92, 72]); },
         rooftop: function () { fireworks([20, 30, 150, 30], ["#ffddbb", "#aaccff", "#eebb11"], 7); },
         penthouse: function () { fireworks([30, 15, 120, 25], ["#ff6688", "#ffdd55", "#88ddff"], 9); },

@@ -2477,6 +2477,89 @@
           ]
         }
       }
+    },
+    "laundromat": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A coin laundry. Two in the morning energy, whatever the time is."
+      ],
+      "objects": {
+        "machine": {
+          "name": "A machine, going",
+          "click": [
+            "Someone's laundry, going round and round. Nobody's here to collect it."
+          ],
+          "choices": [
+            {
+              "label": "Watch it spin",
+              "say": [
+                "(You watch it go round. And round. And round.)",
+                "...That was weirdly relaxing."
+              ]
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        },
+        "machines": {
+          "name": "Washing machines",
+          "lines": [
+            "A wall of washing machines, all waiting. Two hundred yen a load."
+          ]
+        },
+        "vending": {
+          "name": "Vending machine",
+          "click": [
+            "Hot drinks in cans."
+          ],
+          "choices": [
+            {
+              "label": "Hot milk tea",
+              "say": [
+                "(The can's almost too hot to hold. Perfect.)"
+              ]
+            },
+            {
+              "label": "Corn potage",
+              "say": [
+                "Corn soup. In a can. From a machine. Japan, I love you."
+              ]
+            },
+            {
+              "label": "Nothing"
+            }
+          ]
+        },
+        "chairs": {
+          "name": "Chairs",
+          "click": [
+            "Plastic chairs and a stack of very old magazines."
+          ],
+          "choices": [
+            {
+              "label": "Read a magazine",
+              "pick": [
+                "A fashion magazine from 1998. Everyone's wearing very small sunglasses.",
+                "A manga anthology with the last page torn out. Of course.",
+                "A crossword, half done in pen. Seven down is 'cat'. It's always cat."
+              ]
+            },
+            {
+              "label": "Just sit",
+              "say": [
+                "(You sit. The machine hums. Somewhere, a dryer buzzes.)"
+              ]
+            }
+          ]
+        },
+        "sock": {
+          "name": "A sock",
+          "lines": [
+            "A single sock. Its partner is out there somewhere. They'll find each other."
+          ]
+        }
+      }
     }
   },
   "house_key": {
