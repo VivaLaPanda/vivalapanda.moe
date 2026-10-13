@@ -835,7 +835,10 @@
             "*Two thumbs up. Then he turns back around.*"
           ]
         }
-      }
+      },
+      "greeting_thursday": [
+        "Andy's not home. It's Thursday. He's playing Namba Bears tonight."
+      ]
     },
     "nightapartments": {
       "speaker": "Ｐａｎｄａ",
@@ -1135,6 +1138,9 @@
             }
           ]
         }
+      ],
+      "greeting_thursday": [
+        "Andy's on stage tonight! Facing the wall, as usual. The crowd loves it."
       ]
     },
     "smallbathhouse": {
@@ -2228,6 +2234,10 @@
               "href": "https://officialmusicfan.club/"
             },
             {
+              "label": "Post on Dollars BBS",
+              "action": "post"
+            },
+            {
               "label": "Read the old posts",
               "say": [
                 "Dollars BBS. I posted here when I was sixteen.",
@@ -2279,7 +2289,23 @@
       },
       "greeting_late": [
         "Net Cafe Noa at an actual three in the morning. It feels right."
-      ]
+      ],
+      "play": {
+        "forum": {
+          "prompt": [
+            "(The reply box blinks. Type something and press Enter.)"
+          ],
+          "posted": "You post: \"{msg}\"",
+          "replies": [
+            "Anonymous replies: \"lol same\"",
+            "Anonymous replies: \"welcome back. it's been a while\"",
+            "Anonymous replies: \"who still posts here in this year of our lord\"",
+            "Anonymous replies: \"based\"",
+            "Anonymous replies: \"this board will outlive us all\"",
+            "Anonymous replies: \"go to bed\""
+          ]
+        }
+      }
     },
     "forestpath": {
       "speaker": "P a n d a",

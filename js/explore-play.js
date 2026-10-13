@@ -1024,6 +1024,17 @@
 
     PLAY.ramen = function () { hear("taisho_met"); };
 
+    // Net Cafe Noa: post on the old forum, and somebody, somewhere, still answers
+    PLAY.netcafe = function () {
+        S.actions.post = function () {
+            var p = P().forum;
+            S.ask(arr(p.prompt), function (msg) {
+                if (!msg.trim()) { S.home(false); return; }
+                S.say([fill(p.posted, { msg: msg.trim().slice(0, 40) }), p.replies[Math.floor(Math.random() * p.replies.length)]], function () { S.home(false); });
+            });
+        };
+    };
+
     // ---------- Erratic Errata's staff door: the garden, once you know to ask ----------
 
     PLAY.weirdstore = function () {
@@ -1403,7 +1414,9 @@
     // the city notices when you're here: a place can greet you differently in the rain (greeting_rain) or in the
     // small hours by your own clock (greeting_late, midnight to five)
     R.greeting = function () {
-        var d = R.said || {}, h = new Date().getHours();
+        var d = R.said || {}, now = new Date(), h = now.getHours();
+        var day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][now.getDay()];
+        if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
         if (d.greeting_rain && RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) return d.greeting_rain;
         if (d.greeting_late && h < 5) return d.greeting_late;
         return d.greeting;
