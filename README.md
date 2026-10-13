@@ -102,7 +102,8 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                                  │              ├─ Namba Bears (song requests)
                                                  │              └─ Bathhouse ─ inner bath (soak)
                                                  ├─ Ghandi's ─ Rabu Rabu (drinks, stamp card)
-                                                 └─ Ramen stall (Taisho) ─ recipes
+                                                 └─ Ramen stall (Taisho) ─┬─ recipes
+                                                                          └─ Karaoke Box (drawn)
 ```
 Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's window ↔ Hidden Garden ↔ Errata; Ramen
 stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima Station; Aquarium → Beach;

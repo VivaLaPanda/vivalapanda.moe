@@ -1314,6 +1314,20 @@
         return n < p.full ? [fill(p.stamped, { n: n, full: p.full })] : [];
     }
 
+    // an object's choices from dialogue.json, with a menu's extras (song, serve, pocket, hear), back to the object
+    function objMenu(list) {
+        return list.map(function (c) {
+            if (!c.song && !c.serve && !c.pocket && !c.hear) return c;
+            return { label: c.label, act: function () {
+                if (c.serve) serve(c.serve);
+                if (c.song) song(c.song);
+                if (c.pocket && !has(c.pocket)) pocket(c.pocket);
+                hear(c.hear);
+                S.say(c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : arr(c.say));
+            } };
+        });
+    }
+
     function menuOf(list) {
         return list.filter(function (c) {
             return (!c.need || heard(c.need)) && (!c.unless || !heard(c.unless));
@@ -1541,7 +1555,7 @@
         var own = o.choices;   // a menu made here (a function), or the dialogue's own
         o.choices = function () {
             var t = (R.said && R.said.objects && R.said.objects[o.id]) || {};
-            var base = typeof own === "function" ? own() : (t.choices || null);
+            var base = typeof own === "function" ? own() : (t.choices ? objMenu(t.choices) : null);
             var gives = givesFor(t.accepts);
             if (!gives.length) return base;
             return (base || [{ label: (R.lines && R.lines.never_mind) || "Never mind" }]).concat(gives);

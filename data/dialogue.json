@@ -2961,6 +2961,64 @@
           ]
         }
       }
+    },
+    "karaoke": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A karaoke box! Somebody left the disco ball on. And the machine. And their drink."
+      ],
+      "objects": {
+        "tv": {
+          "name": "The karaoke machine",
+          "click": [
+            "The song list is three binders thick. What are we singing?"
+          ],
+          "choices": [
+            {
+              "label": "A city pop classic",
+              "song": "/audio/college-electric-youth-real-hero.mp3",
+              "say": [
+                "(You sing your heart out. The disco ball approves.)"
+              ]
+            },
+            {
+              "label": "Something dramatic",
+              "song": "/audio/kavinsky-nightcall.mp3",
+              "say": [
+                "(You do the whole thing with your eyes closed. Very moving.)"
+              ]
+            },
+            {
+              "label": "An anime opening",
+              "song": "/audio/possessioner-opening.mp3",
+              "say": [
+                "(You know every word. You didn't know you knew every word.)"
+              ]
+            },
+            {
+              "label": "Not tonight"
+            }
+          ]
+        },
+        "table": {
+          "name": "The table",
+          "click": [
+            "Two microphones, a tambourine, and a song book."
+          ],
+          "choices": [
+            {
+              "label": "Shake the tambourine",
+              "pick": [
+                "(Shk-shk.) That's all it needs to do, and it does it perfectly.",
+                "(Shk-shk-shk!) Somewhere, a ramen chef nods along."
+              ]
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        }
+      }
     }
   },
   "house_key": {

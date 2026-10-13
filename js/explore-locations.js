@@ -302,6 +302,18 @@ var LOCATIONS = {
         ],
         objects: [{ id: "window", rect: [150, 300, 440, 170] }]
     },
+    // drawn for the city (FAL, quantized to its own inks); through the purple door by the ramen stall
+    "karaoke": {
+        title: "Karaoke Box", image: "../img/explore/places/karaoke.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/college-electric-youth-real-hero.mp3",
+        links: [
+            { to: "?loc=ramen", rect: [0, 478, 640, 50] }
+        ],
+        // the disco ball's spots, changing colour in turn
+        layers: [{ src: "../img/explore/layers/karaoke-spots-a.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-a" },
+                 { src: "../img/explore/layers/karaoke-spots-b.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-b" }],
+        objects: [{ id: "tv", rect: [100, 60, 210, 230] }, { id: "table", rect: [250, 330, 260, 140] }]
+    },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
@@ -465,6 +477,7 @@ var LOCATIONS = {
         title: "A Ramen Stall", image: "../img/explore/places/ramen_yatai.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-settle.mp3",
         links: [
+            { to: "?loc=karaoke", rect: [100, 170, 65, 140] },   // the purple-lit door in the alley wall
             { to: "?loc=nightalley", rect: [0, 300, 90, 178] },
             { to: "?loc=cutiebar", rect: [680, 230, 60, 190] }
         ],
