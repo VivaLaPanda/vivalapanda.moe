@@ -4472,7 +4472,9 @@
       "off_now": "The house isn't taking requests right now.",
       "failed": "Hm, the house didn't answer. Try again in a bit?",
       "bad_key": "Huh, the key doesn't fit anymore."
-    }
+    },
+    "bag": "Your bag ({n} things)",
+    "bag_close": "Close the bag"
   },
   "pockets": {
     "_readme": "Things you've picked up in Explore (the claw machine, the festival, the harbour), shown in the pockets by the dialog box (js/house-key.js). icon: img/house-key/<icon>.png (default plush-<id>).",

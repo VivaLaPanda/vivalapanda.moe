@@ -320,7 +320,7 @@
 
     function clearChoices() {
         choicesEl.textContent = "";
-        choicesEl.classList.remove("room-choices-grid");
+        choicesEl.classList.remove("room-choices-grid", "room-choices-grid3");
     }
 
     // choices: { label, href } opens a link, { label, copy } copies text, { label, object } opens
@@ -329,6 +329,7 @@
         state = "choosing";
         clearChoices();
         choicesEl.classList.toggle("room-choices-grid", !!grid);
+        choicesEl.classList.toggle("room-choices-grid3", grid === 3);   // longer names: three columns
         choices.forEach(function (c) {
             var item;
             if (c.href) {

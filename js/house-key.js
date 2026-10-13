@@ -81,6 +81,28 @@
         inv.appendChild(b);
     }
 
+    // everything you're carrying: [icon, name, look, new?]; few enough show as icons, more go in a bag (a list)
+    function carried() {
+        var t = T(), out = [];
+        pockets().forEach(function (id) {       // finds and prizes from Explore (js/explore-play.js)
+            var it = (R.dialogueAll.pockets || {})[id];
+            if (!it) return;
+            out.push({ icon: (it.icon || "plush-" + id) + ".png", name: it.name,
+                       look: function () {   // a pocket whose words change (the stamp card), looked up when clicked
+                           var look = window.POCKET_LOOK && window.POCKET_LOOK[id];
+                           S.say(look ? look(it) : arr(it.look));
+                           if (look) drawInventory();
+                       },
+                       fresh: (id === "rally" && get("pandaRallyNew") === "1") || (id === "letters" && get("pandaLettersNew") === "1") });
+        });
+        carrying(hunt()).forEach(function (id) {
+            out.push({ icon: id + ".png", name: itemName(id), look: function () { S.say([fill(t.items[id].look, { word: ITEMS[id] })]); } });
+        });
+        return out;
+    }
+
+    var BAG_AT = 4;   // more things than this and they go in the bag (a row of icons would cover the menu)
+
     function drawInventory() {
         var t = T(), box = document.getElementById("text-box");
         if (!t || !box) return;
@@ -90,24 +112,22 @@
             box.appendChild(inv);
         }
         inv.textContent = "";
-        pockets().forEach(function (id) {       // prizes from Explore's game centre (js/explore-play.js)
-            var it = (R.dialogueAll.pockets || {})[id];
-            if (!it) return;
-            var look = window.POCKET_LOOK && window.POCKET_LOOK[id];   // a pocket whose words change (Explore's stamp card)
-            button((it.icon || "plush-" + id) + ".png", it.name, function () {
-                S.say(look ? look(it) : arr(it.look));
-                if (look) drawInventory();
+        var things = carried();
+        if (things.length > BAG_AT) {
+            button("bag.png", fill(t.bag, { n: things.length }), function () {
+                S.offer(things.map(function (th) { return { label: th.name, act: th.look }; }).concat([{ label: t.bag_close }]), 3);
             });
-            if ((id === "rally" && get("pandaRallyNew") === "1") || (id === "letters" && get("pandaLettersNew") === "1")) {
-                inv.lastChild.classList.add("hk-new");
-            }
-        });
-        carrying(hunt()).forEach(function (id) {
-            button(id + ".png", itemName(id), function () { S.say([fill(t.items[id].look, { word: ITEMS[id] })]); });
-        });
+            if (things.some(function (th) { return th.fresh; })) inv.lastChild.classList.add("hk-new");
+        } else {
+            things.forEach(function (th) {
+                button(th.icon, th.name, th.look);
+                if (th.fresh) inv.lastChild.classList.add("hk-new");
+            });
+        }
         if (key()) button("key.png", "Panda's spare key", function () { S.say(arr(t.slot_key)); });
         else button("key-empty.png", "An empty key slot", function () { S.say(arr(t.slot_empty)); });
     }
+
 
     // ---------- the hunt (Explore) ----------
 

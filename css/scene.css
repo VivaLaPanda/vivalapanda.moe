@@ -173,6 +173,8 @@
     row-gap: 0;
 }
 
+#room-choices.room-choices-grid3 { grid-template-columns: repeat(3, max-content); }
+
 /* #room-choices for specificity: style.css's `.subwindow a` would stretch link choices to 80% */
 #room-choices .room-choice {
     font-family: 'pc-98';
