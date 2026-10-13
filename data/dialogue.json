@@ -3257,10 +3257,26 @@
             "\"Upriver to the glade, down to the sea. Thirty years. Same river, different water.\"",
             "\"The lighthouse keeper and I wave every night. Never met him. Good man.\""
           ]
+        },
+        {
+          "label": "Ask what four short, one long means",
+          "need": "ghost_free",
+          "say": [
+            "\"Old signal. Means 'all's well'. He hasn't used it in years.\""
+          ]
         }
       ],
       "linger": [
         "A heron on the bank watches the boat go by, unimpressed."
+      ],
+      "greeting_after": [
+        {
+          "need": "ghost_free",
+          "once": true,
+          "greeting": [
+            "The boatman nods. \"Lighthouse flashed something odd last night. Four short, one long.\""
+          ]
+        }
       ]
     },
     "zengarden": {
