@@ -1993,6 +1993,7 @@
         }
         if (d.greeting_rain && RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) return d.greeting_rain;
         if (d.greeting_late && h < 5) return d.greeting_late;
+        if (d.greeting_dawn && h >= 5 && h < 7) return d.greeting_dawn;   // first light, by your clock
         return d.greeting;
     };
 

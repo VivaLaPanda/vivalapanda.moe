@@ -2789,6 +2789,9 @@
       },
       "greeting_sunday": [
         "Sunday night at the shrine. Quiet. Someone's sweeping the steps very slowly."
+      ],
+      "greeting_dawn": [
+        "Morning at the shrine. The keeper's sweeping up last night's petals."
       ]
     },
     "backpassage": {
@@ -3237,6 +3240,9 @@
       ],
       "rare": [
         "A huge cruise ship slides past the harbour mouth, lit up like a city of its own."
+      ],
+      "greeting_dawn": [
+        "Dawn at the harbour. The fishing boats are already heading out."
       ]
     },
     "riverboat": {
@@ -3550,7 +3556,10 @@
         "12-31": [
           "\"Toshikoshi soba tonight, not ramen! Long noodles, long life. Sit, sit.\""
         ]
-      }
+      },
+      "greeting_dawn": [
+        "\"Last bowl before I close up. Sun's coming. Eat, then sleep.\""
+      ]
     },
     "gamecentre": {
       "speaker": "P a n d a",
@@ -3743,7 +3752,10 @@
         "08-12": [
           "The Perseids peak tonight. The sky's full of shooting stars. Make all the wishes."
         ]
-      }
+      },
+      "greeting_dawn": [
+        "The stars are going out one by one. The sky over the tower's turning pink."
+      ]
     },
     "konbini": {
       "speaker": "C a s h i e r",
