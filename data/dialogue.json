@@ -4406,7 +4406,24 @@
             }
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Flip to Panda's station",
+          "say": [
+            "The karaoke machine has a radio mode. One preset just says: \"Chamber of Vibes\"."
+          ],
+          "menu": [
+            {
+              "label": "Tune in",
+              "href": "/radio.html"
+            },
+            {
+              "label": "Back to singing"
+            }
+          ]
+        }
+      ]
     },
     "lake": {
       "speaker": "P a n d a",
