@@ -5283,7 +5283,19 @@
       ],
       "take": "Take the key",
       "refused": "The water spits everything back out.",
-      "offline": "Nothing happens. Maybe try again later?"
+      "offline": "Nothing happens. Maybe try again later?",
+      "coin": "Toss in a coin",
+      "coin_lines": [
+        [
+          "(Plink. The ripples spread, and settle. The hand doesn't come back. It doesn't need to.)"
+        ],
+        [
+          "(Plink. Somewhere under the water, something glints back at you.)"
+        ],
+        [
+          "(Plink.) The pond keeps your coin, and your wish, and doesn't say a thing."
+        ]
+      ]
     },
     "pc": {
       "prompt": "A>LOGIN panda\nPASSWORD:",

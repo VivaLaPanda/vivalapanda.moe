@@ -178,6 +178,9 @@
     // the Hidden Glade's pond: the sword's lake. Drop in the four favours, and a hand brings up the key
     function pondChoices() {
         var t = T(), h = hunt();
+        if (t && key() && t.pond.coin) {   // the key's found: the pond's just a pond again, good for a wish
+            return [{ label: t.pond.coin, act: function () { S.say(arr(t.pond.coin_lines[Math.floor(Math.random() * t.pond.coin_lines.length)])); } }];
+        }
         if (!t || key() || collected(h) < ORDER.length) return null;
         return carrying(h).map(function (id) {
             return { label: fill(t.pond.drop, { item: itemName(id) }), act: function () { drop(id); } };
