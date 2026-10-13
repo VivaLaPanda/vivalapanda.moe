@@ -4107,6 +4107,51 @@
           ]
         }
       }
+    },
+    "underbridge": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Steps down from the shrine to the river. Somebody's sitting by the water."
+      ],
+      "objects": {
+        "girl": {
+          "name": "A girl by the river",
+          "click": [
+            "She's hugging her knees, watching the water. She doesn't seem to mind company."
+          ],
+          "choices": [
+            {
+              "label": "Sit with her",
+              "say": [
+                "\"The petals come down from the shrine. I count them. Two hundred and six tonight.\""
+              ]
+            },
+            {
+              "label": "Ask about the wishes",
+              "action": "wishes"
+            },
+            {
+              "label": "Leave her be"
+            }
+          ]
+        },
+        "river": {
+          "name": "The river",
+          "lines": [
+            "Petals drifting on black water, all heading the same way. Out to sea, eventually."
+          ]
+        }
+      },
+      "play": {
+        "your_wish": "\"Sometimes an ema floats down. One came by tonight. It said: '{wish}'.\"",
+        "hope": [
+          "\"I hope it comes true. I always hope they come true.\""
+        ],
+        "no_wish": [
+          "\"Sometimes a wish floats down from the shrine. You can read them, if you're quick.\"",
+          "\"Nobody's sent one tonight. Maybe you should.\""
+        ]
+      }
     }
   },
   "house_key": {

@@ -1071,7 +1071,22 @@
         });
     }
 
+    // shrine petals on the river, drifting downstream
+    function petals(region, n) {
+        var ps = [];
+        for (var i = 0; i < n; i++) ps.push({ x: rand(region[0], region[0] + region[2]), y: rand(region[1], region[1] + region[3]), v: rand(2, 4) });
+        ambient(function (ctx, dt, t) {
+            ps.forEach(function (p, i) {
+                p.x -= p.v * dt; p.y += p.v * .5 * dt;
+                if (p.x < region[0] || p.y > region[1] + region[3]) { p.x = region[0] + region[2]; p.y = rand(region[1], region[1] + region[3] * .5); }
+                ctx.fillStyle = (i + Math.floor(t * 2)) % 3 ? "#e86a8a" : "#ffb0c4";
+                ctx.fillRect(Math.round(p.x), Math.round(p.y + Math.sin(t + i) * .6), 1, 1);
+            });
+        });
+    }
+
     var AMBIENT = {
+        underbridge: function () { petals([75, 60, 110, 70], 14); },
         laundromat: function () { tumble([8, 96], 5); },
         campsite: function () { embers([92, 72]); },
         rooftop: function () { fireworks([20, 30, 150, 30], ["#ffddbb", "#aaccff", "#eebb11"], 7); },
@@ -1235,6 +1250,14 @@
             function away(e) { if (e) e.stopPropagation(); view.remove(); S.home(false); }
             view.addEventListener("click", away);
             S.say([fill(P().moon.seen, { phase: moonName(age), days: Math.round(age) })], function () { S.offer([{ label: P().moon.stop, act: away }]); });
+        };
+    };
+
+    // the girl under the bridge: she counts the petals; sometimes a wish floats by, and sometimes it's yours
+    PLAY.underbridge = function () {
+        S.actions.wishes = function () {
+            var p = P(), mine = get("pandaEma");
+            S.say(mine ? [fill(p.your_wish, { wish: mine })].concat(arr(p.hope)) : arr(p.no_wish), function () { S.home(false); });
         };
     };
 

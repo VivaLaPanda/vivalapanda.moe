@@ -214,6 +214,7 @@ var LOCATIONS = {
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/dance_in_the_memories.mp3",
         links: [
             { to: "?loc=forestedge", rect: [543, 101, 126, 201] },
+            { to: "?loc=underbridge", rect: [0, 250, 80, 160] },   // steps down to the river
             { to: "?loc=festival", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "offering", rect: [266, 201, 218, 184] }]
@@ -333,6 +334,15 @@ var LOCATIONS = {
             { to: "?loc=backpassage", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "bartender", rect: [181, 17, 216, 415] }, { id: "lady", rect: [430, 133, 216, 382] }]
+    },
+    // downstream of the shrine: petals float by (js/explore-play.js); so, sometimes, do wishes
+    "underbridge": {
+        title: "Under the Bridge", image: "../img/explore/places/dark_bridge.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        links: [
+            { to: "?loc=shrine", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "girl", rect: [146, 211, 79, 79] }, { id: "river", rect: [300, 300, 440, 178] }]
     },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",

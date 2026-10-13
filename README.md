@@ -81,7 +81,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                                  └─ Tower Bar (drinks; the man in the hat)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
                     │                ├─ A Late Cafe
-                    │                ├─ Pumpo Park (lanterns; a rave flyer) ─ Summer Festival (goldfish, ring toss) ─ Shrine
+                    │                ├─ Pumpo Park (lanterns; a rave flyer) ─ Summer Festival (goldfish, ring toss) ─ Shrine (ema) ─ Under the Bridge
                     │                ├─ Residential ─┬─ Konbini
                     │                │               └─ Houses ─┬─ the girl under the streetlight ─ Acacia Apartments
                     │                │                          │      ─┬─ the Roof (stars, fireworks, the ending)
