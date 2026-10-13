@@ -372,8 +372,19 @@ var LOCATIONS = {
         links: [
             { to: "?loc=weirdstore", rect: [557, 193, 114, 197] },
             { to: "?loc=livehouse", rect: [306, 277, 48, 85] },
-            { to: "?loc=bathhouseentry", rect: [206, 277, 48, 85] }
+            { to: "?loc=bathhouseentry", rect: [206, 277, 48, 85] },
+            { to: "?loc=netcafe", rect: [40, 60, 75, 240] }   // Cafe Noa's sign, on the left
         ]
+    },
+    // drawn for the city (FAL, quantized to Shizuka Street's inks); its booth links out to Panda's old haunts
+    "netcafe": {
+        title: "Net Cafe Noa", image: "../img/explore/places/net_cafe.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-hacking.mp3",
+        links: [
+            { to: "?loc=shizukastreet", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "booth", rect: [441, 274, 166, 133] }, { id: "drinkbar", rect: [267, 141, 166, 75] },
+                  { id: "manga", rect: [0, 66, 93, 200] }, { id: "clock", rect: [686, 66, 42, 58] }]
     },
     "weirdstore": {
         title: "Erratic Errata", image: "../img/explore/places/shop_misc_interior.png", pos: "center",

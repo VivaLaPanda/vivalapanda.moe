@@ -93,6 +93,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                        │                                           ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
                                        │                                                                         └─ Riverboat
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
+                                                 │              ├─ Net Cafe Noa (Panda's old bookmarks)
                                                  │              ├─ Namba Bears (song requests)
                                                  │              └─ Bathhouse ─ inner bath (soak)
                                                  ├─ Ghandi's ─ Rabu Rabu (drinks, stamp card)

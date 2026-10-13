@@ -2015,6 +2015,86 @@
           ]
         }
       }
+    },
+    "netcafe": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "Net Cafe Noa. Open all night.",
+        "In here it's always three in the morning."
+      ],
+      "objects": {
+        "booth": {
+          "name": "A booth",
+          "click": [
+            "This booth's computer is still logged in. The bookmarks are... mine?"
+          ],
+          "choices": [
+            {
+              "label": "Dollars BBS",
+              "href": "https://dollars-bbs.org/main/"
+            },
+            {
+              "label": "Mebious",
+              "href": "https://mebious.neocities.org/"
+            },
+            {
+              "label": "suyu",
+              "href": "https://suyu.neocities.org/"
+            },
+            {
+              "label": "Official Music Fan Club",
+              "href": "https://officialmusicfan.club/"
+            },
+            {
+              "label": "Read the old posts",
+              "say": [
+                "Dollars BBS. I posted here when I was sixteen.",
+                "The account's still logged in. Past me had a LOT of opinions about anime."
+              ]
+            },
+            {
+              "label": "Log off"
+            }
+          ]
+        },
+        "drinkbar": {
+          "name": "Drink bar",
+          "click": [
+            "Free refills."
+          ],
+          "choices": [
+            {
+              "label": "Melon soda",
+              "pick": [
+                "Neon green and fizzy. It tastes like 1999.",
+                "You fill the cup to the very top. Nobody's watching."
+              ]
+            },
+            {
+              "label": "Corn soup",
+              "say": [
+                "(The machine dispenses hot corn soup. In a can. At three in the morning.)",
+                "Perfect."
+              ]
+            },
+            {
+              "label": "Nothing"
+            }
+          ]
+        },
+        "manga": {
+          "name": "Manga shelves",
+          "lines": [
+            "Every volume of everything. Volume 7 of something is always missing."
+          ]
+        },
+        "clock": {
+          "name": "Clock",
+          "lines": [
+            "Three o'clock. It's always three o'clock in here."
+          ]
+        }
+      }
     }
   },
   "house_key": {
