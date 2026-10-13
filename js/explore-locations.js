@@ -37,7 +37,7 @@ var LOCATIONS = {
     // up the back stairs from the casino's far corridor (js/explore-games.js puts the door in the panorama)
     "casinolounge": {
         title: "The High Rollers' Lounge", image: "../img/explore/places/fancy_lounge.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/sonic-casino-night-zone.mp4",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/cosmic-psycho-bar.mp3",
         links: [
             { to: "?loc=casino", rect: [0, 478, 640, 50] }
         ],
@@ -72,7 +72,7 @@ var LOCATIONS = {
     },
     "teaparty": {
         title: "A Clearing", image: "../img/explore/places/day_forest_teaparty.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/train-music/tenniscoats-papas-ear.mp3",
         links: [
             { to: "?loc=hilltop", rect: [580, 0, 160, 220] },
             { to: "?loc=forestpath", rect: [0, 478, 640, 50] }
@@ -81,7 +81,7 @@ var LOCATIONS = {
     },
     "hilltop": {
         title: "The Hilltop", image: "../img/explore/pathways/day_hilltop.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/caught-a-star-in-your-eye.mp3",
         links: [
             { to: "?loc=lilyfield", rect: [0, 380, 260, 95] },
             { to: "?loc=observatory", rect: [440, 120, 120, 80] },   // a little dome on the far ridge
@@ -92,7 +92,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized to its own inks); the telescope shows tonight's real moon (js/explore-games.js)
     "observatory": {
         title: "The Hill Observatory", image: "../img/explore/places/observatory.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
         links: [
             { to: "?loc=hilltop", rect: [0, 478, 640, 50] }
         ],
@@ -101,7 +101,7 @@ var LOCATIONS = {
     },
     "lilyfield": {
         title: "The Lily Field", image: "../img/explore/pathways/flower_plain.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/doradora-emotion-dor02.mp3",
         links: [
             { to: "?loc=campsite", rect: [250, 200, 300, 110] },
             { to: "?loc=hilltop", rect: [0, 478, 640, 50] }
@@ -167,7 +167,7 @@ var LOCATIONS = {
     },
     "oldhouse": {
         title: "The Old House", image: "../img/explore/places/night_home_front.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/possessioner-in-the-boutique.mp3",
         links: [
             { to: "?loc=catroom", rect: [336, 255, 141, 113] },
             { to: "?loc=shrine", rect: [0, 377, 207, 151] },
@@ -176,7 +176,7 @@ var LOCATIONS = {
     },
     "catroom": {
         title: "The Old House", image: "../img/explore/places/night_room_traditional.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-sweetheart.mp3",
         links: [
             { to: "?loc=oldhouse", rect: [0, 0, 60, 280] }
         ],
@@ -189,7 +189,7 @@ var LOCATIONS = {
     // behind Erratic Errata, for those who ask for the second edition (js/explore-town.js)
     "zengarden": {
         title: "A Hidden Garden", image: "../img/explore/pathways/zengarden.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/train-music/sufjan-stevens-seven-swans.mp3",
         links: [
             { to: "?loc=weirdstore", rect: [0, 330, 200, 148] }
         ],
@@ -199,7 +199,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized to Acacia Apartments' inks); shooting stars in js/explore-ambient.js
     "rooftop": {
         title: "Acacia Apartments, the Roof", image: "../img/explore/places/rooftop.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/college-electric-youth-real-hero.mp3",
         links: [
             { to: "?loc=nightapartments", rect: [0, 330, 100, 148] }
         ],
@@ -229,7 +229,7 @@ var LOCATIONS = {
     },
     "shrine": {
         title: "Pumpo Shrine", image: "../img/explore/places/night_temple_festival.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/dance_in_the_memories.mp3",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/cosmic-psycho-begin.mp3",
         links: [
             { to: "?loc=forestedge", rect: [543, 101, 126, 201] },
             { to: "?loc=underbridge", rect: [0, 250, 80, 160] },   // steps down to the river
@@ -252,7 +252,7 @@ var LOCATIONS = {
     },
     "bookshop": {
         title: "The Night Bookshop", image: "../img/explore/pathways/night_minilibrary.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/mesuneko-hishoshitsu-staff-roll.mp3",
         links: [
             { to: "?loc=nightplaza", rect: [0, 380, 150, 98] }
         ]
@@ -268,7 +268,7 @@ var LOCATIONS = {
     },
     "konbini": {
         title: "The Konbini", image: "../img/explore/places/conbini.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/ippatsu-jang-see-you-later.mp3",
         links: [
             { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }
         ]
@@ -276,7 +276,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized to its own inks); the tumbling laundry in js/explore-ambient.js
     "laundromat": {
         title: "Coin Laundry", image: "../img/explore/places/laundromat.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
         links: [
             { to: "?loc=nightresidential2", rect: [380, 130, 280, 190] },   // the glass door, out to the street
             { to: "?loc=nightresidential2", rect: [0, 478, 640, 50] }
@@ -288,7 +288,7 @@ var LOCATIONS = {
     // under Tokugawa Tower (the lobby's lift goes down here)
     "garage": {
         title: "Tokugawa Tower, B1", image: "../img/explore/places/garage.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/possessioner-abandoned-district.mp3",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/iskaku-horror-1.mp3",
         links: [
             { to: "?loc=frontdesk", rect: [410, 210, 60, 85] },   // the lift, under the green sign
             { to: "?loc=frontdesk", rect: [0, 478, 420, 50] }
@@ -307,7 +307,7 @@ var LOCATIONS = {
     // floor 3 of Tokugawa Tower (the lift)
     "gallery": {
         title: "Tokugawa Gallery", image: "../img/explore/places/gallery.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
         links: [
             { to: "?loc=frontdesk", rect: [0, 478, 640, 50] }
         ],
@@ -318,7 +318,7 @@ var LOCATIONS = {
     // under the tracks by Isogashii Crossing (trains rumble overhead: js/explore-games.js)
     "izakaya": {
         title: "Izakaya Gonta", image: "../img/explore/places/day_izakaya.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/ippatsu-jang-see-you-later.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/animahjong-x-10.mp3",
         links: [
             { to: "?loc=stationcrossing", rect: [0, 478, 640, 50] }
         ],
@@ -326,7 +326,7 @@ var LOCATIONS = {
     },
     "nightcafe": {
         title: "A Late Cafe", image: "../img/explore/places/night_cafe.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
         links: [
             { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }
         ],
@@ -335,7 +335,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized to its own inks); through the purple door by the ramen stall
     "karaoke": {
         title: "Karaoke Box", image: "../img/explore/places/karaoke.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/college-electric-youth-real-hero.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-sweetheart.mp3",
         links: [
             { to: "?loc=ramen", rect: [0, 478, 640, 50] }
         ],
@@ -365,7 +365,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized); the cats are in the picture, each one clickable
     "catcafe": {
         title: "Neko no Ma", image: "../img/explore/places/cat_cafe.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/caught-a-star-in-your-eye.mp3",
         links: [
             { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }
         ],
@@ -398,7 +398,7 @@ var LOCATIONS = {
     // drawn for the city like the ramen stall (FAL, quantized to Isogashii Boulevard's inks)
     "gamecentre": {
         title: "Taito Game Centre", image: "../img/explore/places/game_centre.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/animahjong-x-10.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/ippatsu-jang-see-you-later.mp3",
         links: [
             { to: "?loc=partystreet", rect: [0, 478, 640, 50] }
         ],
@@ -460,7 +460,7 @@ var LOCATIONS = {
     },
     "surfshop": {
         title: "Half Pipe", image: "../img/explore/places/day_beach_shop.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/college-electric-youth-real-hero.mp3",
         links: [
             { to: "?loc=beach", rect: [655, 180, 85, 348] },
             { to: "?loc=otojima", rect: [0, 478, 640, 50] }   // behind you
@@ -469,7 +469,7 @@ var LOCATIONS = {
     },
     "beach": {
         title: "Otojima Beach", image: "../img/explore/pathways/day_beach.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/caught-a-star-in-your-eye.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/dance_in_the_memories.mp3",
         links: [
             { to: "?loc=sunset", rect: [470, 262, 270, 158] },
             { to: "?loc=surfshop", rect: [0, 478, 640, 50] }   // behind you
@@ -481,7 +481,7 @@ var LOCATIONS = {
     },
     "sunset": {
         title: "The Shore at Sunset", image: "../img/explore/places/sunset.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/college-electric-youth-real-hero.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
         links: [
             { to: "?loc=harbour", rect: [0, 446, 284, 82] },
             { to: "?loc=beach", rect: [0, 478, 640, 50] }   // behind you
@@ -504,7 +504,7 @@ var LOCATIONS = {
     // drawn for the city (FAL, quantized to its own 16 blues); jellyfish in js/explore-ambient.js
     "aquarium": {
         title: "Otojima Aquarium", image: "../img/explore/places/aquarium.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-office-marina.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doradora-emotion-dor02.mp3",
         links: [
             { to: "?loc=harbour", rect: [0, 478, 640, 50] }
         ],
@@ -514,7 +514,7 @@ var LOCATIONS = {
     // lake behind it filled from the same rows further along)
     "lake": {
         title: "Lake Otojima", image: "../img/explore/places/day_park_coast_noboat.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/possessioner-in-the-boutique.mp3",
         layers: [{ src: "../img/explore/layers/ferry.png", rect: [40, 188, 157, 49], pixel: true, anim: "ferry" }],
         links: [
             { to: "?loc=riverboat", rect: [0, 230, 500, 120] },   // on, upriver
@@ -539,7 +539,7 @@ var LOCATIONS = {
     // drawing, in two alternating sets)
     "pier": {
         title: "Otojima Pier", image: "../img/explore/places/pier.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/caught-a-star-in-your-eye.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/animahjong-x-10.mp3",
         layers: [{ src: "../img/explore/layers/pier-bulbs-a.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-a" },
                  { src: "../img/explore/layers/pier-bulbs-b.png", rect: [-24, 0, 787, 528], pixel: true, anim: "twinkle-b" }],
         links: [
@@ -550,7 +550,7 @@ var LOCATIONS = {
     },
     "riverboat": {
         title: "Up the River", image: "../img/explore/pathways/riverboat.png", pos: "center",
-        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/mercurius_pretty-the_birth_of_homunculus.mp3",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/train-music/tenniscoats-papas-ear.mp3",
         links: [
             { to: "?loc=forestglade", rect: [208, 271, 116, 96] }
         ]
@@ -583,7 +583,7 @@ var LOCATIONS = {
     // drawn for the city: FAL from the Alley's and the festival's pictures, quantized to the Alley's 16 inks
     "ramen": {
         title: "A Ramen Stall", image: "../img/explore/places/ramen_yatai.png", pos: "center",
-        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-settle.mp3",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
         links: [
             { to: "?loc=karaoke", rect: [100, 170, 65, 140] },   // the purple-lit door in the alley wall
             { to: "?loc=nightalley", rect: [0, 300, 90, 178] },
