@@ -1620,6 +1620,7 @@
                 var got = photos();
                 got.push(place);
                 put("pandaPhotos", JSON.stringify(got));
+                if (got.length >= 3) hear("photographer");   // enough for an exhibition (the gallery)
                 var flash = document.createElement("div");
                 flash.className = "play-flash";
                 S.stage.appendChild(flash);
@@ -1687,6 +1688,14 @@
         if (todo.length) out.push(it.todo_head + " " + todo.join(" "));
         if (done.length) out.push(it.done_head + " " + done.join(" "));
         return out.length > 1 || todo.length || done.length ? out : arr(it.empty).concat(out);
+    };
+
+    // the gallery's exhibition of your photos: the album, framed as a show
+    S.actions.exhibition = function () {
+        var cam = (R.dialogueAll.pockets || {}).camera;
+        if (!cam || !window.POCKET_LOOK.camera) return;
+        window.POCKET_LOOK.camera(cam);
+        S.say(arr(P().exhibition), function () { S.home(false); });
     };
 
     // the pocket radio (Sakura fixed Ghandi's old one): tune it and the music changes, wherever you are

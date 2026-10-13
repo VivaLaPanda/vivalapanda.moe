@@ -3488,6 +3488,11 @@
       },
       "menu": [
         {
+          "label": "See the new exhibition",
+          "need": "photographer",
+          "action": "exhibition"
+        },
+        {
           "label": "Look at the pixel art in the back",
           "say": [
             "In the back room: a whole wall of PC-98 style pixel art.",
@@ -3501,6 +3506,20 @@
             {
               "label": "Back to the gallery"
             }
+          ]
+        }
+      ],
+      "play": {
+        "exhibition": [
+          "A new show: \"Pandopolis at Night, by an anonymous visitor.\" Wait. These are yours.",
+          "(A couple stops at one of your photos for a long time. They seem to like it.)"
+        ]
+      },
+      "greeting_after": [
+        {
+          "need": "photographer",
+          "greeting": [
+            "The gallery's put up a new exhibition. There's a crowd. Well, four people."
           ]
         }
       ]
