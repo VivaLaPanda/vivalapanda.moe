@@ -393,6 +393,87 @@
         });
     };
 
+    // ---------- ambient life: particles over the picture, in its own inks ----------
+
+    // a canvas over the scene at a quarter of its 740x528 (each dot one fat pixel, like the art's), not clickable;
+    // draw(ctx, dt, t) each frame; still for visitors who prefer less motion
+    function ambient(draw) {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        document.addEventListener("scenestart", function () {
+            var cv = document.createElement("canvas");
+            cv.width = 185;
+            cv.height = 132;
+            cv.className = "play-ambient";
+            S.stage.appendChild(cv);
+            var ctx = cv.getContext("2d"), last = performance.now();
+            (function step(now) {
+                var dt = Math.min(.1, (now - last) / 1000);
+                last = now;
+                if (!document.hidden) { ctx.clearRect(0, 0, 185, 132); draw(ctx, dt, now / 1000); }
+                requestAnimationFrame(step);
+            })(last);
+        });
+    }
+
+    function fireflies(region, n, core, glow) {   // region [x, y, w, h] in canvas px
+        var flies = [];
+        for (var i = 0; i < n; i++) {
+            flies.push({ x: rand(region[0], region[0] + region[2]), y: rand(region[1], region[1] + region[3]),
+                         a: rand(0, 6.28), phase: rand(0, 6.28), rate: rand(.5, 1.1) });
+        }
+        ambient(function (ctx, dt, t) {
+            flies.forEach(function (f) {
+                f.a += rand(-1.2, 1.2) * dt;
+                f.x += Math.cos(f.a) * 3 * dt;
+                f.y += Math.sin(f.a) * 2 * dt;
+                if (f.x < region[0] || f.x > region[0] + region[2]) f.a = Math.PI - f.a;
+                if (f.y < region[1] || f.y > region[1] + region[3]) f.a = -f.a;
+                var b = Math.sin(t * f.rate * 2 + f.phase);   // a slow blink: dark half the time
+                if (b < .1) return;
+                var x = Math.round(f.x), y = Math.round(f.y);
+                if (b > .6) {
+                    ctx.fillStyle = glow;
+                    ctx.fillRect(x - 1, y, 1, 1); ctx.fillRect(x + 1, y, 1, 1); ctx.fillRect(x, y - 1, 1, 1); ctx.fillRect(x, y + 1, 1, 1);
+                }
+                ctx.fillStyle = core;
+                ctx.fillRect(x, y, 1, 1);
+            });
+        });
+    }
+
+    function steam(region, inks) {   // wisps rising off water, thinning as they go (dithered, never blended)
+        var puffs = [];
+        ambient(function (ctx, dt, t) {
+            if (puffs.length < 44 && Math.random() < dt * 14) {
+                puffs.push({ x: rand(region[0], region[0] + region[2]), y: rand(region[1], region[1] + region[3]),
+                             age: 0, life: rand(2.5, 4.5), drift: rand(-2, 2), ink: inks[Math.floor(Math.random() * inks.length)] });
+            }
+            puffs = puffs.filter(function (p) { return p.age < p.life; });
+            puffs.forEach(function (p) {
+                p.age += dt;
+                p.y -= 5 * dt;
+                p.x += (p.drift + Math.sin(t + p.y * .3)) * dt;
+                var k = p.age / p.life, x = Math.round(p.x), y = Math.round(p.y), frame = Math.floor(t * 6);
+                ctx.fillStyle = p.ink;
+                // a 5x3 wisp, fewer of its pixels as it fades: a checker that thins out
+                for (var dy = 0; dy < 3; dy++) {
+                    for (var dx = 0; dx < 5; dx++) {
+                        if ((dy === 0 || dy === 2) && (dx === 0 || dx === 4)) continue;   // rounded
+                        if ((dx + dy + frame) % 2 && k > .3) continue;
+                        if (k > .7 && (dx + dy * 2 + frame) % 3) continue;
+                        ctx.fillRect(x + dx, y + dy, 1, 1);
+                    }
+                }
+            });
+        });
+    }
+
+    var AMBIENT = {
+        forestedge: function () { fireflies([0, 25, 152, 66], 18, "#ffffff", "#99cc66"); },
+        smallbathhouse: function () { steam([0, 64, 185, 28], ["#ffffff", "#bdceff"]); }
+    };
+    if (AMBIENT[place]) AMBIENT[place]();
+
     // ---------- the stray cat ----------
 
     // img/explore/layers/cat.png: six 16x10 frames, drawn in the apartments' inks (black, rim, yellow eyes)

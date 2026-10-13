@@ -47,6 +47,8 @@ var LOCATIONS = {
         links: [
             { to: "../train.html", rect: [174, 189, 416, 297] }
         ],
+        layers: [{ src: "../img/explore/layers/glade-glints-a.png", rect: [0, 0, 1022, 528], pixel: true, anim: "twinkle-a" },
+                 { src: "../img/explore/layers/glade-glints-b.png", rect: [0, 0, 1022, 528], pixel: true, anim: "twinkle-b" }],
         objects: [{ id: "pond", rect: [0, 420, 740, 108] }]   // the house key's hunt ends here (js/house-key.js)
     },
     "musicianbedroom": {

@@ -455,3 +455,14 @@
     box-shadow: inset -3px -3px 0 #aab;
     pointer-events: none;
 }
+
+/* ambient life over a scene: fireflies, steam (js/explore-play.js) */
+.play-ambient {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
