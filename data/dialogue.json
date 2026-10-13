@@ -1098,7 +1098,14 @@
           "name": "Poster",
           "lines": [
             "A signed poster. Whoever she is, she's a big deal around here."
-          ]
+          ],
+          "lines_after": {
+            "need": "bar25_seen",
+            "lines": [
+              "The signed poster... it's the lady in red from Bar 25. Twenty years younger, on stage.",
+              "Whoever she was then, she still tips great."
+            ]
+          }
         }
       },
       "play": {

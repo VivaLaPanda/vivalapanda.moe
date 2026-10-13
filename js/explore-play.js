@@ -700,7 +700,10 @@
                 hits = [];
                 CASINO_SPOTS[v].forEach(function (o) {
                     var r = [o.src[0] * CASINO_S - CASINO_OX[v], o.src[1] * CASINO_S, o.src[2] * CASINO_S, o.src[3] * CASINO_S];
-                    hit(r, R.said.objects[o.id].name, o.id === "roulette" ? roulette : function () { S.say(arr(R.said.objects[o.id].lines)); });
+                    hit(r, R.said.objects[o.id].name, o.id === "roulette" ? roulette : function () {
+                        var t = R.said.objects[o.id];
+                        S.say(arr(t.lines_after && heard(t.lines_after.need) ? t.lines_after.lines : t.lines));   // seen something since
+                    });
                 });
                 hit([70, 478, 570, 50], "Back out to Main Street", function () { location.href = "?loc=mainstreet"; });
                 if (v > 0) hit([0, 0, 70, 528], "Look left", function () { show(v - 1); });     // the edges win
@@ -1158,6 +1161,7 @@
     };
 
     PLAY.ramen = function () { hear("taisho_met"); };
+    PLAY.bar25 = function () { hear("bar25_seen"); };
     if (place === "otojima") hear("visited_otojima");   // a postcard arrives at home (dialogue.json letters)
 
     // the girl on the residential street, once she has her charm back: gone (
