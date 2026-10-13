@@ -600,6 +600,9 @@
             }
           ]
         }
+      ],
+      "linger": [
+        "A taxi idles at the corner, waiting for nobody in particular."
       ]
     },
     "agency": {
@@ -1329,12 +1332,18 @@
       },
       "greeting_spring": [
         "Cherry blossoms in Pumpo Park! Everyone's out on blue tarps, under the lanterns."
+      ],
+      "linger": [
+        "The lanterns in the trees sway a little. Drums, very faintly."
       ]
     },
     "nightplaza": {
       "speaker": "Ｐａｎｄａ",
       "greeting": [
         "It's so quiet here at night..."
+      ],
+      "linger": [
+        "The fountain changes its rhythm. Nobody else seems to notice."
       ]
     },
     "nightresidential": {
@@ -1367,6 +1376,9 @@
             "A street musician playing the station chime on a saxophone. Andy would approve."
           ]
         }
+      ],
+      "linger": [
+        "Someone hands you a tissue packet without breaking stride. You have nine now."
       ]
     },
     "stationcrossing": {
@@ -1404,6 +1416,9 @@
             "\"Someone once left a whole bowl of ramen. Still warm. We gave it to the night shift.\""
           ]
         }
+      ],
+      "linger": [
+        "\"...Please stay behind the yellow line.\" (You were already behind it.)"
       ]
     },
     "trainwetlands": {
@@ -1507,6 +1522,9 @@
             "...Ramen. Definitely ramen. That way."
           ]
         }
+      ],
+      "linger": [
+        "A neon sign buzzes, flickers, decides to keep going."
       ]
     },
     "cutiebar": {
@@ -1664,7 +1682,10 @@
             "カラオケ: \"karaoke\". There's a karaoke box behind the ramen stall, too."
           ]
         }
-      }
+      },
+      "linger": [
+        "A bicycle bell dings somewhere behind you, and is gone."
+      ]
     },
     "weirdstore": {
       "speaker": "P a n d a",
@@ -1971,6 +1992,9 @@
       },
       "greeting_late": [
         "The city's quieter this late. Just the lights, and the hum."
+      ],
+      "linger": [
+        "Far below, a train crawls across the city like a lit zip."
       ]
     },
     "nightresidential_girl": {
@@ -2264,6 +2288,9 @@
       ],
       "greeting_winter": [
         "A winter festival! Amazake, hand warmers, and the goldfish tank's got a little heater."
+      ],
+      "linger": [
+        "A kid walks past with a goldfish bag held up like a trophy."
       ]
     },
     "shrine": {
@@ -2340,6 +2367,9 @@
       ],
       "greeting_spring": [
         "Petals all over the shrine steps. The bell rope's got one stuck to it."
+      ],
+      "linger": [
+        "The bell rope sways. Nobody's touching it."
       ]
     },
     "backpassage": {
@@ -2606,6 +2636,9 @@
             ]
           ]
         }
+      ],
+      "linger": [
+        "A wave comes up further than the others and just touches your shoes."
       ]
     },
     "sunset": {
@@ -2703,7 +2736,10 @@
             }
           ]
         }
-      }
+      },
+      "linger": [
+        "A boat's rope creaks against the pier. Somewhere, a gull complains."
+      ]
     },
     "riverboat": {
       "speaker": "P a n d a",
@@ -2957,6 +2993,9 @@
       ],
       "greeting_regular": [
         "\"Ah, my regular! Sit, sit. The usual's already on.\""
+      ],
+      "linger": [
+        "Taisho hums an old song while he stirs. He's out of tune. It's perfect."
       ]
     },
     "gamecentre": {
@@ -3267,6 +3306,9 @@
       },
       "greeting_regular": [
         "\"Oh, hi again! I put the good onigiri aside for you. Don't tell the manager.\""
+      ],
+      "linger": [
+        "The door chime goes. Nobody's there. It does that sometimes."
       ]
     },
     "bookshop": {
@@ -3554,6 +3596,9 @@
       },
       "greeting_regular": [
         "Booth seven. Our booth, now. The chair's still warm from last time."
+      ],
+      "linger": [
+        "Someone three booths over sighs at a loading screen. Same."
       ]
     },
     "forestpath": {
@@ -3638,6 +3683,9 @@
             ]
           ]
         }
+      ],
+      "linger": [
+        "The kids' red ball rolls past your feet. One of them waves sorry."
       ]
     },
     "lilyfield": {
@@ -3700,7 +3748,10 @@
             }
           ]
         }
-      }
+      },
+      "linger": [
+        "The fire pops. The sleeping one mumbles something about pancakes."
+      ]
     },
     "laundromat": {
       "speaker": "P a n d a",
@@ -4277,7 +4328,10 @@
             }
           ]
         }
-      }
+      },
+      "linger": [
+        "The carriage sways. You nearly fall asleep, then the train sways you awake."
+      ]
     },
     "lighthouse": {
       "speaker": "P a n d a",
