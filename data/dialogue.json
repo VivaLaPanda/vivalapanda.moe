@@ -2309,6 +2309,10 @@
             {
               "label": "Log off"
             }
+          ],
+          "click_late": [
+            "The screen flickers. For a second, in big letters: PRESENT DAY. PRESENT TIME.",
+            "...Then the bookmarks are back, like nothing happened."
           ]
         },
         "drinkbar": {

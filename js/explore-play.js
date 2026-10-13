@@ -1026,6 +1026,16 @@
 
     // Net Cafe Noa: post on the old forum, and somebody, somewhere, still answers
     PLAY.netcafe = function () {
+        var booth = obj("booth");
+        booth.click = function () {   // in the small hours the screen isn't quite itself
+            var t = R.said.objects.booth;
+            if (new Date().getHours() >= 5 || !t.click_late) return arr(t.click);
+            var g = document.createElement("div");
+            g.className = "play-glitch";
+            S.stage.appendChild(g);
+            setTimeout(function () { g.remove(); }, 1400);
+            return arr(t.click_late);
+        };
         S.actions.post = function () {
             var p = P().forum;
             S.ask(arr(p.prompt), function (msg) {

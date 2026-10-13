@@ -551,3 +551,17 @@
     box-shadow: 3px 4px 0 rgba(0, 0, 0, .5);
     image-rendering: pixelated;
 }
+
+/* the net cafe's screen at three in the morning */
+.play-glitch {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .35) 0 2px, rgba(120, 160, 255, .12) 2px 4px);
+    animation: play-glitch 1.4s steps(7) forwards;
+}
+@keyframes play-glitch {
+    0% { opacity: 1; transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(4px); opacity: .7; }
+    60% { transform: translateX(-2px); } 100% { opacity: 0; transform: translateX(0); }
+}
