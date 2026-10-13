@@ -896,7 +896,25 @@
             "...Is that music?"
           ]
         }
-      ]
+      ],
+      "objects": {
+        "flyer": {
+          "name": "A flyer",
+          "click": [
+            "A flyer taped to the restroom hut: NEXT RAVE 5/2.",
+            "There's a bus on it. And a very floppy... Pumpo?"
+          ],
+          "choices": [
+            {
+              "label": "Read the flyer",
+              "href": "/pumpo/"
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        }
+      }
     },
     "nightplaza": {
       "speaker": "Ｐａｎｄａ",

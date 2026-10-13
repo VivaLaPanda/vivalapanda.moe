@@ -183,6 +183,7 @@ var LOCATIONS = {
             { to: "?loc=festival", rect: [483, 377, 257, 151] },
             { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }   // behind you
         ],
+        objects: [{ id: "flyer", rect: [423, 430, 80, 45] }],   // on the restroom hut
         // far back in the trees, the festival's lanterns
         layers: [{ src: "../img/explore/layers/park-lanterns.png", rect: [-83, 0, 905, 528], pixel: true, anim: "flicker" }]
     },
