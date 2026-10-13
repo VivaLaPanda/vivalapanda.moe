@@ -1288,6 +1288,10 @@
         fetch("/reading/books.json").then(function (r) { return r.json(); }).then(function (d) {
             books = ((d.shelves && d.shelves.read) || []).filter(function (b) { return b.rating >= 5; });
         }).catch(function () { books = []; });
+        S.actions.poem = function () {   // the poem of the night: the same one for everyone today
+            var ps = P().poems, day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+            S.say(arr(P().poem_intro).concat(arr(ps[day % ps.length])), function () { S.home(false); });
+        };
         S.actions.recommend = function () {
             var p = P();
             if (!books || !books.length) { S.say(arr(p.no_books), function () { S.home(false); }); return; }

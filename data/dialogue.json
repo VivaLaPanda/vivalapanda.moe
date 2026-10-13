@@ -2987,6 +2987,10 @@
       ],
       "menu": [
         {
+          "label": "Read the poem by the till",
+          "action": "poem"
+        },
+        {
           "label": "Ask for a recommendation",
           "action": "recommend"
         },
@@ -3000,7 +3004,48 @@
       ],
       "play": {
         "recommend": "\"Panda gave this one five stars: {title}, by {author}. Couldn't stop talking about it.\"",
-        "no_books": "\"The shelves are being restocked. Come back later?\""
+        "no_books": "\"The shelves are being restocked. Come back later?\"",
+        "poem_intro": [
+          "(A card by the till, in the bookseller's handwriting: tonight's poem.)"
+        ],
+        "poems": [
+          [
+            "Last train gone. / The platform keeps / its yellow line / for no one."
+          ],
+          [
+            "Two forks, one cake. / The window fogs. / Outside, the rain / pretends not to look."
+          ],
+          [
+            "A cat on the water tank / counts the city's lights / and loses track / on purpose."
+          ],
+          [
+            "Steam off the broth, / steam off the bath: / the whole town / breathing out."
+          ],
+          [
+            "The lighthouse says / the same word every six seconds. / The sea / never tires of it."
+          ],
+          [
+            "Neon in the puddle. / You step over it / carefully, / like it might wake."
+          ],
+          [
+            "Somebody's laundry / turning in the dark. / Two socks, / finding each other."
+          ],
+          [
+            "Paper lanterns / far back in the trees. / The festival / you can almost hear."
+          ],
+          [
+            "Three in the morning. / The net cafe clock agrees. / It always / agrees."
+          ],
+          [
+            "The moon tonight / is only a fingernail. / Still, / it finds the river."
+          ],
+          [
+            "Ramen, a warm bath, / and someone / to walk you home. / That's the whole list."
+          ],
+          [
+            "The man in the hat / ordered one more, / and the glass / waited with him."
+          ]
+        ]
       }
     },
     "aquarium": {
