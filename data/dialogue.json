@@ -1169,7 +1169,8 @@
           "need": "house_key",
           "greeting": [
             "\"So you found it. The spare key. Welcome to the family, stranger. Don't make me regret it.\""
-          ]
+          ],
+          "once": true
         }
       ]
     },
@@ -1756,7 +1757,8 @@
           "need": "sabrina_shell",
           "greeting": [
             "\"Hey, anon.\" (There's a little pink shell by the register now.)"
-          ]
+          ],
+          "once": true
         },
         {
           "need": "tony_answered",

@@ -1907,8 +1907,13 @@
         var day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][now.getDay()];
         var visits = +(get("pandaVisits_" + place) || 0) + 1;
         put("pandaVisits_" + place, visits);
-        var after = (d.greeting_after || []).filter(function (g) { return heard(g.need); })[0];
-        if (after) return after.greeting;   // because of something you did (Andy, at the cafe with Sakura)
+        var after = (d.greeting_after || []).filter(function (g) {
+            return heard(g.need) && !(g.once && heard("said_" + place + "_" + g.need));
+        })[0];
+        if (after) {   // because of something you did (Andy, at the cafe with Sakura); "once": just the first time
+            if (after.once) hear("said_" + place + "_" + after.need);
+            return after.greeting;
+        }
         var md = ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2);
         if (d.greeting_on && d.greeting_on[md]) return d.greeting_on[md];   // a date on the calendar ("05-02")
         if (d.greeting_halloween && halloween()) return d.greeting_halloween;

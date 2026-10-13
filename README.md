@@ -72,7 +72,7 @@ meant to be poked at.
 - The city remembers you (all in this browser): places say something different on a return visit
   (`greeting_return`), after five visits (`greeting_regular`), and once in a while something rare happens on
   arrival (`rare`); stay still somewhere quiet and something small happens (`linger`); characters greet you
-  differently after you've helped them (`greeting_after`); letters from them arrive in the living room
+  differently after you've helped them (`greeting_after`, `once` for just the first time); letters from them arrive in the living room
   (`letters` in `data/dialogue.json`); the Pandopolis Times at the konbini reports it. Some dates change greetings
   (`greeting_on`: the Pumpo rave on 5/2, Tanabata, Christmas, New Year's Eve, Valentine's, the Perseids).
 - A night bus (Main Street, the residential street) goes somewhere at random, often somewhere you haven't been.
