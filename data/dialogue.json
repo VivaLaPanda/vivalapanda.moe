@@ -1489,7 +1489,8 @@
             "A salaryman doing a very confident dance outside the game centre. Respect.",
             "Someone's handing out tissue packets with ads on them. You take three.",
             "A street musician playing the station chime on a saxophone. Andy would approve."
-          ]
+          ],
+          "pocket": "tissues"
         }
       ],
       "linger": [
@@ -4925,7 +4926,17 @@
             {
               "label": "Leave her be"
             }
-          ]
+          ],
+          "accepts": {
+            "tissues": {
+              "label": "Offer her a tissue",
+              "take": true,
+              "say": [
+                "She takes one and laughs, a little wet. \"Sorry. The petals make me sentimental.\"",
+                "\"...Thank you. You're kind. The city's kinder than it looks.\""
+              ]
+            }
+          }
         },
         "river": {
           "name": "The river",
@@ -5824,6 +5835,11 @@
       "name": "taiyaki",
       "icon": "taiyaki",
       "look": "A taiyaki from the festival, wrapped in paper. Still a little warm."
+    },
+    "tissues": {
+      "name": "tissue packets",
+      "icon": "tissues",
+      "look": "Tissue packets with ads on them. You have a lot. Someone might need one."
     }
   },
   "letters": {
