@@ -1664,6 +1664,17 @@
             "\"Best student I ever had. Worst listener. Don't tell her I said the first part.\"",
             "\"She runs a good bar. Too much grenadine, but a good bar.\""
           ]
+        },
+        {
+          "label": "Ask about the empty stool",
+          "need": "ghost_free",
+          "unless": "hat_given",
+          "pocket": "hat",
+          "hear": "hat_given",
+          "say": [
+            "\"Paid his tab, all twelve years of it. Said she'd finally come home.\"",
+            "\"He left this. Said to give it to whoever helped her.\" (Tony slides over a hat.)"
+          ]
         }
       ],
       "accepts": {
@@ -1684,7 +1695,8 @@
           "say": [
             "The man in the hat looks at the ace for a long moment.",
             "Then, very slowly, he tips his hat to you. He doesn't say a word."
-          ]
+          ],
+          "unless": "ghost_free"
         },
         "camera": {
           "label": "Show Tony your photos",
@@ -1698,6 +1710,12 @@
         "\"The fella in the hat stepped out a minute ago. First time in twelve years.\""
       ],
       "greeting_after": [
+        {
+          "need": "ghost_free",
+          "greeting": [
+            "The stool at the end of the bar is empty. For the first time in twelve years, Tony says."
+          ]
+        },
         {
           "need": "tony_answered",
           "greeting": [
@@ -2646,6 +2664,12 @@
           "need": "sock_taken",
           "greeting": [
             "\"Irasshaimase! ...You're out late a lot, huh? Same.\""
+          ]
+        },
+        {
+          "need": "ghost_free",
+          "greeting": [
+            "\"Irasshaimase! ...Funny. The man in the hat didn't come in for his melon bread.\""
           ]
         }
       ]
@@ -3784,6 +3808,12 @@
             "drifter_fed"
           ],
           "text": "Fed the man in the back passage."
+        },
+        {
+          "flags": [
+            "hat_given"
+          ],
+          "text": "The man in the hat stopped waiting."
         }
       ]
     },
@@ -3822,6 +3852,11 @@
       "name": "onigiri",
       "icon": "onigiri",
       "look": "An onigiri from the konbini. You were saving it for someone. Or for later."
+    },
+    "hat": {
+      "name": "the man's hat",
+      "icon": "hat",
+      "look": "A dark felt hat with a red band, worn soft. It's been waiting a long time too."
     }
   },
   "letters": {
@@ -3860,6 +3895,12 @@
       "need": "hat_tipped",
       "text": [
         "A note in very neat handwriting: \"He tipped his hat? In twelve years... Who ARE you? -J\""
+      ]
+    },
+    "hat": {
+      "need": "hat_given",
+      "text": [
+        "No stamp, no name. Just: \"Thank you for bringing her home. -H\""
       ]
     }
   }

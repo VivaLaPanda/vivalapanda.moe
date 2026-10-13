@@ -411,7 +411,10 @@
     // giving: a place or an object can accept things from your pockets (dialogue.json "accepts": item id ->
     // { label, say, take (it's theirs now), pocket (they give you something back), hear (a flag) })
     function givesFor(accepts, after) {
-        return Object.keys(accepts || {}).filter(has).map(function (id) {
+        return Object.keys(accepts || {}).filter(function (id) {
+            var a = accepts[id];
+            return has(id) && (!a.need || heard(a.need)) && (!a.unless || !heard(a.unless));
+        }).map(function (id) {
             var a = accepts[id];
             return { label: a.label, act: function () {
                 if (a.take) unpocket(id);
