@@ -1894,6 +1894,8 @@
         put("pandaVisits_" + place, visits);
         var after = (d.greeting_after || []).filter(function (g) { return heard(g.need); })[0];
         if (after) return after.greeting;   // because of something you did (Andy, at the cafe with Sakura)
+        var md = ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2);
+        if (d.greeting_on && d.greeting_on[md]) return d.greeting_on[md];   // a date on the calendar ("05-02")
         if (d.greeting_halloween && halloween()) return d.greeting_halloween;
         if (d.greeting_newyear && now.getMonth() === 0 && now.getDate() <= 3) return d.greeting_newyear;
         if (d.greeting_winter && winter()) return d.greeting_winter;

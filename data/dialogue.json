@@ -621,7 +621,15 @@
       ],
       "rare": [
         "A marching band goes down Main Street! Tubas and everything. Nobody knows where they're going."
-      ]
+      ],
+      "greeting_on": {
+        "12-25": [
+          "Christmas on Main Street. Somebody's put a Santa hat on the casino sign. The N is still out."
+        ],
+        "12-31": [
+          "New Year's Eve! The whole city's heading for the shrine to ring the bell at midnight."
+        ]
+      }
     },
     "agency": {
       "speaker": "J o h n n y  U p p e r c u t",
@@ -1221,6 +1229,11 @@
             "Was that dancing? Sure. That was dancing."
           ]
         }
+      },
+      "greeting_on": {
+        "05-02": [
+          "It's the night of the Pumpo rave! The flyer was right. There's a bus painted on the DJ booth."
+        ]
       }
     },
     "forestedge": {
@@ -2468,7 +2481,12 @@
       ],
       "linger": [
         "The bell rope sways. Nobody's touching it."
-      ]
+      ],
+      "greeting_on": {
+        "07-07": [
+          "Tanabata! Bamboo by the shrine, covered in paper wishes. Somewhere up there, two stars meet."
+        ]
+      }
     },
     "backpassage": {
       "speaker": "P a n d a",
@@ -3107,7 +3125,12 @@
       ],
       "linger": [
         "Taisho hums an old song while he stirs. He's out of tune. It's perfect."
-      ]
+      ],
+      "greeting_on": {
+        "12-31": [
+          "\"Toshikoshi soba tonight, not ramen! Long noodles, long life. Sit, sit.\""
+        ]
+      }
     },
     "gamecentre": {
       "speaker": "P a n d a",
@@ -3253,7 +3276,12 @@
       ],
       "rare": [
         "A meteor shower! One, two, five, too many to count. Make a wish? Make all of them."
-      ]
+      ],
+      "greeting_on": {
+        "08-12": [
+          "The Perseids peak tonight. The sky's full of shooting stars. Make all the wishes."
+        ]
+      }
     },
     "konbini": {
       "speaker": "C a s h i e r",
@@ -4227,7 +4255,12 @@
       },
       "linger": [
         "One of them laughs so hard they have to put their fork down."
-      ]
+      ],
+      "greeting_on": {
+        "02-14": [
+          "Valentine's Day. Every table in the cafe has two forks and one slice of cake."
+        ]
+      }
     },
     "karaoke": {
       "speaker": "P a n d a",
