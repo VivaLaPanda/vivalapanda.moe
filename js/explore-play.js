@@ -1198,5 +1198,32 @@
         });
     }
 
+    // the penthouse telescope: a round view of somewhere else in the city; click to look away
+    PLAY.penthouse = function () {
+        S.actions.telescope = function () {
+            var p = P().telescope, v = p.views[Math.floor(Math.random() * p.views.length)];
+            var lens = document.createElement("div");
+            lens.className = "play-telescope";
+            lens.style.backgroundImage = "url(" + v.src + ")";
+            lens.style.backgroundPosition = v.pos || "center";
+            S.stage.appendChild(lens);
+            function away(e) { if (e) e.stopPropagation(); lens.remove(); S.say(arr(p.away), function () { S.offer(menuOf(R.said.menu)); }); }
+            lens.addEventListener("click", away);
+            S.say(arr(v.say), function () { S.offer([{ label: p.stop, act: away }]); });
+        };
+    };
+
+    // up, up, down, down, left, right, left, right, B, A
+    var KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    var konami = 0;
+    document.addEventListener("keydown", function (e) {
+        konami = e.key === KONAMI[konami] ? konami + 1 : e.key === KONAMI[0] ? 1 : 0;
+        if (konami === KONAMI.length) {
+            konami = 0;
+            var all = (R.dialogueAll && R.dialogueAll.explore && R.dialogueAll.explore.lines) || {};
+            if (all.konami) S.say(arr(all.konami));
+        }
+    });
+
     if (PLAY[place]) PLAY[place]();
 })();

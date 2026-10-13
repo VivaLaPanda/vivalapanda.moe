@@ -1019,8 +1019,45 @@
             "Somewhere down there, a black cat is judging somebody.",
             "Isogashii Boulevard never actually goes dark. Not once."
           ]
+        },
+        {
+          "label": "Look through the telescope",
+          "action": "telescope"
         }
-      ]
+      ],
+      "play": {
+        "telescope": {
+          "stop": "Look away",
+          "away": "(You step back from the telescope.)",
+          "views": [
+            {
+              "src": "/img/explore/pathways/night_festival.png",
+              "say": [
+                "Lanterns, way past the park. Someone's winning at goldfish."
+              ]
+            },
+            {
+              "src": "/img/explore/pathways/night_coast.png",
+              "say": [
+                "The harbour, right out at the edge. There's a light sweeping the water."
+              ]
+            },
+            {
+              "src": "/img/explore/places/rooftop.png",
+              "pos": "center top",
+              "say": [
+                "Someone's rooftop, with a folding chair aimed at the stars. Nice."
+              ]
+            },
+            {
+              "src": "/img/explore/places/game_centre.png",
+              "say": [
+                "Through a window: a claw machine. The panda's still in there."
+              ]
+            }
+          ]
+        }
+      }
     },
     "nightresidential_girl": {
       "speaker": "Ｐａｎｄａ",
@@ -1111,6 +1148,10 @@
         "It's the cat from the old house! It blinks at you slowly, then trots off.",
         "Mrrp. (The cat headbutts your leg and leaves. A visit, apparently.)",
         "The cat again. It's definitely following us. Or we're following it."
+      ],
+      "konami": [
+        "...Did you just type the Konami code?",
+        "Fine. Thirty extra lives. Don't spend them all in one place."
       ]
     },
     "festival": {

@@ -504,3 +504,15 @@
     pointer-events: none;
 }
 @keyframes play-flash { to { opacity: 0; } }
+
+/* the penthouse telescope: a round view of somewhere else */
+.play-telescope {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background-color: #000;
+    background-size: cover;
+    image-rendering: pixelated;
+    clip-path: circle(34% at 50% 48%);
+    cursor: pointer;
+}
