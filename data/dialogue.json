@@ -5614,7 +5614,64 @@
           "text": "Learned the cat's names."
         }
       ],
-      "visited": "Places in Pandopolis I've been: {n} of {total}."
+      "visited": "Places in Pandopolis I've been: {n} of {total}.",
+      "nudge_head": "Doodled in the margin:",
+      "nudges": [
+        {
+          "not": [
+            "catroom_seen"
+          ],
+          "text": "a little black cat, by some apartment stairs."
+        },
+        {
+          "not": [
+            "note_given"
+          ],
+          "text": "a cocktail glass, and an arrow pointing up a tall tower."
+        },
+        {
+          "not": [
+            "ghost_asked"
+          ],
+          "text": "a girl under a streetlight, and a question mark."
+        },
+        {
+          "not": [
+            "fuse_given"
+          ],
+          "text": "a battery with a lightning bolt, and a guitar."
+        },
+        {
+          "not": [
+            "takeout_given"
+          ],
+          "text": "a ramen bowl with steam, and a bath with steam."
+        },
+        {
+          "not": [
+            "radio_got"
+          ],
+          "text": "a radio with an X over it, and a spanner."
+        },
+        {
+          "not": [
+            "shell_got"
+          ],
+          "text": "a seashell, and a heart."
+        },
+        {
+          "not": [
+            "poem_read"
+          ],
+          "text": "a stack of books with a little card on top."
+        },
+        {
+          "not": [
+            "fox_seen"
+          ],
+          "text": "a fox mask, and some red gates on a hill."
+        }
+      ]
     },
     "takeout": {
       "name": "takeout ramen",

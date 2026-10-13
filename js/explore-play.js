@@ -1830,6 +1830,8 @@
         }
         if (todo.length) boxes(it.todo_head, todo);
         if (done.length) boxes(it.done_head, done);
+        var nudge = (it.nudges || []).filter(ok)[0];   // the first thing you haven't done, gently
+        if (nudge) out.push(it.nudge_head + " " + nudge.text);
         return out.length > 1 || todo.length || done.length ? out : arr(it.empty).concat(out);
     };
 
