@@ -1285,6 +1285,15 @@
             "*Andy half turns.* \"Breakcore remix of the Pandopolis station chime. It slaps.\"",
             "*Without turning:* \"Playing Namba Bears on Thursday. Tell Sakura she's on the guest list.\""
           ]
+        },
+        {
+          "label": "Ask Andy to play it out loud",
+          "need": "andy_turned",
+          "song": "/audio/andypls-kidzbop-nightcore.mp3",
+          "say": [
+            "*Andy takes his headphones off and unplugs them. The room explodes.*",
+            "*He doesn't turn around. But he's nodding along.*"
+          ]
         }
       ],
       "accepts": {
