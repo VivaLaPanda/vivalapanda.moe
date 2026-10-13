@@ -1296,6 +1296,49 @@
 
     if (PLAY[place]) PLAY[place]();
 
+    // ---------- the disposable camera (from Half Pipe): photos at scenic spots, an album in your pockets ----------
+
+    var PHOTO_SPOTS = ["sunset", "rooftop", "penthouse", "festival", "forestglade", "beach", "aquarium", "zengarden",
+                       "shrine", "harbour"];
+    var EXPOSURES = 24;
+    function photos() { try { return JSON.parse(get("pandaPhotos")) || []; } catch (e) { return []; } }
+    if (PHOTO_SPOTS.indexOf(place) >= 0) {
+        (R.afterGreeting = R.afterGreeting || []).push(function () {
+            var p = (R.dialogueAll.pockets || {}).camera;
+            if (!p || !has("camera") || photos().indexOf(place) >= 0) return null;
+            return [{ label: p.take_label, act: function () {
+                var got = photos();
+                got.push(place);
+                put("pandaPhotos", JSON.stringify(got));
+                var flash = document.createElement("div");
+                flash.className = "play-flash";
+                S.stage.appendChild(flash);
+                setTimeout(function () { flash.remove(); }, 450);
+                S.say([fill(p.taken, { left: EXPOSURES - got.length })], function () { S.home(false); });
+            } }];
+        });
+    }
+    // the album: your photos laid out like prints on a table (click to put them away)
+    window.POCKET_LOOK = window.POCKET_LOOK || {};
+    window.POCKET_LOOK.camera = function (it) {
+        var got = photos();
+        if (!got.length || !window.LOCATIONS) return arr(it.look);
+        var album = document.createElement("div");
+        album.className = "play-album";
+        got.forEach(function (k, i) {
+            var L = LOCATIONS[k], ph = document.createElement("div");
+            if (!L) return;
+            ph.className = "play-photo";
+            ph.style.backgroundImage = "url(" + (k === "penthouse" ? "/img/explore/settings/skyling-normal-flicker.gif" : L.image) + ")";
+            ph.style.transform = "rotate(" + ((i * 37 % 11) - 5) + "deg)";
+            ph.title = L.title;
+            album.appendChild(ph);
+        });
+        album.addEventListener("click", function (e) { e.stopPropagation(); album.remove(); });
+        S.stage.appendChild(album);
+        return [fill(it.album, { n: got.length })];
+    };
+
     // the city notices when you're here: a place can greet you differently in the rain (greeting_rain) or in the
     // small hours by your own clock (greeting_late, midnight to five)
     R.greeting = function () {

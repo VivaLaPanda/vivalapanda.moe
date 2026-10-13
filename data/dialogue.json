@@ -1650,7 +1650,19 @@
             }
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Buy a disposable camera",
+          "unless": "has_camera",
+          "pocket": "camera",
+          "hear": "has_camera",
+          "say": [
+            "You buy a disposable camera. Twenty-four shots. Choose wisely.",
+            "(Somewhere pretty would be good. A sunset, maybe.)"
+          ]
+        }
+      ]
     },
     "beach": {
       "speaker": "P a n d a",
@@ -2455,6 +2467,14 @@
       "name": "amp fuse",
       "icon": "fuse",
       "look": "A spare amp fuse from Sakura, for Andy. Do not lose this. Andy needs his breakcore."
+    },
+    "camera": {
+      "name": "disposable camera",
+      "icon": "camera",
+      "look": "A disposable camera from Half Pipe. Find somewhere pretty and take a photo.",
+      "take_label": "Take a photo",
+      "taken": "(Click! The film winds on. {left} shots left.)",
+      "album": "Your photos so far: {n}. (Click them to put them away.)"
     }
   }
 }
