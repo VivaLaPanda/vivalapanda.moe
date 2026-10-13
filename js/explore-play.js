@@ -1699,7 +1699,7 @@
 
     // Main Street: Panda hints at a stamp you haven't found yet (the map stays unlabelled; this is the nudge)
     if (place === "mainstreet") {
-        (R.afterGreeting = R.afterGreeting || []).push(function () {
+        (R.afterGreeting = R.afterGreeting || []).unshift(function () {   // first in the list: the newcomer's best start
             var hints = (R.said.play || {}).hints;
             if (!hints) return null;
             return [{ label: hints.label, act: function hint() {
