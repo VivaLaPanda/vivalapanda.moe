@@ -768,7 +768,10 @@
         "The attendant on Platform 1. And Andy, if he'll turn around.\""
       ],
       "short": "\"Still {left} short, stranger. Come back when they've all paid up.\"",
-      "done": "\"The forest. The glade past its edge. Look where the sword should be.\""
+      "done": [
+        "\"Every debt collected. A pleasure doing business, stranger.",
+        "What you seek lies beneath the water in the Hidden Glade.\""
+      ]
     },
     "favour_choice": "Panda's favour",
     "items": {
