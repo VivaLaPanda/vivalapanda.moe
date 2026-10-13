@@ -82,7 +82,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
                     │                ├─ A Late Cafe
                     │                ├─ Pumpo Park (lanterns; a rave flyer) ─ Summer Festival (goldfish, ring toss) ─ Shrine (ema) ─ Under the Bridge
-                    │                ├─ Residential ─┬─ Konbini
+                    │                ├─ Residential ─┬─ Konbini · Neko no Ma (cat cafe)
                     │                │               └─ Houses ─┬─ the girl under the streetlight ─ Acacia Apartments
                     │                │                          │      ─┬─ the Roof (stars, fireworks, the ending)
                     │                │                          │       └⇢ (the cat) Back Passage ─ Old House ─ its room
@@ -113,7 +113,7 @@ Loops: Shrine → Forest Edge; Old House's garden → Shrine; the Old House's wi
 stall → Rabu Rabu; Game Centre → Club Polka; Bookshop → Residential; Harbour → Otojima; Aquarium → Beach;
 Riverboat → Hidden Glade; Campfire → Hidden Glade. Drawn for the city (FAL from a neighbouring picture, quantized to 16
 inks): the ramen stall, game centre, roof, aquarium, net cafe, coin laundry, karaoke box, the empty bridge the
-train crosses, the observatory, the last train, the lighthouse, the fox gates, and the residential street without the girl.
+train crosses, the observatory, the last train, the lighthouse, the fox gates, the cat cafe, and the residential street without the girl.
 
 Threads that cross the city (flags in localStorage `pandaHeard_*`; Panda's notebook in your pockets tracks them;
 letters arrive in the living room after some of them): Sabrina ⇄ Tony (a note and a coaster); Sakura → Andy (a

@@ -255,6 +255,7 @@ var LOCATIONS = {
         title: "Residential District", image: "../img/explore/pathways/night_residential.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
         links: [
+            { to: "?loc=catcafe", rect: [560, 160, 120, 160] },   // a warm window behind the wall: cats in it
             { to: "?loc=nightresidential2", rect: [264, 398, 246, 47] },
             { to: "?loc=konbini", rect: [168, 184, 113, 223] }   // the shop glowing on the left
         ]
@@ -354,6 +355,17 @@ var LOCATIONS = {
             { to: "?loc=shrine", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "girl", rect: [146, 211, 79, 79] }, { id: "river", rect: [300, 300, 440, 178] }]
+    },
+    // drawn for the city (FAL, quantized); the cats are in the picture, each one clickable
+    "catcafe": {
+        title: "Neko no Ma", image: "../img/explore/places/cat_cafe.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-neptune.mp3",
+        links: [
+            { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "calico", rect: [30, 140, 90, 70] }, { id: "grey", rect: [280, 130, 80, 70] },
+                  { id: "smallginger", rect: [150, 205, 70, 55] }, { id: "ginger", rect: [200, 310, 110, 70] },
+                  { id: "white", rect: [490, 220, 100, 110] }, { id: "cream", rect: [590, 400, 120, 78] }]
     },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",

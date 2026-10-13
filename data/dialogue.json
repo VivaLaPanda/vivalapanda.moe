@@ -970,6 +970,16 @@
               "say": [
                 "\"Past the campfire, there are red gates. Wear a fox's face and the foxes might show theirs.\""
               ]
+            },
+            {
+              "keys": [
+                "cafe",
+                "cats",
+                "neko"
+              ],
+              "say": [
+                "\"Neko no Ma, by the konbini. Six cats. Bring fish and you'll never pay for coffee again.\""
+              ]
             }
           ]
         }
@@ -4697,6 +4707,154 @@
       "linger": [
         "A breeze runs through the gates, all the way up the hill and back."
       ]
+    },
+    "catcafe": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "A cat cafe! Six cats, zero interest in us. Perfect."
+      ],
+      "greeting_after": [
+        {
+          "need": "cat_fed",
+          "greeting": [
+            "A cat cafe! ...Wait, that black cat on the windowsill. It's ours. It visits, apparently."
+          ]
+        }
+      ],
+      "objects": {
+        "calico": {
+          "name": "Calico",
+          "click": [
+            "A calico on the very top of the cat tower, surveying her kingdom."
+          ],
+          "choices": [
+            {
+              "label": "Pet",
+              "pick": [
+                "She allows exactly one pat. Then she turns her back. Audience over.",
+                "She headbutts your hand. You have been chosen."
+              ]
+            },
+            {
+              "label": "Leave it be"
+            }
+          ]
+        },
+        "grey": {
+          "name": "Grey tabby",
+          "click": [
+            "A grey tabby on the shelf, pretending to be a bookend."
+          ],
+          "choices": [
+            {
+              "label": "Pet",
+              "pick": [
+                "He doesn't move a muscle. Purring, though. Definitely purring.",
+                "He knocks a book off the shelf, looking right at you."
+              ]
+            },
+            {
+              "label": "Leave it be"
+            }
+          ]
+        },
+        "smallginger": {
+          "name": "Little ginger",
+          "click": [
+            "A little ginger cat curled on a cushion on the shelf, one eye open."
+          ],
+          "choices": [
+            {
+              "label": "Pet",
+              "pick": [
+                "Mew. (It's very small. Your heart can't take it.)",
+                "It attacks your sleeve with its whole body. Ferocious."
+              ]
+            },
+            {
+              "label": "Leave it be"
+            }
+          ]
+        },
+        "ginger": {
+          "name": "Ginger",
+          "click": [
+            "A big ginger cat flat out on a cushion, belly to the ceiling."
+          ],
+          "choices": [
+            {
+              "label": "Pet",
+              "pick": [
+                "You touch the belly. Big mistake. Huge. (It was worth it.)",
+                "He stretches so long he's twice the size. Then flops back."
+              ]
+            },
+            {
+              "label": "Leave it be"
+            }
+          ]
+        },
+        "white": {
+          "name": "White cat",
+          "click": [
+            "A white cat mid-stretch, back legs out, very serious about it."
+          ],
+          "choices": [
+            {
+              "label": "Pet",
+              "pick": [
+                "She finishes the stretch first. Then accepts pets. Priorities.",
+                "Mrrp? She follows you for exactly three steps, then forgets."
+              ]
+            },
+            {
+              "label": "Leave it be"
+            }
+          ]
+        },
+        "cream": {
+          "name": "Fluffy cream",
+          "click": [
+            "A cloud of cream fur asleep in the toy basket. There's a cat in there somewhere."
+          ],
+          "choices": [
+            {
+              "label": "Pet",
+              "pick": [
+                "Your hand disappears into the fluff. The fluff purrs.",
+                "It sneezes in its sleep. Somewhere, angels weep."
+              ]
+            },
+            {
+              "label": "Leave it be"
+            }
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Order a cat-shaped latte",
+          "say": [
+            "(The foam is a cat face. You can't bring yourself to drink it. ...You drink it.)"
+          ]
+        }
+      ],
+      "accepts": {
+        "mackerel": {
+          "label": "Offer the cats the mackerel",
+          "take": true,
+          "say": [
+            "Six cats teleport to your feet at once. The mackerel is gone in four seconds.",
+            "You are, briefly, the most popular person in Pandopolis."
+          ]
+        },
+        "yoyo": {
+          "label": "Bounce the water yo-yo",
+          "say": [
+            "Six heads follow the yo-yo up and down. The kitten falls off the shelf. It's fine."
+          ]
+        }
+      }
     }
   },
   "house_key": {
