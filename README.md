@@ -77,7 +77,7 @@ where one is drawn, and the bottom edge of the picture (behind you) back to the 
 ```
 Home ─ Main Street ─┬─ Casino (pans; roulette)
                     ├─ Tokugawa Tower lobby (a lift) ─┬─ Penthouse (watch the city; telescope)
-                    │                                  ├─ B1 car park (a warm car)
+                    │                                  ├─ B1 car park (a warm car), 3F gallery
                     │                         └─ Tower Bar (drinks)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
                     │                ├─ Pumpo Park (lanterns) ─ Summer Festival (goldfish, ring toss) ─ Shrine
@@ -91,7 +91,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop ─ Lily Field
                     │                                                 ─ Campfire ─ ↺ Hidden Glade
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
-                                       ├─ Club Polka (dance) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
+                                       ├─ Club Polka (dance; Ruri's back room: high-low) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
                                        ├─ Crossing ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                        └─ Otojima Station ─ Half Pipe ─ Beach
                                        │                                           ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium

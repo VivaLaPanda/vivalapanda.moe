@@ -38,6 +38,7 @@ var LOCATIONS = {
         title: "Club Polka", image: "../img/explore/places/club.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/control-your-music.mp3",
         links: [
+            { to: "?loc=cardroom", rect: [600, 100, 140, 150] },   // a door marked PRIVATE, behind the lights
             { to: "?loc=partystreet", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "floor", rect: [166, 217, 415, 170] }]
@@ -260,6 +261,26 @@ var LOCATIONS = {
             { to: "frontdesk.html", rect: [0, 478, 420, 50] }
         ],
         objects: [{ id: "bluecar", rect: [430, 300, 230, 228] }, { id: "redcar", rect: [170, 280, 260, 140] }]
+    },
+    // behind the door marked PRIVATE at the back of Club Polka: Ruri's table (high-low in js/explore-play.js)
+    "cardroom": {
+        title: "A Back Room", image: "../img/explore/places/day_tavernlady.png", pos: "center",
+        holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/kavinsky-nightcall.mp3",
+        links: [
+            { to: "?loc=club", rect: [560, 0, 180, 300] },   // back down the stairs
+            { to: "?loc=club", rect: [0, 478, 640, 50] }
+        ]
+    },
+    // floor 3 of Tokugawa Tower (the lift)
+    "gallery": {
+        title: "Tokugawa Gallery", image: "../img/explore/places/gallery.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        links: [
+            { to: "frontdesk.html", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "dots", rect: [313, 255, 85, 94] }, { id: "nude", rect: [436, 279, 141, 57] },
+                  { id: "ufo", rect: [625, 260, 66, 94] }, { id: "big", rect: [31, 0, 160, 349] },
+                  { id: "visitors", rect: [500, 340, 110, 110] }]
     },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",

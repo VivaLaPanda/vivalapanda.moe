@@ -1267,6 +1267,13 @@
               "go": "towerbar.html"
             },
             {
+              "label": "3F, the gallery",
+              "say": [
+                "(The lift opens onto polished floors and very quiet people.)"
+              ],
+              "go": "explore.html?loc=gallery"
+            },
+            {
               "label": "12F, METR",
               "href": "https://metr.org"
             },
@@ -2642,6 +2649,97 @@
           ]
         }
       }
+    },
+    "cardroom": {
+      "speaker": "R u r i",
+      "greeting": [
+        "\"Well, well. Lost, kid? Or looking for a game?\""
+      ],
+      "menu": [
+        {
+          "label": "Play high-low",
+          "action": "highlow"
+        },
+        {
+          "label": "Ask about Ruri",
+          "pick": [
+            "\"I used to deal at the casino. Then I started winning. Now I deal here.\"",
+            "\"Johnny and I go way back. He owes me. Everyone in this town owes me.\"",
+            "\"The man in the hat plays here Tuesdays. Never takes the hat off. Never loses.\""
+          ]
+        }
+      ],
+      "play": {
+        "highlow": {
+          "first": "(Ruri flips a card: {card}.) \"Higher or lower?\"",
+          "higher": "Higher",
+          "lower": "Lower",
+          "fold": "Fold",
+          "right": "(Next card: {card}.) \"Hm. Lucky.\"",
+          "again": "\"Again?\"",
+          "wrong": "(Next card: {card}.) \"Ooh. Bad luck, kid.\"",
+          "folded": "\"Smart. Knowing when to walk away is the whole game.\"",
+          "won": [
+            "\"Three in a row. Fine.\" (She flicks you a card.) \"Keep the ace. You'll need it.\""
+          ]
+        }
+      }
+    },
+    "gallery": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "The tower has an art gallery on floor three. Open late, for some reason."
+      ],
+      "objects": {
+        "dots": {
+          "name": "Painting of dots",
+          "lines": [
+            "Seven coloured dots on white. The card says it's called 'Commute'."
+          ]
+        },
+        "nude": {
+          "name": "A landscape",
+          "lines": [
+            "A long, warm landscape. Sand, maybe. Or a person sleeping. Hard to say."
+          ]
+        },
+        "ufo": {
+          "name": "Painting of a UFO",
+          "lines": [
+            "A UFO over a mountain. The card says 'Self Portrait'."
+          ]
+        },
+        "big": {
+          "name": "A huge photograph",
+          "lines": [
+            "Blown up so big it's mostly grain. You have to stand way back to see it."
+          ]
+        },
+        "visitors": {
+          "name": "Visitors",
+          "lines": [
+            "A couple, holding hands, very quietly having an opinion."
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Look at the pixel art in the back",
+          "say": [
+            "In the back room: a whole wall of PC-98 style pixel art.",
+            "...Some of it looks a lot like this city."
+          ],
+          "menu": [
+            {
+              "label": "See Panda's pixel art",
+              "href": "https://github.com/VivaLaPanda/pc98-assets"
+            },
+            {
+              "label": "Back to the gallery"
+            }
+          ]
+        }
+      ]
     }
   },
   "house_key": {
@@ -2989,6 +3087,11 @@
       "name": "a lone sock",
       "icon": "sock",
       "look": "A single sock from the rooftop washing line. Its partner must be somewhere."
+    },
+    "ace": {
+      "name": "Ruri's ace",
+      "icon": "ace",
+      "look": "An ace of spades from Ruri. 'You'll need it,' she said. For what?"
     }
   }
 }

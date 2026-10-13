@@ -1061,6 +1061,35 @@
         };
     };
 
+    // ---------- Ruri's high-low: guess the next card; three in a row wins her ace ----------
+
+    PLAY.cardroom = function () {
+        var CARDS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+        function draw(not) { var c; do { c = Math.floor(Math.random() * 13); } while (c === not); return c; }
+        S.actions.highlow = function () {
+            var p = P().highlow, card = draw(-1), streak = 0;
+            function deal(line) {
+                S.say([line], function () {
+                    S.offer([{ label: p.higher, act: function () { guess(1); } }, { label: p.lower, act: function () { guess(-1); } },
+                             { label: p.fold, act: function () { S.say(arr(p.folded), function () { S.home(false); }); } }]);
+                });
+            }
+            function guess(dir) {
+                var next = draw(card), right = (next - card) * dir > 0;
+                card = next;
+                if (!right) { S.say([fill(p.wrong, { card: CARDS[next] })], function () { S.home(false); }); return; }
+                streak++;
+                if (streak >= 3) {
+                    if (!has("ace")) pocket("ace");
+                    S.say([fill(p.right, { card: CARDS[next] })].concat(arr(p.won)), function () { S.home(false); });
+                    return;
+                }
+                deal(fill(p.right, { card: CARDS[next] }) + " " + p.again);
+            }
+            deal(fill(p.first, { card: CARDS[card] }));
+        };
+    };
+
     // ---------- Erratic Errata's staff door: the garden, once you know to ask ----------
 
     PLAY.weirdstore = function () {
