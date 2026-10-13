@@ -214,7 +214,7 @@
             document.removeEventListener("keydown", key, true);
             o.box.remove();
             if (ringers >= 2) pocket("fox_mask");
-            S.say(arr(ringers >= 2 ? p.won : ringers === 1 ? p.close : p.none), function () { S.offer(menuOf(R.said.menu)); });
+            S.say(arr(ringers >= 2 ? p.won : ringers === 1 ? p.close : p.none), function () { S.home(false); });
         }
         function toss() {
             if (flying || rings <= 0 || over) return;
@@ -558,7 +558,7 @@
             S.stage.appendChild(flash);
             setTimeout(function () { flash.remove(); }, 450);
             pocket("sticker");
-            S.say(arr(p.printed), function () { S.offer(menuOf(R.said.menu)); });
+            S.say(arr(p.printed), function () { S.home(false); });
         });
     }
 
@@ -586,7 +586,7 @@
             document.removeEventListener("keydown", key, true);
             o.box.remove();
             if (item) pocket(item);
-            S.say(lines, function () { S.offer(menuOf(R.said.menu)); });
+            S.say(lines, function () { S.home(false); });
         }
         function reel() {
             var now = performance.now();
@@ -988,7 +988,7 @@
                     done = true;
                     document.removeEventListener("pointerdown", up, true);
                     if (was) m.play().catch(function () {});
-                    S.say([p.stand], function () { S.offer(menuOf(R.said.menu)); });
+                    S.say([p.stand], function () { S.home(false); });
                 }
                 setTimeout(up, 20000);
                 setTimeout(function () { document.addEventListener("pointerdown", up, true); }, 400);
@@ -1005,10 +1005,10 @@
         }).catch(function () { books = []; });
         S.actions.recommend = function () {
             var p = P();
-            if (!books || !books.length) { S.say(arr(p.no_books), function () { S.offer(menuOf(R.said.menu)); }); return; }
+            if (!books || !books.length) { S.say(arr(p.no_books), function () { S.home(false); }); return; }
             var b = books[Math.floor(Math.random() * books.length)];
             var title = b.title.replace(/\s*\(.*\)$/, "").split(":")[0];
-            S.say([fill(p.recommend, { title: title, author: b.author })], function () { S.offer(menuOf(R.said.menu)); });
+            S.say([fill(p.recommend, { title: title, author: b.author })], function () { S.home(false); });
         };
     };
 
@@ -1180,7 +1180,7 @@
             if (c.cycle) return { label: c.label, act: function () {   // the next of its lines each time, remembered
                 var key = "pandaCycle_" + place + "_" + c.label, i = +(get(key) || 0);
                 put(key, Math.min(i + 1, c.cycle.length - 1));
-                S.say(arr(c.cycle[i]), function () { S.offer(menuOf(R.said.menu)); });
+                S.say(arr(c.cycle[i]), function () { S.home(false); });
             } };
             if (!c.say && !c.pick) return c;
             return { label: c.label, act: function () {
@@ -1192,7 +1192,7 @@
                 if (c.serve && P().stamps) lines = lines.concat(stamp());
                 S.say(lines, function () {
                     if (c.go) location.href = c.go;   // shown through somewhere
-                    else S.offer(menuOf(R.said.menu));
+                    else S.home(false);
                 });
             } };
         });
@@ -1276,7 +1276,7 @@
             lens.style.backgroundImage = "url(" + v.src + ")";
             lens.style.backgroundPosition = v.pos || "center";
             S.stage.appendChild(lens);
-            function away(e) { if (e) e.stopPropagation(); lens.remove(); S.say(arr(p.away), function () { S.offer(menuOf(R.said.menu)); }); }
+            function away(e) { if (e) e.stopPropagation(); lens.remove(); S.say(arr(p.away), function () { S.home(false); }); }
             lens.addEventListener("click", away);
             S.say(arr(v.say), function () { S.offer([{ label: p.stop, act: away }]); });
         };
@@ -1307,7 +1307,7 @@
 
     // what a place and its objects accept: a "Give..." choice for each thing you're carrying that they'd take
     (R.afterGreeting = R.afterGreeting || []).push(function () {
-        return givesFor(R.said && R.said.accepts, function () { S.offer(R.said.menu ? menuOf(R.said.menu) : []); });
+        return givesFor(R.said && R.said.accepts, function () { S.home(false); });
     });
     R.objects.concat(R.knickKnacks || []).forEach(function (o) {
         var own = o.choices;   // a menu made here (a function), or the dialogue's own

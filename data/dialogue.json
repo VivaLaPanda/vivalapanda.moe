@@ -624,7 +624,76 @@
             "\"You've got connections, stranger. I'm impressed.\""
           ]
         }
-      }
+      },
+      "menu": [
+        {
+          "label": "Ask about someone",
+          "say": [
+            "\"Who are we talking about, stranger?\""
+          ],
+          "menu": [
+            {
+              "label": "Sabrina",
+              "say": [
+                "\"Sabrina used to pour for Tony up at the tower, then left to open Rabu Rabu.",
+                "They still trade notes. Through customers, mostly.\"",
+                "\"That one's on the house.\""
+              ]
+            },
+            {
+              "label": "Tony",
+              "say": [
+                "\"Tony's poured at the tower since before it had forty floors.",
+                "The man in the hat is his oldest regular. Never seen him leave.\"",
+                "\"That one's on the house.\""
+              ]
+            },
+            {
+              "label": "Taisho",
+              "say": [
+                "\"Taisho feeds the old house cat every night. He thinks it's a secret. It isn't.\"",
+                "\"That one's on the house.\""
+              ]
+            },
+            {
+              "label": "Andy",
+              "say": [
+                "\"Andy plays Namba Bears on Thursdays. Never turns around on stage, either.",
+                "Sakura keeps his gear alive.\"",
+                "\"That one's on the house.\""
+              ]
+            },
+            {
+              "label": "Sakura",
+              "say": [
+                "\"Sakura can fix anything with a battery in it. Andy owes her about forty favours.\"",
+                "\"That one's on the house.\""
+              ]
+            },
+            {
+              "label": "Brownie",
+              "say": [
+                "\"Brownie's grandfather dug the bathhouse well. Brownie's never once raised the price.\"",
+                "\"That one's on the house.\""
+              ]
+            },
+            {
+              "label": "The cat",
+              "say": [
+                "\"That cat runs half the neighbourhood. Weakness: mackerel. Fresh, off Otojima's pier.\"",
+                "\"That one's on the house.\""
+              ]
+            },
+            {
+              "label": "37",
+              "say": [
+                "\"Thirty-seven runs the tower desk. It's a name, not a number. Ask him about floor 12.\"",
+                "\"That one's on the house.\""
+              ]
+            }
+          ]
+        }
+      ]
     },
     "casino": {
       "speaker": "P a n d a",

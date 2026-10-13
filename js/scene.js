@@ -647,7 +647,7 @@
     function status(line) { stopTyping(); text.textContent = line; }
 
     var SCENE = window.SCENE = { say: say, offer: offer, ask: ask, lines: lines, actions: {}, status: status,
-                                 toIdle: toIdle, stage: stage, placeNative: placeNative };
+                                 toIdle: toIdle, home: home, stage: stage, placeNative: placeNative };
 
     // a room's own setup (R.ready: the living room loads its scene first) and the lines, then the room
     Promise.all([
