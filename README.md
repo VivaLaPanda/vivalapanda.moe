@@ -87,6 +87,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
                                                  │              ├─ Namba Bears (song requests) ─ Bathhouse ─ inner bath
                                                  ├─ Ghandi's ─ Rabu Rabu (drinks)
+                                                 └─ Ramen stall (Taisho; drawn for the city) ─ recipes
 ```
 
 **The house key.** Visitors who find Panda's spare key can switch the living room's lamps, blinds and AC on and off

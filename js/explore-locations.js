@@ -255,8 +255,16 @@ var LOCATIONS = {
         links: [
             { to: "?loc=shizukastreet", rect: [483, 214, 67, 87] },
             { to: "?loc=weaponshop", rect: [425, 207, 45, 119] },
-            { to: "?loc=cutiebar", rect: [238, 113, 77, 357] }
+            { to: "?loc=cutiebar", rect: [238, 113, 77, 357] },
+            { to: "?loc=ramen", rect: [522, 308, 110, 220] }
         ]
+    },
+    // drawn for the city: FAL from the Alley's and the festival's pictures, quantized to the Alley's 16 inks
+    "ramen": {
+        title: "A Ramen Stall", image: "../img/explore/places/ramen_yatai.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-settle.mp3",
+        links: [],
+        objects: [{ id: "lantern", rect: [184, 125, 75, 133] }, { id: "stools", rect: [275, 374, 315, 116] }]
     },
     "cutiebar": {
         title: "Rabu Rabu", image: "../img/explore/places/bar_with_cutie.png", pos: "center",

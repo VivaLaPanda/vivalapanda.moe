@@ -1328,6 +1328,75 @@
         "sit": "(You sit by the water. Nobody says anything for a while.)",
         "stand": "...Okay. That was nice."
       }
+    },
+    "ramen": {
+      "speaker": "T a i s h o",
+      "greeting": [
+        "\"Irasshai! Sit, sit. Cold night for it.\""
+      ],
+      "objects": {
+        "lantern": {
+          "name": "Lantern",
+          "lines": [
+            "The lantern says \"ramen.\" It has never needed to say anything else."
+          ]
+        },
+        "stools": {
+          "name": "Stools",
+          "lines": [
+            "Three stools. The middle one wobbles. Everyone knows not to take it."
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Order ramen",
+          "say": [
+            "\"What'll it be?\""
+          ],
+          "menu": [
+            {
+              "label": "Shoyu",
+              "serve": "shoyu",
+              "say": [
+                "\"Shoyu. A classic.\"",
+                "(It's perfect. You drink the broth too. He nods, approving.)"
+              ]
+            },
+            {
+              "label": "Miso",
+              "serve": "miso",
+              "say": [
+                "\"Miso! Good on a cold night.\"",
+                "(The steam fogs up everything for a second.)"
+              ]
+            },
+            {
+              "label": "Whatever you recommend",
+              "serve": "tonkotsu",
+              "say": [
+                "\"Tonkotsu. Twelve hours on the stove.\"",
+                "\"If you don't like it, don't tell me.\""
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Ask about Panda",
+          "pick": [
+            "\"Panda? Comes by after midnight. Writes down everything I say, like it's a recipe.\"",
+            "\"Panda always orders the same thing, then asks how I made it. Every time.\"",
+            "\"Says it all goes in a book. Don't know who'd want to read about my broth.\""
+          ]
+        },
+        {
+          "label": "Find Panda's recipe book",
+          "say": [
+            "\"The book? Round the corner. Tell 'em Taisho sent you.\""
+          ],
+          "go": "/recipes.html"
+        }
+      ]
     }
   },
   "house_key": {

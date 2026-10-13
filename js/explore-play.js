@@ -444,10 +444,11 @@
         });
     }
 
-    function steam(region, inks) {   // wisps rising off water, thinning as they go (dithered, never blended)
+    function steam(region, inks, most) {   // wisps rising off water, thinning as they go (dithered, never blended)
         var puffs = [];
+        most = most || 44;
         ambient(function (ctx, dt, t) {
-            if (puffs.length < 44 && Math.random() < dt * 14) {
+            if (puffs.length < most && Math.random() < dt * most / 3) {
                 puffs.push({ x: rand(region[0], region[0] + region[2]), y: rand(region[1], region[1] + region[3]),
                              age: 0, life: rand(2.5, 4.5), drift: rand(-2, 2), ink: inks[Math.floor(Math.random() * inks.length)] });
             }
@@ -473,7 +474,11 @@
 
     var AMBIENT = {
         forestedge: function () { fireflies([0, 25, 152, 66], 18, "#ffffff", "#99cc66"); },
-        smallbathhouse: function () { steam([0, 64, 185, 28], ["#ffffff", "#bdceff"]); }
+        smallbathhouse: function () { steam([0, 64, 185, 28], ["#ffffff", "#bdceff"]); },
+        ramen: function () {   // off the two pots, either side of the chef (not over his face)
+            steam([80, 62, 17, 3], ["#ffffff", "#ffddcc"], 12);
+            steam([120, 61, 16, 3], ["#ffffff", "#ffddcc"], 12);
+        }
     };
     if (AMBIENT[place]) AMBIENT[place]();
 
@@ -639,7 +644,8 @@
     // changes the music
     var SERVE = {
         cutiebar: { prefix: "rabu-", rect: [179, 258, 26, 50] },
-        towerbar: { prefix: "tower-", rect: [459, 214, 17, 17] }
+        towerbar: { prefix: "tower-", rect: [459, 214, 17, 17] },
+        ramen: { prefix: "ramen-", rect: [412, 286, 30, 13] }
     };
     var served = null;
 
