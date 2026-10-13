@@ -3862,6 +3862,10 @@
           "say": [
             "\"My secret?\" (He leans in.) \"Laugh louder than the trains!\" (He does.)"
           ]
+        },
+        {
+          "label": "Challenge Gonta to jan-ken-pon",
+          "action": "janken"
         }
       ],
       "accepts": {
@@ -3876,7 +3880,29 @@
       },
       "greeting_regular": [
         "\"MY FAVOURITE CUSTOMER! Your seat's been waiting! Nobody else is allowed in it!\""
-      ]
+      ],
+      "play": {
+        "janken": {
+          "ready": [
+            "\"JAN-KEN?! Loser buys the yakitori! Ready?!\""
+          ],
+          "hands": {
+            "rock": "Rock",
+            "paper": "Paper",
+            "scissors": "Scissors"
+          },
+          "thrown": "(You throw {you}. Gonta throws {him}.)",
+          "draw": "\"AIKO DE SHO! Again! AGAIN!\"",
+          "you_win": [
+            "\"NOOO! Beaten! By a customer!\"",
+            "\"Yakitori's on me! Everybody hear that? ON ME!\""
+          ],
+          "he_wins": [
+            "\"HA! VICTORY!\" (He does a lap of the counter.)",
+            "\"...Ah, put your wallet away. First one's still on me.\""
+          ]
+        }
+      }
     },
     "nightcafe": {
       "speaker": "P a n d a",

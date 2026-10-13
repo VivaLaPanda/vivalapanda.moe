@@ -1177,6 +1177,21 @@
         });
     };
 
+    // jan-ken-pon with Gonta: loser buys the yakitori; he takes it very seriously
+    S.actions.janken = function () {
+        var p = P().janken, hands = ["rock", "paper", "scissors"];
+        function throwHand(mine) {
+            var his = Math.floor(Math.random() * 3), r = (mine - his + 3) % 3;   // 0 draw, 1 you win, 2 he wins
+            var line = fill(p.thrown, { you: p.hands[hands[mine]], him: p.hands[hands[his]] });
+            if (r === 0) { S.say([line, p.draw], offerHands); return; }
+            S.say([line].concat(arr(r === 1 ? p.you_win : p.he_wins)), function () { S.home(false); });
+        }
+        function offerHands() {
+            S.offer(hands.map(function (h, i) { return { label: p.hands[h], act: function () { throwHand(i); } }; }));
+        }
+        S.say(arr(p.ready), offerHands);
+    };
+
     // Izakaya Gonta, under the tracks: every so often a train goes over and the whole place shakes
     PLAY.izakaya = function () {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
