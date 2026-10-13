@@ -1296,6 +1296,15 @@
 
     if (PLAY[place]) PLAY[place]();
 
+    // the city notices when you're here: a place can greet you differently in the rain (greeting_rain) or in the
+    // small hours by your own clock (greeting_late, midnight to five)
+    R.greeting = function () {
+        var d = R.said || {}, h = new Date().getHours();
+        if (d.greeting_rain && RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) return d.greeting_rain;
+        if (d.greeting_late && h < 5) return d.greeting_late;
+        return d.greeting;
+    };
+
     // what a place and its objects accept: a "Give..." choice for each thing you're carrying that they'd take
     (R.afterGreeting = R.afterGreeting || []).push(function () {
         return givesFor(R.said && R.said.accepts, function () { S.offer(R.said.menu ? menuOf(R.said.menu) : []); });

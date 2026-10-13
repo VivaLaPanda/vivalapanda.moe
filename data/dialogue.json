@@ -560,7 +560,13 @@
           "casino": "See that neon sign by the canopy? Some letters don't light up, but the door's real.",
           "done": "You've found everything I know about! ...Probably. This city has a way of growing."
         }
-      }
+      },
+      "greeting_late": [
+        "The middle of the night, and Pandopolis is wide awake. So are we, I guess."
+      ],
+      "greeting_rain": [
+        "Rain on Main Street. Everything's reflecting everything else."
+      ]
     },
     "agency": {
       "speaker": "J o h n n y  U p p e r c u t",
@@ -599,7 +605,10 @@
             ]
           }
         ]
-      }
+      },
+      "greeting_late": [
+        "\"Burning the midnight oil, stranger? So am I. Information never sleeps.\""
+      ]
     },
     "casino": {
       "speaker": "P a n d a",
@@ -750,7 +759,10 @@
       ],
       "play": {
         "cat_bolts": "A cat! Hey, wait up!"
-      }
+      },
+      "greeting_rain": [
+        "Rain on the stairs, rain on the bikes. The cat's probably somewhere dry."
+      ]
     },
     "nightpark": {
       "speaker": "Ｐａｎｄａ",
@@ -790,6 +802,9 @@
       "speaker": "Ｐａｎｄａ",
       "greeting": [
         "This part of a town is a blast! Just don't accept any mysterious packages from strangers..."
+      ],
+      "greeting_rain": [
+        "Even in the rain, Isogashii Boulevard won't slow down."
       ]
     },
     "stationcrossing": {
@@ -847,6 +862,9 @@
       "speaker": "P a n d a",
       "greeting": [
         "Ah, now we're exploring properly"
+      ],
+      "greeting_rain": [
+        "The neon looks twice as bright in the puddles."
       ]
     },
     "cutiebar": {
@@ -1142,7 +1160,10 @@
             }
           ]
         }
-      }
+      },
+      "greeting_late": [
+        "The city's quieter this late. Just the lights, and the hum."
+      ]
     },
     "nightresidential_girl": {
       "speaker": "Ｐａｎｄａ",
@@ -1404,6 +1425,9 @@
       "greeting": [
         "An old wooden house with the lights on.",
         "The cat just walked right in like it owns the place."
+      ],
+      "greeting_rain": [
+        "The rain's loud on the old roof tiles. The lights are still on inside."
       ]
     },
     "catroom": {
@@ -1478,7 +1502,10 @@
           "It rolls onto its back. This is a trap, isn't it.",
           "SWAT. Yep. It was a trap."
         ]
-      }
+      },
+      "greeting_late": [
+        "The tea's gone cold. The cat hasn't moved an inch."
+      ]
     },
     "otojima": {
       "speaker": "P a n d a",
@@ -1806,7 +1833,13 @@
             "\"The cat from the old house would've fought you for that.\""
           ]
         }
-      }
+      },
+      "greeting_late": [
+        "\"Still up? Good. The broth's best this late.\""
+      ],
+      "greeting_rain": [
+        "\"Get under the awning! Rain makes the broth taste better, you know.\""
+      ]
     },
     "gamecentre": {
       "speaker": "P a n d a",
@@ -1909,7 +1942,10 @@
           "That's three wishes.",
           "The universe owes you, now. Spend them wisely."
         ]
-      }
+      },
+      "greeting_late": [
+        "The roof at this hour. Even the city's asleep. Mostly."
+      ]
     },
     "konbini": {
       "speaker": "C a s h i e r",
@@ -1958,6 +1994,9 @@
             "\"Somebody from the tower bar comes in for milk. Asked me not to tell anyone. Oops.\""
           ]
         }
+      ],
+      "greeting_late": [
+        "\"Irasshai... mase.\" (The cashier stifles a yawn.)"
       ]
     },
     "bookshop": {
@@ -2094,7 +2133,10 @@
             "Three o'clock. It's always three o'clock in here."
           ]
         }
-      }
+      },
+      "greeting_late": [
+        "Net Cafe Noa at an actual three in the morning. It feels right."
+      ]
     }
   },
   "house_key": {
