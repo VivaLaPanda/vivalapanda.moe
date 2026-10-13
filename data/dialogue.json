@@ -3124,6 +3124,21 @@
         {
           "label": "Read the Pandopolis Times",
           "action": "newspaper"
+        },
+        {
+          "label": "Read Panda's column",
+          "say": [
+            "(Page six of the Times: a column by Panda, called \"The Portal\". It's long. It's good.)"
+          ],
+          "menu": [
+            {
+              "label": "Read the whole thing",
+              "href": "https://vlpanda.substack.com"
+            },
+            {
+              "label": "Fold the paper"
+            }
+          ]
         }
       ],
       "greeting_late": [
