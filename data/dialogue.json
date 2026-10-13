@@ -690,6 +690,13 @@
                 "\"Thirty-seven runs the tower desk. It's a name, not a number. Ask him about floor 12.\"",
                 "\"That one's on the house.\""
               ]
+            },
+            {
+              "label": "The man in the hat",
+              "say": [
+                "\"The man in the hat.\" (Johnny goes quiet for a moment.)",
+                "\"Some questions even I don't sell answers to, stranger.\""
+              ]
             }
           ]
         }
@@ -1355,7 +1362,11 @@
             "(He scribbles on a coaster and slides it over.) \"Take that back down to her, would you?\""
           ]
         }
-      }
+      },
+      "greeting_late": [
+        "\"Pull up a stool, friend. Quiet tonight.\"",
+        "\"The fella in the hat stepped out a minute ago. First time in twelve years.\""
+      ]
     },
     "lines": {
       "empty": [
@@ -2136,7 +2147,8 @@
         }
       ],
       "greeting_late": [
-        "\"Irasshai... mase.\" (The cashier stifles a yawn.)"
+        "\"Irasshai... mase.\" (The cashier stifles a yawn.)",
+        "(A man in a hat brushes past on his way out. A melon bread under one arm.)"
       ]
     },
     "bookshop": {
