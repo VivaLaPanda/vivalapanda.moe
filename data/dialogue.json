@@ -1071,6 +1071,22 @@
             "\"The elevator plays the same song every day. Guests have filed complaints. Lovingly.\"",
             "\"The penthouse is booked until further notice, sir. By a cat, oddly.\""
           ]
+        },
+        {
+          "label": "Read the building directory",
+          "say": [
+            "(The directory: B1 parking. 1F the bar. 40F the penthouse, guests only.)",
+            "\"Floor 12 is METR, sir. They're often up late, measuring what AI systems can do.\""
+          ],
+          "menu": [
+            {
+              "label": "Take the lift to floor 12",
+              "href": "https://metr.org"
+            },
+            {
+              "label": "Maybe another time"
+            }
+          ]
         }
       ]
     },
@@ -1754,6 +1770,22 @@
             "\"Panda? Comes by after midnight. Writes down everything I say, like it's a recipe.\"",
             "\"Panda always orders the same thing, then asks how I made it. Every time.\"",
             "\"Says it all goes in a book. Don't know who'd want to read about my broth.\""
+          ]
+        },
+        {
+          "label": "Ask about the other regular",
+          "say": [
+            "\"Panda's husband? Comes in with Panda. Takes notes on everything, same as Panda.\"",
+            "\"They sit right there and compare notes over the broth. Venki, his name is.\""
+          ],
+          "menu": [
+            {
+              "label": "Read Venki's notes",
+              "href": "https://venki.com"
+            },
+            {
+              "label": "Back to the ramen"
+            }
           ]
         },
         {
