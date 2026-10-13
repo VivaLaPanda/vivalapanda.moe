@@ -1471,6 +1471,36 @@
       "speaker": "Ｐａｎｄａ",
       "greeting": [
         "Hey you don't think these people will mind us wandering into their houses right?"
+      ],
+      "menu": [
+        {
+          "label": "Look at the lit windows",
+          "cycle": [
+            [
+              "A kitchen window: someone's washing up, swaying to a radio you can't hear."
+            ],
+            [
+              "An upstairs window: a kid with a torch under the covers, reading. Their secret's safe with you."
+            ],
+            [
+              "A living room: an old couple asleep in front of the TV, holding hands."
+            ],
+            [
+              "A window with a cat in it. Not the black cat. A very round orange one. It stares you down."
+            ]
+          ]
+        },
+        {
+          "label": "Wave at a window",
+          "pick": [
+            "A little kid waves back, very seriously. Then the curtain closes.",
+            "Nobody waves back. A light goes off. Rude, but fair; it's late.",
+            "The round orange cat in the window slowly blinks at you. That counts."
+          ]
+        }
+      ],
+      "linger": [
+        "Somewhere a front door clicks shut. A bicycle bell. Then just crickets."
       ]
     },
     "partystreet": {
