@@ -872,6 +872,13 @@
         });
     }
 
+    // the rooftop ending: the party, plus a line for each thread you closed (dialogue.json play.finale_extra)
+    S.actions.finale = function () {
+        var p = P(), extra = (p.finale_extra || []).filter(function (x) { return heard(x.need); }).map(function (x) { return x.line; });
+        var lines = p.finale.slice(0, -1).concat(extra, p.finale.slice(-1));
+        S.say(lines, function () { S.home(false); });
+    };
+
     PLAY.rooftop = function () {
         shootingStars();
         obj("sky").lines = function () {
