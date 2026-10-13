@@ -968,6 +968,8 @@
         });
     };
 
+    PLAY.ramen = function () { hear("taisho_met"); };
+
     // ---------- Erratic Errata's staff door: the garden, once you know to ask ----------
 
     PLAY.weirdstore = function () {
@@ -1121,6 +1123,11 @@
 
     PLAY.catroom = function () {
         var pets = 0, cat = obj("cat");   // (asleep on the cushion: a layer in explore-locations.js)
+        hear("catroom_seen");
+        obj("tea").lines = function () {   // whose tea? once you've met Taisho, there's a note under the cup
+            var t = R.said.objects.tea;
+            return arr(heard("taisho_met") && t.note ? t.note : t.lines);
+        };
         cat.choices = function () {
             var p = P();
             return [{ label: p.pet_label, act: function () {

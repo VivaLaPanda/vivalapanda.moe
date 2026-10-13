@@ -1569,6 +1569,10 @@
           "name": "Tea",
           "lines": [
             "A teapot and two cups. One's still warm. Someone just stepped out."
+          ],
+          "note": [
+            "A teapot and two cups. Under one cup, a note:",
+            "\"Gone to the stall. If the cat says it hasn't eaten, it's lying. -T\""
           ]
         },
         "tv": {
@@ -1928,6 +1932,15 @@
             {
               "label": "Back to the ramen"
             }
+          ]
+        },
+        {
+          "label": "Ask about the old house",
+          "need": "catroom_seen",
+          "say": [
+            "\"The old wooden house? With the cat?\" (He laughs.)",
+            "\"That's mine. Well. The cat lets me stay there.\"",
+            "\"Leave the door open for me? The cat can't work the latch. Says it can, but it can't.\""
           ]
         },
         {
