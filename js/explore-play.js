@@ -1163,6 +1163,50 @@
         };
     };
 
+    // ---------- the hill observatory: tonight's moon, as it really is ----------
+
+    function moonAge() {   // days since a new moon (synodic month 29.53 days; new moon 2000-01-06 18:14 UTC)
+        var days = (Date.now() - Date.UTC(2000, 0, 6, 18, 14)) / 86400000;
+        return ((days % 29.530589) + 29.530589) % 29.530589;
+    }
+    function moonName(age) {
+        var p = P().moon.phases;
+        return p[Math.floor((age / 29.530589) * 8 + .5) % 8];
+    }
+    function drawMoon(age) {   // a lit disc: the terminator's ellipse moves across as the month goes
+        var cv = document.createElement("canvas"), n = 48, ctx;
+        cv.width = cv.height = n;
+        ctx = cv.getContext("2d");
+        var f = age / 29.530589, k = Math.cos(f * 2 * Math.PI), waxing = f < .5;
+        for (var y = 0; y < n; y++) {
+            for (var x = 0; x < n; x++) {
+                var dx = (x + .5 - n / 2) / (n / 2), dy = (y + .5 - n / 2) / (n / 2);
+                if (dx * dx + dy * dy > 1) continue;
+                var edge = Math.sqrt(1 - dy * dy), t = dx / edge;           // -1 at the left limb, 1 at the right
+                var lit = waxing ? t > k : t < -k;
+                var crater = [[20, 18, 12], [30, 28, 20], [15, 32, 8], [33, 14, 6], [24, 38, 10]].some(function (c) {
+                    return (x - c[0]) * (x - c[0]) + (y - c[1]) * (y - c[1]) < c[2];   // a few seas, like the real one
+                });
+                ctx.fillStyle = lit ? (crater ? "#c8c4b0" : ((x + y) % 2 ? "#f4f0dc" : "#e8e2c8")) : ((x + y) % 2 ? "#1a1a2a" : "#22223a");
+                ctx.fillRect(x, y, 1, 1);
+            }
+        }
+        return cv;
+    }
+    PLAY.observatory = function () {
+        S.actions.moon = function () {
+            var age = moonAge(), view = document.createElement("div"), cv = drawMoon(age);
+            view.className = "play-telescope";
+            view.style.background = "#05050c";
+            cv.style.cssText = "position:absolute;left:50%;top:48%;width:44%;transform:translate(-50%,-50%);image-rendering:pixelated";
+            view.appendChild(cv);
+            S.stage.appendChild(view);
+            function away(e) { if (e) e.stopPropagation(); view.remove(); S.home(false); }
+            view.addEventListener("click", away);
+            S.say([fill(P().moon.seen, { phase: moonName(age), days: Math.round(age) })], function () { S.offer([{ label: P().moon.stop, act: away }]); });
+        };
+    };
+
     // ---------- Erratic Errata's staff door: the garden, once you know to ask ----------
 
     PLAY.weirdstore = function () {

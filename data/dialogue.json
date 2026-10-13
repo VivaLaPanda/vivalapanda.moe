@@ -3235,6 +3235,85 @@
           ]
         }
       ]
+    },
+    "observatory": {
+      "speaker": "P a n d a",
+      "greeting": [
+        "An old observatory up on the ridge. The dome's open, and somebody left the lamp on."
+      ],
+      "objects": {
+        "telescope": {
+          "name": "Telescope",
+          "click": [
+            "A big brass telescope, already pointed at the sky."
+          ],
+          "choices": [
+            {
+              "label": "Look through it",
+              "action": "moon"
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        },
+        "desk": {
+          "name": "Desk",
+          "click": [
+            "A lamp, a thermos of tea, and a notebook of observations."
+          ],
+          "choices": [
+            {
+              "label": "Read the notebook",
+              "cycle": [
+                [
+                  "\"Clear skies. Saw Jupiter's moons. All four. Waved.\""
+                ],
+                [
+                  "\"Cloudy. Drank the tea instead.\""
+                ],
+                [
+                  "\"A shooting star over the apartments. Somebody on the roof saw it too.\""
+                ],
+                [
+                  "\"The festival fireworks again. Couldn't see anything else. Didn't mind.\""
+                ]
+              ]
+            },
+            {
+              "label": "Have some tea",
+              "say": [
+                "(You pour a cup from the thermos. It's still hot. Whoever comes up here plans ahead.)"
+              ]
+            },
+            {
+              "label": "Leave it"
+            }
+          ]
+        },
+        "charts": {
+          "name": "Star charts",
+          "lines": [
+            "Star charts, pinned edge to edge. Someone's drawn a tiny panda next to Ursa Major."
+          ]
+        }
+      },
+      "play": {
+        "moon": {
+          "stop": "Look away",
+          "seen": "Tonight's moon: {phase}. About {days} days since the new moon.",
+          "phases": [
+            "a new moon (it's barely there)",
+            "a waxing crescent",
+            "the first quarter",
+            "a waxing gibbous",
+            "full",
+            "a waning gibbous",
+            "the last quarter",
+            "a waning crescent"
+          ]
+        }
+      }
     }
   },
   "house_key": {

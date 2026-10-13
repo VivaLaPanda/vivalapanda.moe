@@ -75,9 +75,20 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac09.mp3",
         links: [
             { to: "?loc=lilyfield", rect: [0, 380, 260, 95] },
+            { to: "?loc=observatory", rect: [440, 120, 120, 80] },   // a little dome on the far ridge
             { to: "?loc=teaparty", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "view", rect: [0, 120, 440, 200] }, { id: "kids", rect: [470, 330, 170, 110] }]
+    },
+    // drawn for the city (FAL, quantized to its own inks); the telescope shows tonight's real moon (js/explore-play.js)
+    "observatory": {
+        title: "The Hill Observatory", image: "../img/explore/places/observatory.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
+        links: [
+            { to: "?loc=hilltop", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "telescope", rect: [475, 66, 199, 382] }, { id: "desk", rect: [143, 232, 232, 216] },
+                  { id: "charts", rect: [380, 100, 120, 100] }]
     },
     "lilyfield": {
         title: "The Lily Field", image: "../img/explore/pathways/flower_plain.png", pos: "center",
