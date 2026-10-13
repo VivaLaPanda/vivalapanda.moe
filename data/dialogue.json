@@ -2164,7 +2164,19 @@
             "The street's empty tonight. Someone's left a single flower by the wall."
           ]
         }
-      ]
+      ],
+      "accepts": {
+        "hat": {
+          "label": "Leave the hat by the flower",
+          "need": "ghost_free",
+          "take": true,
+          "hear": "hat_left",
+          "say": [
+            "You set the hat down by the wall, next to the single flower.",
+            "The streetlight flickers once, warm, and steadies."
+          ]
+        }
+      }
     },
     "towerbar": {
       "speaker": "T o n y",
@@ -4690,7 +4702,16 @@
             {
               "label": "Just sit"
             }
-          ]
+          ],
+          "accepts": {
+            "hat": {
+              "label": "Show the bartender the hat",
+              "say": [
+                "He looks at the hat for a long moment, then sets a second glass on the bar, next to yours.",
+                "\"For old times.\""
+              ]
+            }
+          }
         },
         "lady": {
           "name": "The lady in red",
