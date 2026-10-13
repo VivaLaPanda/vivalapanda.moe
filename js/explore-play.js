@@ -1745,7 +1745,7 @@
 
     var PHOTO_SPOTS = ["sunset", "rooftop", "penthouse", "festival", "forestglade", "beach", "aquarium", "zengarden",
                        "shrine", "harbour", "hilltop", "lilyfield", "campsite", "lighthouse", "lake", "observatory",
-                       "nighttrain", "karaoke", "inari", "underbridge"];
+                       "nighttrain", "karaoke", "inari", "underbridge", "catcafe", "bar25", "gallery"];
     var EXPOSURES = 24;
     function photos() { try { return JSON.parse(get("pandaPhotos")) || []; } catch (e) { return []; } }
     if (PHOTO_SPOTS.indexOf(place) >= 0) {
