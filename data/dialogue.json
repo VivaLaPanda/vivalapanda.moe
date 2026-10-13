@@ -578,8 +578,7 @@
         }
       },
       "greeting_late": [
-        "Nearly dawn. The neon's starting to look tired. So are we.",
-        "...One more place, though?"
+        "The middle of the night, and Pandopolis is wide awake. So are we, I guess."
       ],
       "greeting_rain": [
         "Rain on Main Street. Everything's reflecting everything else."
@@ -631,7 +630,8 @@
         "A taxi idles at the corner, waiting for nobody in particular."
       ],
       "rare": [
-        "A marching band goes down Main Street! Tubas and all. They turn into an alley and are gone."
+        "A marching band goes down Main Street! Tubas and all. They turn into an alley and are gone.",
+        "Nearly dawn. The neon's starting to look tired. So are we. ...One more place, though?"
       ],
       "greeting_on": {
         "12-25": [
