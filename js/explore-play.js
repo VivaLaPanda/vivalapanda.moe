@@ -1025,8 +1025,17 @@
             var ac = new AC(), out = ac.createGain();
             out.gain.value = 0;
             out.connect(ac.destination);
-            out.gain.linearRampToValueAtTime(kind === "rain" ? .05 : .03, ac.currentTime + 3);
-            if (kind === "rain") {                        // brown-ish noise through a bandpass: rain on pavement
+            var level = kind === "crickets" ? .03 : .05;
+            out.gain.linearRampToValueAtTime(level, ac.currentTime + 3);
+            if (kind === "waves") {                       // low noise swelling and falling, like water on sand
+                var wl = ac.sampleRate * 4, wb = ac.createBuffer(1, wl, ac.sampleRate), wd = wb.getChannelData(0), wlast = 0;
+                for (var wi = 0; wi < wl; wi++) { wlast = (wlast + .02 * (Math.random() * 2 - 1)) / 1.02; wd[wi] = wlast * 3.5; }
+                var ws = ac.createBufferSource(), lp = ac.createBiquadFilter(), swell = ac.createGain(), lfo = ac.createOscillator(), depth = ac.createGain();
+                ws.buffer = wb; ws.loop = true; lp.type = "lowpass"; lp.frequency.value = 500;
+                lfo.frequency.value = .12; depth.gain.value = .5; swell.gain.value = .6;
+                lfo.connect(depth); depth.connect(swell.gain);
+                ws.connect(lp); lp.connect(swell); swell.connect(out); ws.start(); lfo.start();
+            } else if (kind === "rain") {                        // brown-ish noise through a bandpass: rain on pavement
                 var len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0), last = 0;
                 for (var i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; }
                 var src = ac.createBufferSource(), bp = ac.createBiquadFilter();
@@ -1046,12 +1055,13 @@
                 })();
             }
             var mute = document.getElementById("mute");   // the site's speaker button mutes this too
-            if (mute) mute.addEventListener("click", function () { out.gain.value = out.gain.value ? 0 : (kind === "rain" ? .05 : .03); });
+            if (mute) mute.addEventListener("click", function () { out.gain.value = out.gain.value ? 0 : level; });
         }
         ["pointerdown", "keydown"].forEach(function (ev) { document.addEventListener(ev, start, { once: true }); });
     }
     if (RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) soundBed("rain");
     if (place === "campsite") soundBed("crickets");
+    if (["beach", "harbour", "lighthouse", "sunset"].indexOf(place) >= 0) soundBed("waves");
 
     // December (or ?season=winter): snow on the outdoor places, drifting, never in a hurry
     function winter() {
