@@ -1800,7 +1800,24 @@
       },
       "greeting_halloween": [
         "A jack-o'-lantern at a shrine. The gods don't seem to mind."
-      ]
+      ],
+      "menu": [
+        {
+          "label": "Write an ema",
+          "action": "ema"
+        }
+      ],
+      "play": {
+        "ema": {
+          "prompt": [
+            "(You buy a little wooden plaque. Write your wish on it, then press Enter.)"
+          ],
+          "hung": [
+            "(You hang it on the rack with all the others. It clacks against its neighbours in the breeze.)"
+          ],
+          "still": "Your ema's still on the rack, between a hundred others: \"{wish}\""
+        }
+      }
     },
     "backpassage": {
       "speaker": "P a n d a",

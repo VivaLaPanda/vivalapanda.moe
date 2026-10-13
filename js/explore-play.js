@@ -1207,6 +1207,21 @@
         };
     };
 
+    // ---------- the shrine's ema: write a wish on a wooden plaque; it's still hanging next time ----------
+
+    PLAY.shrine = function () {
+        S.actions.ema = function () {
+            var p = P().ema, mine = get("pandaEma");
+            if (mine) { S.say([fill(p.still, { wish: mine })], function () { S.home(false); }); return; }
+            S.ask(arr(p.prompt), function (wish) {
+                wish = wish.trim().slice(0, 60);
+                if (!wish) { S.home(false); return; }
+                put("pandaEma", wish);
+                S.say(arr(p.hung), function () { S.home(false); });
+            });
+        };
+    };
+
     // ---------- Erratic Errata's staff door: the garden, once you know to ask ----------
 
     PLAY.weirdstore = function () {
