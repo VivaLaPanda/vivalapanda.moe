@@ -1216,6 +1216,9 @@
       },
       "greeting_return": [
         "The glade again. Still no sword. The pond's as still as ever."
+      ],
+      "linger": [
+        "...Did something just wave at us from the pond?"
       ]
     },
     "musicianbedroom": {
@@ -2484,6 +2487,9 @@
             "The cat opens one eye when you come in, then closes it again. You're allowed."
           ]
         }
+      ],
+      "linger": [
+        "The cat snores, very quietly. Then louder. Then very quietly again."
       ]
     },
     "otojima": {
@@ -2783,6 +2789,9 @@
             "The garden again. Your goldfish is in the koi pond, small, orange, bossing everyone around."
           ]
         }
+      ],
+      "linger": [
+        "A frog plops into the pond. The koi pretend not to notice."
       ]
     },
     "ramen": {
@@ -3088,6 +3097,9 @@
       ],
       "greeting_winter": [
         "Snow on the roof, and on the folding chair. Somebody brushed off half of it."
+      ],
+      "linger": [
+        "The city hums below. Somewhere a window goes dark, then another lights up."
       ]
     },
     "konbini": {
@@ -3390,6 +3402,9 @@
             ]
           ]
         }
+      ],
+      "linger": [
+        "A jellyfish drifts up and bumps the glass right in front of you. Hello."
       ]
     },
     "netcafe": {
@@ -3780,7 +3795,10 @@
             }
           }
         }
-      }
+      },
+      "linger": [
+        "Somewhere a dryer buzzes. Nobody comes. The sock waits."
+      ]
     },
     "garage": {
       "speaker": "P a n d a",
@@ -4027,7 +4045,10 @@
             }
           ]
         }
-      }
+      },
+      "linger": [
+        "One of them laughs so hard they have to put their fork down."
+      ]
     },
     "karaoke": {
       "speaker": "P a n d a",
@@ -4216,7 +4237,10 @@
             ]
           }
         }
-      }
+      },
+      "linger": [
+        "The dome creaks a little in the wind. The stars don't mind."
+      ]
     },
     "nighttrain": {
       "speaker": "P a n d a",
@@ -4321,6 +4345,9 @@
             ]
           ]
         }
+      ],
+      "linger": [
+        "Flash. Six seconds. Flash. You've started counting along without meaning to."
       ]
     },
     "bar25": {
@@ -4421,7 +4448,10 @@
             }
           ]
         }
-      }
+      },
+      "linger": [
+        "The bartender polishes the same glass. It's been very clean for a while now."
+      ]
     },
     "underbridge": {
       "speaker": "P a n d a",
@@ -4484,6 +4514,9 @@
             "She's writing something in a little notebook. She covers it when she sees you, smiling."
           ]
         }
+      ],
+      "linger": [
+        "She hums something under her breath. The river carries it off."
       ]
     },
     "inari": {
@@ -4525,7 +4558,10 @@
             "It looks at you, then at the mask, then bows its head once. When you blink, it's gone."
           ]
         }
-      }
+      },
+      "linger": [
+        "A breeze runs through the gates, all the way up the hill and back."
+      ]
     }
   },
   "house_key": {
