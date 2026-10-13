@@ -803,6 +803,118 @@
               "say": [
                 "\"Forty-two? No. Ramen, a warm bath, and somebody who'll walk you home.\""
               ]
+            },
+            {
+              "keys": [
+                "karaoke"
+              ],
+              "say": [
+                "\"Purple door by the ramen stall. Somebody always leaves the disco ball on.\""
+              ]
+            },
+            {
+              "keys": [
+                "laundry",
+                "laundromat",
+                "sock",
+                "socks"
+              ],
+              "say": [
+                "\"Coin laundry, off the houses street. Lost socks find each other there. Eventually.\""
+              ]
+            },
+            {
+              "keys": [
+                "lighthouse",
+                "beacon"
+              ],
+              "say": [
+                "\"Otojima harbour. Climb the beacon. Count the seconds between flashes.\""
+              ]
+            },
+            {
+              "keys": [
+                "izakaya",
+                "gonta",
+                "yakitori"
+              ],
+              "say": [
+                "\"Gonta's, under the tracks by the crossing. Hold your drink when the trains go over.\""
+              ]
+            },
+            {
+              "keys": [
+                "gallery",
+                "art"
+              ],
+              "say": [
+                "\"Third floor of the tower. Take the lift. Ask 37.\""
+              ]
+            },
+            {
+              "keys": [
+                "radio"
+              ],
+              "say": [
+                "\"Ghandi has an old one that doesn't work. Sakura at Denchi's fixes anything.\""
+              ]
+            },
+            {
+              "keys": [
+                "sakura",
+                "andy"
+              ],
+              "say": [
+                "\"Sakura fixes things. Andy breaks them, loudly. They get along.\""
+              ]
+            },
+            {
+              "keys": [
+                "sabrina",
+                "tony"
+              ],
+              "say": [
+                "\"Teacher and student. Both too proud to say they miss each other. Carry a note.\""
+              ]
+            },
+            {
+              "keys": [
+                "brownie",
+                "bath",
+                "bathhouse"
+              ],
+              "say": [
+                "\"Brownie never eats during the rush. Taisho knows. Taisho always knows.\""
+              ]
+            },
+            {
+              "keys": [
+                "fish",
+                "fishing",
+                "mackerel"
+              ],
+              "say": [
+                "\"Otojima's pier. The cat at the old house would trade its soul for a mackerel.\""
+              ]
+            },
+            {
+              "keys": [
+                "casino",
+                "roulette",
+                "chips"
+              ],
+              "say": [
+                "\"Under Main Street's neon. The N's out on the sign. The door's real.\""
+              ]
+            },
+            {
+              "keys": [
+                "stamp",
+                "rally"
+              ],
+              "say": [
+                "\"Eight stamps, eight places worth finding. Fill the card, then go up on a roof.\""
+              ]
             }
           ]
         }
