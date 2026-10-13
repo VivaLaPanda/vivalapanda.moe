@@ -849,6 +849,14 @@
       "speaker": "P a n d a",
       "greeting": [
         "It's almost sunrise, perfect time to wander into the mysterious forest!"
+      ],
+      "menu": [
+        {
+          "label": "Listen",
+          "say": [
+            "(Fireflies, crickets, and very far away, the festival drums.)"
+          ]
+        }
       ]
     },
     "forestglade": {
@@ -995,18 +1003,46 @@
       ],
       "greeting_rain": [
         "Even in the rain, Isogashii Boulevard won't slow down."
+      ],
+      "menu": [
+        {
+          "label": "People-watch",
+          "pick": [
+            "A couple sharing one umbrella that's clearly too small. Nobody's complaining.",
+            "A salaryman doing a very confident dance outside the game centre. Respect.",
+            "Someone's handing out tissue packets with ads on them. You take three.",
+            "A street musician playing the station chime on a saxophone. Andy would approve."
+          ]
+        }
       ]
     },
     "stationcrossing": {
       "speaker": "Ｐａｎｄａ",
       "greeting": [
         "Yeah, its normal for it to suddenly become day when you come here, don't worry about it"
+      ],
+      "menu": [
+        {
+          "label": "Wait for the light",
+          "say": [
+            "(You wait for the walking man. Everyone else waits too, even with no traffic.)"
+          ]
+        }
       ]
     },
     "trainplatform": {
       "speaker": "S t a t i o n   A t t e n d a n t",
       "greeting": [
         "\"Please stay behind the yellow line\""
+      ],
+      "menu": [
+        {
+          "label": "Ask about the trains",
+          "pick": [
+            "\"One express to Otojima a day. Always the one you just missed. Stay behind the line.\"",
+            "\"Last train's at midnight. After that, the platform's mine. Stay behind the line.\""
+          ]
+        }
       ]
     },
     "trainwetlands": {
@@ -1054,6 +1090,23 @@
       "greeting": [
         "I uhh, promise this place is definitely legal...",
         "probably."
+      ],
+      "menu": [
+        {
+          "label": "Browse the surplus",
+          "pick": [
+            "A gas mask someone's turned into a planter. There's a cactus in it. It's thriving.",
+            "A crate of army-green thermoses. Nobody knows which army.",
+            "A field radio that only picks up one station. It's playing enka.",
+            "A tent, still in the bag, labelled \"for two (small) people\"."
+          ]
+        },
+        {
+          "label": "Ask Ghandi what's new",
+          "say": [
+            "\"New? Nothing's new here. That's the point. Everything's had a life already.\""
+          ]
+        }
       ]
     },
     "nightalley": {
@@ -1063,6 +1116,15 @@
       ],
       "greeting_rain": [
         "The neon looks twice as bright in the puddles."
+      ],
+      "menu": [
+        {
+          "label": "Follow your nose",
+          "say": [
+            "The air smells like grilled meat, rain, and somebody's perfume.",
+            "...Ramen. Definitely ramen. That way."
+          ]
+        }
       ]
     },
     "cutiebar": {
