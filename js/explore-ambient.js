@@ -413,7 +413,63 @@
         });
     }
 
+    // the last train's windows: lights outside come out of the carriage's vanishing point (the far door) and run along
+    // the wall's perspective toward you, growing and speeding up as they pass. Drawn under the picture, so only the
+    // glass shows them (without motion, the still strip under the windows stays)
+    function trainLights(vp) {   // the vanishing point, canvas px
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        document.addEventListener("scenestart", function () {
+            var strip = S.stage.querySelector("img[src*='night-train-lights']");
+            if (strip) strip.style.visibility = "hidden";
+            var cv = document.createElement("canvas");
+            cv.width = 185;
+            cv.height = 132;
+            cv.className = "play-ambient";
+            cv.style.zIndex = "-1";
+            S.stage.insertBefore(cv, document.getElementById("room-art"));
+            var ctx = cv.getContext("2d"), lights = [], last = performance.now(), due = 0, F = 50;
+            var INKS = ["#ffcc66", "#ffffff", "#ffe9b0", "#88ddff"];
+            var glass = new Image();   // the window panes (from the picture's transparency), so nothing leaks through gaps
+            glass.src = "/img/explore/layers/night-train-glass.png";
+            function at(l, z) { return [vp[0] + F * l.x / z, vp[1] + F * l.y / z]; }
+            (function step(now) {
+                var dt = Math.min(.1, (now - last) / 1000);
+                last = now;
+                if (!document.hidden) {
+                    due -= dt;
+                    if (due <= 0) {   // a light out on the left, somewhere a ray from the vanishing point crosses the glass
+                        var x = -rand(.4, 1.6);
+                        due = rand(.08, .35);
+                        lights.push({ x: x, y: x * rand(-.02, .6), z: 7, ink: INKS[Math.floor(Math.random() * INKS.length)] });
+                    }
+                    ctx.clearRect(0, 0, 185, 132);
+                    lights = lights.filter(function (l) {
+                        l.z -= 1.8 * dt;
+                        var q = at(l, l.z), p = at(l, l.z + .12);   // a streak, longer as it nears
+                        if (l.z < .25 || q[0] < -4) return false;
+                        var n = Math.max(1, Math.ceil(Math.hypot(q[0] - p[0], q[1] - p[1]))), size = l.z < 1 ? 2 : 1;
+                        ctx.fillStyle = l.ink;
+                        for (var i = 0; i <= n; i++) {
+                            ctx.fillRect(Math.round(p[0] + (q[0] - p[0]) * i / n), Math.round(p[1] + (q[1] - p[1]) * i / n), size, size);
+                        }
+                        return true;
+                    });
+                    if (glass.complete && glass.naturalWidth) {
+                        ctx.globalCompositeOperation = "destination-in";
+                        ctx.drawImage(glass, 0, 0);
+                    }
+                    ctx.globalCompositeOperation = "destination-over";   // the night behind the lights
+                    ctx.fillStyle = "#04040a";
+                    ctx.fillRect(0, 0, 185, 132);
+                    ctx.globalCompositeOperation = "source-over";
+                }
+                requestAnimationFrame(step);
+            })(last);
+        });
+    }
+
     var AMBIENT = {
+        nighttrain: function () { trainLights([155, 62]); },   // the far door: (619, 249) in scene px
         underbridge: function () { petals([75, 60, 110, 70], 14); },
         laundromat: function () { tumble([8, 96], 5); },
         campsite: function () { embers([92, 72]); },

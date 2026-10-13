@@ -1242,6 +1242,24 @@
       "objects": {
         "floor": {
           "name": "The dance floor"
+        },
+        "regular": {
+          "name": "A regular",
+          "click": [
+            "A regular nursing a drink. He keeps glancing at a door marked PRIVATE."
+          ],
+          "choices": [
+            {
+              "label": "Ask about the door marked PRIVATE",
+              "say": [
+                "\"Ruri's table. Up the stairs, past the lights.\" He shrugs. \"Tell her you feel lucky.\""
+              ],
+              "go": "?loc=cardroom"
+            },
+            {
+              "label": "Leave him to it"
+            }
+          ]
         }
       },
       "play": {
@@ -1494,6 +1512,13 @@
             "(Plink.) The fountain gurgles, satisfied.",
             "(Plink.) It lands next to a button and a single guitar pick."
           ]
+        },
+        {
+          "label": "Follow the smell of coffee",
+          "say": [
+            "(Past the trees, someone's still making coffee. You follow your nose.)"
+          ],
+          "go": "?loc=nightcafe"
         }
       ]
     },
@@ -1502,7 +1527,15 @@
       "greeting": [
         "Hey you don't think these people will mind us wandering into their houses right?"
       ],
-      "menu": [],
+      "menu": [
+        {
+          "label": "Follow the sound of purring",
+          "say": [
+            "(Behind a wall, a warm window full of cats. The door's round the side.)"
+          ],
+          "go": "?loc=catcafe"
+        }
+      ],
       "linger": [
         "A vending machine hums to itself on the corner. It's the loudest thing here."
       ]
@@ -1537,6 +1570,13 @@
             "Nobody waves back. A light goes off. Rude, but fair; it's late.",
             "The round orange cat in the window slowly blinks at you. That counts."
           ]
+        },
+        {
+          "label": "Follow the hum of the dryers",
+          "say": [
+            "(A gap in the wall, a light on behind it. Somebody's doing laundry at this hour.)"
+          ],
+          "go": "?loc=laundromat"
         }
       ],
       "linger": [
@@ -1584,6 +1624,13 @@
           "say": [
             "(You wait for the walking man. Everyone else waits too, even with no traffic.)"
           ]
+        },
+        {
+          "label": "Duck under the tracks",
+          "say": [
+            "(Under the railway bridge: a red lantern, a lot of noise, and yakitori smoke.)"
+          ],
+          "go": "?loc=izakaya"
         }
       ],
       "linger": [
@@ -1741,7 +1788,8 @@
           "say": [
             "The air smells like grilled meat, rain, and somebody's perfume.",
             "...Ramen. Definitely ramen. That way."
-          ]
+          ],
+          "go": "?loc=ramen"
         }
       ],
       "linger": [
@@ -2697,6 +2745,13 @@
               "\"Off you go. And hang an ema, if you haven't. The gods like to read.\""
             ]
           ]
+        },
+        {
+          "label": "Take the steps down to the river",
+          "say": [
+            "(Round the back of the shrine, mossy steps go down to the river.)"
+          ],
+          "go": "?loc=underbridge"
         }
       ],
       "play": {
@@ -3091,6 +3146,15 @@
       },
       "linger": [
         "The sun touches the water. For a second the whole sea is orange."
+      ],
+      "menu": [
+        {
+          "label": "Walk along the shore to the harbour",
+          "say": [
+            "(The sand turns to concrete, then a railing, then boats. The harbour lights are on.)"
+          ],
+          "go": "?loc=harbour"
+        }
       ]
     },
     "harbour": {
@@ -3102,6 +3166,13 @@
         {
           "label": "Fish off the pier",
           "action": "fish"
+        },
+        {
+          "label": "Walk along to the pier",
+          "say": [
+            "(You follow the lights along the shore to the old amusement pier.)"
+          ],
+          "go": "?loc=pier"
         }
       ],
       "play": {
@@ -4293,6 +4364,18 @@
           "name": "The view",
           "lines": [
             "Fields, a little road, a mountain. The city feels very far away."
+          ],
+          "choices": [
+            {
+              "label": "Follow the ridge to the little dome",
+              "say": [
+                "(A path runs along the ridge to a small white dome. Its door is open.)"
+              ],
+              "go": "?loc=observatory"
+            },
+            {
+              "label": "Just take in the view"
+            }
           ]
         },
         "kids": {
@@ -4365,6 +4448,17 @@
           "name": "Campfire",
           "lines": [
             "Warm. The sparks go up and up and don't come back."
+          ],
+          "choices": [
+            {
+              "label": "Sit by the fire",
+              "say": [
+                "(You sit. The fire pops. Nobody says anything, and that's fine.)"
+              ]
+            },
+            {
+              "label": "Just warm your hands"
+            }
           ]
         },
         "campers": {
@@ -4374,10 +4468,11 @@
           ],
           "choices": [
             {
-              "label": "Sit by the fire",
+              "label": "Ask about the red gates",
               "say": [
-                "(You sit. The fire pops. Nobody says anything, and that's fine.)"
-              ]
+                "\"Up the hill past the big tree. Red gates, all the way up. Mind the foxes.\""
+              ],
+              "go": "?loc=inari"
             },
             {
               "label": "Ask where they're headed",
@@ -4789,9 +4884,16 @@
           "choices": [
             {
               "label": "A city pop classic",
+              "song": "/audio/plastic-love.mp3",
+              "say": [
+                "(Plastic Love. You hit the key change and the whole room goes quiet. Then it cheers.)"
+              ]
+            },
+            {
+              "label": "A real human bean",
               "song": "/audio/college-electric-youth-real-hero.mp3",
               "say": [
-                "(You sing your heart out. The disco ball approves.)"
+                "(\"...and a real human bean...\" Nobody corrects you. Nobody ever does.)"
               ]
             },
             {
@@ -4878,6 +4980,13 @@
           "say": [
             "(It takes the ferry a long time to get anywhere. Nobody on it seems to mind.)"
           ]
+        },
+        {
+          "label": "Take a boat upriver",
+          "say": [
+            "(An old boatman pats the seat beside him. \"Upriver? Sit down, then.\")"
+          ],
+          "go": "?loc=riverboat"
         }
       ],
       "linger": [

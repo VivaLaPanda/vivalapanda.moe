@@ -242,7 +242,7 @@
         var h = new Date().getHours();
         if ((h >= 2 && h < 4) || /[?&]late\b/.test(location.search)) {   // Bar 25: a door that's only there 2-4am
             document.addEventListener("scenestart", function () {
-                hiddenWay([500, 300, 90, 140], "?loc=bar25", "A door you haven't seen before");
+                hiddenWay([622, 285, 100, 175], "?loc=bar25", "A door you haven't seen before");
                 (function sayWhenFree() {   // after the greeting's done, never over it
                     var arrow = document.getElementById("text-arrow");
                     if ((arrow && !arrow.hidden) || document.getElementById("room-text").textContent.length < 3) { setTimeout(sayWhenFree, 800); return; }

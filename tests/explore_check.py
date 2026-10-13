@@ -5,7 +5,8 @@
 - every click zone (hotspot or play-hit) is mostly reachable (not under another zone or an overlay) and
   no zone covers so much of the picture that it hides what else is there
 - home menus with too many choices
-- the link graph: targets exist, every place has a way out, everything is reachable from Main Street
+- the link graph (exits, and choices that go somewhere): targets exist, every place has a way out, everything
+  is reachable from Main Street
 - every page's asset stamps are current (scripts/build.py --check)
 - every "action" in dialogue.json has code; warns about "play" lines no code reads
 
@@ -59,7 +60,18 @@ def link_graph() -> dict[str, list[str]]:
         links = re.search(r"links: \[(.*?)\n        \]", body, re.S)
         targets = re.findall(r'to: "([^"]+)"', links.group(1)) if links else []
         graph[name] = [t for t in (target_place(t) for t in targets) if t]
+    dialogue = json.loads((REPO / "data/dialogue.json").read_text())["explore"]
+    for name in graph:   # a choice that takes you somewhere ("go") is a way too
+        graph[name] += [t for t in (target_place(g) for g in gos(dialogue.get(name))) if t]
     return graph
+
+
+def gos(x: object) -> list[str]:
+    if isinstance(x, dict):
+        return ([x["go"]] if isinstance(x.get("go"), str) else []) + [g for v in x.values() for g in gos(v)]
+    if isinstance(x, list):
+        return [g for v in x for g in gos(v)]
+    return []
 
 
 def target_place(to: str) -> str | None:
@@ -78,7 +90,7 @@ def check_graph() -> list[str]:
             continue
         seen.add(k)
         todo += graph[k]
-    gated = {"zengarden", "casinolounge", "backpassage", "oldhouse", "catroom", "bar25", "garage", "gallery"}   # reached by a door that opens in play
+    gated = {"casinolounge", "backpassage", "oldhouse", "catroom", "bar25"}   # reached by a door that opens in play
     out += [f"graph: {k} not reachable from mainstreet by links" for k in graph if k not in seen and k not in gated]
     return out
 
@@ -225,18 +237,18 @@ def check_place(browser: Browser, base: str, place: str) -> Result:
         errs: list[str] = []
         # zones with everything moving (an animated overlay could block clicks)
         pg = page(browser, size, base, errs, "no-preference")
-        pg.goto(url(base, place), wait_until="domcontentloaded")
+        load(pg, url(base, place))
         settle(pg, "greeting", Result(place), vp)
         check_zones(pg, res, vp)
         pg.context.close()
         # the words with reduced motion, so lines appear at once instead of typing out
         pg = page(browser, size, base, errs, "reduce")
-        pg.goto(url(base, place), wait_until="domcontentloaded")
+        load(pg, url(base, place))
         home = settle(pg, "greeting", res, vp)
         if vp == "desktop" and len(home) > MAX_CHOICES:
             res.warnings.append(f"{len(home)} choices at home: {home}")
         for label in home[:MAX_CHOICES + 3]:
-            pg.goto(url(base, place), wait_until="domcontentloaded")
+            load(pg, url(base, place))
             if label not in settle(pg, "greeting", Result(place), vp):
                 continue
             if not click_choice(pg, label, base, place):
@@ -254,11 +266,11 @@ def check_place(browser: Browser, base: str, place: str) -> Result:
 
 def check_objects(pg: Page, base: str, place: str, res: Result, vp: str) -> None:
     """Click each thing in the picture that isn't a way out, read what it says, and take its first choice (a game)."""
-    pg.goto(url(base, place), wait_until="domcontentloaded")
+    load(pg, url(base, place))
     settle(pg, "greeting", Result(place), vp)
     ids = pg.eval_on_selector_all(".room-hotspot", "es => es.map(e => e.dataset.id).filter(i => !/^exit/.test(i))")
     for oid in ids:
-        pg.goto(url(base, place), wait_until="domcontentloaded")
+        load(pg, url(base, place))
         settle(pg, "greeting", Result(place), vp)
         try:
             pg.locator(f".room-hotspot[data-id='{oid}']").dispatch_event("click")
@@ -269,6 +281,18 @@ def check_objects(pg: Page, base: str, place: str, res: Result, vp: str) -> None
             settle(pg, f"object {oid} > {got[0]}", res, vp)
 
 
+def load(pg: Page, where: str) -> None:
+    """Go to a page; a choice that goes somewhere may still be navigating, so try again once it has."""
+    for attempt in range(3):
+        try:
+            pg.goto(where, wait_until="domcontentloaded")
+            return
+        except Exception:
+            if attempt == 2:
+                raise
+            pg.wait_for_timeout(500)
+
+
 def worker(base: str, todo: "Queue[str]", out: list[Result]) -> None:
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -277,7 +301,10 @@ def worker(base: str, todo: "Queue[str]", out: list[Result]) -> None:
                 place = todo.get_nowait()
             except Empty:
                 break
-            out.append(check_place(browser, base, place))
+            try:
+                out.append(check_place(browser, base, place))
+            except Exception as e:   # report it and carry on with the other places
+                out.append(Result(place, problems=[f"the check itself failed: {str(e).splitlines()[0]}"]))
         browser.close()
 
 

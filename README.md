@@ -85,7 +85,9 @@ meant to be poked at.
   to see it.
 
 The map (each place's main exits; ⇢ a way that has to be found or unlocked). Every place has a way out: a door
-where one is drawn, and the bottom edge of the picture (behind you) back to the street you came from.
+where one is drawn, and the bottom edge of the picture (behind you) back to the street you came from. Where
+the picture has no door for a place, a choice in the place's menu or on a person offers the way (the plaza's
+smell of coffee, the purring on the residential street, the regular at Club Polka).
 ```
 Home ─ Main Street ─┬─ Casino (pans; roulette) ─ High Rollers' Lounge (the back corridor)
                     ├─ Tokugawa Tower lobby (a lift) ─┬─ B1 car park · 3F gallery · 12F metr.org
@@ -101,10 +103,9 @@ Home ─ Main Street ─┬─ Casino (pans; roulette) ─ High Rollers' Lounge 
                     │                │                          │                     (⇢ 2-4am only: Bar 25)
                     │                │                          ├─ Coin Laundry
                     │                │                          └─ Andy's House
-                    │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ train.html
+                    │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ the stream ─ Riverboat
                     │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop (─ Observatory)
-                    │                                                 ─ Lily Field ─ Campfire ─┬─ ↺ Hidden Glade
-                    │                                                                          └─ Fox Gates ─ ↺ Shrine
+                    │                                                 ─ Lily Field ─ Campfire ─ Fox Gates ─ ↺ Shrine
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
                                        ├─ Club Polka (dance) ─ Ruri's back room (high-low)
                                        ├─ Agency (Johnny: the hunt, rumours, people) ─ Denchi's (symphoslots)
@@ -112,7 +113,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette) ─ High Rollers' Lounge 
                                        │                                                          └─ Otojima (back: the Last Train)
                                        │      ─ Half Pipe (camera) ─ Beach ─ Sunset ─ Harbour (fishing) ─┬─ Lighthouse · Pier (Ferris wheel)
                                        │                                                                   ├─ Aquarium
-                                       │                                                                   └─ Lake ─ Riverboat
+                                       │                                                                   └─ Lake ─ Riverboat ─ ↺ Hidden Glade
                                        └─ Alley ─┬─ Shizuka St ─┬─ Erratic Errata ⇢ (second edition) Hidden Garden
                                                  │              ├─ Net Cafe Noa (Panda's old bookmarks; Dollars BBS)
                                                  │              ├─ Namba Bears (song requests)
@@ -120,8 +121,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette) ─ High Rollers' Lounge 
                                                  ├─ Ghandi's ─ Rabu Rabu (drinks, stamp card)
                                                  └─ Ramen stall (Taisho; venki.com) ─ Karaoke Box
 ```
-Loops: Shrine → Forest Edge; Old House's garden → Shrine; Ramen stall → Rabu Rabu; Harbour → Otojima; Riverboat →
-Hidden Glade; Campfire → Hidden Glade; Fox Gates → Shrine. Drawn for the city (FAL from a neighbouring picture, quantized to 16
+Loops: Harbour → Otojima; Riverboat ↔ Hidden Glade (the stream); Fox Gates → Shrine. Drawn for the city (FAL from a neighbouring picture, quantized to 16
 inks): the ramen stall, game centre, roof, aquarium, net cafe, coin laundry, karaoke box, the empty bridge the
 train crosses, the observatory, the last train, the lighthouse, the fox gates, the cat cafe, the pier, and the residential street without the girl.
 
