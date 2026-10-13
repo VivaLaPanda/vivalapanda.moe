@@ -4221,6 +4221,26 @@
                 "tired"
               ],
               "reply": "Anonymous replies: \"hey. go get some ramen. then sleep. it gets better, promise\""
+            },
+            {
+              "keys": [
+                "lain",
+                "wired",
+                "navi"
+              ],
+              "reply": "Anonymous replies: \"no matter where you go, everyone's connected\""
+            },
+            {
+              "keys": [
+                "mebious"
+              ],
+              "reply": "Anonymous replies: \"it is a mysterious entity. anomalous. shifting. go look\""
+            },
+            {
+              "keys": [
+                "suyu"
+              ],
+              "reply": "Anonymous replies: \"time waits for no one\""
             }
           ]
         }
@@ -4229,7 +4249,8 @@
         "Booth seven. Our booth, now. The chair's still warm from last time."
       ],
       "linger": [
-        "Someone three booths over sighs at a loading screen. Same."
+        "Someone three booths over sighs at a loading screen. Same.",
+        "For a moment every screen in the cafe shows the same word: PRESENT. Then it's gone."
       ],
       "rare": [
         "The power flickers off. Every screen goes black. Then on. Somebody groans about their save."
