@@ -736,6 +736,15 @@
       "greeting": [
         "Wow this seems like a great spot to get murdered.",
         "...Maybe we should leave?"
+      ],
+      "menu": [
+        {
+          "label": "Sit on a bench",
+          "say": [
+            "(You sit for a minute. Little red lights flicker deep in the trees.)",
+            "...Is that music?"
+          ]
+        }
       ]
     },
     "nightplaza": {
@@ -968,6 +977,16 @@
       "speaker": "Brownie",
       "greeting": [
         "\"Welcome to my fine establishment, hope you enjoy yourself\""
+      ],
+      "menu": [
+        {
+          "label": "Ask about the baths",
+          "pick": [
+            "\"Hottest water in the city. My grandfather dug the well himself.\"",
+            "\"Towels are free. Rubber ducks are also free. Please return the rubber ducks.\"",
+            "\"Some nights a black cat sneaks in to sleep by the boiler. I let it.\""
+          ]
+        }
       ]
     },
     "frontdesk": {
@@ -1297,6 +1316,15 @@
       "speaker": "P a n d a",
       "greeting": [
         "Otojima! Last stop. Smell that? Sea air."
+      ],
+      "menu": [
+        {
+          "label": "Check the timetable",
+          "pick": [
+            "One train a day, it says. It's always the one you just missed.",
+            "The timetable has a doodle of a fish in the corner. It's waving."
+          ]
+        }
       ]
     },
     "surfshop": {
