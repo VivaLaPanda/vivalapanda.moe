@@ -5066,6 +5066,15 @@
           "say": [
             "(The foam is a cat face. You can't bring yourself to drink it. ...You drink it.)"
           ]
+        },
+        {
+          "label": "Ask the owner about the black cat",
+          "need": "cat_fed",
+          "hear": "cat_named",
+          "say": [
+            "\"That one? Comes and goes. Taisho calls him Chashu. The shrine lady calls him Kuro.\"",
+            "\"I think he answers to whoever's holding fish.\""
+          ]
         }
       ],
       "accepts": {
@@ -5577,6 +5586,12 @@
             "ruri_beaten"
           ],
           "text": "Beat Ruri at high-low."
+        },
+        {
+          "flags": [
+            "cat_named"
+          ],
+          "text": "Learned the cat's names."
         }
       ],
       "visited": "Places in Pandopolis I've been: {n} of {total}."
