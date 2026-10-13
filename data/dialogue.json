@@ -565,7 +565,33 @@
       "speaker": "P a n d a",
       "greeting": [
         ":cattodance:"
-      ]
+      ],
+      "objects": {
+        "floor": {
+          "name": "The dance floor"
+        }
+      },
+      "play": {
+        "dance": {
+          "intro": "The floor's packed. Think you can keep up?",
+          "play": "Dance!",
+          "watch": "Just vibe",
+          "stop": "Sit down",
+          "how": "Arrow keys (or tap the lanes) when the arrows reach the top. On the beat!",
+          "how_quiet": "Arrow keys (or tap the lanes) when the arrows reach the top. Unmute for the beat!",
+          "ready": "Here it comes...",
+          "status": "{judge}   Combo {combo}",
+          "perfect": "PERFECT",
+          "good": "GOOD",
+          "miss": "MISS",
+          "results": [
+            "{perfect} perfects out of {n}! The crowd's chanting your name. Probably.",
+            "Not bad! You've got moves.",
+            "You danced! That's what counts.",
+            "Was that dancing? Sure. That was dancing."
+          ]
+        }
+      }
     },
     "forestedge": {
       "speaker": "P a n d a",

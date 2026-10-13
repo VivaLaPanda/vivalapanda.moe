@@ -195,6 +195,120 @@
         g.choices = function () { var p = P().goldfish; return [{ label: p.play, act: goldfish }, { label: p.watch }]; };
     };
 
+    // ---------- Club Polka: dance ----------
+
+    var DANCE_BPM = 147, DANCE_OFFSET = .173;   // control-your-music.mp3's beat (measured from the track)
+    var LANES = ["ArrowLeft", "ArrowDown", "ArrowUp", "ArrowRight"];
+    var ARROW = ["....x....", "...xxx...", "..xxxxx..", ".xxxxxxx.", "xxxxxxxxx", "...xxx...", "...xxx...", "...xxx...", "...xxx..."];
+    var LANE_INK = ["#ff44aa", "#55ddff", "#55ddff", "#ff44aa"];
+
+    function dance() {
+        var p = P().dance, o = overlay(), cv = o.cv, ctx = o.ctx, W = cv.width, H = cv.height;
+        var music = document.getElementById("music"), beat = 60 / DANCE_BPM;
+        var t0 = performance.now() / 1000, useMusic = music && !music.paused && music.currentTime > 0;
+        function now() { return useMusic ? music.currentTime : performance.now() / 1000 - t0; }
+        var TRAVEL = 1.5, X0 = 56, LANE_W = 18, TOP = 14;
+        var start = Math.ceil((now() + 2.2 - DANCE_OFFSET) / beat) * beat + DANCE_OFFSET;   // two beats' lead-in
+        var notes = [];
+        for (var i = 0; i < 32; i++) {
+            notes.push({ t: start + i * beat, lane: Math.floor(Math.random() * 4) });
+            if (i > 12 && i % 4 === 3 && i < 31) notes.push({ t: start + (i + .5) * beat, lane: Math.floor(Math.random() * 4) });
+        }
+        var score = { perfect: 0, good: 0, miss: 0 }, combo = 0, flash = [0, 0, 0, 0], last = "", over = false, raf;
+        o.box.style.background = "transparent";
+
+        function judge(text) { last = text; S.status(fill(p.status, { judge: last, combo: combo })); }
+
+        function hit(lane) {
+            var t = now(), best = null;
+            notes.forEach(function (n) {
+                if (!n.done && n.lane === lane && Math.abs(n.t - t) < .2 && (!best || Math.abs(n.t - t) < Math.abs(best.t - t))) best = n;
+            });
+            flash[lane] = .15;
+            if (!best) return;
+            best.done = true;
+            var d = Math.abs(best.t - t);
+            if (d < .07) { score.perfect++; combo++; judge(p.perfect); }
+            else { score.good++; combo++; judge(p.good); }
+        }
+
+        function key(e) {
+            var lane = LANES.indexOf(e.key);
+            if (lane < 0) return;
+            e.preventDefault();
+            e.stopPropagation();
+            if (!e.repeat) hit(lane);
+        }
+        document.addEventListener("keydown", key, true);
+        cv.addEventListener("pointerdown", function (e) {   // phones: tap the lane
+            var x = canvasPoint(cv, e)[0], lane = Math.floor((x - X0) / LANE_W);
+            if (lane >= 0 && lane < 4) hit(lane);
+        });
+
+        function end() {
+            if (over) return;
+            over = true;
+            cancelAnimationFrame(raf);
+            document.removeEventListener("keydown", key, true);
+            o.box.remove();
+            var acc = (score.perfect + score.good * .5) / notes.length;
+            var line = acc >= .9 ? p.results[0] : acc >= .6 ? p.results[1] : acc >= .3 ? p.results[2] : p.results[3];
+            S.say([fill(line, { perfect: score.perfect, n: notes.length })]);
+        }
+
+        function arrow(lane, x, y, ink, outline) {
+            for (var ry = 0; ry < 9; ry++) {
+                for (var rx = 0; rx < 9; rx++) {
+                    // rotate the up arrow into the lane's direction
+                    var sx = rx, sy = ry;
+                    if (lane === 0) { sx = 8 - ry; sy = rx; }
+                    else if (lane === 1) { sx = rx; sy = 8 - ry; }
+                    else if (lane === 3) { sx = ry; sy = 8 - rx; }
+                    if (ARROW[sy][sx] !== "x") continue;
+                    var edge = outline && sx > 0 && sx < 8 && sy > 0 && sy < 8 && ARROW[sy - 1][sx] === "x" && ARROW[sy + 1] &&
+                               ARROW[sy + 1][sx] === "x" && ARROW[sy][sx - 1] === "x" && ARROW[sy][sx + 1] === "x";
+                    if (edge) continue;
+                    ctx.fillStyle = ink;
+                    ctx.fillRect(x + rx, y + ry, 1, 1);
+                }
+            }
+        }
+
+        function step() {
+            var t = now();
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = "rgba(0,0,24,.55)";
+            ctx.fillRect(X0 - 3, 0, LANE_W * 4 + 6, H);
+            for (var l = 0; l < 4; l++) {
+                var lx = X0 + l * LANE_W + 4;
+                flash[l] = Math.max(0, flash[l] - 1 / 60);
+                arrow(l, lx, TOP, flash[l] > 0 ? "#ffffff" : "#8a9ad8", flash[l] <= 0);
+            }
+            var left = 0;
+            notes.forEach(function (n) {
+                if (n.done) return;
+                if (t - n.t > .2) { n.done = true; score.miss++; combo = 0; judge(p.miss); return; }
+                left++;
+                var y = TOP + (n.t - t) / TRAVEL * (H - TOP);
+                if (y < H) arrow(n.lane, X0 + n.lane * LANE_W + 4, Math.round(y), LANE_INK[n.lane], false);
+            });
+            if (!left && t > notes[notes.length - 1].t + .5) { end(); return; }
+            raf = requestAnimationFrame(step);
+        }
+
+        S.say([useMusic ? p.how : p.how_quiet], function () {
+            judge(p.ready);
+            S.offer([{ label: p.stop, act: end }]);
+            raf = requestAnimationFrame(step);
+        });
+    }
+
+    PLAY.club = function () {
+        var f = obj("floor");
+        f.click = function () { return [P().dance.intro]; };
+        f.choices = function () { var p = P().dance; return [{ label: p.play, act: dance }, { label: p.watch }]; };
+    };
+
     // ---------- the stray cat ----------
 
     // img/explore/layers/cat.png: six 16x10 frames, drawn in the apartments' inks (black, rim, yellow eyes)

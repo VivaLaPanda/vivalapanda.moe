@@ -30,7 +30,8 @@ var LOCATIONS = {
     "club": {
         title: "Club Polka", image: "../img/explore/places/club.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/control-your-music.mp3",
-        links: []
+        links: [],
+        objects: [{ id: "floor", rect: [166, 217, 415, 170] }]
     },
     "forestedge": {
         title: "The Edge of the Forest", image: "../img/explore/pathways/forest.png", pos: "center",
