@@ -863,6 +863,7 @@
             return [{ label: p.pet_label, act: function () {
                 S.say(arr(p.pets[pets % p.pets.length]), function () { S.offer(cat.choices()); });
                 pets++;
+                if (pets >= 2) hear("catfriend");   // friends now: it turns up around town (CAT_SPOTS)
             } }, { label: p.leave_label }];
         };
     };
@@ -928,6 +929,27 @@
     (R.afterGreeting = R.afterGreeting || []).push(function () {
         return R.said && R.said.menu ? menuOf(R.said.menu) : null;
     });
+
+    // once you've made friends (petted it at the old house), the cat sometimes turns up sitting around town
+    var CAT_SPOTS = {
+        mainstreet: [210, 485, 35, 22], nightplaza: [318, 462, 31, 19], ramen: [588, 475, 27, 17],
+        shrine: [343, 503, 27, 17], festival: [150, 506, 29, 18]
+    };
+    if (CAT_SPOTS[place] && heard("catfriend") && Math.random() < .4) {
+        document.addEventListener("scenestart", function () {
+            var r = CAT_SPOTS[place], cat = sprite("sit"), visits = (R.lines && R.lines.cat_visits) || ["Mrrp."];
+            S.placeNative(cat, r[0], r[1], r[2], r[3]);
+            cat.setAttribute("role", "button");
+            cat.setAttribute("aria-label", "The cat");
+            S.stage.appendChild(cat);
+            cat.addEventListener("click", function (e) {
+                e.stopPropagation();
+                cat.remove();
+                S.say([visits[Math.floor(Math.random() * visits.length)]]);
+                scamper(sprite("runA"), r[0], r[0] + 260, r[1] + r[3] * .2, r[2], r[3] * .9, 1100);
+            });
+        });
+    }
 
     if (PLAY[place]) PLAY[place]();
 })();

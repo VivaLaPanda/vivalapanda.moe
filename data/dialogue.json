@@ -1030,7 +1030,12 @@
       "backToRoom": "Okay, maybe later.",
       "lookPrompt": "Look at:",
       "copied": "Copied!",
-      "copyFailed": "Hm, that didn't copy."
+      "copyFailed": "Hm, that didn't copy.",
+      "cat_visits": [
+        "It's the cat from the old house! It blinks at you slowly, then trots off.",
+        "Mrrp. (The cat headbutts your leg and leaves. A visit, apparently.)",
+        "The cat again. It's definitely following us. Or we're following it."
+      ]
     },
     "festival": {
       "speaker": "P a n d a",
