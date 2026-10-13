@@ -1858,6 +1858,30 @@
               "say": [
                 "Through a window: a claw machine. The panda's still in there."
               ]
+            },
+            {
+              "src": "/img/explore/places/lighthouse.png",
+              "say": [
+                "Way out past the harbour: the lighthouse. Flash. Six seconds. Flash."
+              ]
+            },
+            {
+              "src": "/img/explore/places/observatory.png",
+              "say": [
+                "A dome on the far hills, open to the sky. Someone else is looking up too."
+              ]
+            },
+            {
+              "src": "/img/explore/places/laundromat.png",
+              "say": [
+                "A coin laundry, all lit up and empty. One machine's still going."
+              ]
+            },
+            {
+              "src": "/img/explore/places/ramen_yatai.png",
+              "say": [
+                "Steam over the Alley. Taisho's still open. Of course he is."
+              ]
             }
           ]
         }
