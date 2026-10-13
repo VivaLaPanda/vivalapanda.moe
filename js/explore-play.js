@@ -1093,6 +1093,16 @@
     // ---------- Johnny's rumours: one at a time, in order, each pointing somewhere ----------
 
     PLAY.agency = function () {
+        S.actions.askjohnny = function () {   // type anything; Johnny answers if he knows the word
+            var p = P().ask;
+            S.ask(arr(p.prompt), function (q) {
+                var words = " " + q.toLowerCase().replace(/[^a-z0-9' ]+/g, " ") + " ", hit = p.topics.filter(function (t) {
+                    return t.keys.some(function (k) { return words.indexOf(" " + k + " ") >= 0; });   // whole words
+                })[0];
+                if (!q.trim()) { S.home(false); return; }
+                S.say(arr(hit ? hit.say : p.unknown[Math.floor(Math.random() * p.unknown.length)]), function () { S.home(false); });
+            });
+        };
         (R.afterGreeting = R.afterGreeting || []).push(function () {
             var p = P();
             if (!p.rumours) return null;

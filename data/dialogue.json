@@ -648,7 +648,164 @@
               "\"That's all I have tonight, stranger. Come back when the city's had time to talk.\""
             ]
           }
-        ]
+        ],
+        "ask": {
+          "prompt": [
+            "\"Name it, stranger.\" (Type what you want to know, then press Enter.)"
+          ],
+          "unknown": [
+            "\"Never heard of it. And I've heard of everything.\"",
+            "\"That one's not in my files. Try asking around.\"",
+            "\"Hm. Ask me again when it's real.\""
+          ],
+          "topics": [
+            {
+              "keys": [
+                "key",
+                "spare",
+                "keys"
+              ],
+              "say": [
+                "\"Panda's spare key? That's my business. Ask me properly: 'Panda's spare key'.\""
+              ]
+            },
+            {
+              "keys": [
+                "cat",
+                "cats"
+              ],
+              "say": [
+                "\"The black cat. Acacia Apartments. Linger, and it comes to you. Bring fish.\""
+              ]
+            },
+            {
+              "keys": [
+                "hat",
+                "hats"
+              ],
+              "say": [
+                "\"The man in the hat. Some questions even I don't sell.\""
+              ]
+            },
+            {
+              "keys": [
+                "ruri",
+                "card",
+                "cards"
+              ],
+              "say": [
+                "\"Ruri deals behind Club Polka. Don't play her for money. Play her for pride.\""
+              ]
+            },
+            {
+              "keys": [
+                "ramen",
+                "taisho"
+              ],
+              "say": [
+                "\"Taisho, off the Alley. Best broth in town. Feeds the old house cat.\""
+              ]
+            },
+            {
+              "keys": [
+                "garden",
+                "errata",
+                "second edition"
+              ],
+              "say": [
+                "\"Errata keeps a second edition under the counter. Only for those who ask.\""
+              ]
+            },
+            {
+              "keys": [
+                "festival",
+                "lantern",
+                "goldfish",
+                "lanterns"
+              ],
+              "say": [
+                "\"Pumpo Park after dark. Follow the lanterns in the trees.\""
+              ]
+            },
+            {
+              "keys": [
+                "train",
+                "otojima",
+                "sea",
+                "beach"
+              ],
+              "say": [
+                "\"Platform 1, all the way to the end. Otojima. Bring a camera.\""
+              ]
+            },
+            {
+              "keys": [
+                "ghost",
+                "girl",
+                "streetlight",
+                "charm",
+                "ghosts"
+              ],
+              "say": [
+                "\"The girl under the streetlight lost something to the sea. The sea gives things back.\""
+              ]
+            },
+            {
+              "keys": [
+                "moon",
+                "star",
+                "observatory",
+                "stars"
+              ],
+              "say": [
+                "\"The hills past the forest's edge. There's an old dome on the ridge.\""
+              ]
+            },
+            {
+              "keys": [
+                "johnny",
+                "you"
+              ],
+              "say": [
+                "\"Me? I'm the one asking the questions, stranger. Usually.\""
+              ]
+            },
+            {
+              "keys": [
+                "panda"
+              ],
+              "say": [
+                "\"Panda? Lives just off Main Street. Knows everyone. Writes everything down.\""
+              ]
+            },
+            {
+              "keys": [
+                "venki"
+              ],
+              "say": [
+                "\"Panda's other half. Takes notes on everything too. They're a matched set.\""
+              ]
+            },
+            {
+              "keys": [
+                "metr",
+                "floor 12"
+              ],
+              "say": [
+                "\"Floor twelve of the tower. They measure what machines can do. They're up late a lot.\""
+              ]
+            },
+            {
+              "keys": [
+                "meaning",
+                "life"
+              ],
+              "say": [
+                "\"Forty-two? No. Ramen, a warm bath, and somebody who'll walk you home.\""
+              ]
+            }
+          ]
+        }
       },
       "greeting_late": [
         "\"Burning the midnight oil, stranger? So am I. Information never sleeps.\""
@@ -765,6 +922,10 @@
               ]
             }
           ]
+        },
+        {
+          "label": "Ask about something specific",
+          "action": "askjohnny"
         }
       ],
       "greeting_return": [
