@@ -2793,6 +2793,58 @@
           ]
         }
       ]
+    },
+    "izakaya": {
+      "speaker": "G o n t a",
+      "greeting": [
+        "\"IRASSHAIIII! Sit down, sit down! First one's on me!\""
+      ],
+      "objects": {
+        "salarymen": {
+          "name": "Salarymen",
+          "lines": [
+            "Two salarymen, ties loosened, arguing about baseball like their lives depend on it."
+          ]
+        }
+      },
+      "menu": [
+        {
+          "label": "Order yakitori",
+          "pick": [
+            "\"Chicken thigh, salt! The best one! Don't argue!\"",
+            "\"Negima! Chicken and leek, the way my grandfather did it!\""
+          ]
+        },
+        {
+          "label": "Order a drink",
+          "say": [
+            "\"One cold one!\" (It arrives before you've finished asking.)"
+          ]
+        },
+        {
+          "label": "Ask about the trains",
+          "pick": [
+            "\"Every train shakes the whole place! Customers say it adds flavour!\"",
+            "\"Seven-fifteen express! Hold your drink!\" (You hold your drink.)"
+          ]
+        },
+        {
+          "label": "Ask Gonta's secret",
+          "say": [
+            "\"My secret?\" (He leans in.) \"Laugh louder than the trains!\" (He does.)"
+          ]
+        }
+      ],
+      "accepts": {
+        "mackerel": {
+          "label": "Give Gonta the mackerel",
+          "take": true,
+          "say": [
+            "\"A MACKEREL! Fresh! Tonight, we feast!\"",
+            "(The whole bar gets a piece. The salarymen stop arguing to applaud.)"
+          ]
+        }
+      }
     }
   },
   "house_key": {

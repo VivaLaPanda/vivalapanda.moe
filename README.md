@@ -92,7 +92,7 @@ Home ─ Main Street ─┬─ Casino (pans; roulette)
                     │                                                 ─ Campfire ─ ↺ Hidden Glade
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
                                        ├─ Club Polka (dance; Ruri's back room: high-low) ─ Agency (Johnny: the hunt, rumours) ─ Denchi's (symphoslots)
-                                       ├─ Crossing ─ Platform 1 ─ On the train ─┬─ train.html
+                                       ├─ Crossing (─ Izakaya Gonta, under the tracks) ─ Platform 1 ─ On the train ─┬─ train.html
                                        │                                        └─ Otojima Station ─ Half Pipe ─ Beach
                                        │                                           ─ Sunset ─ Harbour (fishing) ─┬─ Aquarium
                                        │                                                                         └─ Riverboat

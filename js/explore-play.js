@@ -1042,6 +1042,19 @@
 
     PLAY.ramen = function () { hear("taisho_met"); };
 
+    // Izakaya Gonta, under the tracks: every so often a train goes over and the whole place shakes
+    PLAY.izakaya = function () {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        document.addEventListener("scenestart", function () {
+            (function rumble() {
+                setTimeout(function () {
+                    S.stage.classList.add("play-rumble");
+                    setTimeout(function () { S.stage.classList.remove("play-rumble"); rumble(); }, 1600);
+                }, rand(20000, 40000));
+            })();
+        });
+    };
+
     // Net Cafe Noa: post on the old forum, and somebody, somewhere, still answers
     PLAY.netcafe = function () {
         var booth = obj("booth");

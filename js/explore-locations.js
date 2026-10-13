@@ -283,6 +283,15 @@ var LOCATIONS = {
                   { id: "ufo", rect: [625, 260, 66, 94] }, { id: "big", rect: [31, 0, 160, 349] },
                   { id: "visitors", rect: [500, 340, 110, 110] }]
     },
+    // under the tracks by Isogashii Crossing (trains rumble overhead: js/explore-play.js)
+    "izakaya": {
+        title: "Izakaya Gonta", image: "../img/explore/places/day_izakaya.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/ippatsu-jang-see-you-later.mp3",
+        links: [
+            { to: "?loc=stationcrossing", rect: [0, 478, 640, 50] }
+        ],
+        objects: [{ id: "salarymen", rect: [0, 200, 150, 160] }]
+    },
     "nightresidential2": {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
@@ -322,6 +331,7 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/cosmic-psycho-settle.mp3",
         links: [
             { to: "?loc=trainplatform", rect: [524, 276, 216, 174] },
+            { to: "?loc=izakaya", rect: [280, 215, 60, 90] },   // the shadow under the tracks
             { to: "?loc=partystreet", rect: [0, 478, 640, 50] }   // behind you
         ],
         // the walk signal changes now and then

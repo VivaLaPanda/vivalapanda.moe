@@ -565,3 +565,7 @@
     0% { opacity: 1; transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(4px); opacity: .7; }
     60% { transform: translateX(-2px); } 100% { opacity: 0; transform: translateX(0); }
 }
+
+/* a train going over the izakaya under the tracks */
+.play-rumble { animation: play-rumble .16s steps(2) 10; }
+@keyframes play-rumble { 0% { transform: translate(0, 0); } 50% { transform: translate(1px, 2px); } }
