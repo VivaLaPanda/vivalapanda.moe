@@ -2928,6 +2928,15 @@
       ],
       "rare": [
         "Way out past the waves, something huge surfaces and blows. A whale! Then it's gone."
+      ],
+      "greeting_after": [
+        {
+          "need": "sabrina_shell",
+          "once": true,
+          "greeting": [
+            "The beach. The drink on the table is pink, with a Rabu Rabu umbrella. Someone took a day off."
+          ]
+        }
       ]
     },
     "sunset": {
