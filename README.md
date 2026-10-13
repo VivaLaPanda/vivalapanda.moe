@@ -77,7 +77,8 @@ The map (→ an exit; ⇢ a hidden or unlocked way; ↺ joins somewhere else on 
 Home ─ Main Street ─┬─ Casino (pans; roulette)
                     ├─ Tokugawa Tower lobby ─┬─ Penthouse
                     │                         └─ Tower Bar (drinks)
-                    ├─ Picrew Plaza ─┬─ Pumpo Park (lanterns) ─ Summer Festival (goldfish) ─ Shrine (fortunes) ─ ↺ Forest Edge
+                    ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
+                    │                ├─ Pumpo Park (lanterns) ─ Summer Festival (goldfish) ─ Shrine (fortunes) ─ ↺ Forest Edge
                     │                ├─ Residential (─ Konbini) ─ Houses ─┬─ the girl ─ Acacia Apartments ─┬─ the Roof (shooting stars; drawn)
                     │                │                        │                                 └⇢ (the cat) Back Passage
                     │                │                        │      ─ Old House ─┬─ its room (the cat; pet it)

@@ -1698,6 +1698,29 @@
           ]
         }
       ]
+    },
+    "bookshop": {
+      "speaker": "B o o k s e l l e r",
+      "greeting": [
+        "\"Open till the last train. Mind the stacks.\""
+      ],
+      "menu": [
+        {
+          "label": "Ask for a recommendation",
+          "action": "recommend"
+        },
+        {
+          "label": "Ask what Panda's reading",
+          "say": [
+            "\"Panda? Keeps a list. I'll show you.\""
+          ],
+          "go": "/reading/"
+        }
+      ],
+      "play": {
+        "recommend": "\"Panda gave this one five stars: {title}, by {author}. Couldn't stop talking about it.\"",
+        "no_books": "\"The shelves are being restocked. Come back later?\""
+      }
     }
   },
   "house_key": {

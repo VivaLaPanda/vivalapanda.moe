@@ -140,8 +140,14 @@ var LOCATIONS = {
         links: [
             { to: "?loc=nightpark", rect: [545, 219, 101, 97] },
             { to: "?loc=nightresidential", rect: [659, 319, 85, 127] },
-            { to: "?loc=forestedge", rect: [2, 209, 415, 87] }
+            { to: "?loc=forestedge", rect: [2, 209, 415, 87] },
+            { to: "?loc=bookshop", rect: [415, 204, 130, 87] }   // the little building at the back
         ]
+    },
+    "bookshop": {
+        title: "The Night Bookshop", image: "../img/explore/pathways/night_minilibrary.png", pos: "center",
+        holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
+        links: []
     },
     "nightresidential": {
         title: "Residential District", image: "../img/explore/pathways/night_residential.png", pos: "center",

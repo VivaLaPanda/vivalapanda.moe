@@ -851,6 +851,22 @@
         };
     };
 
+    // ---------- the night bookshop: a book Panda gave five stars (from the reading list, /reading/books.json) ----------
+
+    PLAY.bookshop = function () {
+        var books = null;
+        fetch("/reading/books.json").then(function (r) { return r.json(); }).then(function (d) {
+            books = ((d.shelves && d.shelves.read) || []).filter(function (b) { return b.rating >= 5; });
+        }).catch(function () { books = []; });
+        S.actions.recommend = function () {
+            var p = P();
+            if (!books || !books.length) { S.say(arr(p.no_books), function () { S.offer(menuOf(R.said.menu)); }); return; }
+            var b = books[Math.floor(Math.random() * books.length)];
+            var title = b.title.replace(/\s*\(.*\)$/, "").split(":")[0];
+            S.say([fill(p.recommend, { title: title, author: b.author })], function () { S.offer(menuOf(R.said.menu)); });
+        };
+    };
+
     // ---------- the stray cat ----------
 
     // img/explore/layers/cat.png: six 16x10 frames, drawn in the apartments' inks (black, rim, yellow eyes)
