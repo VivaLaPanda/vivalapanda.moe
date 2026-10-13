@@ -578,7 +578,8 @@
         }
       },
       "greeting_late": [
-        "The middle of the night, and Pandopolis is wide awake. So are we, I guess."
+        "Nearly dawn. The neon's starting to look tired. So are we.",
+        "...One more place, though?"
       ],
       "greeting_rain": [
         "Rain on Main Street. Everything's reflecting everything else."
@@ -3735,7 +3736,8 @@
         "The city hums below. Somewhere a window goes dark, then another lights up."
       ],
       "rare": [
-        "A meteor shower! One, two, five, too many to count. Make a wish? Make all of them."
+        "A meteor shower! One, two, five, too many to count. Make a wish? Make all of them.",
+        "The first grey light of dawn over the skyline. The city's lights go out, one by one."
       ],
       "greeting_on": {
         "08-12": [
