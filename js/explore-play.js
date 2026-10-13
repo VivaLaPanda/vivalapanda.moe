@@ -870,7 +870,27 @@
         });
     }
 
+    // water rushing past a boat: streaks born at the river's vanishing point that grow and spread toward you,
+    // hidden behind the bow (picture px, mapped to the canvas with s and ox)
+    function river(vp, s, ox, bow) {
+        var streaks = [];
+        function at(sx, sy) { return [(sx * s - ox) / 4, sy * s / 4]; }
+        ambient(function (ctx, dt) {
+            if (streaks.length < 40 && Math.random() < dt * 20) streaks.push({ p: 0, lane: rand(-1, 1), v: rand(.35, .55) });
+            streaks = streaks.filter(function (k) { return k.p < 1; });
+            streaks.forEach(function (k) {
+                k.p += k.v * dt * (0.4 + k.p * 1.6);                // slow far away, quick up close
+                var sx = vp[0] + k.lane * (6 + k.p * 70), sy = vp[1] + k.p * k.p * 55;
+                if (sx > bow[0] && sx < bow[1] && sy > bow[2]) return;
+                var c = at(sx, sy), len = 1 + Math.round(k.p * 4);
+                ctx.fillStyle = k.p < .5 ? "#bbbbcc" : "#ffffff";
+                ctx.fillRect(Math.round(c[0]), Math.round(c[1]), len, 1);
+            });
+        });
+    }
+
     var AMBIENT = {
+        riverboat: function () { river([175, 139], 528 / 273, 63.2, [148, 192, 158]); },
         harbour: function () { beacon([37, 43]); },
         trainplatform: function () { headlights([130, 46], 30); },
         forestedge: function () { fireflies([0, 25, 152, 66], 18, "#ffffff", "#99cc66"); },
