@@ -3980,8 +3980,17 @@
         },
         "charts": {
           "name": "Star charts",
-          "lines": [
+          "click": [
             "Star charts, pinned edge to edge. Someone's drawn a tiny panda next to Ursa Major."
+          ],
+          "choices": [
+            {
+              "label": "Join the stars",
+              "action": "stars"
+            },
+            {
+              "label": "Leave them"
+            }
           ]
         }
       },
@@ -3999,6 +4008,21 @@
             "the last quarter",
             "a waning crescent"
           ]
+        },
+        "stars": {
+          "how": "Click the stars to join them up. All of them.",
+          "stop": "Done",
+          "names": {
+            "dipper": [
+              "The Big Dipper! Seven stars, one very large ladle."
+            ],
+            "cat": [
+              "...It's a cat. Somebody drew a cat in the stars. The chart calls it \"Neko Major\"."
+            ],
+            "panda": [
+              "A panda! The little doodle on the chart was right. It really is up there."
+            ]
+          }
         }
       }
     },

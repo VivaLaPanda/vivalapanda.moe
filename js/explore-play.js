@@ -1239,7 +1239,54 @@
         }
         return cv;
     }
+    // join the stars: click them, lines follow your clicks; when they're all joined the constellation draws itself
+    var CONSTELLATIONS = [
+        { id: "dipper", stars: [[40, 40], [62, 44], [80, 52], [98, 60], [104, 84], [130, 86], [128, 62]], lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 3]] },
+        { id: "cat", stars: [[72, 52], [80, 42], [104, 42], [112, 52], [112, 74], [92, 86], [72, 74], [68, 34], [116, 34],
+                             [84, 62], [100, 62], [92, 72]],
+          lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 0], [7, 0], [7, 1], [8, 2], [8, 3], [9, 11], [10, 11]] },
+        { id: "panda", stars: [[78, 48], [106, 48], [114, 66], [92, 86], [70, 66],              // the head
+                               [68, 32], [76, 26], [84, 32], [76, 40], [100, 32], [108, 26], [116, 32], [108, 40],   // ears
+                               [80, 58], [86, 64], [80, 70], [104, 58], [98, 64], [104, 70]],    // eye patches
+          lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0], [5, 6], [6, 7], [7, 8], [8, 5], [9, 10], [10, 11], [11, 12], [12, 9],
+                  [13, 14], [14, 15], [15, 13], [16, 17], [17, 18], [18, 16]] }
+    ];
+    function stars() {
+        var p = P().stars, c = CONSTELLATIONS[Math.floor(Math.random() * CONSTELLATIONS.length)];
+        var o = overlay(), cv = o.cv, ctx = o.ctx, clicked = [], done = false, t0 = performance.now(), raf;
+        function draw(now) {
+            ctx.fillStyle = "#06061a"; ctx.fillRect(0, 0, 185, 132);
+            for (var i = 0; i < 120; i++) { ctx.fillStyle = i % 7 ? "#2a2a4a" : "#5a5a8a"; ctx.fillRect((i * 53) % 185, (i * 31) % 132, 1, 1); }
+            ctx.strokeStyle = done ? "#ffe9a0" : "#8a9ad8"; ctx.lineWidth = 1;
+            var pairs = done ? c.lines : clicked.slice(1).map(function (s, i) { return [clicked[i], s]; });
+            pairs.forEach(function (l) {
+                var a = c.stars[l[0]], b = c.stars[l[1]];
+                ctx.beginPath(); ctx.moveTo(a[0] + .5, a[1] + .5); ctx.lineTo(b[0] + .5, b[1] + .5); ctx.stroke();
+            });
+            c.stars.forEach(function (st, i) {
+                var on = clicked.indexOf(i) >= 0, tw = Math.sin((now - t0) / 300 + i) > 0;
+                ctx.fillStyle = on ? "#fff6c0" : (tw ? "#ffffff" : "#c8c8ff");
+                ctx.fillRect(st[0] - 1, st[1], 3, 1); ctx.fillRect(st[0], st[1] - 1, 1, 3);
+            });
+            if (!done) raf = requestAnimationFrame(draw);
+        }
+        cv.addEventListener("pointerdown", function (e) {
+            if (done) return;
+            var pt = canvasPoint(cv, e), best = -1, bd = 1e9;
+            c.stars.forEach(function (st, i) { var dd = Math.hypot(st[0] - pt[0], st[1] - pt[1]); if (dd < bd) { bd = dd; best = i; } });
+            if (bd > 12 || clicked.indexOf(best) >= 0) return;
+            clicked.push(best);
+            if (clicked.length === c.stars.length) {
+                done = true; cancelAnimationFrame(raf); draw(performance.now());
+                S.say(arr(p.names[c.id]), function () { S.offer([{ label: p.stop, act: function () { o.box.remove(); S.home(false); } }]); });
+            }
+        });
+        S.say(arr(p.how), function () { S.offer([{ label: p.stop, act: function () { cancelAnimationFrame(raf); o.box.remove(); S.home(false); } }]); });
+        raf = requestAnimationFrame(draw);
+    }
+
     PLAY.observatory = function () {
+        S.actions.stars = stars;
         S.actions.moon = function () {
             var age = moonAge(), view = document.createElement("div"), cv = drawMoon(age);
             view.className = "play-telescope";
