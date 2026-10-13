@@ -360,9 +360,17 @@
     position: absolute;
     right: 52px;
     bottom: 8px;
+    max-width: calc(100% - 70px);
     display: flex;
+    flex-wrap: wrap-reverse;     /* a full pocket grows upward, never off the box */
+    justify-content: flex-end;
     gap: 6px;
     z-index: 1;
+}
+
+@media (max-width: 768px) {
+    #hk-inventory button, #hk-inventory img { width: 24px; height: 24px; }
+    #hk-inventory { gap: 4px; }
 }
 
 #hk-inventory button {
