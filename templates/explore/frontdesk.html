@@ -1,21 +1,13 @@
-{{ define "scene_label" }}Places to go{{ end -}}
-{{ define "scene_noscript" }}<a href="/living-room.html">Back home</a>{{ end -}}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- an old address: this place is explore.html?loc=frontdesk now -->
+    <meta http-equiv="refresh" content="0; url=explore.html?loc=frontdesk">
+    <link rel="canonical" href="https://vivalapanda.moe/explore/explore.html?loc=frontdesk">
     <title>Tokugawa Tower Lobby</title>
-    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="preload" href="/fonts/pc-9800-core.woff2" as="font" type="font/woff2" crossorigin>
-    <link href="/css/scene.css" rel="stylesheet" type="text/css" media="all">
-    <script src="/js/explore-locations.js" defer></script>
-    <script src="/js/scene.js" defer></script>
-    <script src="/js/house-key.js" defer></script>
-    <script src="/js/explore-play.js" defer></script>
-    <script src="/js/scene-music.js" defer></script>
   </head>
-  <body data-scene="frontdesk">
-{{ template "t_scene.html" . }}
+  <body>
+    <a href="explore.html?loc=frontdesk">This way</a>
   </body>
 </html>

@@ -1,6 +1,6 @@
 // Explore: the city of Pandopolis, one scene per location, run by js/scene.js like the rooms. explore/explore.html
-// shows the location named by ?loc= (Main Street without one); the tower's own pages and the girl's street are pages
-// of their own (their <body data-scene="...">). Everything anyone says is in /data/dialogue.json, section "explore".
+// shows the location named by ?loc= (Main Street without one). Everything anyone says is in /data/dialogue.json,
+// section "explore".
 // Per location: title (the page title), image and pos (the picture, cover-fitted, at that object-position), holo
 // (the right sidebar), music, frame ("light" for the light window frame; dark otherwise), links (exits: to, and rect
 // [x, y, w, h] in the 740x528 scene window; sprite: a visible button there), objects (things to click that aren't
@@ -12,7 +12,7 @@ var LOCATIONS = {
         title: "Pandopolis", image: "../img/explore/pathways/mainstreet_night.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/possessioner-possessioner.mp3",
         links: [
-            { to: "frontdesk.html", rect: [505, 379, 141, 127] },
+            { to: "?loc=frontdesk", rect: [505, 379, 141, 127] },
             { to: "?loc=casino", rect: [0, 303, 123, 130] },
             { to: "?loc=nightplaza", rect: [409, 399, 85, 77] },
             { to: "?loc=partystreet", rect: [264, 378, 106, 87] },
@@ -152,7 +152,7 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/kara-no-naka-wht-vrgn-blk-slv.mp3",
         links: [
             { to: "?loc=rooftop", rect: [427, 330, 98, 152] },   // up the outside stairs
-            { to: "nightresidential_girl.html", rect: [0, 478, 640, 50] }   // behind you
+            { to: "?loc=nightresidential_girl", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     // the stray cat's way home: only open once you've chased it (js/explore-play.js)
@@ -290,8 +290,8 @@ var LOCATIONS = {
         title: "Tokugawa Tower, B1", image: "../img/explore/places/garage.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/possessioner-abandoned-district.mp3",
         links: [
-            { to: "frontdesk.html", rect: [410, 210, 60, 85] },   // the lift, under the green sign
-            { to: "frontdesk.html", rect: [0, 478, 420, 50] }
+            { to: "?loc=frontdesk", rect: [410, 210, 60, 85] },   // the lift, under the green sign
+            { to: "?loc=frontdesk", rect: [0, 478, 420, 50] }
         ],
         objects: [{ id: "bluecar", rect: [430, 300, 230, 228] }, { id: "redcar", rect: [170, 280, 260, 140] }]
     },
@@ -309,7 +309,7 @@ var LOCATIONS = {
         title: "Tokugawa Gallery", image: "../img/explore/places/gallery.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/crystal-rinal-school-days.mp3",
         links: [
-            { to: "frontdesk.html", rect: [0, 478, 640, 50] }
+            { to: "?loc=frontdesk", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "dots", rect: [313, 255, 85, 94] }, { id: "nude", rect: [436, 279, 141, 57] },
                   { id: "ufo", rect: [625, 260, 66, 94] }, { id: "big", rect: [31, 0, 160, 349] },
@@ -377,7 +377,7 @@ var LOCATIONS = {
         title: "Residential District Houses", image: "../img/explore/pathways/night_residential_2.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/doki-doki-vac01.mp3",
         links: [
-            { to: "nightresidential_girl.html", rect: [317, 208, 80, 47] },
+            { to: "?loc=nightresidential_girl", rect: [317, 208, 80, 47] },
             { to: "?loc=musicianbedroom", rect: [47, 78, 130, 287] },
             { to: "?loc=laundromat", rect: [455, 200, 65, 100] },   // the gap in the wall, a light on behind it
             { to: "?loc=nightresidential", rect: [0, 478, 640, 50] }   // behind you
@@ -654,16 +654,16 @@ var LOCATIONS = {
         title: "Tokugawa Tower Lobby", image: "/img/explore/places/front_desk.gif", pos: "left",
         frame: "light", music: "/audio/possessioner-abandoned-district.mp3",
         links: [
-            { to: "penthouse.html", rect: [146, 7, 113, 23], sprite: "/img/explore/overlays/penthouse-button.png" },
-            { to: "towerbar.html", rect: [170, 98, 70, 26], sprite: "/img/explore/overlays/bar-button.png" },
-            { to: "explore.html", rect: [0, 478, 640, 50] }   // behind you
+            { to: "?loc=penthouse", rect: [146, 7, 113, 23], sprite: "/img/explore/overlays/penthouse-button.png" },
+            { to: "?loc=towerbar", rect: [170, 98, 70, 26], sprite: "/img/explore/overlays/bar-button.png" },
+            { to: "?loc=mainstreet", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
     "penthouse": {
         title: "Tokugawa Tower Penthouse", image: "/img/explore/places/city_overlook_transparent.png", pos: "center",
         holo: "/img/holo/HolosurpriseBGTransparent.png", frame: "light", music: "/audio/possessioner-city-a.mp3",
         links: [
-            { to: "frontdesk.html", rect: [0, 478, 640, 50] }
+            { to: "?loc=frontdesk", rect: [0, 478, 640, 50] }
         ],
         under: {"src": "/img/explore/settings/skyling-normal-flicker.gif", "rect": [-1, -332, 780, 780]}
     },
@@ -671,8 +671,8 @@ var LOCATIONS = {
         title: "Residential District", image: "/img/explore/pathways/night_residential_girl.png", pos: "center",
         music: "/audio/iskaku-horror-1.mp3",
         links: [
-            { to: "explore.html?loc=nightapartments", rect: [17, 278, 80, 157] },
-            { to: "explore.html?loc=nightresidential2", rect: [0, 478, 640, 50] }   // behind you
+            { to: "?loc=nightapartments", rect: [17, 278, 80, 157] },
+            { to: "?loc=nightresidential2", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "girl", rect: [377, 328, 80, 187] }]
     },
@@ -680,7 +680,7 @@ var LOCATIONS = {
         title: "Tokugawa Tower Bar", image: "/img/explore/places/bar_crowded.png", pos: "left",
         frame: "light", music: "/audio/cosmic-psycho-bar.mp3",
         links: [
-            { to: "frontdesk.html", rect: [0, 478, 640, 50] }
+            { to: "?loc=frontdesk", rect: [0, 478, 640, 50] }
         ],
         objects: [{ id: "regular", rect: [485, 59, 141, 357], view: "barshoujo" }],
         views: {"barshoujo": {"src": "/img/explore/portraits/bar_lady.png", "pos": "center"}}
@@ -690,7 +690,7 @@ var LOCATIONS = {
 // the location this page shows, as a scene for js/scene.js
 (function () {
     "use strict";
-    var id = document.body.dataset.scene || new URLSearchParams(location.search).get("loc") || "mainstreet";
+    var id = new URLSearchParams(location.search).get("loc") || "mainstreet";
     var L = LOCATIONS[id];
     if (!L) {
         location.replace("/explore/explore.html");

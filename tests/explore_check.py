@@ -22,7 +22,6 @@ from pathlib import Path
 from playwright.sync_api import Browser, Page, sync_playwright
 
 REPO = Path(__file__).resolve().parent.parent
-SPECIAL = {"frontdesk", "penthouse", "towerbar", "nightresidential_girl"}   # places with their own page
 VIEWPORTS = {"desktop": (1280, 860), "phone": (390, 844)}
 MAX_CHOICES = 5
 WORKERS = 8
@@ -45,7 +44,7 @@ def places() -> list[str]:
 
 
 def url(base: str, place: str) -> str:
-    return f"{base}/explore/{place}.html" if place in SPECIAL else f"{base}/explore/explore.html?loc={place}"
+    return f"{base}/explore/explore.html?loc={place}"
 
 
 # ---------- the link graph (static) ----------
@@ -62,11 +61,8 @@ def link_graph() -> dict[str, list[str]]:
 
 
 def target_place(to: str) -> str | None:
-    if m := re.search(r"loc=(\w+)", to):
-        return m.group(1)
-    if m := re.fullmatch(r"(\w+)\.html", to):
-        return "mainstreet" if m.group(1) == "explore" else m.group(1)
-    return None   # leaves Explore (another page of the site, or outside)
+    m = re.fullmatch(r"\?loc=(\w+)", to)
+    return m.group(1) if m else None   # anything else leaves Explore (another page of the site, or outside)
 
 
 def check_graph() -> list[str]:

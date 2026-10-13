@@ -53,7 +53,7 @@ def main() -> None:
                 page.write_text(new)
     if check and stale:
         sys.exit("stale asset stamps (run python3 scripts/build.py): " + ", ".join(map(str, stale)))
-    print(f"{len(pages())} pages" + ("" if check else f", {len(stale)} restamped"))
+    print(f"{len(pages())} pages built and stamped" if not check else f"{len(pages())} pages: stamps current")
 
 
 if __name__ == "__main__":

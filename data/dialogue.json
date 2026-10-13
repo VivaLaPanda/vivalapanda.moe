@@ -2115,21 +2115,21 @@
               "say": [
                 "(The lift hums down. And down.)"
               ],
-              "go": "explore.html?loc=garage"
+              "go": "?loc=garage"
             },
             {
               "label": "1F, the bar",
               "say": [
                 "\"Right this way, sir.\""
               ],
-              "go": "towerbar.html"
+              "go": "?loc=towerbar"
             },
             {
               "label": "3F, the gallery",
               "say": [
                 "(The lift opens onto polished floors and very quiet people.)"
               ],
-              "go": "explore.html?loc=gallery"
+              "go": "?loc=gallery"
             },
             {
               "label": "12F, METR",
@@ -2140,7 +2140,7 @@
               "say": [
                 "\"Guests only, sir. ...I'll pretend I didn't see you.\""
               ],
-              "go": "penthouse.html"
+              "go": "?loc=penthouse"
             }
           ]
         },
