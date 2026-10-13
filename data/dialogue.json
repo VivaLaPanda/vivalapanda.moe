@@ -2594,7 +2594,7 @@
               "label": "Leave him the taiyaki",
               "take": true,
               "say": [
-                "He sniffs, opens one eye, and smiles without waking up. The taiyaki's gone by the time you look back."
+                "He sniffs, smiles without waking. When you look back, the taiyaki's gone."
               ]
             }
           }
@@ -4777,7 +4777,8 @@
               "label": "Offer the bartender the taiyaki",
               "take": true,
               "say": [
-                "\"From the festival?\" He eats it in two bites, tail first. \"...The tail's the best part. Don't argue.\""
+                "\"From the festival?\" He eats it in two bites, tail first.",
+                "\"The tail's the best part. Don't argue.\""
               ]
             }
           }
