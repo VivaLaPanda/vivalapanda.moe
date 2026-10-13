@@ -1676,15 +1676,22 @@
 
     // the city notices when you're here: a place can greet you differently in the rain (greeting_rain) or in the
     // small hours by your own clock (greeting_late, midnight to five)
-    R.greeting = function () {
+    var greetingNow = null;   // chosen once per visit (it's shown again when a branch ends)
+    R.greeting = function () { return greetingNow || (greetingNow = pickGreeting()); };
+    function pickGreeting() {
         var d = R.said || {}, now = new Date(), h = now.getHours();
         var day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][now.getDay()];
+        var visits = +(get("pandaVisits_" + place) || 0) + 1;
+        put("pandaVisits_" + place, visits);
         var after = (d.greeting_after || []).filter(function (g) { return heard(g.need); })[0];
         if (after) return after.greeting;   // because of something you did (Andy, at the cafe with Sakura)
         if (d.greeting_halloween && halloween()) return d.greeting_halloween;
         if (d.greeting_newyear && now.getMonth() === 0 && now.getDate() <= 3) return d.greeting_newyear;
         if (d.greeting_winter && winter()) return d.greeting_winter;
         if (d["greeting_" + day]) return d["greeting_" + day];   // a weekly thing (Andy's Thursday show)
+        if (d.greeting_return && visits > 1 && Math.random() < .6) {   // you've been here before
+            return [d.greeting_return[Math.floor(Math.random() * d.greeting_return.length)]];
+        }
         if (d.greeting_rain && RAINY.indexOf(place) >= 0 && (raining() || /[?&]rain\b/.test(location.search))) return d.greeting_rain;
         if (d.greeting_late && h < 5) return d.greeting_late;
         return d.greeting;

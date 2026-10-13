@@ -574,6 +574,12 @@
       ],
       "greeting_winter": [
         "Snow on Main Street! Everything's gone quiet and soft."
+      ],
+      "greeting_return": [
+        "Back on Main Street. Where to tonight?",
+        "Pandopolis again! It's like it never sleeps. Because it doesn't.",
+        "Main Street. The neon's buzzing. Somewhere, a cat is judging someone.",
+        "Hey, you came back! The city missed you. Probably."
       ]
     },
     "agency": {
@@ -760,6 +766,9 @@
             }
           ]
         }
+      ],
+      "greeting_return": [
+        "\"Back again, stranger? Information's still for sale.\""
       ]
     },
     "casino": {
@@ -872,7 +881,10 @@
           "name": "The pond",
           "_note": "its lines are in house_key.pond"
         }
-      }
+      },
+      "greeting_return": [
+        "The glade again. Still no sword. The pond's as still as ever."
+      ]
     },
     "musicianbedroom": {
       "speaker": "A n d y",
