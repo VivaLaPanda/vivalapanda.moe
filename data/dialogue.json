@@ -3943,7 +3943,15 @@
             "A maroon sports car. There's a parking ticket on it dated 1997."
           ]
         }
-      }
+      },
+      "greeting_after": [
+        {
+          "need": "hat_given",
+          "greeting": [
+            "The dark blue car's still parked here. The engine's cold now, for the first time."
+          ]
+        }
+      ]
     },
     "cardroom": {
       "speaker": "R u r i",
