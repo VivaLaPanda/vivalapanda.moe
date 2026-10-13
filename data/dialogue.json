@@ -1823,7 +1823,10 @@
               "label": "Give it the mackerel",
               "take": true,
               "pocket": "bottlecap",
-              "hear": "catfriend",
+              "hear": [
+                "cat_fed",
+                "catfriend"
+              ],
               "say": [
                 "The cat is awake before you've even unwrapped it.",
                 "(Crunch. Crunch. Crunch.)",
@@ -1882,10 +1885,23 @@
           "It stretches one paw out. Purrrrrr.",
           "It rolls onto its back. This is a trap, isn't it.",
           "SWAT. Yep. It was a trap."
+        ],
+        "pets_fed": [
+          "Purrrr. It pushes its head into your hand.",
+          "It rolls over. You know this trick. ...It's not a trick this time.",
+          "It falls asleep with its paw on your hand. You live here now, apparently."
         ]
       },
       "greeting_late": [
         "The tea's gone cold. The cat hasn't moved an inch."
+      ],
+      "greeting_after": [
+        {
+          "need": "cat_fed",
+          "greeting": [
+            "The cat opens one eye when you come in, then closes it again. You're allowed."
+          ]
+        }
       ]
     },
     "otojima": {

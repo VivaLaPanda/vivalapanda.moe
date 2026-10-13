@@ -16,7 +16,9 @@
     function rand(a, b) { return a + Math.random() * (b - a); }
     // things you've heard around town (a rumour, a mumble) open choices elsewhere: a choice's "need"
     function heard(flag) { return get("pandaHeard_" + flag) === "1"; }
-    function hear(flag) { if (flag) put("pandaHeard_" + flag, "1"); }
+    function hear(flag) {   // one flag or a list of them
+        [].concat(flag || []).forEach(function (f) { put("pandaHeard_" + f, "1"); });
+    }
     function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
     function put(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private */ } }
 
@@ -1322,7 +1324,8 @@
         cat.choices = function () {
             var p = P();
             return [{ label: p.pet_label, act: function () {
-                S.say(arr(p.pets[pets % p.pets.length]), function () { S.offer(cat.choices()); });
+                var lines = heard("cat_fed") && p.pets_fed ? p.pets_fed : p.pets;   // fed it once: it trusts you
+                S.say(arr(lines[pets % lines.length]), function () { S.offer(cat.choices()); });
                 pets++;
                 if (pets >= 2) hear("catfriend");   // friends now: it turns up around town (CAT_SPOTS)
             } }, { label: p.leave_label }];
