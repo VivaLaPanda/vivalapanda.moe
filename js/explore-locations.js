@@ -493,7 +493,8 @@ var LOCATIONS = {
             { to: "?loc=nightalley", rect: [0, 300, 90, 178] },
             { to: "?loc=cutiebar", rect: [680, 230, 60, 190] }
         ],
-        objects: [{ id: "lantern", rect: [184, 125, 75, 133] }, { id: "stools", rect: [275, 374, 315, 116] }]
+        objects: [{ id: "sign_ramen", rect: [100, 0, 50, 120] }, { id: "sign_cashier", rect: [170, 30, 40, 100] }, { id: "sign_ramen2", rect: [612, 0, 50, 100] },
+                  { id: "lantern", rect: [184, 125, 75, 133] }, { id: "stools", rect: [275, 374, 315, 116] }]
     },
     "cutiebar": {
         title: "Rabu Rabu", image: "../img/explore/places/bar_with_cutie.png", pos: "center",
@@ -510,7 +511,8 @@ var LOCATIONS = {
             { to: "?loc=livehouse", rect: [306, 277, 48, 85] },
             { to: "?loc=bathhouseentry", rect: [206, 277, 48, 85] },
             { to: "?loc=netcafe", rect: [40, 60, 75, 240] }   // Cafe Noa's sign, on the left
-        ]
+        ],
+        objects: [{ id: "sign_coffee", rect: [95, 70, 30, 120] }, { id: "sign_slot", rect: [400, 0, 45, 220] }, { id: "sign_karaoke", rect: [595, 50, 45, 80] }]
     },
     // drawn for the city (FAL, quantized to Shizuka Street's inks); its booth links out to Panda's old haunts
     "netcafe": {

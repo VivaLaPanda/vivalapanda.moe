@@ -1185,7 +1185,27 @@
       "speaker": "P a n d a",
       "greeting": [
         "Ah, now we're exploring properly"
-      ]
+      ],
+      "objects": {
+        "sign_coffee": {
+          "name": "A sign",
+          "lines": [
+            "COFFEE, and カフェ ノア: \"Cafe Noa\". Same people as the net cafe, I bet."
+          ]
+        },
+        "sign_slot": {
+          "name": "A sign",
+          "lines": [
+            "スロット: \"slots\". A pachinko parlour. We are not going in there."
+          ]
+        },
+        "sign_karaoke": {
+          "name": "A sign",
+          "lines": [
+            "カラオケ: \"karaoke\". There's a karaoke box behind the ramen stall, too."
+          ]
+        }
+      }
     },
     "weirdstore": {
       "speaker": "P a n d a",
@@ -2177,6 +2197,24 @@
           "name": "Stools",
           "lines": [
             "Three stools. The middle one wobbles. Everyone knows not to take it."
+          ]
+        },
+        "sign_ramen": {
+          "name": "A sign",
+          "lines": [
+            "ラーメン: \"ramen\". The whole alley agrees on this."
+          ]
+        },
+        "sign_cashier": {
+          "name": "A sign",
+          "lines": [
+            "カシアリ: \"cashiari\". It's somebody's name. Or a typo. Probably both."
+          ]
+        },
+        "sign_ramen2": {
+          "name": "A sign",
+          "lines": [
+            "ラーメン again. Two ramen signs in one alley. Bold strategy."
           ]
         }
       },
