@@ -2345,7 +2345,15 @@
         "late_door": [
           "...Was that door always there? There's a light on behind it."
         ]
-      }
+      },
+      "greeting_after": [
+        {
+          "need": "drifter_fed",
+          "greeting": [
+            "The man from before is sitting up now. He nods at you. One crumb of onigiri left."
+          ]
+        }
+      ]
     },
     "oldhouse": {
       "speaker": "P a n d a",
@@ -4843,6 +4851,13 @@
       "need": "fox_seen",
       "text": [
         "No envelope. Just a single white hair on the doormat, and the faint smell of incense."
+      ]
+    },
+    "otojima": {
+      "need": "visited_otojima",
+      "text": [
+        "A postcard of Otojima beach. On the back, in your own handwriting: \"Wish you were here.\"",
+        "You don't remember sending it."
       ]
     }
   }

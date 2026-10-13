@@ -1158,6 +1158,7 @@
     };
 
     PLAY.ramen = function () { hear("taisho_met"); };
+    if (place === "otojima") hear("visited_otojima");   // a postcard arrives at home (dialogue.json letters)
 
     // the girl on the residential street, once she has her charm back: gone (
     // the picture is the same street with her painted out: night_residential_empty.png)
