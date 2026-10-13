@@ -20,9 +20,6 @@ window.onload = function(){
 
 // mostly all copied from http://vimutv.com/
 
-var getRandom = function(min, max) {
-	return Math.floor(Math.random() * max);
-};
 
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -30,7 +27,8 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var playlistID = "PLVBUsmE3WihINwYoXTDDPGT0kE2rVelby";
 
-var randomSong = getRandom(0,27) - 1;
+var TRAIN_VIDEOS = 26;   // the playlist's length: a random one to start on (0-based)
+var randomSong = Math.floor(Math.random() * TRAIN_VIDEOS);
 
 var video;
 function onYouTubeIframeAPIReady() {
@@ -83,27 +81,10 @@ function setShuffleFunction(){
 	video.setShuffle(true);      	
 }
 
-function onPlayerError(event) {  				
-	console.log("onPlayerError"+event.data)	
-	//playlist error	
-	if(event.data==2){
-		//alert("onPlayerError"+event.data)	
-		setTimeout(playlistError, 1000);		
-	}else{
-		setTimeout(playNext, 1000);	
-	}
-}
-
-function playlistError(){
-	videoID = ''
-	video.loadPlaylist({
-		//vi/mu Pop Music Playlist
-		list:'PL9fT1eiD70UGSPtLnOrnuH87w_g-mr7k1',
-		'index':randomSong
-	}) 
-	video.setLoop(true);  
-	setTimeout(setShuffleFunction, 1000);
-	hasHash = 0		
+// a video that won't play: on to the next one (the playlist loops)
+function onPlayerError(event) {
+	console.log("train video error " + event.data);
+	setTimeout(playNext, 1000);
 }
 
 function playNext(){

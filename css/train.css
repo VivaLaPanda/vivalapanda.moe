@@ -6,3 +6,12 @@
     margin-top: -60px;
     pointer-events: none;
 }
+/* phones: the window fills the screen's width (the sidebars are hidden there) */
+@media (max-width: 768px) {
+    #main-image-tall {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: 100svh;
+    }
+}
