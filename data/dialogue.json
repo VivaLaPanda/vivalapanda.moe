@@ -583,6 +583,23 @@
       ],
       "greeting_spring": [
         "Petals blowing down Main Street from somewhere. Spring found the city."
+      ],
+      "menu": [
+        {
+          "label": "Write to Panda",
+          "say": [
+            "There's a red postbox on the corner. It says: \"To Panda. Any time.\""
+          ],
+          "menu": [
+            {
+              "label": "Write a letter",
+              "href": "/contact.html"
+            },
+            {
+              "label": "Maybe later"
+            }
+          ]
+        }
       ]
     },
     "agency": {
