@@ -2093,6 +2093,13 @@
       ],
       "menu": [
         {
+          "label": "Go through to the baths",
+          "say": [
+            "\"Through the curtain, love. Mind the step, it's slippery.\""
+          ],
+          "go": "?loc=smallbathhouse"
+        },
+        {
           "label": "Ask about the baths",
           "pick": [
             "\"Hottest water in the city. My grandfather dug the well himself.\"",

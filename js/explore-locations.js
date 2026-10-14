@@ -236,9 +236,10 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
         links: [
             { to: "?loc=nightpark", rect: [545, 219, 101, 97] },
-            { to: "?loc=nightresidential", rect: [659, 319, 85, 127] },
-            { to: "?loc=forestedge", rect: [2, 209, 415, 87] },
-            { to: "?loc=bookshop", rect: [415, 204, 130, 87] }   // the little building at the back
+            { to: "?loc=nightresidential", rect: [692, 300, 48, 170] },   // the walkway, off to the right past the bin
+            { to: "?loc=forestedge", rect: [190, 212, 220, 80] },   // into the trees behind the benches
+            { to: "?loc=bookshop", rect: [415, 204, 130, 87] },   // the little building at the back
+            { to: "?loc=mainstreet", rect: [0, 478, 640, 50] }   // behind you
         ],
         layers: [{ src: "../img/explore/layers/plaza-glints-a.png", rect: [-80, 0, 901, 528], pixel: true, anim: "twinkle-a" },
                  { src: "../img/explore/layers/plaza-glints-b.png", rect: [-80, 0, 901, 528], pixel: true, anim: "twinkle-b" }]
@@ -632,8 +633,7 @@ var LOCATIONS = {
         title: "Brownie's Bathhouse", image: "../img/explore/portraits/bath.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/eve-burst-error-room-marina.mp3",
         links: [
-            { to: "?loc=smallbathhouse", rect: [58, 428, 597, 100] },
-            { to: "?loc=shizukastreet", rect: [0, 478, 640, 50] }   // behind you
+            { to: "?loc=shizukastreet", rect: [0, 478, 640, 50] }   // behind you (the baths: ask Brownie)
         ]
     },
     "frontdesk": {
