@@ -578,11 +578,11 @@
         });
     }
 
-    // a song for each part of the day (R.house.music: { morning, day, evening, night }), changed as the day turns;
-    // the first is chosen by the sun before js/scene-music.js starts it
+    // a song for each part of the day (R.house.music: { morning, day, evening, night }, or a phase of its own, e.g.
+    // sunset), changed as the day turns; the first is chosen by the sun before js/scene-music.js starts it
     var SONG_TIME = { dawn: "morning", morning: "morning", noon: "day", afternoon: "day",
                       evening: "evening", sunset: "evening", dusk: "evening", night: "night" };
-    function songFor(phase) { return R.house.music && R.house.music[SONG_TIME[phase] || "day"]; }
+    function songFor(phase) { var m = R.house.music; return m && (m[phase] || m[SONG_TIME[phase] || "day"]); }
     if (songFor(sunPhase())) R.music = songFor(sunPhase());
     function retune() {
         var song = songFor(phaseNow()), m = document.getElementById("music");

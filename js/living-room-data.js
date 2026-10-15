@@ -112,6 +112,8 @@ window.HOUSE = window.HOUSE || {};
                  music: { morning: "/audio/graunseed-moanin.mp3",                     // For Graunseed, "Moanin'"
                           day: "/audio/giten-megami-tensei-little-bossa-nova.mp3",     // Giten Megami Tensei
                           evening: "/audio/doukyuusei-room.mp3",                       // Doukyuusei, the room
+                          sunset: "/audio/ffcc-departure-pc98-arrange.mp3",            // "Departure" (FFCC), a PC-98
+                          dusk: "/audio/ffcc-departure-pc98-arrange.mp3",              // arrange (audio/src/ffcc-departure)
                           night: "/audio/yu-no-home-relief.mp3" } },                   // YU-NO, "Home (Relief)"
         seenKey: "pandaLivingRoomSeen",
         scene: { src: "/img/living-room/noon@4x.png?v=23", width: 500, height: 357 },
