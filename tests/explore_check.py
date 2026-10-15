@@ -15,6 +15,7 @@ Run: uv run --with playwright tests/explore_check.py [base-url] [place ...]
 """
 import json
 import re
+from collections import Counter
 import subprocess
 import sys
 from queue import Empty, Queue
@@ -92,6 +93,19 @@ def check_graph() -> list[str]:
         todo += graph[k]
     gated = {"casinolounge", "backpassage", "oldhouse", "catroom", "bar25"}   # reached by a door that opens in play
     out += [f"graph: {k} not reachable from mainstreet by links" for k in graph if k not in seen and k not in gated]
+    return out
+
+
+def check_duplicate_ways() -> list[str]:
+    """A place never has two ways (map links or "go" choices) to the same destination."""
+    src = (REPO / "js/explore-locations.js").read_text()
+    dialogue = json.loads((REPO / "data/dialogue.json").read_text())["explore"]
+    parts = re.split(r'\n    "(\w+)": \{', src)
+    out = []
+    for name, body in zip(parts[1::2], parts[2::2]):
+        links = re.search(r"links: \[(.*?)\n        \]", body, re.S)
+        ways = (re.findall(r'to: "([^"]+)"', links.group(1)) if links else []) + gos(dialogue.get(name))
+        out += [f"graph: {name} has {n} ways to {to}" for to, n in Counter(ways).items() if n > 1]
     return out
 
 
@@ -313,7 +327,7 @@ def main() -> None:
     base = args.pop(0).rstrip("/") if args and args[0].startswith("http") else "https://dev.vivalapanda.moe"
     todo = args or places()
     action_fails, unread = check_actions()
-    problems = check_graph() + check_stamps() + action_fails
+    problems = check_graph() + check_duplicate_ways() + check_stamps() + action_fails
     for w in unread:
         print(f"warn {w}")
     queue: Queue[str] = Queue()

@@ -142,11 +142,19 @@
                 hear(c.hear);
                 var lines = c.pick ? [c.pick[Math.floor(Math.random() * c.pick.length)]] : arr(c.say);
                 if (c.serve && P().stamps) lines = lines.concat(stamp());
-                S.say(lines, c.go ? function () { location.href = c.go; } : after);   // go: shown through somewhere
+                S.say(lines, c.go ? function () { travel(c); } : after);
             } };
         });
     }
     function backHome() { S.home(false); }
+
+    // a choice that ends somewhere else (go): its last line is read first (a click on the ▼); one that only asks the
+    // way ("Ask about the red gates") then offers going as a choice of its own (go_label)
+    function travel(c) {
+        function go() { location.href = c.go; }
+        if (c.go_label) S.offer([{ label: c.go_label, act: go }, { label: (R.lines && R.lines.never_mind) || "Never mind", act: backHome }]);
+        else S.pause(go);
+    }
 
     (R.afterGreeting = R.afterGreeting || []).push(function () {
         return R.said && R.said.menu ? choicesOf(R.said.menu, backHome) : null;

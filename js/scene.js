@@ -293,6 +293,9 @@
         })();
     }
 
+    // wait for a click (or Enter) on the ▼, then fn: a line that ends somewhere else gets read first
+    function pause(fn) { state = "talking"; arrow.hidden = false; advance = fn; }
+
     // the place's default state: its greeting's last line (when coming back to it) and every script's choices
     // together (R.afterGreeting; one returning true took the box over itself)
     function home(reshow) {
@@ -685,7 +688,7 @@
     function status(line) { stopTyping(); text.textContent = line; }
 
     var SCENE = window.SCENE = { say: say, offer: offer, ask: ask, lines: lines, actions: {}, status: status,
-                                 toIdle: toIdle, home: home, stage: stage, placeNative: placeNative };
+                                 toIdle: toIdle, home: home, pause: pause, stage: stage, placeNative: placeNative };
 
     // a room's own setup (R.ready: the living room loads its scene first) and the lines, then the room
     Promise.all([

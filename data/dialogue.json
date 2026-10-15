@@ -588,13 +588,6 @@
               "label": "Maybe later"
             }
           ]
-        },
-        {
-          "label": "Head home",
-          "say": [
-            "The neon follows you halfway down the street. Then it's just the streetlights, and your door."
-          ],
-          "go": "/living-room.html"
         }
       ],
       "linger": [
@@ -1103,7 +1096,7 @@
             {
               "label": "37",
               "say": [
-                "\"Thirty-seven runs the tower desk. It's a name, not a number. Ask him about floor 12.\"",
+                "\"Thirty-seven runs the tower desk. It's a name, not a number. Ask her about floor 12.\"",
                 "\"That one's on the house.\""
               ]
             },
@@ -1254,7 +1247,8 @@
               "say": [
                 "\"Ruri's table. Up the stairs, past the lights.\" He shrugs. \"Tell her you feel lucky.\""
               ],
-              "go": "?loc=cardroom"
+              "go": "?loc=cardroom",
+              "go_label": "Go up the stairs"
             },
             {
               "label": "Leave him to it"
@@ -1959,6 +1953,15 @@
       },
       "linger": [
         "A bicycle bell dings somewhere behind you, and is gone."
+      ],
+      "menu": [
+        {
+          "label": "Follow the steam",
+          "say": [
+            "(Down a side street, steam curls out of a doorway. A sign: Brownie's Bathhouse.)"
+          ],
+          "go": "?loc=bathhouseentry"
+        }
       ]
     },
     "weirdstore": {
@@ -1983,7 +1986,8 @@
             "The clerk looks up, then looks around.",
             "\"...Through the back. Wipe your feet.\""
           ],
-          "go": "?loc=zengarden"
+          "go": "?loc=zengarden",
+          "go_label": "Go through the back"
         }
       ],
       "objects": {
@@ -2160,47 +2164,7 @@
           ]
         },
         {
-          "label": "Take the lift",
-          "say": [
-            "\"Which floor, sir?\""
-          ],
-          "menu": [
-            {
-              "label": "B1, parking",
-              "say": [
-                "(The lift hums down. And down.)"
-              ],
-              "go": "?loc=garage"
-            },
-            {
-              "label": "1F, the bar",
-              "say": [
-                "\"Right this way, sir.\""
-              ],
-              "go": "?loc=towerbar"
-            },
-            {
-              "label": "3F, the gallery",
-              "say": [
-                "(The lift opens onto polished floors and very quiet people.)"
-              ],
-              "go": "?loc=gallery"
-            },
-            {
-              "label": "12F, METR",
-              "href": "https://metr.org"
-            },
-            {
-              "label": "40F, the penthouse",
-              "say": [
-                "\"Guests only, sir. ...I'll pretend I didn't see you.\""
-              ],
-              "go": "?loc=penthouse"
-            }
-          ]
-        },
-        {
-          "label": "Ask 37 what he does on his nights off",
+          "label": "Ask 37 what she does on her nights off",
           "need": "observatory_seen",
           "say": [
             "\"Nights off, sir? I walk up past the forest. There's an old dome on the ridge.\"",
@@ -3180,6 +3144,13 @@
             "(You follow the lights along the shore to the old amusement pier.)"
           ],
           "go": "?loc=pier"
+        },
+        {
+          "label": "Walk out to the lighthouse",
+          "say": [
+            "(Up the steps at the end of the breakwater. The beacon sweeps over you.)"
+          ],
+          "go": "?loc=lighthouse"
         }
       ],
       "play": {
@@ -4479,7 +4450,8 @@
               "say": [
                 "\"Up the hill past the big tree. Red gates, all the way up. Mind the foxes.\""
               ],
-              "go": "?loc=inari"
+              "go": "?loc=inari",
+              "go_label": "Head up to the red gates"
             },
             {
               "label": "Ask where they're headed",

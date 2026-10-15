@@ -90,22 +90,22 @@ the picture has no door for a place, a choice in the place's menu or on a person
 smell of coffee, the purring on the residential street, the regular at Club Polka).
 ```
 Home ─ Main Street ─┬─ Casino (pans; roulette) ─ High Rollers' Lounge (the back corridor)
-                    ├─ Tokugawa Tower lobby (a lift) ─┬─ B1 car park · 3F gallery · 12F metr.org
+                    ├─ Tokugawa Tower lobby (board) ──┬─ B1 car park · 3F gallery · 12F metr.org
                     │                                  ├─ Penthouse (watch the city; telescope; fireworks)
                     │                                  └─ Tower Bar (drinks; the man in the hat)
                     ├─ Picrew Plaza ─┬─ Night Bookshop (Panda's five-star books) ─ reading list
                     │                ├─ A Late Cafe
-                    │                ├─ Pumpo Park (lanterns; a rave flyer) ─ Summer Festival (goldfish, ring toss) ─ Shrine (ema) ─ Under the Bridge
-                    │                ├─ Residential ─┬─ Konbini · Neko no Ma (cat cafe)
-                    │                │               └─ Houses ─┬─ the girl under the streetlight ─ Acacia Apartments
-                    │                │                          │      ─┬─ the Roof (stars, fireworks, the ending)
-                    │                │                          │       └⇢ (the cat) Back Passage ─ Old House ─ its room
-                    │                │                          │                     (⇢ 2-4am only: Bar 25)
-                    │                │                          ├─ Coin Laundry
-                    │                │                          └─ Andy's House
-                    │                └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ the stream ─ Riverboat
-                    │                                            └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop (─ Observatory)
-                    │                                                 ─ Lily Field ─ Campfire ─ Fox Gates ─ ↺ Shrine
+                    │                ├─ Pumpo Park (lanterns; a rave flyer) ─┬─ Summer Festival (goldfish, ring toss) ─ Shrine (ema) ─ Under the Bridge
+                    │                │                                       └─ Forest Edge (fireflies) ─┬─ Hidden Glade (pond: the house key) ─ the stream ─ Riverboat
+                    │                │                                                                   └─ the hills: Sunlit Path ─ Tea Party ─ Hilltop (─ Observatory)
+                    │                │                                                                        ─ Lily Field ─ Campfire ─ Fox Gates ─ ↺ Shrine
+                    │                └─ Residential ─┬─ Konbini · Neko no Ma (cat cafe)
+                    │                                └─ Houses ─┬─ the girl under the streetlight ─ Acacia Apartments
+                    │                                           │      ─┬─ the Roof (stars, fireworks, the ending)
+                    │                                           │       └⇢ (the cat) Back Passage ─ Old House ─ its room
+                    │                                           │                     (⇢ 2-4am only: Bar 25)
+                    │                                           ├─ Coin Laundry
+                    │                                           └─ Andy's House
                     └─ Isogashii Blvd ─┬─ Taito Game Centre (claw machine, purikura)
                                        ├─ Club Polka (dance) ─ Ruri's back room (high-low)
                                        ├─ Agency (Johnny: the hunt, rumours, people) ─ Denchi's (symphoslots)

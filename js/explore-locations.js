@@ -57,7 +57,7 @@ var LOCATIONS = {
         links: [
             { to: "?loc=forestglade", rect: [174, 189, 416, 297] },
             { to: "?loc=forestpath", rect: [590, 380, 150, 95] },   // the dirt path, uphill
-            { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }   // behind you
+            { to: "?loc=nightpark", rect: [0, 478, 640, 50] }   // behind you: back out to the park
         ]
     },
     // the hills: a quiet trail from the forest's edge, round to a campfire and up to the fox gates
@@ -207,6 +207,7 @@ var LOCATIONS = {
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/viper-moon.mp3",
         links: [
             { to: "?loc=festival", rect: [483, 377, 257, 151] },
+            { to: "?loc=forestedge", rect: [430, 40, 310, 300] },   // into the big trees: the woods start here
             { to: "?loc=nightplaza", rect: [0, 478, 640, 50] }   // behind you
         ],
         objects: [{ id: "flyer", rect: [423, 430, 80, 45] }],   // on the restroom hut
@@ -237,7 +238,6 @@ var LOCATIONS = {
         links: [
             { to: "?loc=nightpark", rect: [545, 219, 101, 97] },
             { to: "?loc=nightresidential", rect: [692, 300, 48, 170] },   // the walkway, off to the right past the bin
-            { to: "?loc=forestedge", rect: [190, 212, 220, 80] },   // into the trees behind the benches
             { to: "?loc=bookshop", rect: [415, 204, 130, 87] },   // the little building at the back
             { to: "?loc=mainstreet", rect: [0, 478, 640, 50] }   // behind you
         ],
@@ -271,8 +271,7 @@ var LOCATIONS = {
         title: "Coin Laundry", image: "../img/explore/places/laundromat.png", pos: "center",
         holo: "../img/holo/HoloHappyBGTransparent.png", music: "../audio/policenauts-living-in-the-real-world.mp3",
         links: [
-            { to: "?loc=nightresidential2", rect: [380, 130, 280, 190] },   // the glass door, out to the street
-            { to: "?loc=nightresidential2", rect: [0, 478, 640, 50] }
+            { to: "?loc=nightresidential2", rect: [380, 130, 280, 190] }   // the glass door, out to the street
         ],
         objects: [{ id: "machine", rect: [0, 330, 90, 120] }, { id: "machines", rect: [90, 50, 260, 380] },
                   { id: "vending", rect: [682, 149, 58, 208] }, { id: "chairs", rect: [549, 330, 130, 145] },
@@ -284,7 +283,7 @@ var LOCATIONS = {
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/iskaku-horror-1.mp3",
         links: [
             { to: "?loc=frontdesk", rect: [410, 210, 60, 85] },   // the lift, under the green sign
-            { to: "?loc=frontdesk", rect: [0, 478, 420, 50] }
+            { to: "?loc=mainstreet", rect: [0, 478, 420, 50] }   // behind you: the ramp up to the street
         ],
         objects: [{ id: "bluecar", rect: [430, 300, 230, 228] }, { id: "redcar", rect: [170, 280, 260, 140] }]
     },
@@ -293,8 +292,7 @@ var LOCATIONS = {
         title: "A Back Room", image: "../img/explore/places/day_tavernlady.png", pos: "center",
         holo: "../img/holo/HolosurpriseBGTransparent.png", music: "../audio/flixmix-trump-vulgar-casino.mp3",
         links: [
-            { to: "?loc=club", rect: [560, 0, 180, 300] },   // back down the stairs
-            { to: "?loc=club", rect: [0, 478, 640, 50] }
+            { to: "?loc=club", rect: [560, 0, 180, 300] }   // back down the stairs
         ]
     },
     // floor 3 of Tokugawa Tower (the lift)
@@ -381,8 +379,8 @@ var LOCATIONS = {
         links: [
             { to: "?loc=club", rect: [621, 276, 91, 174] },
             { to: "?loc=agency", rect: [609, 4, 115, 167] },
-            { to: "?loc=nightalley", rect: [423, 290, 85, 103] },
-            { to: "?loc=stationcrossing", rect: [223, 290, 85, 103] },
+            { to: "?loc=nightalley", rect: [468, 225, 60, 125] },   // the side street by the ABC sign
+            { to: "?loc=stationcrossing", rect: [285, 195, 175, 80] },   // on down the boulevard, to the crossing
             { to: "?loc=electronicstore", rect: [39, 285, 85, 179] },
             { to: "?loc=gamecentre", rect: [0, 147, 145, 136] }   // the Taito sign and the awning under it
         ]
@@ -486,7 +484,6 @@ var LOCATIONS = {
         links: [
             { to: "?loc=lake", rect: [573, 179, 167, 55] },   // the little boat upriver
             { to: "?loc=aquarium", rect: [0, 138, 142, 69] },   // the lit building along the shore
-            { to: "?loc=lighthouse", rect: [143, 110, 60, 90] },   // the beacon, up the steps
             { to: "?loc=otojima", rect: [492, 345, 248, 183] }
         ]
     },
@@ -592,7 +589,6 @@ var LOCATIONS = {
         links: [
             { to: "?loc=weirdstore", rect: [557, 193, 114, 197] },
             { to: "?loc=livehouse", rect: [306, 277, 48, 85] },
-            { to: "?loc=bathhouseentry", rect: [206, 277, 48, 85] },
             { to: "?loc=netcafe", rect: [0, 190, 70, 170] }   // Cafe Noa's storefront, on the left
         ],
         objects: [{ id: "sign_coffee", rect: [95, 70, 30, 120] }, { id: "sign_slot", rect: [400, 0, 45, 220] }, { id: "sign_karaoke", rect: [595, 50, 45, 80] }]
@@ -640,8 +636,12 @@ var LOCATIONS = {
         title: "Tokugawa Tower Lobby", image: "/img/explore/places/front_desk.gif", pos: "left",
         frame: "light", music: "/audio/possessioner-abandoned-district.mp3",
         links: [
-            { to: "?loc=penthouse", rect: [146, 7, 113, 23], sprite: "/img/explore/overlays/penthouse-button.png" },
-            { to: "?loc=towerbar", rect: [170, 98, 70, 26], sprite: "/img/explore/overlays/bar-button.png" },
+            // the directory board is the lift: each floor's box is a button (the gif's own pixels x 1.056, over its boxes)
+            { to: "?loc=penthouse", rect: [152, 8, 112, 23], sprite: "/img/explore/overlays/penthouse-button.png" },
+            { to: "?loc=towerbar", rect: [175, 99, 63, 23], sprite: "/img/explore/overlays/bar-button.png" },
+            { to: "?loc=gallery", rect: [103, 120, 57, 23], sprite: "/img/explore/overlays/gallery-button.png" },
+            { to: "?loc=garage", rect: [103, 171, 57, 23], sprite: "/img/explore/overlays/parking-button.png" },
+            { to: "https://metr.org", rect: [256, 120, 57, 23], sprite: "/img/explore/overlays/metr-button.png" },
             { to: "?loc=mainstreet", rect: [0, 478, 640, 50] }   // behind you
         ]
     },
