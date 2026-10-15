@@ -157,6 +157,7 @@
         if (scene.speakers) drawMusic();
         if (scene.ac) drawAC();
         if (R.house.hud) drawHud();
+        retune();
         if (scene.twinkle_phases) {
             var tw = document.getElementById("room-twinkle");
             if (tw) tw.hidden = scene.twinkle_phases.indexOf(phaseNow()) < 0;
@@ -575,6 +576,20 @@
             clicks = clicks.filter(function (c) { return now - c < 4000; }).concat(now);
             if (clicks.length >= 10 && scene) { clicks = []; debugPanel(); }
         });
+    }
+
+    // a song for each part of the day (R.house.music: { morning, day, evening, night }), changed as the day turns;
+    // the first is chosen by the sun before js/scene-music.js starts it
+    var SONG_TIME = { dawn: "morning", morning: "morning", noon: "day", afternoon: "day",
+                      evening: "evening", sunset: "evening", dusk: "evening", night: "night" };
+    function songFor(phase) { return R.house.music && R.house.music[SONG_TIME[phase] || "day"]; }
+    if (songFor(sunPhase())) R.music = songFor(sunPhase());
+    function retune() {
+        var song = songFor(phaseNow()), m = document.getElementById("music");
+        if (!song || !m || m.getAttribute("src") === song) return;
+        var was = !m.paused;
+        m.src = song;
+        if (was) m.play().catch(function () {});
     }
 
     R.onBuilt = function (a) {

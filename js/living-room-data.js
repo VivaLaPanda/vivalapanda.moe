@@ -108,7 +108,11 @@ window.HOUSE = window.HOUSE || {};
 
     R = window.ROOM = {
         dialogue: "living_room",
-        house: { base: "/img/living-room/", v: "23", hud: true, debugClock: { x: 204, y: 61, w: 33, h: 35 } },
+        house: { base: "/img/living-room/", v: "23", hud: true, debugClock: { x: 204, y: 61, w: 33, h: 35 },
+                 music: { morning: "/audio/graunseed-moanin.mp3",                     // For Graunseed, "Moanin'"
+                          day: "/audio/giten-megami-tensei-little-bossa-nova.mp3",     // Giten Megami Tensei
+                          evening: "/audio/doukyuusei-room.mp3",                       // Doukyuusei, the room
+                          night: "/audio/yu-no-home-relief.mp3" } },                   // YU-NO, "Home (Relief)"
         seenKey: "pandaLivingRoomSeen",
         scene: { src: "/img/living-room/noon@4x.png?v=23", width: 500, height: 357 },
 
