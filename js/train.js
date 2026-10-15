@@ -8,7 +8,7 @@ function randomTrainMusic() {
     return trainmusic[Math.floor(Math.random()*trainmusic.length)];
 }
 
-window.onload = function(){
+window.addEventListener("load", function () {
     // load the audio
     const music =  document.getElementById("music");
     music.src = randomTrainMusic();
@@ -16,50 +16,35 @@ window.onload = function(){
     music.load();
     var played = music.play();                 // held back until a tap or key on a first visit (soundOn retries)
     if (played && played.catch) played.catch(function () {});
+});
+
+// the train window: Panda's own clips (media/train/, in Git LFS; listed in its index.json),
+// one after another in a shuffled order. They start muted, which every browser lets autoplay; the first tap or key
+// turns the sound on and starts whatever the browser held back (the train, the music).
+var clips = [], at = 0, failures = 0;
+
+function shuffle(a) {
+	for (var i = a.length - 1; i > 0; i--) {
+		var j = Math.floor(Math.random() * (i + 1)), t = a[i];
+		a[i] = a[j];
+		a[j] = t;
+	}
+	return a;
 }
 
-// mostly all copied from http://vimutv.com/
-
-
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-var playlistID = "PLVBUsmE3WihINwYoXTDDPGT0kE2rVelby";
-
-var TRAIN_VIDEOS = 26;   // the playlist's length: a random one to start on (0-based)
-var randomSong = Math.floor(Math.random() * TRAIN_VIDEOS);
-
-var video;
-function onYouTubeIframeAPIReady() {
-    video = new YT.Player('tallvideo', {
-        listType: 'playlist',
-        list: playlistID,
-        playerVars: {
-            'list': playlistID,
-            'autoplay': 1,
-            'controls': 0,          // no control bar
-            'disablekb': 1,         // no keyboard shortcuts
-            'fs': 0,                // no fullscreen button
-            'iv_load_policy': 3,    // no annotations
-            'playsinline': 1,
-            'index': randomSong
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onError': onPlayerError
-        }
-    });
+function nextClip() {
+	var video = document.getElementById("tallvideo");
+	if (!video || !clips.length) return;
+	video.src = "/media/train/" + clips[at++ % clips.length];
+	var played = video.play();
+	if (played && played.catch) played.catch(function () {});
 }
 
-// the train plays with its sound: a visitor arriving from the site has already clicked, which lets this page autoplay
-// with sound. Someone landing here cold may be refused: YouTube then plays muted, or waits on its play button, and the
-// player can't be clicked (css/train.css), so the first tap or key anywhere turns the sound on and starts whatever the
-// browser held back (the train, the music).
 function soundOn() {
-	if (video && video.getPlayerState) {
-		if (video.isMuted()) video.unMute();
-		if (video.getPlayerState() !== YT.PlayerState.PLAYING) video.playVideo();
+	var video = document.getElementById("tallvideo");
+	if (video) {
+		video.muted = false;
+		if (video.paused && video.src) video.play().catch(function () {});
 	}
 	var music = document.getElementById("music");
 	if (music && music.paused) {
@@ -71,22 +56,15 @@ function soundOn() {
 	document.addEventListener(ev, soundOn, { once: true });
 });
 
-function onPlayerReady(event) {
-	event.target.playVideo();
-	event.target.setLoop(true);
-	setTimeout(setShuffleFunction, 1000);
-}
-
-function setShuffleFunction(){
-	video.setShuffle(true);      	
-}
-
-// a video that won't play: on to the next one (the playlist loops)
-function onPlayerError(event) {
-	console.log("train video error " + event.data);
-	setTimeout(playNext, 1000);
-}
-
-function playNext(){
-	video.nextVideo();
-}
+window.addEventListener("load", function () {
+	var video = document.getElementById("tallvideo");
+	video.addEventListener("ended", nextClip);
+	video.addEventListener("playing", function () { failures = 0; });
+	video.addEventListener("error", function () {   // a clip that won't play: on to the next (not forever)
+		if (++failures < clips.length) setTimeout(nextClip, 500);
+	});
+	fetch("/media/train/index.json").then(function (r) { return r.json(); }).then(function (list) {
+		clips = shuffle(list);
+		nextClip();
+	}).catch(function () {});
+});
