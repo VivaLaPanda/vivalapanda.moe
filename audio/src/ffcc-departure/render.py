@@ -72,14 +72,14 @@ class SSGPatch:
 
 
 PATCHES: dict[int, FMPatch | SSGPatch] = {
-    # 0 lead: two detuned 2-op pairs, soft brass/flute, delayed vibrato
-    0: FMPatch(4, 5, [Op(1, 0, 15, 0.01, 30, 5, 2, 30), Op(1, 0, 0, 0.012, 2.5, 4, 1.0, 22),
-                      Op(2, 3, 25, 0.01, 20, 6, 2, 30), Op(1, 6, 5, 0.012, 2.5, 4, 1.0, 22)],
-               vol=-1, vib_delay=0.32, vib_depth=16, vib_rate=5.3),
-    # 1 lead2: thinner reed, detuned against the lead
-    1: FMPatch(4, 5, [Op(1, 0, 21, 0.01, 12, 6, 2, 30), Op(1, 0, 0, 0.015, 2.0, 3, 1.0, 22),
-                      Op(3, 0, 30, 0.01, 18, 8, 2, 30), Op(1, -4, 7, 0.015, 2.0, 3, 1.0, 22)],
-               vol=-5, vib_delay=0.4, vib_depth=12, vib_rate=5.0, detune=-7),
+    # 0 recorder: mostly odd harmonics (mul-2 modulator), faint 2nd from the detuned pair, slow swell, chiff, delayed vibrato
+    0: FMPatch(4, 0, [Op(2, 0, 34, 0.004, 80, 10, 0, 60), Op(1, 0, 0, 0.09, 0, 0, 0.6, 70),
+                      Op(1, 0, 46, 0.06, 0, 0, 0, 60), Op(1, 4, 10, 0.11, 0, 0, 0.6, 70)],
+               vol=0, vib_delay=0.35, vib_depth=11, vib_rate=5.2, vel_db=18),
+    # 1 second recorder, detuned against the first
+    1: FMPatch(4, 0, [Op(2, 0, 36, 0.004, 80, 10, 0, 60), Op(1, 0, 0, 0.1, 0, 0, 0.6, 70),
+                      Op(1, 0, 48, 0.06, 0, 0, 0, 60), Op(1, -3, 10, 0.12, 0, 0, 0.6, 70)],
+               vol=-5, vib_delay=0.45, vib_depth=9, vib_rate=4.9, detune=-6, vel_db=18),
     # 2 finger bass: bright pluck that closes quickly
     2: FMPatch(4, 5, [Op(1, 0, 14, 0.001, 40, 12, 6, 60, 0.2), Op(1, 0, 0, 0.002, 7, 10, 5, 45),
                       Op(1, 3, 20, 0.001, 50, 16, 6, 60), Op(0.5, -3, 6, 0.002, 6, 10, 5, 45)],
@@ -91,21 +91,21 @@ PATCHES: dict[int, FMPatch | SSGPatch] = {
     # 4 strings pad: slow attack, detuned pair
     4: FMPatch(4, 3, [Op(1, 0, 25, 0.3, 2, 6, 1, 10), Op(1, 0, 0, 0.32, 1, 3, 0.5, 9),
                       Op(2, 0, 32, 0.3, 2, 6, 1, 10), Op(1, 9, 4, 0.36, 1, 3, 0.5, 9)],
-               vol=-4, vib_delay=0.0, vib_depth=5, vib_rate=4.6),
-    # 5 soft lead for the quiet section: ocarina-like
-    5: FMPatch(4, 1, [Op(1, 0, 33, 0.03, 4, 6, 1, 20), Op(1, 0, 0, 0.045, 2, 3, 1.0, 18),
-                      Op(2, 0, 48, 0.03, 4, 6, 1, 20), Op(2, 4, 15, 0.05, 2, 3, 1.0, 18)],
-               vol=-4, vib_delay=0.25, vib_depth=18, vib_rate=5.0),
-    10: SSGPatch(vol=-5, ar=0.0, decay=5, sustain=-6, rr=30, vib_delay=0.3, vib_depth=12),  # echo
+               vol=-7, vib_delay=0.0, vib_depth=5, vib_rate=4.6),
+    # 5 reed chanter for the C section: buzzy, fast attack, vibrato
+    5: FMPatch(4, 4, [Op(1, 0, 27, 0.01, 6, 4, 0, 40), Op(1, 0, 0, 0.03, 1, 2, 0.5, 40),
+                      Op(2, 0, 25, 0.01, 6, 4, 0, 40), Op(1, 0, 2, 0.03, 1, 2, 0.5, 40)],
+               vol=-3, vib_delay=0.3, vib_depth=14, vib_rate=5.5),
+    10: SSGPatch(vol=-12, ar=0.04, decay=4, sustain=-6, rr=30, vib_delay=0.3, vib_depth=10),  # echo
     11: SSGPatch(vol=-11, ar=0.0, decay=45, sustain=-30, rr=80),  # arpeggio
-    12: SSGPatch(vol=-12, ar=0.12, decay=1.5, sustain=-4, rr=12, vib_delay=0.5, vib_depth=8),  # pedal
+    12: SSGPatch(vol=-8, ar=0.15, decay=0.5, sustain=-3, rr=12, vib_delay=0.5, vib_depth=4),  # drone
 }
 
 # OPNA panning is L, R or both; kept narrow since PC-98 rips are close to mono.
 PAN = {0: (1.0, 1.0), 1: (1.0, 0.7), 2: (1.0, 1.0), 3: (0.7, 1.0), 4: (1.0, 0.75), 5: (0.75, 1.0),
        6: (1.0, 1.0), 7: (0.85, 1.0), 8: (1.0, 0.85), 9: (1.0, 1.0)}
 DRUM_PAN = {36: (1.0, 1.0), 38: (1.0, 1.0), 37: (1.0, 0.6), 42: (0.6, 1.0), 46: (0.6, 1.0),
-            49: (1.0, 1.0), 45: (1.0, 0.7), 48: (0.7, 1.0)}
+            49: (1.0, 1.0), 45: (1.0, 0.7), 48: (0.7, 1.0), 54: (0.75, 1.0)}
 
 
 @dataclass
@@ -342,6 +342,11 @@ def drum_sample(key: int, rng: np.random.Generator) -> np.ndarray:
         f0, f1, tau = (78, 131, 0.18) if key == 47 else (73, 147, 0.06)
         f = f1 - (f1 - f0) * np.exp(-t / tau)
         x = np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, 0.22) + 0.2 * noise(n, rng) * env(n, 0.006)
+    elif key == 54:  # tambourine: jingles + noise
+        n = int(0.22 * SR)
+        t = np.arange(n) / SR
+        jingle = sum(np.sin(2 * np.pi * f * t + i) for i, f in enumerate((6200, 7300, 8900, 10100))) / 4
+        x = (0.6 * one_pole_hp(noise(n, rng), 5000) + 0.5 * jingle * (0.6 + 0.4 * noise(n, rng))) * env(n, 0.06)
     elif key in (45, 48):  # toms
         n = int(0.4 * SR)
         f0 = 150 if key == 48 else 105
@@ -356,7 +361,7 @@ def drum_sample(key: int, rng: np.random.Generator) -> np.ndarray:
     return np.round(x * 127) / 127
 
 
-DRUM_DB = {36: -3, 38: -8, 37: -13, 42: -14, 46: -16, 49: -15, 45: -8, 48: -8, 47: -6, 50: -7}
+DRUM_DB = {36: -3, 38: -8, 37: -13, 42: -14, 46: -16, 49: -15, 45: -8, 48: -8, 47: -6, 50: -7, 54: -15}
 
 
 def render(notes: list[NoteEvent], loop_end: float) -> tuple[np.ndarray, dict[int, np.ndarray]]:

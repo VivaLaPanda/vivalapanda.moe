@@ -1,11 +1,10 @@
 """PC-98 (YM2608/OPNA) arrange of "Departure" (Final Fantasy Crystal Chronicles, Kumi Tanioka).
 
 Writes departure-pc98.mid: one MIDI channel per OPNA voice.
-  ch0 FM1 lead        ch1 FM2 lead double / harmony   ch2 FM3 bass
-  ch3 FM4 harp        ch4 FM5 pad                     ch5 FM6 pad
-  ch6 SSG1 echo       ch7 SSG2 arpeggio               ch8 SSG3 pedal / octave double
-  ch9 OPNA rhythm (36 BD, 38 SD, 37 rim, 42 HH, 46 open HH, 49 top cymbal, 45/48 toms,
-      47/50 hand drum with upward bend)
+  ch0 FM1 recorder lead (reed chanter in C)   ch1 FM2 second recorder   ch2 FM3 bass
+  ch3 FM4 harp        ch4 FM5 pad             ch5 FM6 pad (A drone in the C section)
+  ch6 SSG1 echo       ch7/ch8 SSG2/SSG3 unused
+  ch9 OPNA rhythm (36 frame drum, 47/50 hand drum with upward bend, 54 tambourine)
 Program numbers pick render.py patches.
 
 Notes come from the piano reduction by Cerulean Pictures (VGMusic "dparture.mid"),
@@ -17,7 +16,7 @@ from pathlib import Path
 
 import mido
 
-BPM = 112
+BPM = 120  # the OST measures 120.1 BPM on a 16th grid
 TPB = 480
 STEP = TPB // 4  # one 16th
 BAR = 16
@@ -71,12 +70,15 @@ REPEAT = {**{b: b - 8 for b in range(13, 21)}, **{b: b - 4 for b in range(25, 28
           **{b: b - 29 for b in range(34, 42)}, **{b: b - 53 for b in range(58, 66)}}
 PIANO_LH[28] = PIANO_LH[24]
 
-# Melodies, sequential "note:dur16" tokens; r = rest.
+# Melodies, sequential "note:dur16" tokens; r = rest. Checked against the OST's top line.
 RIFF = "A4:4 F4:2 D5:2 C5:2 C4:2 G4:2 A#4:2 | A4:4 A4:2 A#4:2 A4:4 F4:2 D4:2"
 INTRO_HARP = "A4:4 D4:2 D4:4 A3:2 D4:2 A3:2 | D4:8 A3:2 A3:2 A3:4"
-A_MEL = ("F5:6 A5:2 E5:6 G5:2 | G5:8 D5:8 | F5:6 D5:2 E5:6 C5:2 | D5:8 D5:8 | "
+# The hook (bars 5-6) is a sustained recorder line over the harp arpeggio; the piano reduction merges the two.
+HOOK = "A4:6 D5:2 C5:8 | A4:6 A#4:2 A4:4 r:4"
+# G5 at the end of bar 7 is held into bar 8 in the OST, not re-struck.
+A_MEL = ("F5:6 A5:2 E5:6 G5:10 D5:6 r:2 | F5:6 D5:2 E5:6 C5:2 | D5:12 r:4 | "
          "F5:6 G5:2 E5:6 C5:2 | D5:12 r:4")
-A_HARM = ("D5:6 F5:2 A4:6 C5:2 | B4:8 B4:8 | A#4:6 A#4:2 A4:6 A4:2 | G4:8 G4:8 | "
+A_HARM = ("D5:6 F5:2 A4:6 C5:2 | B4:8 B4:6 r:2 | A#4:6 A#4:2 A4:6 A4:2 | G4:12 r:4 | "
           "A#4:6 D5:2 A4:6 A4:2 | A4:12 r:4")
 B_MEL = ("D5:6 C5:2 F5:6 D5:2 | A4:6 A#4:2 C5:6 D5:2 | E5:6 F5:2 G5:6 A5:2 | E5:6 F5:2 D5:8 | "
          "D5:6 C5:2 F5:6 D5:2 | A4:6 A#4:2 C5:6 D5:2 | E5:6 F5:2 G5:6 A5:2 | E5:6 F5:2 G5:6 D5:2 | "
@@ -85,6 +87,7 @@ B_MEL = ("D5:6 C5:2 F5:6 D5:2 | A4:6 A#4:2 C5:6 D5:2 | E5:6 F5:2 G5:6 A5:2 | E5:
 B_HARM = ("G4:6 G4:2 G4:6 G4:2 | F4:6 F4:2 F4:6 F4:2 | A4:6 A4:2 A4:6 A4:2 | G#4:6 G#4:2 G#4:8 | "
           "G4:6 G4:2 G4:6 G4:2 | F4:6 F4:2 F4:6 F4:2 | A4:6 A4:2 A4:6 A4:2 | G#4:6 G#4:2 G#4:6 G#4:2 | "
           "G4:16 | A#4:16 | C5:16 | A4:16")
+# The OST plays this an octave below the piano reduction, on a reedy chanter over an A drone.
 C_MEL = ("r:4 E5:2 D5:2 E5:12 F5:2 G5:2 E5:12 F5:2 G5:2 A5:8 | G5:12 A5:2 G5:2 | "
          "F5:7 G5:1 E5:6 C5:2 | D5:8 D5:4 F5:2 G5:2 | A5:4 D5:2 E5:1 F5:1 E5:4 D5:2 C5:2 | D5:12 r:4 | "
          "r:4 D5:4 A5:12 B5:2 G5:2 A5:14 A5:2 D6:7 C6:1 | B5:7 A5:1 G5:4 A5:2 G5:2 | "
@@ -109,8 +112,6 @@ CHORDS.update({b + 8: v for b, v in C_CHORDS.items()})
 for _b, _src in REPEAT.items():
     CHORDS[_b] = CHORDS[_src]
 
-RIFF_BARS = [5, 13, 34, 58]
-MEL_BARS = [7, 15, 36, 60]
 
 
 @dataclass
@@ -159,13 +160,10 @@ def bass_root(pc: int) -> int:
 
 
 def bass(bars: range, style: str, vel: int) -> list[Note]:
-    """FM bass: root / octave patterns per chord, fifths as passing tones."""
+    """FM bass: the piano left hand (pedal) or root / octave patterns per chord."""
     pats = {
         "pedal": None,
-        "bounce": [(0, 2, 0), (2, 2, 0), (4, 2, 12), (6, 2, 0)],
-        "bounce5": [(0, 2, 0), (2, 2, 0), (4, 2, 12), (6, 2, 7)],
-        "drive": [(0, 3, 0), (3, 1, 0), (4, 2, 12), (6, 1, 0), (7, 1, 12)],
-        "b33": [(0, 3, 0), (3, 3, 12), (6, 2, 0)],
+        "piano": [(0, 2, 0), (2, 2, 12)],
         "long": [(0, 6, 0), (6, 2, 12)],
     }
     out = []
@@ -224,18 +222,6 @@ def voice_pads(bars: range, vel: int, lo: int = 53, hi: int = 72) -> tuple[list[
     return a_out, b_out
 
 
-def arp(bars: range, vel: int, base: int = 69) -> list[Note]:
-    """SSG 16th arpeggio over chord tones from `base` upward."""
-    out = []
-    for b in bars:
-        for pos, length, pcs in halves(b):
-            tones = sorted(p for p in range(base, base + 13) if p % 12 in pcs)[:4]
-            order = tones + tones[-2:0:-1] if len(tones) > 2 else tones * 2
-            for i in range(length):
-                out.append(Note(bar_start(b) + pos + i, 1, order[i % len(order)], vel - (0 if i % 4 == 0 else 14)))
-    return out
-
-
 def pedal_line(bars: range, vel: int, target: int = 69) -> list[Note]:
     """SSG pedal: the chord tone nearest A4, held."""
     out = []
@@ -263,132 +249,74 @@ def transpose(notes: list[Note], semis: int, vel_scale: float = 1.0) -> list[Not
 
 
 def drums() -> list[Note]:
-    BD, SD, RIM, HH, OH, CY, TL, TH = 36, 38, 37, 42, 46, 49, 45, 48
-    BEND, BEND_FAST = 47, 50  # hand drum with an upward pitch bend, as in the original
+    """Frame drum (kick + bending hand drum) and tambourine on 2 and 4, as in the OST."""
+    BD, BEND, BEND_FAST, TAMB = 36, 47, 50, 54
     out = []
 
     def hit(bar: int, pos: int, k: int, v: int) -> None:
         out.append(Note(bar_start(bar) + pos, 1, k, v))
 
-    def hats(bar: int, v: int, step: int = 2) -> None:
-        for p in range(0, 16, step):
-            hit(bar, p, HH, v if p % 4 == 0 else v - 18)
-
-    for b in range(1, 5):
-        hit(b, 0, BD, 92)
-        if b % 2:
-            hit(b, 6, BEND, 84)
+    for b in range(1, 66):
+        if b == 33:
+            hit(b, 0, BD, 96); hit(b, 11, BEND, 76)
+            continue
+        hit(b, 0, BD, 96)
+        hit(b, 6, BEND if b % 2 else BD, 82 if b % 2 else 70)
+        if b >= 5:
+            hit(b, 4, TAMB, 78); hit(b, 12, TAMB, 84)
     hit(4, 9, BEND_FAST, 80)
-    for b in (3, 4):
-        hats(b, 50, 4)
-    for b in list(range(5, 21, 2)) + list(range(34, 42, 2)) + list(range(50, 58, 2)) + list(range(58, 66, 2)):
-        hit(b, 6, BEND, 80)
-    for b in range(5, 13):  # A1: hats, rim backbeat, soft kick
-        hats(b, 62)
-        hit(b, 0, BD, 80); hit(b, 8, BD, 64)
-        hit(b, 4, RIM, 70); hit(b, 12, RIM, 70)
-    for b in list(range(13, 21)) + list(range(34, 42)):  # A2/A3
-        hats(b, 68)
-        hit(b, 0, BD, 92); hit(b, 6, BD, 70); hit(b, 8, BD, 84)
-        hit(b, 4, RIM, 74); hit(b, 12, SD, 70)
-    for p, k in ((8, TH), (10, TH), (12, TL), (14, TL)):
-        hit(20, p, k, 84)
-    for b in range(21, 29):  # B: half-time
-        hats(b, 66)
-        hit(b, 14, OH, 52)
-        hit(b, 0, BD, 96); hit(b, 10, BD, 78); hit(b, 8, SD, 84)
-    hit(21, 0, CY, 90); hit(25, 0, CY, 74)
-    for b in range(29, 33):
-        hats(b, 60, 4)
-        hit(b, 0, BD, 92); hit(b, 8, SD, 72)
-    for p, k, v in ((8, TH, 70), (10, TH, 76), (12, TL, 82), (14, TL, 88)):
-        hit(32, p, k, v)
-    hit(33, 0, BD, 96); hit(33, 11, BEND, 76)
-    hit(34, 0, CY, 76)
-    for b in range(42, 50):  # C: nearly bare
-        hats(b, 46, 4)
-        hit(b, 12, RIM, 56)
-    for b in range(50, 58):
-        hats(b, 56)
-        hit(b, 0, BD, 80); hit(b, 8, BD, 66)
-        hit(b, 4, RIM, 64); hit(b, 12, RIM, 66)
-    for p, k, v in ((12, TH, 70), (13, TH, 74), (14, TL, 80), (15, TL, 86)):
-        hit(57, p, k, v)
-    hit(58, 0, CY, 96)
-    for b in range(58, 66):  # A4: full
-        hats(b, 70)
-        hit(b, 0, BD, 98); hit(b, 6, BD, 74); hit(b, 8, BD, 88)
-        hit(b, 4, SD, 82); hit(b, 12, SD, 86)
-    # last bar thins out so the loop back to the quiet intro is not a cliff
-    out = [n for n in out if not (n.start == bar_start(65) + 12 and n.pitch == SD)]
-    for n in out:
-        if n.start >= bar_start(65) + 8:
-            n.vel = int(n.vel * 0.7)
     return out
 
 
 def build() -> dict[int, list[Note]]:
     ch: dict[int, list[Note]] = {i: [] for i in range(10)}
-    a_bars = [(5, 1), (13, 2), (34, 3), (58, 4)]  # (start bar, pass number)
+    a_starts = [5, 13, 34, 58]
 
-    # FM4 harp: intro figure, riff, off-beat chord tones, C-section arpeggio.
+    # FM4 harp: intro figure, the riff arpeggio, off-beat chord tones, C-section arpeggio.
     ch[3] += seq(1, INTRO_HARP + " | " + INTRO_HARP, 84)
-    for start, n in a_bars:
-        ch[3] += seq(start, RIFF, 96)
-        ch[3] += harp_from_lh(range(start + 2, start + 8), 76 if n < 4 else 84)
-    ch[3] += harp_from_lh(range(21, 33), 74)
+    for start in a_starts:
+        ch[3] += seq(start, RIFF, 88)
+        ch[3] += harp_from_lh(range(start + 2, start + 8), 80)
+    ch[3] += harp_from_lh(range(21, 33), 80)
     ch[3] += seq(33, "A3:8", 64)
-    ch[3] += harp_from_lh(range(42, 58), 78, low=55)
+    ch[3] += harp_from_lh(range(42, 58), 80, low=55)
 
-    # FM1 lead / FM2 double or harmony.
-    for start, n in a_bars:
-        mel = seq(start + 2, A_MEL, 104)
-        ch[0] += mel
-        if n in (1, 3):
-            ch[1] += seq(start + 2, A_HARM, 82)
-        else:
-            ch[1] += transpose(mel, 0, 0.8)  # detuned unison double (patch detune)
-    ch[0] += seq(21, B_MEL, 106)
-    ch[1] += seq(21, B_HARM, 80)
-    c_mel = seq(42, C_MEL, 96)
-    ch[0] += c_mel
+    # FM1 recorder lead (reed chanter in C, an octave down); FM2 second recorder in thirds / inner voice.
+    for start in a_starts:
+        ch[0] += seq(start, HOOK, 104)
+        ch[0] += seq(start + 2, A_MEL, 108)
+        ch[1] += seq(start + 2, A_HARM, 84)
+    ch[0] += seq(21, B_MEL, 108)
+    ch[1] += seq(21, B_HARM, 74)
+    ch[0] += transpose(seq(42, C_MEL, 104), -12)
 
-    # FM3 bass.
+    # FM3 bass: the piano left hand's roots, with the octave jump on the second 8th.
     ch[2] += bass(range(1, 7), "pedal", 100)
-    ch[2] += bass(range(7, 13), "bounce", 100)
+    ch[2] += bass(range(7, 13), "piano", 100)
     ch[2] += bass(range(13, 15), "pedal", 100)
-    ch[2] += bass(range(15, 21), "bounce5", 102)
-    ch[2] += bass(range(21, 33), "b33", 104)
+    ch[2] += bass(range(15, 33), "piano", 100)
     ch[2] += seq(33, "D2:6", 96)
     ch[2] += bass(range(34, 36), "pedal", 100)
-    ch[2] += bass(range(36, 42), "bounce5", 102)
-    ch[2] += bass(range(42, 50), "long", 88)
-    ch[2] += bass(range(50, 58), "bounce", 96)
-    ch[2] += bass(range(58, 60), "pedal", 104)
-    ch[2] += bass(range(60, 66), "drive", 106)
+    ch[2] += bass(range(36, 42), "piano", 100)
+    ch[2] += bass(range(42, 58), "long", 92)
+    ch[2] += bass(range(58, 60), "pedal", 100)
+    ch[2] += bass(range(60, 66), "piano", 102)
 
-    # FM5/FM6 pads.
-    pa, pb = voice_pads(range(3, 66), 70)
+    # FM5/FM6 soft string pad under everything.
+    pa, pb = voice_pads(range(3, 66), 64)
     ch[4] += pa
-    ch[5] += pb
+    in_c = lambda n: bar_start(42) <= n.start < bar_start(58)
+    ch[5] += [n for n in pb if not in_c(n)]
+    # In C, FM6 turns into the soft A drone the OST holds over the chanter.
+    ch[5] += pedal_line(range(42, 58), 92)
 
-    # SSG1 echo: an 8th behind the lead (and the riff), quieter.
-    lead_and_riff = sorted(ch[0] + [n for n in ch[3] if any(
-        bar_start(s) <= n.start < bar_start(s + 2) for s, _ in a_bars)], key=lambda n: n.start)
-    ch[6] += echo(lead_and_riff, 2, 0.62, bar_start(13), bar_start(33))
-    ch[6] += echo(lead_and_riff, 2, 0.62, bar_start(34), bar_start(42))
-    ch[6] += echo(lead_and_riff, 2, 0.55, bar_start(50), bar_start(66))
-
-    # SSG2 16th arpeggio; SSG3 pedal in C, octave-up double in the last A.
-    ch[7] += arp(range(15, 21), 64)
-    ch[7] += arp(range(21, 33), 68)
-    ch[7] += arp(range(60, 66), 70)
-    ch[8] += pedal_line(range(42, 58), 60)
-    ch[8] += transpose([n for n in ch[0] if n.start >= bar_start(60)], 12, 0.62)
+    # SSG1: quiet echo of the lead an 8th behind, only in the 2nd and 4th A melody.
+    for start in (13, 58):
+        ch[6] += echo(ch[0], 2, 0.5, bar_start(start + 2), bar_start(start + 8))
 
     ch[9] = drums()
     # Dynamics: the OST's intro, link and C section sit 3-9 dB under the A/B sections.
-    for (b0, b1), f, lead_f in (((1, 4), 0.62, 0.62), ((33, 33), 0.75, 0.75), ((42, 49), 0.62, 0.8), ((50, 57), 0.8, 0.9)):
+    for (b0, b1), f, lead_f in (((1, 4), 0.72, 0.72), ((33, 33), 0.85, 0.85), ((42, 49), 0.55, 0.68), ((50, 57), 0.68, 0.82)):
         for k, notes in ch.items():
             for n in notes:
                 if bar_start(b0) <= n.start < bar_start(b1 + 1):
@@ -402,10 +330,10 @@ def build() -> dict[int, list[Note]]:
 
 
 PROGRAMS = {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 4, 6: 10, 7: 11, 8: 12, 9: 0}
-TRACK_NAMES = {0: "FM1 lead", 1: "FM2 lead2", 2: "FM3 bass", 3: "FM4 harp", 4: "FM5 pad", 5: "FM6 pad",
-               6: "SSG1 echo", 7: "SSG2 arp", 8: "SSG3 pedal", 9: "OPNA rhythm"}
+TRACK_NAMES = {0: "FM1 recorder", 1: "FM2 recorder 2", 2: "FM3 bass", 3: "FM4 harp", 4: "FM5 pad", 5: "FM6 pad / drone",
+               6: "SSG1 echo", 7: "SSG2", 8: "SSG3", 9: "OPNA rhythm"}
 # Program changes within a channel: (bar, channel, program).
-PROGRAM_CHANGES = [(42, 0, 5), (58, 0, 0)]
+PROGRAM_CHANGES = [(42, 0, 5), (58, 0, 0), (42, 5, 1), (58, 5, 4)]
 
 
 def write(ch: dict[int, list[Note]]) -> None:
